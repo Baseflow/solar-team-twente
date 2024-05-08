@@ -11,6 +11,7 @@ analyzer:
     - "lib/base_app.dart"
     - "lib/firebase_options.dart"
     - "**/generated/**"
+    - "lib/src/ui/localizations/generated/**"
 
 linter:
   rules:
