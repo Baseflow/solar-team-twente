@@ -47,30 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDGcM2nOWq_hfwxlD9iKkynXEgybNi6JJE',
-    appId: '1:608162368906:web:1649b0fc7fd0666df78c73',
-    messagingSenderId: '608162368906',
-    projectId: 'flutter-base-app-dddee',
-    authDomain: 'flutter-base-app-dddee.firebaseapp.com',
-    storageBucket: 'flutter-base-app-dddee.appspot.com',
-    measurementId: 'G-1XQX2HM0H8',
+    apiKey: 'AIzaSyBj8a_Xz23EAHAhxc5MCJJyQuI8DMHRZ8Q',
+    appId: '1:639646983859:web:56cba5f0cb33fc6f9af2c6',
+    messagingSenderId: '639646983859',
+    projectId: 'solarteam-twente',
+    authDomain: 'solarteam-twente.firebaseapp.com',
+    storageBucket: 'solarteam-twente.appspot.com',
+    measurementId: 'G-PX0Y065DR3',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD57e4WCVHxMG9g-hzAd3Pj4rVqcW2zHdM',
-    appId: '1:608162368906:android:14fd17f0b84141d0f78c73',
-    messagingSenderId: '608162368906',
-    projectId: 'flutter-base-app-dddee',
-    storageBucket: 'flutter-base-app-dddee.appspot.com',
+    apiKey: 'AIzaSyBJeuTol0sF1EqG7HuIHSis2YASbmuRGTk',
+    appId: '1:639646983859:android:39770e2df2d64bc99af2c6',
+    messagingSenderId: '639646983859',
+    projectId: 'solarteam-twente',
+    storageBucket: 'solarteam-twente.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBcacHwKG84dF2jnb9ePgRZjOP_Gl6I8GY',
-    appId: '1:608162368906:ios:d481fb6d7debd325f78c73',
-    messagingSenderId: '608162368906',
-    projectId: 'flutter-base-app-dddee',
-    storageBucket: 'flutter-base-app-dddee.appspot.com',
-    iosBundleId: 'com.baseflow.baseapp.dev',
+    apiKey: 'AIzaSyA0pCTMq44LeFLu7WblbbLw_Afn8w37MQE',
+    appId: '1:639646983859:ios:b928a46b9c5df79f9af2c6',
+    messagingSenderId: '639646983859',
+    projectId: 'solarteam-twente',
+    storageBucket: 'solarteam-twente.appspot.com',
+    iosBundleId: 'com.baseflow.solarteamtwente',
   );
-
 }

@@ -9,5 +9,34 @@
     "frameworksBackend": {
       "region": "europe-west1"
     }
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "solarteam-twente",
+          "appId": "1:639646983859:android:39770e2df2d64bc99af2c6",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "solarteam-twente",
+          "appId": "1:639646983859:ios:b928a46b9c5df79f9af2c6",
+          "uploadDebugSymbols": true,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "solarteam-twente",
+          "configurations": {
+            "android": "1:639646983859:android:39770e2df2d64bc99af2c6",
+            "ios": "1:639646983859:ios:b928a46b9c5df79f9af2c6",
+            "web": "1:639646983859:web:56cba5f0cb33fc6f9af2c6"
+          }
+        }
+      }
+    }
   }
 }

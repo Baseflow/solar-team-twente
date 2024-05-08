@@ -1,40 +1,21 @@
 {
   "project_info": {
-    "project_number": "608162368906",
-    "project_id": "flutter-base-app-dddee",
-    "storage_bucket": "flutter-base-app-dddee.appspot.com"
+    "project_number": "639646983859",
+    "project_id": "solarteam-twente",
+    "storage_bucket": "solarteam-twente.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:608162368906:android:5253aeed1323e9cff78c73",
+        "mobilesdk_app_id": "1:639646983859:android:39770e2df2d64bc99af2c6",
         "android_client_info": {
-          "package_name": "com.baseflow.base_app.dev"
+          "package_name": "com.baseflow.solarteamtwente.dev"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD57e4WCVHxMG9g-hzAd3Pj4rVqcW2zHdM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:608162368906:android:14fd17f0b84141d0f78c73",
-        "android_client_info": {
-          "package_name": "com.baseflow.baseapp.dev"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD57e4WCVHxMG9g-hzAd3Pj4rVqcW2zHdM"
+          "current_key": "AIzaSyBJeuTol0sF1EqG7HuIHSis2YASbmuRGTk"
         }
       ],
       "services": {
