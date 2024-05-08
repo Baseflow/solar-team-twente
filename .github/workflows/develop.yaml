@@ -35,7 +35,7 @@ jobs:
         run: flutter pub get
 
       - name: Format files
-        run: dart format --set-exit-if-changed .
+        run: dart format $(find . -name "*.dart" -not -wholename "*/generated/*" -not -name "*.mocks.dart") --set-exit-if-changed .
 
       - name: Analyze files
         run: flutter analyze --no-fatal-warnings
