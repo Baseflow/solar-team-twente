@@ -1,9 +1,10 @@
-import 'package:solar_team_twente/src/ui/features/authentication/widgets/change_language_button.dart';
-import 'package:solar_team_twente/src/ui/features/settings/cubit/language_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:solar_team_twente/src/ui/features/authentication/widgets/change_language_button.dart';
+import 'package:solar_team_twente/src/ui/features/settings/cubit/language_cubit.dart';
+
 import '../../helpers/material_app_helper.dart';
 
 class MockLanguageCubit extends MockCubit<String> implements LanguageCubit {}

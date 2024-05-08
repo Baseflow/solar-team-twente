@@ -1,8 +1,8 @@
-import 'package:solar_team_twente/core.dart';
-import 'package:solar_team_twente/src/ui/features/settings/cubit/language_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:solar_team_twente/core.dart';
+import 'package:solar_team_twente/src/ui/features/settings/cubit/language_cubit.dart';
 
 class MockLanguageService extends Mock implements LanguageService {}
 

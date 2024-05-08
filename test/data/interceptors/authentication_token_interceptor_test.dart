@@ -1,7 +1,7 @@
-import 'package:solar_team_twente/core.dart';
-import 'package:solar_team_twente/src/data/interceptors/authentication_token_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:solar_team_twente/core.dart';
+import 'package:solar_team_twente/src/data/interceptors/authentication_token_interceptor.dart';
 import 'package:test/test.dart';
 
 class MockAuthenticationRepository extends Mock

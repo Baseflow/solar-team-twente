@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
 import 'package:solar_team_twente/core.dart';
 import 'package:solar_team_twente/src/ui/features/authentication/cubit/forgot_password_cubit.dart';
+import 'package:test/test.dart';
 
 class MockProfileService extends Mock implements ProfileService {}
 
