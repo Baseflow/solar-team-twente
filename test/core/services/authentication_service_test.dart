@@ -1,6 +1,6 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
 import 'package:solar_team_twente/core.dart';
+import 'package:test/test.dart';
 
 void main() {
   test(

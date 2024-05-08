@@ -1,6 +1,6 @@
-import 'package:solar_team_twente/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:solar_team_twente/core.dart';
 
 class MockLanguageRepository extends Mock implements LanguageRepository {}
 

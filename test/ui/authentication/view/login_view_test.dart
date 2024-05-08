@@ -1,16 +1,16 @@
-import 'package:solar_team_twente/src/ui/features/settings/cubit/language_cubit.dart';
-import 'package:solar_team_twente/core.dart';
-import 'package:solar_team_twente/src/ui/features/authentication/views/login_view.dart';
-import 'package:solar_team_twente/src/ui/features/authentication/cubit/login_cubit.dart';
-import 'package:solar_team_twente/src/ui/features/authentication/widgets/login_container.dart';
-import 'package:solar_team_twente/src/ui/features/shared/widgets/filled_loading_button.dart';
-import 'package:solar_team_twente/src/ui/localizations/generated/app_localizations.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:solar_team_twente/core.dart';
+import 'package:solar_team_twente/src/ui/features/authentication/cubit/login_cubit.dart';
+import 'package:solar_team_twente/src/ui/features/authentication/views/login_view.dart';
+import 'package:solar_team_twente/src/ui/features/authentication/widgets/login_container.dart';
+import 'package:solar_team_twente/src/ui/features/settings/cubit/language_cubit.dart';
+import 'package:solar_team_twente/src/ui/features/shared/widgets/filled_loading_button.dart';
+import 'package:solar_team_twente/src/ui/localizations/generated/app_localizations.dart';
 
 import '../../../helpers/material_app_helper.dart';
 

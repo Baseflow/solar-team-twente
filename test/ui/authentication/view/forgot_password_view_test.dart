@@ -7,8 +7,8 @@ import 'package:solar_team_twente/core.dart';
 import 'package:solar_team_twente/src/ui/features/authentication/cubit/forgot_password_cubit.dart';
 import 'package:solar_team_twente/src/ui/features/authentication/views/forgot_password_view.dart';
 
-import '../../../helpers/mock_go_router_provider.dart';
 import '../../../helpers/material_app_helper.dart';
+import '../../../helpers/mock_go_router_provider.dart';
 
 class MockForgotPasswordCubit extends MockCubit<ForgotPasswordState>
     implements ForgotPasswordCubit {}
