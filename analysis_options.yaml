@@ -1,0 +1,21 @@
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
+analyzer:
+  exclude:
+    - "bin/cache/**"
+    - "**/*.mocks.dart"
+    - "**/*.g.dart"
+    - "**/*.gen.dart"
+    - "lib/src/assets/generated/*.dart"
+    - "lib/src/ui/localizations/generated/*.dart"
+    - "lib/injectable.config.dart"
+    - "lib/base_app.dart"
+    - "lib/firebase_options.dart"
+    - "**/generated/**"
+
+linter:
+  rules:
+    one_member_abstracts: false
+    prefer_relative_imports: true
+    always_use_package_imports: false
+    always_specify_types: true
+    omit_local_variable_types: false

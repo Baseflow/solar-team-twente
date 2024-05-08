@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "608162368906",
+    "project_id": "flutter-base-app-dddee",
+    "storage_bucket": "flutter-base-app-dddee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608162368906:android:5253aeed1323e9cff78c73",
+        "android_client_info": {
+          "package_name": "com.baseflow.base_app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57e4WCVHxMG9g-hzAd3Pj4rVqcW2zHdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608162368906:android:14fd17f0b84141d0f78c73",
+        "android_client_info": {
+          "package_name": "com.baseflow.baseapp.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57e4WCVHxMG9g-hzAd3Pj4rVqcW2zHdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

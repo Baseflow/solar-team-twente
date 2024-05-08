@@ -1,0 +1,61 @@
+# This file is understood by git 1.7.2+.
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Windows specific files should always be crlf on checkout
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Dart specific files should always be lf on checkout
+
+*.css   text eol=lf
+*.dart  text eol=lf
+*.html  text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.yaml  text eol=lf
+*.sh    text eol=lf
+
+# Check out the following as ln always for osx/linux/cygwin
+*.sh text eol=lf
+
+# Opt in the following types to always normalize line endings
+# on checkin and always use native endings on checkout.
+*.config  text
+*.cs      text diff=csharp
+*.csproj  text
+*.md      text
+*.msbuild text
+*.nuspec  text
+*.pp      text
+*.ps1     text
+*.sln     text
+*.tt      text
+*.txt     text
+*.xaml    text
+*.xml     text
+
+# Binary files
+*.bmp     binary
+*.jpeg    binary
+*.jpg     binary
+*.png     binary
+*.sdf     binary
+*.gif     binary
+*.ico     binary
+*.psd     binary
+*.webp    binary
+
+# Standard to msysgit
+*.doc	 diff=astextplain
+*.DOC	 diff=astextplain
+*.docx diff=astextplain
+*.DOCX diff=astextplain
+*.dot  diff=astextplain
+*.DOT  diff=astextplain
+*.pdf  diff=astextplain
+*.PDF	 diff=astextplain
+*.rtf	 diff=astextplain
+*.RTF	 diff=astextplain

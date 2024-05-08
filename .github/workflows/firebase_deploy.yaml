@@ -1,0 +1,58 @@
+name: Deploy to Firebase Hosting
+'on':
+  push:
+    branches:
+      - 'main'
+      - 'staging'
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Ensure correct JAVA version is installed.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      # Make sure the stable version of Flutter is available
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          # use the build-in cache from Subosito
+          cache: true
+      
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Run flutter l10n
+        run: flutter gen-l10n
+
+      - name: Run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Format files
+        run: flutter format --set-exit-if-changed .
+
+      - name: Analyze files
+        run: flutter analyze --no-fatal-warnings
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build web
+        run: flutter build web --release
+        env:
+          ENVIRONMENT: $
+        
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "$"
+          firebaseServiceAccount: "$"
+          channelId: live
+          projectId: "$"
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
+          

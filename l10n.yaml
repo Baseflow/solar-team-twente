@@ -1,0 +1,8 @@
+arb-dir: lib/src/ui/localizations/translations
+output-dir: lib/src/ui/localizations/generated
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+preferred-supported-locales: [nl, en]
+synthetic-package: false
+nullable-getter: false

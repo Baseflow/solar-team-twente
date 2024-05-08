@@ -1,0 +1,154 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+
+    
+    // Make sure that you have the Google services Gradle plugin
+    id "com.google.gms.google-services"
+    
+    
+    // Add the Crashlytics Gradle plugin
+    id "com.google.firebase.crashlytics"
+    
+}
+
+// Declares a variable to contain the dart-define.
+def dartDefines = [
+    APP_TITLE: "[DEV] SolarTeamTwente",
+    APP_ID: "com.baseflow.solarteamtwente.dev"
+];
+if (project.hasProperty("dart-defines")) {
+    // Decode dart-defines, which are comma-separated and encoded in Base64, and store them in a variable.
+    dartDefines = dartDefines + project.property("dart-defines")
+        .split(",")
+        .collectEntries { entry ->
+            def pair = new String(entry.decodeBase64(), "UTF-8").split("=")
+            [(pair.first()): pair.last()]
+        }
+}
+
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
+if (flutterVersionCode == null) {
+    flutterVersionCode = "1"
+}
+
+def flutterVersionName = localProperties.getProperty("flutter.versionName")
+if (flutterVersionName == null) {
+    flutterVersionName = "1.0"
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace "com.baseflow.solarteamtwente"
+    compileSdkVersion 34 // flutter.compileSdkVersion
+    ndkVersion "25.1.8937393" // flutter.ndkVersion
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        // For AGP 4.1+
+        // isCoreLibraryDesugaringEnabled = true
+        // For AGP 4.0
+        coreLibraryDesugaringEnabled = true
+        // Sets Java compatibility to Java 8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    defaultConfig {
+        applicationId dartDefines.APP_ID
+        resValue "string", "app_title", dartDefines.APP_TITLE
+        dimension "default"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 21 // flutter.minSdkVersion
+        targetSdkVersion 34 // flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties["keyAlias"]
+            keyPassword keystoreProperties["keyPassword"]
+            storeFile keystoreProperties["storeFile"] ? file(keystoreProperties["storeFile"]) : null
+            storePassword keystoreProperties["storePassword"]
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android.txt")
+            
+            firebaseCrashlytics {
+              // Enable processing and uploading of native symbols to Firebase servers.
+              // By default, this is disabled to improve build speeds.
+              // This flag must be enabled to see properly-symbolicated native
+              // stack traces in the Crashlytics dashboard.
+              nativeSymbolUploadEnabled true
+              strippedNativeLibsDir "build/intermediates/stripped_native_libs/release/out/lib"
+              unstrippedNativeLibsDir "build/intermediates/merged_native_libs/release/out/lib"
+            }
+            
+        }
+        debug {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    // For AGP 7.4+
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.0.4"
+    // For AGP 7.3
+    // coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.2.3"
+    // For AGP 4.0 to 7.2
+    // coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.9"
+
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation "androidx.window:window:1.2.0"
+    implementation "androidx.window:window-java:1.2.0"
+
+    
+    // Import the BoM for the Firebase platform
+    // By using the Firebase Android BoM, your app will always use compatible versions of Firebase Android libraries.
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    
+    
+    // Add the dependencies for the Crashlytics NDK and Analytics libraries
+    // When using the BoM, you don"t specify versions in Firebase library dependencies
+    implementation "com.google.firebase:firebase-crashlytics-ndk"
+    
+    
+    implementation "com.google.firebase:firebase-analytics"
+    
+}
