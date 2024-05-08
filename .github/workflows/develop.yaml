@@ -37,14 +37,14 @@ jobs:
       - name: Install Flutter dependencies
         run: flutter pub get
 
-      - name: Analyze files
-        run: flutter analyze --no-fatal-warnings
-
       - name: Run flutter l10n
         run: flutter gen-l10n
 
       - name: Run build_runner
         run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Analyze files
+        run: flutter analyze --no-fatal-warnings
 
       - name: Run tests
         run: flutter test
