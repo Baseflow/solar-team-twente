@@ -1,0 +1,7 @@
+FLAVOR=development
+APP_TITLE=[DEV] Solar Team Twente
+APP_ID=com.baseflow.solarteamtwente.dev
+BASE_URL=https://randomuser.me/api/
+AUTH_URL=https://example.com/auth
+DEFAULT_USERNAME=dev@baseflow.com
+DEFAULT_PASSWORD=password
