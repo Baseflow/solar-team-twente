@@ -10,7 +10,6 @@ import '../features/profile/views/profile_page.dart';
 import '../features/shared/widgets/profile_avatar.dart';
 import '../layouts/slot_child_layout.dart';
 
-
 /// The [TrailingNavigationRail] widget used in the AppScaffoldShell.
 class TrailingNavigationRail extends StatelessWidget {
   /// Creates a new instance of the [TrailingNavigationRail].

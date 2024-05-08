@@ -2,9 +2,9 @@ import 'package:solar_team_twente/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockLanguageRepository extends Mock implements LanguageRepository{}
-void main() {
+class MockLanguageRepository extends Mock implements LanguageRepository {}
 
+void main() {
   test('should return GB language code', () {
     final LanguageService languageService = LanguageService(
       languageRepository: MockLanguageRepository(),

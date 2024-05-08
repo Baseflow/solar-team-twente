@@ -9,9 +9,9 @@ part 'change_password_state.dart';
 class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   /// Creates a new instance of [ChangePasswordCubit].
   ChangePasswordCubit(
-      this._authenticationService,
-      ChangePasswordState initialChangePasswordState,
-      ) : super(initialChangePasswordState);
+    this._authenticationService,
+    ChangePasswordState initialChangePasswordState,
+  ) : super(initialChangePasswordState);
 
   final AuthenticationService _authenticationService;
 

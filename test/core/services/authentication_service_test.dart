@@ -113,14 +113,14 @@ void main() {
 
   group(
     'ensureValidToken',
-        () {
+    () {
       test(
         'should emit authenticated state when token is valid',
-            () async {
+        () async {
           final AuthenticationRepository mockAuthenticationRepository =
-          MockAuthenticationRepository();
+              MockAuthenticationRepository();
           final AuthenticationService authenticationService =
-          AuthenticationService(
+              AuthenticationService(
             authenticationRepository: mockAuthenticationRepository,
           );
 
@@ -150,12 +150,12 @@ void main() {
 
       test(
         'should emit authenticated state when token has expired but '
-            'refreshing succeeds',
-            () async {
+        'refreshing succeeds',
+        () async {
           final AuthenticationRepository mockAuthenticationRepository =
-          MockAuthenticationRepository();
+              MockAuthenticationRepository();
           final AuthenticationService authenticationService =
-          AuthenticationService(
+              AuthenticationService(
             authenticationRepository: mockAuthenticationRepository,
           );
 
@@ -196,11 +196,11 @@ void main() {
 
       test(
         'should emit unauthenticated state when an exception is caught',
-            () async {
+        () async {
           final AuthenticationRepository mockAuthenticationRepository =
-          MockAuthenticationRepository();
+              MockAuthenticationRepository();
           final AuthenticationService authenticationService =
-          AuthenticationService(
+              AuthenticationService(
             authenticationRepository: mockAuthenticationRepository,
           );
 
@@ -235,11 +235,11 @@ void main() {
 
       test(
         'should emit unauthenticated state when token is null',
-            () async {
+        () async {
           final AuthenticationRepository mockAuthenticationRepository =
-          MockAuthenticationRepository();
+              MockAuthenticationRepository();
           final AuthenticationService authenticationService =
-          AuthenticationService(
+              AuthenticationService(
             authenticationRepository: mockAuthenticationRepository,
           );
 

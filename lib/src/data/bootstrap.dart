@@ -33,18 +33,17 @@ Future<void> _registerDependencies() async {
 
   // Register API client implementations
   ioc
-    
+
     // Register data dependencies needed for the Analytics feature.
     ..registerLazySingleton<core.AnalyticsRepository>(
       FirebaseAnalyticsClient.new,
     )
-    
-    
+
     // Register data dependencies needed for the Crashlytics feature.
     ..registerLazySingleton<core.CrashlyticsRepository>(
       FirebaseCrashlyticsClient.new,
     )
-    
+
     // Register data dependencies needed for the Authentication feature.
     ..registerFactory<AuthenticationClient>(
       // TODO(mvanbeusekom): Replace the mock implementation with a real

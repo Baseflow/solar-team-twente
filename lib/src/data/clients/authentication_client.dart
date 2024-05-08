@@ -10,7 +10,7 @@ part 'authentication_client.g.dart';
 abstract class AuthenticationClient {
   /// Creates a new instance of the [AuthenticationClient].
   factory AuthenticationClient(Dio dio, {required String baseUrl}) =
-  _AuthenticationClient;
+      _AuthenticationClient;
 
   /// Login using the specified [email] and [password] credentials.
   @POST('')
@@ -87,7 +87,7 @@ class MockAuthenticationClient implements AuthenticationClient {
   }
 
   @override
-  Future<TokenDTO> updatePassword({required String newPassword}) async{
+  Future<TokenDTO> updatePassword({required String newPassword}) async {
     return TokenDTO(
       accessToken: 'accessToken',
       refreshToken: 'refreshToken',

@@ -70,9 +70,9 @@ class RegisterState {
       authErrorCode: authErrorCode ?? this.authErrorCode,
       registerSuccessful: registerSuccessful ?? this.registerSuccessful,
       isPrivacyPolicyAccepted:
-      isPrivacyPolicyAccepted ?? this.isPrivacyPolicyAccepted,
+          isPrivacyPolicyAccepted ?? this.isPrivacyPolicyAccepted,
       isTermsAndConditionsAccepted:
-      isTermsAndConditionsAccepted ?? this.isTermsAndConditionsAccepted,
+          isTermsAndConditionsAccepted ?? this.isTermsAndConditionsAccepted,
     );
   }
 }

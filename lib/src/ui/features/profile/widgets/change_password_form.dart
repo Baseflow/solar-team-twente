@@ -51,7 +51,7 @@ class ChangePasswordForm extends StatelessWidget {
                     8,
                     errorText: l10n.passwordMinimum8Char,
                   ),
-                      (_) => cubit.state.currentAndNewPasswordMatch
+                  (_) => cubit.state.currentAndNewPasswordMatch
                       ? l10n.newPasswordShouldBeDifferent
                       : null,
                 ],
@@ -80,7 +80,7 @@ class ChangePasswordForm extends StatelessWidget {
                     8,
                     errorText: l10n.passwordMinimum8Char,
                   ),
-                      (_) => !cubit.state.newPasswordsMatch
+                  (_) => !cubit.state.newPasswordsMatch
                       ? l10n.passwordsNotMatching
                       : null,
                 ],
@@ -109,7 +109,7 @@ class ChangePasswordForm extends StatelessWidget {
                     8,
                     errorText: l10n.passwordMinimum8Char,
                   ),
-                      (_) => !cubit.state.newPasswordsMatch
+                  (_) => !cubit.state.newPasswordsMatch
                       ? l10n.passwordsNotMatching
                       : null,
                 ],

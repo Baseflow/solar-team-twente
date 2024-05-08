@@ -37,12 +37,12 @@ class SlotChildLayout extends StatelessWidget {
         Breakpoints.medium: SlotLayout.from(
           key: const Key('adaptive_overview_layout_medium_body'),
           builder: (_) =>
-          mediumBody ?? smallBody ?? AdaptiveScaffold.emptyBuilder(_),
+              mediumBody ?? smallBody ?? AdaptiveScaffold.emptyBuilder(_),
         ),
         Breakpoints.large: SlotLayout.from(
           key: const Key('adaptive_overview_layout_large_body'),
           builder: (_) =>
-          largeBody ??
+              largeBody ??
               mediumBody ??
               smallBody ??
               AdaptiveScaffold.emptyBuilder(_),

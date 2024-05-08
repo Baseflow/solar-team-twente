@@ -7,7 +7,6 @@ import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
 import '../widgets/change_password_form.dart';
 
-
 /// The view provided for `ChangePasswordPage`.
 class ChangePasswordView extends StatelessWidget {
   /// Creates a new instance of [ChangePasswordView].

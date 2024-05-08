@@ -15,11 +15,11 @@ import 'app_scaffold_shell.dart';
 import 'global_router.dart' as router show rootNavigatorKey;
 
 final GlobalKey<NavigatorState> _homeNavigatorKey =
-GlobalKey<NavigatorState>(debugLabel: 'home');
+    GlobalKey<NavigatorState>(debugLabel: 'home');
 final GlobalKey<NavigatorState> _counterNavigatorKey =
-GlobalKey<NavigatorState>(debugLabel: 'counter');
+    GlobalKey<NavigatorState>(debugLabel: 'counter');
 final GlobalKey<NavigatorState> _moreNavigatorKey =
-GlobalKey<NavigatorState>(debugLabel: 'more');
+    GlobalKey<NavigatorState>(debugLabel: 'more');
 
 /// Stores the routes that are accessible to authenticated users.
 class AuthenticatedRoutes {
@@ -28,10 +28,10 @@ class AuthenticatedRoutes {
     return StatefulShellRoute.indexedStack(
       parentNavigatorKey: router.rootNavigatorKey,
       builder: (
-          BuildContext context,
-          GoRouterState state,
-          StatefulNavigationShell navigationShell,
-          ) {
+        BuildContext context,
+        GoRouterState state,
+        StatefulNavigationShell navigationShell,
+      ) {
         return AppScaffoldShell(navigationShell: navigationShell);
       },
       branches: <StatefulShellBranch>[

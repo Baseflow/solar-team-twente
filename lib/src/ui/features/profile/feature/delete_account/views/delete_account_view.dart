@@ -95,7 +95,7 @@ class _DeleteAccountForm extends StatelessWidget {
                     FormBuilderValidators.required(
                       errorText: context.l10n.deleteAccountPasswordRequired,
                     ),
-                        (_) => _validatePassword(context),
+                    (_) => _validatePassword(context),
                   ],
                 ),
               ),
@@ -122,7 +122,7 @@ class _DeleteAccountForm extends StatelessWidget {
     if (state is! DeleteAccountErrorState) return null;
     return switch (state.errorCode) {
       DeleteAccountExceptionCode.invalidPassword =>
-      context.l10n.deleteAccountInvalidPassword,
+        context.l10n.deleteAccountInvalidPassword,
       DeleteAccountExceptionCode.unknown => context.l10n.unknownError,
       _ => null,
     };

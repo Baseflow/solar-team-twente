@@ -9,7 +9,7 @@ class MockAuthenticationService extends Mock implements AuthenticationService {}
 void main() {
   group(
     'ChangePasswordCubit',
-        () {
+    () {
       late MockAuthenticationService mockAuthenticationService;
 
       setUp(() {
@@ -21,7 +21,7 @@ void main() {
 
       group(
         'updates',
-            () {
+        () {
           blocTest<ChangePasswordCubit, ChangePasswordState>(
             'the new password',
             build: () => ChangePasswordCubit(
@@ -52,7 +52,7 @@ void main() {
 
       group(
         'emits',
-            () {
+        () {
           blocTest<ChangePasswordCubit, ChangePasswordState>(
             'correct state after successful password change',
             build: () => ChangePasswordCubit(
@@ -64,7 +64,7 @@ void main() {
             ),
             act: (ChangePasswordCubit cubit) async {
               when(
-                    () => mockAuthenticationService.updatePassword(
+                () => mockAuthenticationService.updatePassword(
                   newPassword: password,
                 ),
               ).thenAnswer((_) async {});
@@ -95,7 +95,7 @@ void main() {
             ),
             act: (ChangePasswordCubit cubit) async {
               when(
-                    () => mockAuthenticationService.updatePassword(
+                () => mockAuthenticationService.updatePassword(
                   newPassword: password,
                 ),
               ).thenAnswer((_) async {});
@@ -113,10 +113,10 @@ void main() {
 
       group(
         'newPasswordsMatch',
-            () {
+        () {
           test(
             'is true when new passwords match',
-                () {
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 newPassword: password,
                 confirmNewPassword: password,
@@ -126,7 +126,7 @@ void main() {
           );
           test(
             "is false when new passwords don't match",
-                () {
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 newPassword: password,
                 confirmNewPassword: differentPassword,
@@ -139,10 +139,10 @@ void main() {
 
       group(
         'oldAndNewPasswordMatch',
-            () {
+        () {
           test(
             'is true when current and new passwords match',
-                () {
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 currentPassword: password,
                 newPassword: password,
@@ -152,7 +152,7 @@ void main() {
           );
           test(
             'is false when current and new passwords do not match',
-                () {
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 currentPassword: differentPassword,
                 newPassword: password,
@@ -165,11 +165,11 @@ void main() {
 
       group(
         'validNewPassword',
-            () {
+        () {
           test(
             'is true when new passwords match and current password '
-                'differs from them',
-                () {
+            'differs from them',
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 currentPassword: differentPassword,
                 newPassword: password,
@@ -180,7 +180,7 @@ void main() {
           );
           test(
             'is false when new passwords and current password match',
-                () {
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 currentPassword: password,
                 newPassword: password,
@@ -191,8 +191,8 @@ void main() {
           );
           test(
             'is false when new passwords do not match and '
-                'current password differs from them',
-                () {
+            'current password differs from them',
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 currentPassword: 'differentCurrentPassword',
                 newPassword: password,
@@ -203,8 +203,8 @@ void main() {
           );
           test(
             'is false when new passwords do not match and '
-                'current password matches new password',
-                () {
+            'current password matches new password',
+            () {
               const ChangePasswordState state = ChangePasswordState(
                 currentPassword: password,
                 newPassword: password,
