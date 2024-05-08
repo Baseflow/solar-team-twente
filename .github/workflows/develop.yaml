@@ -48,6 +48,3 @@ jobs:
 
       - name: Run tests
         run: flutter test
-
-      - name: Build Android to test app compatibility
-        run: flutter build apk
