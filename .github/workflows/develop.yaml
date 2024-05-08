@@ -31,11 +31,11 @@ jobs:
           # use the build-in cache from Subosito to cache flutter and pubspec.lock
           cache: true
 
-      - name: Install Flutter dependencies
-        run: flutter pub get
-
       - name: Format files
         run: dart format --set-exit-if-changed .
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
 
       - name: Analyze files
         run: flutter analyze --no-fatal-warnings
