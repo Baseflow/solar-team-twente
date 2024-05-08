@@ -138,7 +138,7 @@ app.*.map.json
 !.idea/runConfigurations/
 
 # Generated files
-**/generated
+**/generated/**
 *.g.dart
 
 # Injection generated files
