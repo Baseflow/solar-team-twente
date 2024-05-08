@@ -45,13 +45,13 @@ class ChangePasswordState extends Equatable {
 
   @override
   List<Object?> get props => <Object?>[
-    currentPassword,
-    newPassword,
-    confirmNewPassword,
-    isLoading,
-    authErrorCode,
-    changePasswordSuccessful,
-  ];
+        currentPassword,
+        newPassword,
+        confirmNewPassword,
+        isLoading,
+        authErrorCode,
+        changePasswordSuccessful,
+      ];
 
   /// Copies the state with a new value.
   ChangePasswordState copyWith({
@@ -69,7 +69,7 @@ class ChangePasswordState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       authErrorCode: authErrorCode ?? this.authErrorCode,
       changePasswordSuccessful:
-      changePasswordSuccessful ?? this.changePasswordSuccessful,
+          changePasswordSuccessful ?? this.changePasswordSuccessful,
     );
   }
 }

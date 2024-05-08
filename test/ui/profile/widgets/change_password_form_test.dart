@@ -36,7 +36,7 @@ void main() {
 
   group(
     'ChangePasswordForm Widget Tests',
-        () {
+    () {
       testWidgets('displays 3 input text fields', (WidgetTester tester) async {
         await tester.pumpWidget(formView);
         expect(find.byType(TextFormField), findsNWidgets(3));
@@ -44,7 +44,7 @@ void main() {
 
       testWidgets(
         'displays 1 filled loading button widget',
-            (WidgetTester tester) async {
+        (WidgetTester tester) async {
           await tester.pumpWidget(formView);
           expect(find.byType(FilledLoadingButton), findsOneWidget);
         },
@@ -54,10 +54,10 @@ void main() {
 
   group(
     'FilledLoadingButton Widget Tests',
-        () {
+    () {
       testWidgets(
         'displays a CircularLoadingIndicator when in loading state',
-            (WidgetTester tester) async {
+        (WidgetTester tester) async {
           when(() => mockChangePasswordCubit.state).thenReturn(
             const ChangePasswordState(isLoading: true),
           );
@@ -70,8 +70,8 @@ void main() {
 
       testWidgets(
         'does not display a CircularLoadingIndicator when '
-            'not in loading state',
-            (WidgetTester tester) async {
+        'not in loading state',
+        (WidgetTester tester) async {
           when(() => mockChangePasswordCubit.state).thenReturn(
             const ChangePasswordState(),
           );
@@ -86,12 +86,12 @@ void main() {
 
   group(
     'SnackBar Tests',
-        () {
+    () {
       testWidgets(
         'shows snack bar when task executed successfully',
-            (WidgetTester tester) async {
+        (WidgetTester tester) async {
           when(mockChangePasswordCubit.changePassword).thenAnswer(
-                (_) => Future<void>.value(),
+            (_) => Future<void>.value(),
           );
 
           whenListen(
@@ -114,9 +114,9 @@ void main() {
 
       testWidgets(
         'shows snack bar when task does not succeed',
-            (WidgetTester tester) async {
+        (WidgetTester tester) async {
           when(mockChangePasswordCubit.changePassword).thenAnswer(
-                (_) => Future<void>.value(),
+            (_) => Future<void>.value(),
           );
 
           whenListen(

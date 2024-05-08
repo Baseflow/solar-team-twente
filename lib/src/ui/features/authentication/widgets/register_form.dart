@@ -61,7 +61,7 @@ class RegistrationForm extends StatelessWidget {
                 labelText: l10n.password,
               ),
               validator:
-              FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                  FormBuilderValidators.compose(<FormFieldValidator<String>>[
                 FormBuilderValidators.required(
                   errorText: l10n.passwordRequired,
                 ),
@@ -86,7 +86,7 @@ class RegistrationForm extends StatelessWidget {
                 labelText: l10n.confirmPassword,
               ),
               validator:
-              FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                  FormBuilderValidators.compose(<FormFieldValidator<String>>[
                 FormBuilderValidators.required(
                   errorText: l10n.passwordRequired,
                 ),
@@ -94,15 +94,15 @@ class RegistrationForm extends StatelessWidget {
                   8,
                   errorText: l10n.passwordMinimum8Char,
                 ),
-                    (_) => cubit.checkMatchingPasswords(
-                  l10n.passwordsNotMatching,
-                ),
+                (_) => cubit.checkMatchingPasswords(
+                      l10n.passwordsNotMatching,
+                    ),
               ]),
             ),
             const Gutter(),
             BlocConsumer<RegisterCubit, RegisterState>(
               listenWhen: (RegisterState previous, RegisterState current) =>
-              (previous.isLoading && !current.isLoading) &&
+                  (previous.isLoading && !current.isLoading) &&
                   (current.authErrorCode != null),
               listener: (BuildContext context, RegisterState state) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -147,7 +147,7 @@ class RegistrationForm extends StatelessWidget {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 final Uri url =
-                                Uri.parse(Constants.appPrivacyPolicy);
+                                    Uri.parse(Constants.appPrivacyPolicy);
                                 launchUrl(url).catchError((Object error) {
                                   context.showSnackBar(
                                     SnackBar(

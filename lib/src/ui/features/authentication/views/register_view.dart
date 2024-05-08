@@ -7,7 +7,6 @@ import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
 import '../widgets/register_form.dart';
 
-
 /// The view for registering a new account.
 class RegisterView extends StatelessWidget {
   /// Creates a new instance of [RegisterView].

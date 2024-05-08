@@ -31,48 +31,48 @@ class ProjectOverviewView extends StatelessWidget {
         builder: (BuildContext context, ProjectOverviewState state) {
           return switch (state) {
             ProjectOverviewLoadedState _ => _ProjectOverviewLoaded(
-              state.projects,
-            ),
+                state.projects,
+              ),
             ProjectOverviewLoadingState _ => CenteredLoadingMessage(
-              loadingMessage: context.l10n.projectOverviewLoading,
-            ),
+                loadingMessage: context.l10n.projectOverviewLoading,
+              ),
             ProjectOverviewEmptyState _ => RefreshableStateMessage(
-              onRefresh: cubit.getAllProjects,
-              asset: Lottie.asset(Assets.animations.emptyState),
-              message: context.l10n.projectOverviewEmpty,
-              child: ElevatedButton.icon(
-                onPressed: () => context.goNamed(NewExamplePage.name),
-                icon: const Icon(Icons.add),
-                label: Text(
-                  context.l10n.projectOverviewAddProjectButtonText,
+                onRefresh: cubit.getAllProjects,
+                asset: Lottie.asset(Assets.animations.emptyState),
+                message: context.l10n.projectOverviewEmpty,
+                child: ElevatedButton.icon(
+                  onPressed: () => context.goNamed(NewExamplePage.name),
+                  icon: const Icon(Icons.add),
+                  label: Text(
+                    context.l10n.projectOverviewAddProjectButtonText,
+                  ),
                 ),
               ),
-            ),
             ProjectOverviewErrorState _ || _ => RefreshableStateMessage(
-              onRefresh: cubit.getAllProjects,
-              asset: Lottie.asset(Assets.animations.loadingFailed),
-              message: context.l10n.projectOverviewLoadingError,
-              child: ElevatedButton.icon(
-                onPressed: cubit.getAllProjects,
-                icon: const Icon(Icons.refresh),
-                label: Text(context.l10n.tryAgainButtonText),
+                onRefresh: cubit.getAllProjects,
+                asset: Lottie.asset(Assets.animations.loadingFailed),
+                message: context.l10n.projectOverviewLoadingError,
+                child: ElevatedButton.icon(
+                  onPressed: cubit.getAllProjects,
+                  icon: const Icon(Icons.refresh),
+                  label: Text(context.l10n.tryAgainButtonText),
+                ),
               ),
-            ),
           };
         },
       ),
       floatingActionButton:
-      BlocBuilder<ProjectOverviewCubit, ProjectOverviewState>(
+          BlocBuilder<ProjectOverviewCubit, ProjectOverviewState>(
         builder: (BuildContext context, ProjectOverviewState state) {
           return switch (state) {
             ProjectOverviewLoadedState _ => FloatingActionButton(
-              key: const Key('project_overview_fab'),
-              // This tag is necessary if more than one fab is alive in the
-              // state of the app.
-              heroTag: 'project_overview_fab',
-              onPressed: () => context.goNamed(NewExamplePage.name),
-              child: Icon(Icons.add, semanticLabel: context.l10n.addAProject),
-            ),
+                key: const Key('project_overview_fab'),
+                // This tag is necessary if more than one fab is alive in the
+                // state of the app.
+                heroTag: 'project_overview_fab',
+                onPressed: () => context.goNamed(NewExamplePage.name),
+                child: Icon(Icons.add, semanticLabel: context.l10n.addAProject),
+              ),
             _ => const SizedBox.shrink(),
           };
         },
@@ -102,10 +102,10 @@ class _ProjectOverviewLoaded extends StatelessWidget {
         ),
         initialItemCount: _projects.length,
         itemBuilder: (
-            BuildContext context,
-            int index,
-            Animation<double> animation,
-            ) {
+          BuildContext context,
+          int index,
+          Animation<double> animation,
+        ) {
           final Project project = _projects[index];
           return ProjectCard(
             name: project.name,

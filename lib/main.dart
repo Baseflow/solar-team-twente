@@ -29,11 +29,9 @@ Future<void> main() async {
       // Initialize the GetIt Ioc Container.
       GetItIocContainer.register();
 
-      
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      
 
       await data.bootstrap();
       await core.bootstrap();

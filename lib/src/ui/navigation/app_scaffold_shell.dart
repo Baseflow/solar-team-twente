@@ -59,15 +59,15 @@ class AppScaffoldShell extends StatelessWidget {
         );
       },
       destinations: navigationShell.route.branches.map(
-            (StatefulShellBranch e) {
+        (StatefulShellBranch e) {
           return switch (e.defaultRoute?.name) {
             CounterPage.name => CounterPage.destination(context),
             ProjectOverviewPage.name =>
-                ProjectOverviewPage.destination(context),
+              ProjectOverviewPage.destination(context),
             MorePage.name => MorePage.destination(context),
             _ => throw UnimplementedError(
-              'The route ${e.defaultRoute?.name} is not implemented.',
-            ),
+                'The route ${e.defaultRoute?.name} is not implemented.',
+              ),
           };
         },
       ).toList(),

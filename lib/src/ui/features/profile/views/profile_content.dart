@@ -79,7 +79,7 @@ class ProfileContent extends StatelessWidget {
                   BaseListTile(
                     title: l10n.phoneNumber,
                     subtitle:
-                    hasProfile ? state.profile.phoneNumber : l10n.unknown,
+                        hasProfile ? state.profile.phoneNumber : l10n.unknown,
                     onTap: () {},
                   ),
                 ],

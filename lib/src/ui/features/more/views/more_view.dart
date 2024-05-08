@@ -38,7 +38,7 @@ class MoreView extends StatelessWidget {
               },
             ),
           ),
-          body:  const SingleChildScrollView(
+          body: const SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[

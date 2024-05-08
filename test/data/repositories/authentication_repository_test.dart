@@ -3,7 +3,8 @@ import 'package:solar_team_twente/core.dart' as core;
 import 'package:solar_team_twente/src/data/clients/clients.dart';
 import 'package:solar_team_twente/src/data/data_stores/data_stores.dart';
 import 'package:solar_team_twente/src/data/dto/authentication/token_dto.dart';
-import 'package:solar_team_twente/src/data/repositories/repositories.dart' as data;
+import 'package:solar_team_twente/src/data/repositories/repositories.dart'
+    as data;
 import 'package:test/test.dart';
 
 void main() {
@@ -300,7 +301,7 @@ void main() {
   group('updatePassword', () {
     test(
       'should return a token',
-          () async {
+      () async {
         final core.Token dummyToken = core.Token(
           accessToken: 'accessToken',
           refreshToken: 'refreshToken',
@@ -309,17 +310,17 @@ void main() {
         final TokenDTO dummyTokenDto = TokenDTO.fromEntity(dummyToken);
 
         when(
-              () => mockAuthenticationClient.updatePassword(
+          () => mockAuthenticationClient.updatePassword(
             newPassword: 'newPassword',
           ),
         ).thenAnswer((_) => Future<TokenDTO>.value(dummyTokenDto));
 
         when(
-              () => mockTokenDataStore.saveToken(token: dummyTokenDto),
+          () => mockTokenDataStore.saveToken(token: dummyTokenDto),
         ).thenAnswer((_) => Future<void>.value());
 
         final data.AuthenticationRepository authenticationRepository =
-        data.AuthenticationRepository.private(
+            data.AuthenticationRepository.private(
           authenticationClient: mockAuthenticationClient,
           tokenDataStore: mockTokenDataStore,
         );
@@ -330,13 +331,13 @@ void main() {
 
         expect(token, dummyToken);
         verify(
-              () => mockAuthenticationClient.updatePassword(
+          () => mockAuthenticationClient.updatePassword(
             newPassword: 'newPassword',
           ),
         ).called(1);
 
         verify(
-              () => mockTokenDataStore.saveToken(token: dummyTokenDto),
+          () => mockTokenDataStore.saveToken(token: dummyTokenDto),
         ).called(1);
       },
     );
