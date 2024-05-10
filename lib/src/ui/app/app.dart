@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ioc/flutter_ioc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../../core.dart';
 import '../features/authentication/cubit/authentication_cubit.dart';
@@ -73,7 +74,7 @@ class App extends StatelessWidget {
             },
             listener: (BuildContext context, AuthenticationState state) {
               if (!kIsWeb) {
-                // FlutterNativeSplash.remove();
+                FlutterNativeSplash.remove();
               }
             },
           ),
