@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
+import '../../../extensions/build_context_extensions.dart';
 import '../views/example_details_page.dart';
 
 /// A card that represents a project.
@@ -21,6 +22,7 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkTheme = context.theme.brightness == Brightness.dark;
     return Card(
       child: ListTile(
         leading: CircleAvatar(
@@ -28,7 +30,9 @@ class ProjectCard extends StatelessWidget {
           child: CircleAvatar(
             radius: 18,
             backgroundColor: Colors.white,
-            child: Image.asset(Assets.baseflowLogo.path),
+            child: Image.asset(
+              isDarkTheme ? Assets.logoWit.path : Assets.logo.path,
+            ),
           ),
         ),
         title: Text(name),

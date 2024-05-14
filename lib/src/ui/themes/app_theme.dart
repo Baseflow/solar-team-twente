@@ -20,7 +20,7 @@ class AppTheme {
 
   /// Creates a new instance of [AppTheme] with the dark color scheme.
   factory AppTheme.dark() => AppTheme._init(
-        FlexTones.candyPop(Brightness.dark),
+        FlexTones.material(Brightness.dark),
         brightness: Brightness.dark,
       );
 
@@ -37,10 +37,7 @@ class AppTheme {
       );
 
   /// The base color of the application.
-  final Color baseColorPrimary = const Color.fromRGBO(241, 56, 36, 1);
-
-  /// License plate yellow
-  final Color licensePlateColor = const Color.fromRGBO(254, 190, 25, 1);
+  final Color baseColorPrimary = const Color.fromRGBO(216, 64, 47, 1);
 
   /// Returns the theme.
   late final ThemeData theme;
@@ -64,7 +61,7 @@ class AppTheme {
           .apply(bodyColor: colorScheme.onSurface),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       extensions: <AppThemeColorExtension>[
-        AppThemeColorExtension(licensePlateColor: licensePlateColor),
+        const AppThemeColorExtension(),
       ],
       // Add custom theme properties here.
     );
