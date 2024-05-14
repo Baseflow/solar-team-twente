@@ -37,7 +37,7 @@ class LoginContainer extends StatelessWidget {
               children: <Widget>[
                 FractionallySizedBox(
                   child: Image.asset(
-                    Assets.baseflowLogo.path,
+                    Assets.logo.path,
                     semanticLabel: l10n.appBarTitle,
                     fit: BoxFit.contain,
                     height: MediaQuery.sizeOf(context).height / 3,

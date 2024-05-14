@@ -19,7 +19,7 @@ class ProfileBackground extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(Assets.baseflowLogo.path),
+              image: AssetImage(Assets.logo.path),
               fit: BoxFit.cover,
             ),
           ),

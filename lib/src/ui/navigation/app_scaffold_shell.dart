@@ -37,7 +37,9 @@ class AppScaffoldShell extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(Sizes.s8),
               child: Image.asset(
-                Assets.baseflowLogo.path,
+                context.theme.brightness == Brightness.dark
+                    ? Assets.logoWit.path
+                    : Assets.logo.path,
                 fit: BoxFit.contain,
                 height: Sizes.s64,
               ),

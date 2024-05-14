@@ -43,7 +43,9 @@ class ProfileHeader extends StatelessWidget {
                     child: SizedBox.expand(
                       child: profileImg == null
                           ? Image.asset(
-                              Assets.baseflowLogo.path,
+                              context.theme.brightness == Brightness.dark
+                                  ? Assets.logoWit.path
+                                  : Assets.logo.path,
                             )
                           : Image.memory(
                               profileImg,

@@ -14,20 +14,11 @@ import 'package:flutter/material.dart';
 @immutable
 class AppThemeColorExtension extends ThemeExtension<AppThemeColorExtension> {
   /// Create a new instance of [AppThemeColorExtension]
-  const AppThemeColorExtension({
-    required this.licensePlateColor,
-  });
-
-  /// The color of the licence plate
-  final Color licensePlateColor;
+  const AppThemeColorExtension();
 
   @override
-  AppThemeColorExtension copyWith({
-    Color? licencePlateColor,
-  }) {
-    return AppThemeColorExtension(
-      licensePlateColor: licencePlateColor ?? licensePlateColor,
-    );
+  AppThemeColorExtension copyWith() {
+    return const AppThemeColorExtension();
   }
 
   @override
@@ -38,10 +29,6 @@ class AppThemeColorExtension extends ThemeExtension<AppThemeColorExtension> {
     if (other is! AppThemeColorExtension) {
       return this;
     }
-    return AppThemeColorExtension(
-      licensePlateColor:
-          Color.lerp(licensePlateColor, other.licensePlateColor, t) ??
-              licensePlateColor,
-    );
+    return const AppThemeColorExtension();
   }
 }

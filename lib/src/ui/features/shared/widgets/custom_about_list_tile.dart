@@ -30,7 +30,7 @@ class CustomAboutListTile extends StatelessWidget {
             applicationVersion: state.appVersion,
             applicationLegalese: Constants.applicationLegalese,
             applicationIcon: Image.asset(
-              Assets.baseflowLogo.path,
+              Assets.logo.path,
               fit: BoxFit.contain,
               height: Sizes.s24,
             ),
