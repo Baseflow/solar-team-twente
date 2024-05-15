@@ -2,11 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_ioc/flutter_ioc.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../core.dart' as core;
-import '../interceptors/authentication_token_interceptor.dart';
 
 /// A factory class for creating instances of the Dio client.
 final class DioFactory {
@@ -48,7 +46,7 @@ final class DioFactory {
       RetryInterceptor(dio: generalDio),
       if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
       DioCacheInterceptor(options: CacheOptions(store: MemCacheStore())),
-      IocContainer.container.get<AuthenticationTokenInterceptor>(),
+      // IocContainer.container.get<AuthenticationTokenInterceptor>(),
     ]);
 
     return generalDio;

@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core.dart' as core;
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
-import 'interceptors/authentication_token_interceptor.dart';
 import 'network/dio_factory.dart';
 import 'repositories/repositories.dart' as data;
 
@@ -66,12 +65,12 @@ Future<void> _registerDependencies() async {
         sharedPreferences: sharedPreferences,
       ),
     )
-    ..registerLazySingleton<AuthenticationTokenInterceptor>(
-      () => AuthenticationTokenInterceptor(
-        authenticationRepository: ioc.get<core.AuthenticationRepository>(),
-        dio: DioFactory.getOrCreateAuthenticationDio(),
-      ),
-    )
+    // ..registerLazySingleton<AuthenticationTokenInterceptor>(
+    //   () => AuthenticationTokenInterceptor(
+    //     authenticationRepository: ioc.get<core.AuthenticationRepository>(),
+    //     dio: DioFactory.getOrCreateAuthenticationDio(),
+    //   ),
+    // )
 
     // Register data dependencies needed for the Project feature.
     ..registerFactory<core.ProjectRepository>(
