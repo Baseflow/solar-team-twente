@@ -43,7 +43,7 @@ class ProfileHeader extends StatelessWidget {
                     child: SizedBox.expand(
                       child: profileImg == null
                           ? Image.asset(
-                              context.theme.brightness == Brightness.dark
+                              context.isDarkMode
                                   ? Assets.dark.logo.path
                                   : Assets.light.logo.path,
                             )

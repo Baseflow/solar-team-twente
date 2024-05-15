@@ -38,7 +38,7 @@ class LoginContainer extends StatelessWidget {
               children: <Widget>[
                 FractionallySizedBox(
                   child: Image.asset(
-                    context.theme.brightness == Brightness.dark
+                    context.isDarkMode
                         ? Assets.dark.logo.path
                         : Assets.light.logo.path,
                     semanticLabel: l10n.appBarTitle,

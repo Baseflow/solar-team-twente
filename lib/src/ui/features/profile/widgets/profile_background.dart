@@ -21,7 +21,7 @@ class ProfileBackground extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                context.theme.brightness == Brightness.dark
+                context.isDarkMode
                     ? Assets.dark.logo.path
                     : Assets.light.logo.path,
               ),

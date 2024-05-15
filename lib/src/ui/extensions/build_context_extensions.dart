@@ -13,7 +13,7 @@ extension ContextExtension on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
 
   /// Returns if the current [BuildContext] is in dark mode.
-  bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+  bool get isDarkMode => theme.brightness == Brightness.dark;
 
   /// Returns a random [ColorScheme] for the current [BuildContext].
   MaterialColor get randomColor => Colors.primaries[Random().nextInt(17)];
