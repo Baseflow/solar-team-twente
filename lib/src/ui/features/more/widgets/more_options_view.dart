@@ -96,7 +96,7 @@ class MoreOptionsView extends StatelessWidget {
     };
   }
 
-  Future<void> _launchLink(BuildContext context) async {
+  Future<void> _launchPrivacyPolicyUrl(BuildContext context) async {
     final Uri url = Uri.parse(Constants.appPrivacyPolicy);
     final bool result = await launchUrl(url);
     if (result) return;
