@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import '../entities/auth/token.dart';
 import '../repositories/authentication_repository.dart';
 import '../types/authentication_status.dart';
 
@@ -62,17 +61,18 @@ class AuthenticationService {
   /// to [AuthenticationStatus.unauthenticated].
   Future<void> ensureValidToken() async {
     try {
-      Token? token = await _authenticationRepository.getToken();
+      // Token? token = await _authenticationRepository.getToken();
+      //
+      // if (token?.isExpired ?? false) {
+      //   token = await _authenticationRepository.refreshToken(token!);
+      // }
 
-      if (token?.isExpired ?? false) {
-        token = await _authenticationRepository.refreshToken(token!);
-      }
-
-      _authStatusController.add(
-        token != null
-            ? AuthenticationStatus.authenticated
-            : AuthenticationStatus.unauthenticated,
-      );
+      // _authStatusController.add(
+      //   token != null
+      //       ? AuthenticationStatus.authenticated
+      //       : AuthenticationStatus.unauthenticated,
+      // );
+      _authStatusController.add(AuthenticationStatus.authenticated);
     } catch (e) {
       _authStatusController.add(AuthenticationStatus.unauthenticated);
     }
