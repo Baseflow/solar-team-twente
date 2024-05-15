@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
+import '../../more/views/terms_and_conditions_page.dart';
 import '../../shared/widgets/filled_loading_button.dart';
 import '../cubit/register_cubit.dart';
 
@@ -125,17 +127,7 @@ class RegistrationForm extends StatelessWidget {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                final Uri url = Uri.parse(
-                                  Constants.termsAndConditions,
-                                );
-                                launchUrl(url).catchError((Object error) {
-                                  context.showSnackBar(
-                                    SnackBar(
-                                      content: Text(context.l10n.failLaunchUrl),
-                                    ),
-                                  );
-                                  return false;
-                                });
+                                context.pushNamed(TermsAndConditionsPage.name);
                               },
                           ),
                           TextSpan(text: ' ${l10n.and.toLowerCase()} '),

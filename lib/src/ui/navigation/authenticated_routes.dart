@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 
 import '../features/counter/view/counter_page.dart';
 import '../features/more/views/more_page.dart';
-import '../features/more/views/terms_and_conditions_page.dart';
 import '../features/projects/views/example_details_page.dart';
 import '../features/projects/views/new_example_page.dart';
 import '../features/projects/views/project_overview_page.dart';
@@ -140,15 +139,6 @@ class AuthenticatedRoutes {
               path: SettingsPage.path,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const MaterialPage<void>(child: SettingsPage());
-              },
-            ),
-            GoRoute(
-              name: TermsAndConditionsPage.name,
-              path: TermsAndConditionsPage.path,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return const MaterialPage<void>(
-                  child: TermsAndConditionsPage(),
-                );
               },
             ),
           ],
