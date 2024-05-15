@@ -47,6 +47,7 @@ void main() {
         },
       );
 
+// TODO(anyone): implement these tests after profile is implemented.
 // testWidgets(
 //   'should display user name in AppBar when profile is loaded',
 //   (WidgetTester tester) async {

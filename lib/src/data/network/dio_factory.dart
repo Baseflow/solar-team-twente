@@ -46,6 +46,7 @@ final class DioFactory {
       RetryInterceptor(dio: generalDio),
       if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
       DioCacheInterceptor(options: CacheOptions(store: MemCacheStore())),
+      // Until auth is implemented, the following code is commented out.
       // IocContainer.container.get<AuthenticationTokenInterceptor>(),
     ]);
 

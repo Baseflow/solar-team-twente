@@ -50,7 +50,6 @@ class AppScaffoldShell extends StatelessWidget {
           ),
         ],
       ),
-      // trailingNavRail: const TrailingNavigationRail(),
       body: (BuildContext context) => navigationShell,
       selectedIndex: navigationShell.currentIndex,
       onSelectedIndexChange: (int index) {

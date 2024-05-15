@@ -28,6 +28,7 @@ class App extends StatelessWidget {
             Ioc.container.get<AuthenticationService>(),
           )..ensureValidToken(),
         ),
+        // Until profile is implemented, the following code is commented out.
         // BlocProvider<ProfileCubit>(
         //   create: (BuildContext context) {
         //     return ProfileCubit(

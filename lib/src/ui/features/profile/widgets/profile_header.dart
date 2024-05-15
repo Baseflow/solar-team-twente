@@ -38,37 +38,39 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
             ),
-            // child: BlocSelector<ProfileCubit, ProfileState, Uint8List?>(
-            //   selector: (ProfileState state) {
-            //     if (state is ProfileLoadedState) {
-            //       return state.profile.profileImage;
-            //     }
-            //     return null;
-            //   },
-            //   builder: (BuildContext context, Uint8List? profileImg) {
-            //     return CircleAvatar(
-            //       radius: 60,
-            //       child: ClipOval(
-            //         child: SizedBox.square(
-            //           dimension: 100,
-            //           child: profileImg == null
-            //               ? Image.asset(
-            //                   context.theme.brightness == Brightness.dark
-            //                       ? Assets.dark.logo.path
-            //                       : Assets.light.logo.path,
-            //                 )
-            //               : Image.memory(
-            //                   profileImg,
-            //                   fit: BoxFit.cover,
-            //                 ),
-            //         ),
-            //       ),
-            //     );
-            //   },
-            // ),
           ),
         ),
       ],
     );
   }
 }
+
+// TODO(anyone): Replace second CircleAvatar with below when profile is added.
+// child: BlocSelector<ProfileCubit, ProfileState, Uint8List?>(
+//   selector: (ProfileState state) {
+//     if (state is ProfileLoadedState) {
+//       return state.profile.profileImage;
+//     }
+//     return null;
+//   },
+//   builder: (BuildContext context, Uint8List? profileImg) {
+//     return CircleAvatar(
+//       radius: 60,
+//       child: ClipOval(
+//         child: SizedBox.square(
+//           dimension: 100,
+//           child: profileImg == null
+//               ? Image.asset(
+//                   context.theme.brightness == Brightness.dark
+//                       ? Assets.dark.logo.path
+//                       : Assets.light.logo.path,
+//                 )
+//               : Image.memory(
+//                   profileImg,
+//                   fit: BoxFit.cover,
+//                 ),
+//         ),
+//       ),
+//     );
+//   },
+// ),
