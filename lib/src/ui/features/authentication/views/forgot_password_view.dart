@@ -36,7 +36,9 @@ class ForgotPasswordView extends StatelessWidget {
                     FractionallySizedBox(
                       widthFactor: 0.5,
                       child: Image.asset(
-                        Assets.logo.path,
+                        context.theme.brightness == Brightness.dark
+                            ? Assets.dark.logo.path
+                            : Assets.light.logo.path,
                         semanticLabel: context.l10n.appBarTitle,
                         fit: BoxFit.contain,
                       ),

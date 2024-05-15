@@ -31,7 +31,9 @@ class ProjectCard extends StatelessWidget {
             radius: 18,
             backgroundColor: Colors.white,
             child: Image.asset(
-              isDarkTheme ? Assets.logoWit.path : Assets.logo.path,
+              context.theme.brightness == Brightness.dark
+                  ? Assets.dark.logo.path
+                  : Assets.light.logo.path,
             ),
           ),
         ),
