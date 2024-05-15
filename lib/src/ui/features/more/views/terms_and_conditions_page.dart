@@ -8,7 +8,7 @@ class TermsAndConditionsPage extends StatelessWidget {
   const TermsAndConditionsPage({super.key});
 
   /// The path of the [TermsAndConditionsPage] route.
-  static const String path = 'terms-conditions';
+  static const String path = '/terms-conditions';
 
   /// The route name of the [TermsAndConditionsPage] route.
   static const String name = 'TermsConditions';
