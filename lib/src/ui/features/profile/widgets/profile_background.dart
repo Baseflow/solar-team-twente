@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
+import '../../../extensions/build_context_extensions.dart';
 
 /// The background image displayed on the profile page.
 class ProfileBackground extends StatelessWidget {
@@ -19,7 +20,11 @@ class ProfileBackground extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(Assets.logo.path),
+              image: AssetImage(
+                context.theme.brightness == Brightness.dark
+                    ? Assets.dark.logo.path
+                    : Assets.light.logo.path,
+              ),
               fit: BoxFit.cover,
             ),
           ),

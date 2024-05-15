@@ -76,6 +76,8 @@ flutter:
     - .env.stg
     - .env.prod
     - assets/
+    - assets/dark/
+    - assets/light/
     - assets/animations/
 
 flutter_gen:

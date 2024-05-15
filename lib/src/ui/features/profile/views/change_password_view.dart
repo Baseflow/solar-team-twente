@@ -3,6 +3,7 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
 import '../../../constants/sizes_constants.dart';
+import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
 import '../widgets/change_password_form.dart';
@@ -32,7 +33,9 @@ class ChangePasswordView extends StatelessWidget {
                   FractionallySizedBox(
                     widthFactor: 0.5,
                     child: Image.asset(
-                      Assets.logo.path,
+                      context.theme.brightness == Brightness.dark
+                          ? Assets.dark.logo.path
+                          : Assets.light.logo.path,
                       semanticLabel: l10n.appBarTitle,
                       fit: BoxFit.contain,
                     ),

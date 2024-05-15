@@ -44,8 +44,8 @@ class ProfileHeader extends StatelessWidget {
                       child: profileImg == null
                           ? Image.asset(
                               context.theme.brightness == Brightness.dark
-                                  ? Assets.logoWit.path
-                                  : Assets.logo.path,
+                                  ? Assets.dark.logo.path
+                                  : Assets.light.logo.path,
                             )
                           : Image.memory(
                               profileImg,

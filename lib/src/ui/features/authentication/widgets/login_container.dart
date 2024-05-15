@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core.dart';
 import '../../../../assets/generated/assets.gen.dart';
 import '../../../constants/sizes_constants.dart';
+import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
 import '../../shared/widgets/filled_loading_button.dart';
@@ -37,7 +38,9 @@ class LoginContainer extends StatelessWidget {
               children: <Widget>[
                 FractionallySizedBox(
                   child: Image.asset(
-                    Assets.logo.path,
+                    context.theme.brightness == Brightness.dark
+                        ? Assets.dark.logo.path
+                        : Assets.light.logo.path,
                     semanticLabel: l10n.appBarTitle,
                     fit: BoxFit.contain,
                     height: MediaQuery.sizeOf(context).height / 3,
