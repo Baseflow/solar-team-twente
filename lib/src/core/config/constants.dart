@@ -4,7 +4,7 @@ class Constants {
   static const String applicationLegalese = '©2024 ' 'Baseflow';
 
   /// The application website.
-  static const String appWebsite = 'https://baseflow.com';
+  static const String appWebsite = 'https://www.solarteam.nl';
 
   /// The privacy policy.
   static const String appPrivacyPolicy = 'https://www.baseflow.com/privacy';
