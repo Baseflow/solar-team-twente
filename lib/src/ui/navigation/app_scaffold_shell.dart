@@ -8,7 +8,6 @@ import '../extensions/build_context_extensions.dart';
 import '../features/counter/view/counter_page.dart';
 import '../features/more/views/more_page.dart';
 import '../features/projects/views/project_overview_page.dart';
-import 'trailing_nav_rail.dart';
 
 /// The [AppScaffoldShell] is the main scaffold for the application.
 ///
@@ -51,7 +50,7 @@ class AppScaffoldShell extends StatelessWidget {
           ),
         ],
       ),
-      trailingNavRail: const TrailingNavigationRail(),
+      // trailingNavRail: const TrailingNavigationRail(),
       body: (BuildContext context) => navigationShell,
       selectedIndex: navigationShell.currentIndex,
       onSelectedIndexChange: (int index) {

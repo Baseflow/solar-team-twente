@@ -7,7 +7,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../../core.dart';
 import '../features/authentication/cubit/authentication_cubit.dart';
-import '../features/profile/cubit/profile_cubit.dart';
 import '../features/settings/cubit/language_cubit.dart';
 import '../features/settings/cubit/theme_cubit.dart';
 import '../localizations/generated/app_localizations.dart';
@@ -29,13 +28,13 @@ class App extends StatelessWidget {
             Ioc.container.get<AuthenticationService>(),
           )..ensureValidToken(),
         ),
-        BlocProvider<ProfileCubit>(
-          create: (BuildContext context) {
-            return ProfileCubit(
-              Ioc.container.get<ProfileService>(),
-            )..getProfile();
-          },
-        ),
+        // BlocProvider<ProfileCubit>(
+        //   create: (BuildContext context) {
+        //     return ProfileCubit(
+        //       Ioc.container.get<ProfileService>(),
+        //     )..getProfile();
+        //   },
+        // ),
         BlocProvider<LanguageCubit>(
           create: (BuildContext languageContext) {
             final String defaultLanguageCode = _defaultLanguageCode(context);
