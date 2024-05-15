@@ -47,6 +47,8 @@ class MoreOptionsView extends StatelessWidget {
       ],
     );
 
+// TODO(anyone): Replace the above code with the following code when the
+// TODO(anyone): profile feature is implemented.
 // return BlocBuilder<ProfileCubit, ProfileState>(
 //   builder: (BuildContext context, ProfileState state) {
 //     return switch (state) {
@@ -90,6 +92,7 @@ class MoreOptionsView extends StatelessWidget {
 // );
   }
 
+  // Until profile is implemented, the following code is commented out.
   // String _getErrorText(ProfileExceptionCode code, AppLocalizations l10n) {
   //   return switch (code) {
   //     _ => l10n.profileNotFound,

@@ -103,6 +103,7 @@ class AuthenticatedRoutes {
             );
           },
           routes: <RouteBase>[
+            // TODO(anyone): add profile routes when profile is implemented.
             // GoRoute(
             //   path: ProfilePage.path,
             //   name: ProfilePage.name,

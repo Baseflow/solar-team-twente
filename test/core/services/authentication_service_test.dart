@@ -111,6 +111,7 @@ void main() {
     },
   );
 
+  // This test group is temporarily disabled until auth is implemented again.
   // group(
   //   'ensureValidToken',
   //   () {

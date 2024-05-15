@@ -65,6 +65,7 @@ Future<void> _registerDependencies() async {
         sharedPreferences: sharedPreferences,
       ),
     )
+    // Until auth is implemented, the following code is commented out.
     // ..registerLazySingleton<AuthenticationTokenInterceptor>(
     //   () => AuthenticationTokenInterceptor(
     //     authenticationRepository: ioc.get<core.AuthenticationRepository>(),

@@ -61,6 +61,7 @@ class AuthenticationService {
   /// to [AuthenticationStatus.unauthenticated].
   Future<void> ensureValidToken() async {
     try {
+      // Token is temporarily disabled until authentication will be implemented.
       // Token? token = await _authenticationRepository.getToken();
       //
       // if (token?.isExpired ?? false) {
