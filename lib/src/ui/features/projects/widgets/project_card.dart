@@ -22,7 +22,6 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkTheme = context.theme.brightness == Brightness.dark;
     return Card(
       child: ListTile(
         leading: CircleAvatar(
@@ -31,7 +30,7 @@ class ProjectCard extends StatelessWidget {
             radius: 18,
             backgroundColor: Colors.white,
             child: Image.asset(
-              context.theme.brightness == Brightness.dark
+              context.isDarkMode
                   ? Assets.dark.logo.path
                   : Assets.light.logo.path,
             ),

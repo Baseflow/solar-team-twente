@@ -30,7 +30,7 @@ class CustomAboutListTile extends StatelessWidget {
             applicationVersion: state.appVersion,
             applicationLegalese: Constants.applicationLegalese,
             applicationIcon: Image.asset(
-              context.theme.brightness == Brightness.dark
+              context.isDarkMode
                   ? Assets.dark.logo.path
                   : Assets.light.logo.path,
               fit: BoxFit.contain,
