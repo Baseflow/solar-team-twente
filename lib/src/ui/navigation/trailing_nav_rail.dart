@@ -24,7 +24,7 @@ class TrailingNavigationRail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Divider(
-            color: context.colorScheme.surfaceVariant,
+            color: context.colorScheme.surfaceContainerHighest,
             thickness: 1,
           ),
           InkWell(

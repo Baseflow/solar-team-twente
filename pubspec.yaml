@@ -5,7 +5,7 @@ publish_to: 'none'
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
-  flutter: 3.19.6
+  flutter: ^3.22.0
 
 dependencies:
   accessibility_tools: ^2.0.0
@@ -51,6 +51,7 @@ dependencies:
   shared_preferences: ^2.2.3
   url_launcher: ^6.2.6
 
+# Needs to override because some packages are not compatible with the latest version of intl
 dependency_overrides:
   intl: ^0.18.1
 

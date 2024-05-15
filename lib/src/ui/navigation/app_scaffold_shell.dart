@@ -46,7 +46,7 @@ class AppScaffoldShell extends StatelessWidget {
             ),
           ),
           Divider(
-            color: context.colorScheme.surfaceVariant,
+            color: context.colorScheme.surfaceContainerHighest,
             thickness: 1,
           ),
         ],
