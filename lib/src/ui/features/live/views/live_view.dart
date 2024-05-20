@@ -23,7 +23,9 @@ class LiveView extends StatelessWidget {
             height: 64,
           ),
         ),
-        body: Container(),
+        body: const Center(
+          child: Text('Hier komt binnenkort een live map te staan.'),
+        ),
       ),
     );
   }
