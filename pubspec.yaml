@@ -70,7 +70,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # generate: true
+  generate: true
   assets:
     - .env.dev
     - .env.stg

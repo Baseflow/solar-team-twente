@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/dashboard/views/dashboard_page.dart';
+import '../features/live/views/live_page.dart';
 import '../features/more/views/more_page.dart';
 import '../features/settings/views/settings_page.dart';
 import 'app_scaffold_shell.dart';
 import 'global_router.dart' as router show rootNavigatorKey;
 
+final GlobalKey<NavigatorState> _liveNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'home');
+final GlobalKey<NavigatorState> _dashboardNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'dashboard');
 final GlobalKey<NavigatorState> _moreNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'more');
 
@@ -25,20 +30,30 @@ class AuthenticatedRoutes {
       },
       branches: <StatefulShellBranch>[
         StatefulShellBranch(
+          navigatorKey: _dashboardNavigatorKey,
           routes: <RouteBase>[
             GoRoute(
+              name: DashboardPage.routeName,
+              path: DashboardPage.path,
               pageBuilder: (BuildContext context, GoRouterState state) {
+                return const MaterialPage<void>(child: DashboardPage());
               },
             ),
           ],
         ),
+        StatefulShellBranch(
+          navigatorKey: _liveNavigatorKey,
           routes: <RouteBase>[
             GoRoute(
+              name: LivePage.routeName,
+              path: LivePage.path,
               pageBuilder: (BuildContext context, GoRouterState state) {
+                return const MaterialPage<void>(child: LivePage());
               },
             ),
           ],
         ),
+        _morePageRoutes,
       ],
     );
   }
