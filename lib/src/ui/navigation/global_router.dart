@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core.dart';
 import '../features/authentication/cubit/authentication_cubit.dart';
 import '../features/authentication/views/login_page.dart';
+import '../features/live/views/live_page.dart';
 import 'app_scaffold_shell.dart';
 import 'authenticated_routes.dart';
 import 'navigation_error_page.dart';
@@ -25,6 +26,7 @@ class GlobalRouter {
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
     errorPageBuilder: (BuildContext context, GoRouterState state) {
+      debugPrint('Error: ${state.error}');
       return const MaterialPage<void>(child: NavigationErrorPage());
     },
     redirect: (BuildContext context, GoRouterState state) async {
@@ -35,6 +37,7 @@ class GlobalRouter {
       )) {
         return null;
       }
+
       final AuthenticationStatus authStatus =
           context.read<AuthenticationCubit>().state.authStatus;
 
@@ -52,6 +55,7 @@ class GlobalRouter {
 
       // If the user is successfully logged in but still on login, go to home.
       if (state.fullPath == LoginPage.path) {
+        return LivePage.path;
       }
 
       // In any other case the redirect can be safely ignored and handled as is.
