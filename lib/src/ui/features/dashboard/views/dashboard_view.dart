@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../../../assets/generated/assets.gen.dart';
 import '../../../localizations/l10n.dart';
+import '../../shared/widgets/state_message_view.dart';
 
 /// {@template dashboard_view}
 /// The UI for the dashboard page, displaying the most important information
@@ -17,7 +20,10 @@ class DashboardView extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.l10n.dashboardPageTitle),
         ),
-        body: Container(),
+        body: StateMessageView(
+          asset: Lottie.asset(Assets.animations.notFound),
+          message: context.l10n.soonAvailableMessage,
+        ),
       ),
     );
   }
