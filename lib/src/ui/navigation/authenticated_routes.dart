@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/counter/view/counter_page.dart';
 import '../features/more/views/more_page.dart';
-import '../features/projects/views/example_details_page.dart';
-import '../features/projects/views/new_example_page.dart';
-import '../features/projects/views/project_overview_page.dart';
 import '../features/settings/views/settings_page.dart';
 import 'app_scaffold_shell.dart';
 import 'global_router.dart' as router show rootNavigatorKey;
 
-final GlobalKey<NavigatorState> _homeNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'home');
-final GlobalKey<NavigatorState> _counterNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'counter');
 final GlobalKey<NavigatorState> _moreNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'more');
 
@@ -31,56 +24,17 @@ class AuthenticatedRoutes {
         return AppScaffoldShell(navigationShell: navigationShell);
       },
       branches: <StatefulShellBranch>[
-        _homeRoutes,
         StatefulShellBranch(
-          navigatorKey: _counterNavigatorKey,
           routes: <RouteBase>[
             GoRoute(
-              name: CounterPage.name,
-              path: CounterPage.path,
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return const MaterialPage<void>(child: CounterPage());
               },
             ),
           ],
         ),
-        _morePageRoutes,
-      ],
-    );
-  }
-
-  static StatefulShellBranch get _homeRoutes {
-    return StatefulShellBranch(
-      navigatorKey: _homeNavigatorKey,
-      routes: <RouteBase>[
-        GoRoute(
-          name: ProjectOverviewPage.name,
-          path: ProjectOverviewPage.path,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return const MaterialPage<void>(
-              child: ProjectOverviewPage(),
-            );
-          },
           routes: <RouteBase>[
             GoRoute(
-              name: ExampleDetailsPage.name,
-              path: ExampleDetailsPage.path,
-              parentNavigatorKey: router.rootNavigatorKey,
               pageBuilder: (BuildContext context, GoRouterState state) {
-                return const MaterialPage<void>(
-                  child: ExampleDetailsPage(),
-                );
-              },
-            ),
-            GoRoute(
-              name: NewExamplePage.name,
-              path: NewExamplePage.path,
-              parentNavigatorKey: router.rootNavigatorKey,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return const MaterialPage<void>(
-                  fullscreenDialog: true,
-                  child: NewExamplePage(),
-                );
               },
             ),
           ],

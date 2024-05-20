@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../core.dart';
 import '../features/authentication/cubit/authentication_cubit.dart';
 import '../features/authentication/views/login_page.dart';
-import '../features/projects/views/project_overview_page.dart';
 import 'app_scaffold_shell.dart';
 import 'authenticated_routes.dart';
 import 'navigation_error_page.dart';
@@ -53,7 +52,6 @@ class GlobalRouter {
 
       // If the user is successfully logged in but still on login, go to home.
       if (state.fullPath == LoginPage.path) {
-        return ProjectOverviewPage.path;
       }
 
       // In any other case the redirect can be safely ignored and handled as is.
