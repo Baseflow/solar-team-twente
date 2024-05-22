@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core.dart' as core;
 import 'clients/clients.dart';
+import 'clients/solar_client.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
 import 'repositories/repositories.dart' as data;
@@ -65,7 +66,7 @@ Future<void> _registerDependencies() async {
         sharedPreferences: sharedPreferences,
       ),
     )
-    // Until auth is implemented, the following code is commented out.
+    // TODO(Anyone): Until auth is implemented the following code is commented.
     // ..registerLazySingleton<AuthenticationTokenInterceptor>(
     //   () => AuthenticationTokenInterceptor(
     //     authenticationRepository: ioc.get<core.AuthenticationRepository>(),
@@ -74,18 +75,20 @@ Future<void> _registerDependencies() async {
     // )
 
     // Register data dependencies needed for the Project feature.
-    ..registerFactory<core.ProjectRepository>(
-      data.ApiProjectRepository.new,
-    )
+    ..registerFactory<core.ProjectRepository>(data.ApiProjectRepository.new)
 
     // Register data dependencies needed for the Profile feature.
     ..registerFactory<ProfileClient>(
-      () => ProfileClient(
-        DioFactory.getOrCreateGeneralDio(),
-      ),
+      () => ProfileClient(DioFactory.getOrCreateGeneralDio()),
     )
     ..registerFactory<core.ProfileRepository>(
       () => data.ApiProfileRepository(ioc.get<ProfileClient>()),
+    )
+    ..registerFactory<SolarClient>(
+      () => SolarClient(DioFactory.getOrCreateGeneralDio()),
+    )
+    ..registerFactory<core.LeaderboardRepository>(
+      () => data.ApiLeaderboardRepository(ioc.get<SolarClient>()),
     )
 
     // Register data dependencies needed for the Theme feature.
