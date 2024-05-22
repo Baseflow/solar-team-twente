@@ -72,9 +72,6 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - .env.dev
-    - .env.stg
-    - .env.prod
     - assets/
     - assets/dark/
     - assets/light/
