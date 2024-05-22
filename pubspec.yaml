@@ -31,6 +31,8 @@ dependencies:
   flutter_ioc_get_it: ^1.2.1
   flutter_localizations:
     sdk: flutter
+  flutter_map: ^6.1.0
+  flutter_map_geojson: ^1.0.8
   flutter_native_splash: ^2.4.0
   flutter_secure_storage: ^9.0.0
   flutter_web_plugins:
@@ -41,6 +43,7 @@ dependencies:
   image_picker: ^1.1.0
   intl: ^0.19.0
   json_annotation: ^4.9.0
+  latlong2: ^0.9.1
   locale_names: ^1.1.1
   lottie: ^3.1.0
   material_symbols_icons: ^4.2719.3
@@ -77,6 +80,7 @@ flutter:
     - assets/dark/
     - assets/light/
     - assets/animations/
+    - assets/geojson/
 
 flutter_gen:
   output: lib/src/assets/generated
