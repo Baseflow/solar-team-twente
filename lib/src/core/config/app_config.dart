@@ -45,6 +45,9 @@ class AppConfig {
   /// The authentication URL.
   static const String authUrl = String.fromEnvironment('AUTH_URL');
 
+  /// The URL to the Solarteam provided API.
+  static const String solarUrl = String.fromEnvironment('SOLAR_URL');
+
   /// The default username for development or staging.
   static String defaultUsername = _instance.kDebugMode
       ? const String.fromEnvironment('DEFAULT_USERNAME')

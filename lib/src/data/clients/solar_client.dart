@@ -9,7 +9,7 @@ part 'solar_client.g.dart';
 @RestApi()
 abstract class SolarClient {
   /// Creates a new instance of the [SolarClient].
-  factory SolarClient(Dio dio) = _SolarClient;
+  factory SolarClient(Dio dio, {required String baseUrl}) = _SolarClient;
 
   /// Gets a random User object.
   @GET('')

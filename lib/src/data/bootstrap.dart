@@ -85,10 +85,13 @@ Future<void> _registerDependencies() async {
       () => data.ApiProfileRepository(ioc.get<ProfileClient>()),
     )
     ..registerFactory<SolarClient>(
-      () => SolarClient(DioFactory.getOrCreateGeneralDio()),
+      () => SolarClient(
+        DioFactory.getOrCreateSolarDio(),
+        baseUrl: core.AppConfig.solarUrl,
+      ),
     )
-    ..registerFactory<core.LeaderboardRepository>(
-      () => data.ApiLeaderboardRepository(ioc.get<SolarClient>()),
+    ..registerLazySingleton<core.LeaderboardRepository>(
+      () => data.ApiLeaderboardRepository(solarClient: ioc.get<SolarClient>()),
     )
 
     // Register data dependencies needed for the Theme feature.

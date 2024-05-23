@@ -39,6 +39,28 @@ final class DioFactory {
     return authenticationDio;
   }
 
+  /// Returns an instance of the Dio client used for the Solar API.
+  static Dio getOrCreateSolarDio() {
+    const String key = 'solar';
+
+    if (_dioInstances.containsKey(key)) {
+      return _dioInstances[key]!;
+    }
+
+    final Dio solarDio = _factory._createSolarDio();
+    _dioInstances[key] = solarDio;
+    return solarDio;
+  }
+
+  Dio _createSolarDio() {
+    // ignore: avoid_redundant_argument_values
+    return Dio(BaseOptions(baseUrl: core.AppConfig.solarUrl))
+      ..interceptors.addAll(<Interceptor>[
+        if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
+        DioCacheInterceptor(options: CacheOptions(store: MemCacheStore())),
+      ]);
+  }
+
   Dio _createGeneralDio() {
     // ignore: avoid_redundant_argument_values
     final Dio generalDio = Dio(BaseOptions(baseUrl: core.AppConfig.baseUrl));

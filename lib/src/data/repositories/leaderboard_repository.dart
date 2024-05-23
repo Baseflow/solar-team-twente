@@ -7,16 +7,16 @@ import '../dto/leaderboard/leaderboard_entry_dto.dart';
 /// Implementation of the [LeaderboardRepository] interface that uses the API.
 class ApiLeaderboardRepository implements LeaderboardRepository {
   /// Creates a new [ApiLeaderboardRepository] instance.
-  const ApiLeaderboardRepository(this._solarClient);
+  const ApiLeaderboardRepository({required this.solarClient});
 
   /// The [SolarClient] instance to use.
-  final SolarClient _solarClient;
+  final SolarClient solarClient;
 
   @override
   Future<List<LeaderboardEntry>> getLeaderboard() async {
     try {
       final List<LeaderboardEntryDTO> leaderboardEntryDTOs =
-          await _solarClient.getLeaderboard();
+          await solarClient.getLeaderboard();
       return leaderboardEntryDTOs
           .map((LeaderboardEntryDTO e) => e.toEntity())
           .toList();
