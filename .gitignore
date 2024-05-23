@@ -15,6 +15,7 @@ devtools_options.yaml
 *.env.*
 *.env*
 !.env.example
+ios/Flutter/Dart-Defines.xcconfig
 
 # IntelliJ related
 *.iml
