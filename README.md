@@ -135,8 +135,36 @@ When you want to add new targets to the project like macOS or Linux you can run 
 Replace `$projectname` and `$organization` with your own and only use the platforms you want to add.
 
 ## Supabase Backend
+If you want to use the Supabase backend, you need to set up a Supabase project and configure the environment variables accordingly.
+One of the environment variables you need to set is the `SUPABASE_ANON_KEY`. This can be found in the settings of your Supabase project.
+See below for more instructions on how to set up the Supabase backend.
+
 ### Local development
-To set up local development, follow the steps as mentioned in the [Supabase documentation](https://supabase.io/docs/guides/local-development).
+To set up local development, follow the steps as mentioned in the [Supabase documentation for local development](https://supabase.io/docs/guides/local-development).
+After initializing and setting up, start supabase locally (make sure docker is running). Then run the following command in your cli:
+```bash
+supabase status
+```
+
+This will return something that looks like this:
+```
+supabase local development setup is running.
+
+         API URL: http://127.0.0.1:54321
+     GraphQL URL: http://127.0.0.1:54321/graphql/v1
+  S3 Storage URL: http://127.0.0.1:54321/storage/v1/s3
+          DB URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+      Studio URL: http://127.0.0.1:54323
+    Inbucket URL: http://127.0.0.1:54324
+      JWT secret: super-secret-jwt-token-with-at-least-32-characters-long
+        anon key: some_kind_of_anon_key
+service_role key: some_kind_of_service_role_key
+   S3 Access Key: some_kind_of_s3_access_key
+   S3 Secret Key: some_kind_of_s3_secret_key
+       S3 Region: local
+```
+
+Use the `anon key` as the `SUPABASE_ANON_KEY` in your `.env.dev` file.
 
 ## TODO Firebase
 
