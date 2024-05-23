@@ -54,4 +54,8 @@ class AppConfig {
   static String defaultPassword = _instance.kDebugMode
       ? const String.fromEnvironment('DEFAULT_PASSWORD')
       : '';
+
+  /// Supabase specific anon key, unique to the supabase project.
+  static const String supabaseAnonKey =
+      String.fromEnvironment('SUPABASE_ANON_KEY');
 }
