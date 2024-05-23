@@ -14,9 +14,6 @@ devtools_options.yaml
 # Environment files
 *.env.*
 *.env*
-!.env.dev
-!.env.stg
-!.env.prod
 
 # IntelliJ related
 *.iml
