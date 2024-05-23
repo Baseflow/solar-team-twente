@@ -1,5 +1,5 @@
 ## :memo: Links to relevant issues/docs
-Link to Jira issue: [-](https://baseflowhq.atlassian.net/browse/-)
+Link to Jira issue: [SOL-](https://baseflowhq.atlassian.net/browse/SOL-)
 
 ## :sparkles: What kind of feature does this PR introduce?
 
