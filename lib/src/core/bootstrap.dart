@@ -49,7 +49,7 @@ void _registerDependencies() {
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(
         leaderboardRepository: ioc.get<LeaderboardRepository>(),
-      ),
+      )..getLeaderboard(),
     )
     ..registerFactory<ThemeService>(
       () => ThemeService(
