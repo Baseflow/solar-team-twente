@@ -56,7 +56,7 @@ final class DioFactory {
     return Dio(
       BaseOptions(
         // ignore: avoid_redundant_argument_values
-      baseUrl: core.AppConfig.solarUrl,
+        baseUrl: core.AppConfig.solarUrl,
         headers: <String, String>{
           'Authorization': 'Bearer ${core.AppConfig.solarApiKey}',
         },

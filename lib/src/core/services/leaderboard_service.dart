@@ -10,7 +10,6 @@ class LeaderboardService {
 
   final LeaderboardRepository _leaderboardRepository;
 
-
   /// Gets the leaderboard entries.
   Future<List<LeaderboardEntry>> getLeaderboard() {
     return _leaderboardRepository.getLeaderboard();

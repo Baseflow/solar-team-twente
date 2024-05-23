@@ -1,6 +1,5 @@
 /// A class that represents a leaderboard entry.
 class LeaderboardEntry {
-
   /// Creates a new leaderboard entry.
   // TODO(Floyd): Macro.
   const LeaderboardEntry({
