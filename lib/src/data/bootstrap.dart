@@ -1,5 +1,6 @@
 import 'package:flutter_ioc/flutter_ioc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core.dart' as core;
 import 'clients/clients.dart';
@@ -13,12 +14,10 @@ import 'repositories/repositories.dart' as data;
 /// The `boostrap()` method is called from the `main.dart` file to bootstrap
 /// the application.
 Future<void> bootstrap() async {
-  // This is a good place to initialize data specific libraries. For instance
-  // if the application needs to communicate with Firebase, this is the perfect
-  // location to call:
-  /// await Firebase.initializeApp(
-  ///     options: DefaultFirebaseOptions.currentPlatform,
-  /// );
+  await Supabase.initialize(
+    url: core.AppConfig.baseUrl,
+    anonKey: core.AppConfig.supabaseAnonKey,
+  );
 
   // Register implementation for the repositories defined in the core library.
   await _registerDependencies();

@@ -53,30 +53,9 @@ To set up your environment variables, you can create a `.env` file in the root o
 In case of most projects, you will have at least 3 environments: `development`, `staging` and `production`.
 
 To set up the environment variables, create a `.env.dev`, `.env.stg` and `.env.prod` file in the root of the project. 
-The `.env` file should contain at least the following (this is the `.env.dev` file):
-
-```
-# --- Development environment configuration ---
-# You make changes to this file to configure the development environment
-
-# Flavor options: development, staging, production
-FLAVOR=development
-
-# Title of the app as it will be displayed on the home screen
-APP_TITLE=[DEV] Solar Team Twente
-# Unique identifier for the app
-APP_ID=com.baseflow.solarteamtwente.dev
-
-# Base URL for the API
-BASE_URL=https://randomuser.me/api/
-
-# URL for the authentication service
-AUTH_URL=https://example.com/auth
-
-# Default username and password, used to prefill the login form when running in debug mode
-DEFAULT_USERNAME=dev@baseflow.com
-DEFAULT_PASSWORD=password
-```
+This project has a `.env.example` file added as an example. 
+Copy the contents of this file and rename it to `.env.dev`, `.env.stg` and `.env.prod`.
+After that, set the variables accordingly.
 
 Adjust all variables according to your needs for the specific environment.
 To specify what environment file is used, run the app with the `--dart-define-from-file=.env.dev` flag. 
