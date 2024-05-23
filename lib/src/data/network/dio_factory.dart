@@ -53,9 +53,15 @@ final class DioFactory {
   }
 
   Dio _createSolarDio() {
-    // ignore: avoid_redundant_argument_values
-    return Dio(BaseOptions(baseUrl: core.AppConfig.solarUrl))
-      ..interceptors.addAll(<Interceptor>[
+    return Dio(
+      BaseOptions(
+        // ignore: avoid_redundant_argument_values
+      baseUrl: core.AppConfig.solarUrl,
+        headers: <String, String>{
+          'Authorization': 'Bearer ${core.AppConfig.solarApiKey}',
+        },
+      ),
+    )..interceptors.addAll(<Interceptor>[
         if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
         DioCacheInterceptor(options: CacheOptions(store: MemCacheStore())),
       ]);

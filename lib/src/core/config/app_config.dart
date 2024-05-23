@@ -11,9 +11,7 @@
 /// ```
 class AppConfig {
   /// Creates a new instance of [AppConfig].
-  AppConfig._(
-    this.kDebugMode,
-  );
+  AppConfig._(this.kDebugMode);
 
   /// The [AppConfig] instance.
   static late AppConfig _instance;
@@ -47,6 +45,9 @@ class AppConfig {
 
   /// The URL to the Solarteam provided API.
   static const String solarUrl = String.fromEnvironment('SOLAR_URL');
+
+  /// The API key for the Solarteam API.
+  static const String solarApiKey = String.fromEnvironment('SOLAR_API_KEY');
 
   /// The default username for development or staging.
   static String defaultUsername = _instance.kDebugMode

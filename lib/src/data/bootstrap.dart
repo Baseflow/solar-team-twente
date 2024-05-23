@@ -85,10 +85,7 @@ Future<void> _registerDependencies() async {
       () => data.ApiProfileRepository(ioc.get<ProfileClient>()),
     )
     ..registerFactory<SolarClient>(
-      () => SolarClient(
-        DioFactory.getOrCreateSolarDio(),
-        baseUrl: core.AppConfig.solarUrl,
-      ),
+      () => SolarClient(DioFactory.getOrCreateSolarDio()),
     )
     ..registerLazySingleton<core.LeaderboardRepository>(
       () => data.ApiLeaderboardRepository(solarClient: ioc.get<SolarClient>()),
