@@ -1,5 +1,5 @@
 name: solar_team_twente # This will be updated to solar_team_twente by Mason
-version: 0.0.1
+version: 0.0.2
 
 publish_to: 'none'
 
@@ -49,6 +49,7 @@ dependencies:
   pretty_dio_logger: ^1.3.1
   retrofit: ^4.1.0
   shared_preferences: ^2.2.3
+  supabase_flutter: ^2.5.3
   url_launcher: ^6.2.6
 
 # Needs to override because some packages are not compatible with the latest version of intl

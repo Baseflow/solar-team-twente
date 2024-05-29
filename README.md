@@ -1,5 +1,25 @@
 # Solar team twente
 
+# Table of Contents
+
+1. [Architecture](#architecture)
+2. [Running the app](#running-the-app)
+    1. [Get the dependencies](#1-get-the-dependencies)
+    2. [Run the generators](#2-run-the-generators)
+    3. [Environment variables](#3-environment-variables)
+    4. [Run the app](#4-run-the-app)
+3. [Creating a new release build](#creating-a-new-release-build)
+4. [Deploying the app](#deploying-the-app)
+5. [TODO-list regarding general project setup](#todo-list-regarding-general-project-setup)
+    1. [Splash Screen](#splash-screen)
+    2. [Launcher Icons](#launcher-icons)
+    3. [Navigation and routing](#navigation-and-routing)
+    4. [Adding additional targets](#adding-additional-targets)
+6. [Supabase Backend](#supabase-backend)
+7. [TODO Firebase](#todo-firebase)
+8. [TODO Android Release](#todo-android-release)
+9. [TODO iOS Release](#todo-ios-release)
+
 ## Architecture
 
 This App is generated using the `base_app` brick provided by [Baseflow](https://baseflow.com). The app is structured to follow the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles created by Robert C. Martin.
@@ -29,16 +49,24 @@ dart run build_runner build --delete-conflicting-outputs
 ```
 
 ### 3. Environment variables
-The environment are already setup, you can find them in the `.env.dev`, `.env.stg` and `.env.prod` file.
-You can your own environment for local development for example. Simply make a copy of the `.env.dev` file and rename it to `.env.dev_local`. Make changes accordingly.
+To set up your environment variables, you can create a `.env` file in the root of the project for each environment you want to support.
+In case of most projects, you will have at least 3 environments: `development`, `staging` and `production`.
 
-To specify what environment file is used, run the app with the `--dart-define-from-file=.env.dev` flag. Alternatively it is possible to override individual value using the `--dart-define` flag. If for example it is necessary to override the `BASE_URL` flag it run the following command:
+To set up the environment variables, create a `.env.dev`, `.env.stg` and `.env.prod` file in the root of the project. 
+This project has a `.env.example` file added as an example. 
+Copy the contents of this file and rename it to `.env.dev`, `.env.stg` and `.env.prod`.
+After that, set the variables accordingly.
+
+Adjust all variables according to your needs for the specific environment.
+To specify what environment file is used, run the app with the `--dart-define-from-file=.env.dev` flag. 
+Alternatively it is possible to override individual value using the `--dart-define` flag. 
+If for example it is necessary to override the `BASE_URL` flag it runs the following command:
 
 ```bash
 flutter run --dart-define-from-file=.env.prod --dart-define="BASE_URL=https://example.com"
 ```
 
-> :warning: **Never commit secrets**: The `.env.dev`, `.env.stg` and `.env.prod` files are checked in so we can all use the same environment variables. If you add a new environment file, make sure to NOT add any secrets to it.
+> :warning: **Never commit secrets**: The `.env.dev`, `.env.stg` and `.env.prod` files are ignored and should remain so. If you add a new environment file, make sure it's never committed.
 
 ### 4. Run the app
 Now you should be able to run the app from your IDE.
@@ -60,12 +88,12 @@ If you want to specify the environment file:
 flutter run --dart-define-from-file=.env.dev
 ```
 
-If the `--dart-define-from-file` is not specified the application will fallback to the configuration values configured in the `lib/src/core/config/app_config.dart` file. Default values for the application name and bundle identifier are configured in the `android/app/build.gradle` and `ios/Flutter/Dart-Defines-defaults.xcconfig` files, as there need to be available at compile time.
+If the `--dart-define-from-file` is not specified the application will fall back to the configuration values configured in the `lib/src/core/config/app_config.dart` file. Default values for the application name and bundle identifier are configured in the `android/app/build.gradle` and `ios/Flutter/Dart-Defines-defaults.xcconfig` files, as there need to be available at compile time.
 
 ## Creating a new release build
 
-- Android: `flutter build apk --dart-define-from-file=.env.prod`
-- iOS: `flutter build ipa --dart-define-from-file=.env.prod`
+- Android: `flutter build apk --dart-define-from-file=.env.dev`
+- iOS: `flutter build ipa --dart-define-from-file=.env.stg`
 - Web: `flutter build web --dart-define-from-file=.env.prod`
 
 ## Deploying the app
@@ -92,22 +120,6 @@ For additional project specific configuration options see the [flutter_native_sp
 Configuration for the launcher icons can be found in the root under `flutter_launcher_icons.yaml`.
 For additional project specific configuration options see the [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) package.
 
-### Environment config
-
-There are 3 configs available by default: `.env.dev`, `.env.stag`, `.env.prod`
-
-```json
-    "FLAVOR": "development",
-    "APP_TITLE": "Base App",
-    "APP_ID": "com.baseflow.base_app",
-    "BASE_URL": "https://randomuser.me/api/",
-    "AUTH_URL": "https://example.com/auth",
-    "DEFAULT_USERNAME": "user",
-    "DEFAULT_PASSWORD": "password"
-```
-
-You need to add the base url and auth endpoint to connect api's. When you fill the default username and password they will be set in debug mode.
-
 ### Navigation and routing
 
 The RootNavigator contains a StatefulShellRoute which will be used as root for navigation patterns like BottomNavigation. The RootScaffold picks up these routes and uses them for the navigation pattern that is implemented on the platform and screen sizes.
@@ -116,11 +128,43 @@ To add pages to the navigation add a `StatefulShellBranch` to the `StatefulShell
 
 ### Adding additional targets
 
-When you want to add new targets to the project like MacOS or Linux you can run the following command in the root folder of your app:
+When you want to add new targets to the project like macOS or Linux you can run the following command in the root folder of your app:
 
 `flutter create . --project-name $projectname --org $organization --platforms android,ios,web,windows,macos,linux --no-overwrite`
 
 Replace `$projectname` and `$organization` with your own and only use the platforms you want to add.
+
+## Supabase Backend
+If you want to use the Supabase backend, you need to set up a Supabase project and configure the environment variables accordingly.
+One of the environment variables you need to set is the `SUPABASE_ANON_KEY`. This can be found in the settings of your Supabase project.
+See below for more instructions on how to set up the Supabase backend.
+
+### Local development
+To set up local development, follow the steps as mentioned in the [Supabase documentation for local development](https://supabase.io/docs/guides/local-development).
+After initializing and setting up, start supabase locally (make sure docker is running). Then run the following command in your cli:
+```bash
+supabase status
+```
+
+This will return something that looks like this:
+```
+supabase local development setup is running.
+
+         API URL: http://127.0.0.1:54321
+     GraphQL URL: http://127.0.0.1:54321/graphql/v1
+  S3 Storage URL: http://127.0.0.1:54321/storage/v1/s3
+          DB URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+      Studio URL: http://127.0.0.1:54323
+    Inbucket URL: http://127.0.0.1:54324
+      JWT secret: super-secret-jwt-token-with-at-least-32-characters-long
+        anon key: some_kind_of_anon_key
+service_role key: some_kind_of_service_role_key
+   S3 Access Key: some_kind_of_s3_access_key
+   S3 Secret Key: some_kind_of_s3_secret_key
+       S3 Region: local
+```
+
+Use the `anon key` as the `SUPABASE_ANON_KEY` in your `.env.dev` file.
 
 ## TODO Firebase
 
