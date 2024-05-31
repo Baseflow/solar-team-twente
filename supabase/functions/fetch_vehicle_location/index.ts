@@ -2,7 +2,7 @@ export async function handler(req: Request) {
   const apikey = Deno.env.get("SOLAR_API_KEY")!;
   const baseUrl = Deno.env.get("SOLAR_BASE_URL")!;
   const url = new URL(req.url);
-  const carId = url.searchParams.get("carId") || "DMU"
+  const carId = url.searchParams.get("carId") || "";
 
   try {
     const response = await fetch(

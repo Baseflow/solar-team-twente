@@ -3,7 +3,7 @@ import tseslint from "typescript-eslint";
 
 
 export default [
-  {files: ["**/*.ts"], languageOptions: {sourceType: "script"}},
-  {languageOptions: { globals: globals.browser }},
+  {files: ["**/*.js"], languageOptions: {sourceType: "script"}},
+  {languageOptions: { globals: globals.node }},
   ...tseslint.configs.recommended,
 ];
