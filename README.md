@@ -166,6 +166,10 @@ service_role key: some_kind_of_service_role_key
 
 Use the `anon key` as the `SUPABASE_ANON_KEY` in your `.env.dev` file.
 
+### Linting
+
+run `npm eslint .` in the root of the project to lint.
+
 ## TODO Firebase
 
 To enable Crashlytics in your project, checkout [Get started with Firebase Crashlytics](https://firebase.google.com/docs/crashlytics/get-started?platform=flutter)

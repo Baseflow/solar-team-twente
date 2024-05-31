@@ -1,6 +1,6 @@
 name: Build develop
 
-on: 
+on:
   pull_request:
     branches: [main, develop]
   push:
@@ -9,7 +9,7 @@ on:
 # This ensures that previous jobs for the PR are canceled when the PR is
 # updated.
 concurrency:
-  group: $-$
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -48,3 +48,25 @@ jobs:
 
       - name: Run tests
         run: flutter test
+
+  lint-backend:
+    name: Lint Node.js Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # Install dependencies
+      - name: Install NPM dependencies
+        run: npm install
+
+      # Run ESLint to check for linting issues
+      - name: Run ESLint
+        run: npx eslint .
