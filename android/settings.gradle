@@ -29,7 +29,7 @@ plugins {
     // Make sure that you have the Google services Gradle plugin dependency
     // Latest version can be found here: 
     // https://github.com/firebase/flutterfire/blob/master/packages/firebase_core/firebase_core/pubspec.yaml#L44
-    id "com.google.gms.google-services" version "4.3.15" apply false
+    id "com.google.gms.google-services" version "4.4.2" apply false
     
     
     // Add the dependency for the Crashlytics Gradle plugin
