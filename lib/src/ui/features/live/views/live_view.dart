@@ -30,7 +30,9 @@ class LiveView extends StatelessWidget {
         future: rootBundle.loadString(Assets.geojson.solarRace24),
         builder: (BuildContext context, AsyncSnapshot<String> snapShot) {
           final GeoJsonParser myGeoJson = GeoJsonParser()
-            ..parseGeoJsonAsString(snapShot.data ?? '');
+            ..parseGeoJsonAsString(
+              snapShot.data ?? '',
+            );
           return FlutterMap(
             mapController: MapController(),
             options: const MapOptions(
