@@ -20,7 +20,7 @@ class AnalyticsService {
   /// The [params] parameter specifies additional parameters for the event.
   Future<void> logEvent({
     required String name,
-    Map<String, Object?>? params,
+    Map<String, Object>? params,
   }) async {
     await _analyticsRepository.logEvent(name: name, params: params);
   }
