@@ -31,7 +31,19 @@ Deno.serve(async (_req) => {
     console.log(data);
 
     if (response.ok) {
-      await supabase
+      // Fetch the latest record from the database
+      const { data: existingRecords } = await supabase
+        .from("vehicle_locations")
+        .select("last_seen")
+        .order("last_seen", { ascending: false })
+        .limit(1);
+
+      // Check if new data is more recent
+      const shouldUpsert = !existingRecords?.[0] || 
+                            new data.last_seen > existingRecords[0].last_seen;
+
+      if (shouldUpsert) {
+        await supabase
         .from("vehicle_locations")
         .upsert({
           name: data.name,
@@ -39,6 +51,7 @@ Deno.serve(async (_req) => {
           latitude: data.latitude,
           last_seen: data.last_seen,
         });
+      }
 
       return new Response(JSON.stringify(data), {
         headers: { "content-type": "application/json" },
@@ -54,8 +67,9 @@ Deno.serve(async (_req) => {
     }
   } catch (error) {
     console.error(error);
-    return new Response("Internal Server Error", {
-      status: 500,
-    });
+    return new Response(
+      error.message || "Internal Server Error", 
+      { status: error.status || 500, }
+  );
   }
 });
