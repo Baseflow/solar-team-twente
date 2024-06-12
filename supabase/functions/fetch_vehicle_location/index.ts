@@ -6,12 +6,8 @@ Deno.serve(async (_req) => {
   const supabase = createClient(
     supabaseUrl,
     supabaseKey,
-    {
-      global: {
-        headers: { Authorization: _req.headers.get("Authorization")! },
-      },
-    },
   );
+
   const apikey = Deno.env.get("SOLAR_API_KEY")!;
   const baseUrl = Deno.env.get("SOLAR_BASE_URL")!;
   const carId = "DMU";
@@ -32,15 +28,18 @@ Deno.serve(async (_req) => {
 
     if (response.ok) {
       // Fetch the latest record from the database
-      const { data: existingRecords } = await supabase
+      const { data: existingRecord, status } = await supabase
         .from("vehicle_locations")
         .select("last_seen")
         .order("last_seen", { ascending: false })
-        .limit(1);
+        .limit(1)
+        .maybeSingle();
+
+      console.log("Existing record", existingRecord, status);
 
       // Check if new data is more recent
-      const shouldUpsert = !existingRecords?.[0] || 
-                            new data.last_seen > existingRecords[0].last_seen;
+      const shouldUpsert = !existingRecord || new Date(data.last_seen) > new Date(existingRecord.last_seen);
+      console.log("Should upsert", shouldUpsert);
 
       if (shouldUpsert) {
         await supabase
