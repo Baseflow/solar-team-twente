@@ -19,4 +19,5 @@ const triggerFunction = async () => {
   }
 }
 
-setInterval(triggerFunction, 30000);
+// Run the function every 10 seconds
+setInterval(triggerFunction, 10000);
