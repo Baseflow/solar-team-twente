@@ -28,7 +28,7 @@ class FirebaseAnalyticsClient implements AnalyticsRepository {
   @override
   Future<void> logEvent({
     required String name,
-    Map<String, Object?>? params,
+    Map<String, Object>? params,
   }) async {
     await FirebaseAnalytics.instance.logEvent(name: name, parameters: params);
   }
