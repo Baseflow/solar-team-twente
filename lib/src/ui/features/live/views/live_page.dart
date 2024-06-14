@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../localizations/l10n.dart';
+import '../cubit/map_carrousel_cubit.dart';
 import 'live_view.dart';
 
 /// {@template live_page}
@@ -31,6 +33,9 @@ class LivePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LiveView();
+    return BlocProvider<MapCarrouselCubit>(
+      create: (_) => MapCarrouselCubit()..init(),
+      child: const LiveView(),
+    );
   }
 }

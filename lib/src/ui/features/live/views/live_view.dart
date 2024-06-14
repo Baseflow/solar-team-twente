@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
 import '../../../extensions/build_context_extensions.dart';
+import '../cubit/map_carrousel_cubit.dart';
+import '../cubit/map_carrousel_state.dart';
 
 /// {@template live_view}
 /// The UI for the live page, displaying the most important information
@@ -26,43 +29,187 @@ class LiveView extends StatelessWidget {
           height: 64,
         ),
       ),
-      body: FutureBuilder<String>(
-        future: rootBundle.loadString(Assets.geojson.solarRace24),
-        builder: (BuildContext context, AsyncSnapshot<String> snapShot) {
-          final GeoJsonParser myGeoJson = GeoJsonParser()
-            ..parseGeoJsonAsString(
-              snapShot.data ?? '',
-            );
-          return FlutterMap(
-            mapController: MapController(),
-            options: const MapOptions(
-              // set initial center to center of tsabong
-              initialCenter: LatLng(-27.226321, 24.013543),
-              initialZoom: 5,
-            ),
-            children: <Widget>[
-              TileLayer(
-                urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      body: BlocBuilder<MapCarrouselCubit, MapCarrouselState>(
+        builder: (BuildContext _, MapCarrouselState state) {
+          return switch (state) {
+            final MapCarrouselInitialState _ ||
+            final MapCarrouselLoadingState _ =>
+              const Center(
+                child: CircularProgressIndicator(),
               ),
-              PolygonLayer(polygons: myGeoJson.polygons),
-              PolylineLayer(polylines: myGeoJson.polylines),
-              MarkerLayer(
-                markers: myGeoJson.markers.map((Marker marker) {
-                  return Marker(
-                    width: 2,
-                    height: 2,
-                    point: marker.point,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: context.colorScheme.primary,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  );
-                }).toList(),
+            final MapCarrouselGlobalLoadedState _ => _FlutterMap(
+                geoJsonParser: state.geoJsonParser,
+              ),
+            final MapCarrouselRaceLoadedState _ => const SizedBox(),
+          };
+        },
+      ),
+    );
+  }
+}
+
+class _FlutterMap extends StatefulWidget {
+  const _FlutterMap({required this.geoJsonParser});
+
+  final GeoJsonParser geoJsonParser;
+
+  @override
+  State<_FlutterMap> createState() => _FlutterMapState();
+}
+
+class _FlutterMapState extends State<_FlutterMap>
+    with TickerProviderStateMixin {
+  late final AnimatedMapController _animatedMapController;
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animatedMapController = AnimatedMapController(
+      vsync: this,
+      curve: Curves.easeInOut,
+      duration: const Duration(seconds: 3),
+    );
+
+    _pageController = PageController();
+    _pageController.addListener(() {
+      final int? index = _pageController.page?.round();
+      if (index != null) {
+        // Adjust the map's center and zoom based on the carousel index
+        _animateMap(index);
+      }
+    });
+  }
+
+  void _animateMap(int index) {
+    final List<LatLngBounds> bounds = <LatLngBounds>[
+      LatLngBounds(
+        const LatLng(-27.318422, 27.824081),
+        const LatLng(-26.320134, 29.18415),
+      ),
+      LatLngBounds(
+        const LatLng(-26.8903773, 26.082086),
+        const LatLng(-25.517609, 27.831684),
+      ),
+      LatLngBounds(
+        const LatLng(-27.471608, 23.402627),
+        const LatLng(-25.541249, 26.082988),
+      ),
+      LatLngBounds(
+        const LatLng(-28.769597, 20.341723),
+        const LatLng(-27.471124, 23.402675),
+      ),
+      LatLngBounds(
+        const LatLng(-29.662415, 17.887869),
+        const LatLng(-28.623128, 20.534983),
+      ),
+      LatLngBounds(
+        const LatLng(-31.748007, 17.833363),
+        const LatLng(-29.661212, 18.730951),
+      ),
+      LatLngBounds(
+        const LatLng(-33.380566, 18.340278),
+        const LatLng(-31.559386, 18.899053),
+      ),
+      LatLngBounds(
+        const LatLng(-34.026167, 18.422593),
+        const LatLng(-33.300209, 19.49382),
+      ),
+    ];
+
+    // Make sure the index is within bounds
+    if (index >= 0 && index < bounds.length) {
+      _animatedMapController.animatedFitCamera(
+        cameraFit: CameraFit.bounds(bounds: bounds[index]),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Flexible(
+          child: MultiBlocListener(
+            listeners: <BlocListener<MapCarrouselCubit, MapCarrouselState>>[
+              BlocListener<MapCarrouselCubit, MapCarrouselState>(
+                listenWhen: (
+                  MapCarrouselState previous,
+                  MapCarrouselState current,
+                ) {
+                  return previous != current;
+                },
+                listener: (BuildContext context, MapCarrouselState state) {},
               ),
             ],
+            child: FlutterMap(
+              mapController: _animatedMapController.mapController,
+              options: const MapOptions(
+                initialCenter: LatLng(-27.226321, 24.013543),
+                initialZoom: 5.2,
+              ),
+              children: <Widget>[
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                ),
+                PolygonLayer<Object>(
+                  polygons: widget.geoJsonParser.polygons,
+                ),
+                PolylineLayer<Object>(
+                  polylines: widget.geoJsonParser.polylines,
+                ),
+                MarkerLayer(
+                  markers: widget.geoJsonParser.markers.map((Marker marker) {
+                    return Marker(
+                      width: 2,
+                      height: 2,
+                      point: marker.point,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+        ),
+        _FlutterMapCarrousel(pageController: _pageController),
+      ],
+    );
+  }
+}
+
+class _FlutterMapCarrousel extends StatelessWidget {
+  const _FlutterMapCarrousel({required this.pageController});
+
+  final PageController pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      child: PageView.builder(
+        itemCount: 8,
+        controller: pageController,
+        itemBuilder: (BuildContext context, int index) {
+          return ColoredBox(
+            color: Theme.of(context).colorScheme.primary,
+            child: Center(
+              child: Text(
+                'Day $index',
+              ),
+            ),
           );
         },
       ),

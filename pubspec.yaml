@@ -31,7 +31,8 @@ dependencies:
   flutter_ioc_get_it: ^1.2.1
   flutter_localizations:
     sdk: flutter
-  flutter_map: ^6.1.0
+  flutter_map: ^7.0.1
+  flutter_map_animations: ^0.7.0
   flutter_map_geojson: ^1.0.8
   flutter_native_splash: ^2.4.0
   flutter_secure_storage: ^9.0.0
