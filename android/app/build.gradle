@@ -141,7 +141,7 @@ dependencies {
     
     // Import the BoM for the Firebase platform
     // By using the Firebase Android BoM, your app will always use compatible versions of Firebase Android libraries.
-    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     
     
     // Add the dependencies for the Crashlytics NDK and Analytics libraries
