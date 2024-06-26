@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
@@ -34,13 +35,10 @@ class LiveView extends StatelessWidget {
           return switch (state) {
             final MapCarrouselInitialState _ ||
             final MapCarrouselLoadingState _ =>
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
-            final MapCarrouselGlobalLoadedState _ => _FlutterMap(
+              const Center(child: CircularProgressIndicator()),
+            final MapCarrouselRaceLoadedState _ => _FlutterMap(
                 geoJsonParser: state.geoJsonParser,
               ),
-            final MapCarrouselRaceLoadedState _ => const SizedBox(),
           };
         },
       ),
@@ -67,18 +65,9 @@ class _FlutterMapState extends State<_FlutterMap>
     super.initState();
     _animatedMapController = AnimatedMapController(
       vsync: this,
-      curve: Curves.easeInOut,
-      duration: const Duration(seconds: 3),
+      curve: Curves.ease,
+      duration: const Duration(seconds: 1),
     );
-
-    _pageController = PageController();
-    _pageController.addListener(() {
-      final int? index = _pageController.page?.round();
-      if (index != null) {
-        // Adjust the map's center and zoom based on the carousel index
-        _animateMap(index);
-      }
-    });
   }
 
   void _animateMap(int index) {
@@ -119,6 +108,7 @@ class _FlutterMapState extends State<_FlutterMap>
 
     // Make sure the index is within bounds
     if (index >= 0 && index < bounds.length) {
+      print('here1');
       _animatedMapController.animatedFitCamera(
         cameraFit: CameraFit.bounds(bounds: bounds[index]),
       );
@@ -143,9 +133,14 @@ class _FlutterMapState extends State<_FlutterMap>
                   MapCarrouselState previous,
                   MapCarrouselState current,
                 ) {
-                  return previous != current;
+                  return previous is MapCarrouselRaceLoadedState &&
+                      current is MapCarrouselRaceLoadedState;
                 },
-                listener: (BuildContext context, MapCarrouselState state) {},
+                listener: (BuildContext context, MapCarrouselState state) {
+                  final int index =
+                      (state as MapCarrouselRaceLoadedState).currentParserIndex;
+                  _animateMap(index);
+                },
               ),
             ],
             child: FlutterMap(
@@ -157,61 +152,62 @@ class _FlutterMapState extends State<_FlutterMap>
               children: <Widget>[
                 TileLayer(
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  tileProvider: const FMTCStore('mapStore').getTileProvider(),
                 ),
-                PolygonLayer<Object>(
-                  polygons: widget.geoJsonParser.polygons,
-                ),
-                PolylineLayer<Object>(
-                  polylines: widget.geoJsonParser.polylines,
-                ),
-                MarkerLayer(
-                  markers: widget.geoJsonParser.markers.map((Marker marker) {
-                    return Marker(
-                      width: 2,
-                      height: 2,
-                      point: marker.point,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
+                // MarkerLayer(
+                //   markers: widget.geoJsonParser.markers.map((Marker marker) {
+                //     return Marker(
+                //       width: 2,
+                //       height: 2,
+                //       point: marker.point,
+                //       child: DecoratedBox(
+                //         decoration: BoxDecoration(
+                //           color: Theme.of(context).colorScheme.primary,
+                //           shape: BoxShape.circle,
+                //         ),
+                //       ),
+                //     );
+                //   }).toList(),
+                // ),
               ],
             ),
           ),
         ),
-        _FlutterMapCarrousel(pageController: _pageController),
+        const _FlutterMapCarrousel(),
       ],
     );
   }
 }
 
 class _FlutterMapCarrousel extends StatelessWidget {
-  const _FlutterMapCarrousel({required this.pageController});
-
-  final PageController pageController;
+  const _FlutterMapCarrousel();
 
   @override
   Widget build(BuildContext context) {
+    // Left and right buttons to navigate the carousel
     return SizedBox(
       height: 100,
       width: MediaQuery.of(context).size.width,
-      child: PageView.builder(
-        itemCount: 8,
-        controller: pageController,
-        itemBuilder: (BuildContext context, int index) {
-          return ColoredBox(
-            color: Theme.of(context).colorScheme.primary,
-            child: Center(
-              child: Text(
-                'Day $index',
-              ),
-            ),
-          );
-        },
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () => context.read<MapCarrouselCubit>().previous(),
+          ),
+          BlocBuilder<MapCarrouselCubit, MapCarrouselState>(
+            builder: (BuildContext _, MapCarrouselState state) {
+              if (state is! MapCarrouselRaceLoadedState) {
+                return const SizedBox();
+              }
+              final int index = state.currentParserIndex;
+              return Text('Day ${index + 1}');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.arrow_forward_ios),
+            onPressed: () => context.read<MapCarrouselCubit>().next(),
+          ),
+        ],
       ),
     );
   }

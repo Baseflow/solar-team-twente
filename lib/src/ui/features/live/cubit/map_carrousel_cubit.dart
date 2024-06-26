@@ -17,17 +17,53 @@ class MapCarrouselCubit extends Cubit<MapCarrouselState> {
   Future<void> init() async {
     emit(const MapCarrouselLoadingState());
     final int currentDay = raceDayFromDate(DateTime.now());
-    // final Map<int, GeoJsonParser> parsers = <int, GeoJsonParser>{};
-    if (currentDay < 0) {
-      final String geoJson = await rootBundle.loadString(
-        Assets.geojson.solarRace24,
-      );
-      final GeoJsonParser globalParser = GeoJsonParser()
-        ..parseGeoJsonAsString(geoJson);
-      emit(MapCarrouselGlobalLoadedState(geoJsonParser: globalParser));
+
+    final String geoJson = await rootBundle.loadString(
+      Assets.geojson.solarRace24,
+    );
+    final GeoJsonParser globalParser = GeoJsonParser()
+      ..parseGeoJsonAsString(geoJson);
+    emit(
+      MapCarrouselRaceLoadedState(
+        geoJsonParser: globalParser,
+        currentParserIndex: currentDay,
+      ),
+    );
+    return;
+
+    // TODO(Floyd): Implement for when the race is happening.
+  }
+
+  void previous() {
+    assert(state is MapCarrouselRaceLoadedState, 'State is not loaded');
+    final MapCarrouselRaceLoadedState loadedState =
+        state as MapCarrouselRaceLoadedState;
+    final int previousDay = loadedState.currentParserIndex - 1;
+    if (previousDay < 0) {
       return;
     }
-    // TODO(Floyd): Implement for when the race is happening.
+    emit(
+      loadedState.copyWith(
+        currentParserIndex: previousDay,
+        geoJsonParser: loadedState.geoJsonParsers[previousDay],
+      ),
+    );
+  }
+
+  void next() {
+    assert(state is MapCarrouselRaceLoadedState, 'State is not loaded');
+    final MapCarrouselRaceLoadedState loadedState =
+    state as MapCarrouselRaceLoadedState;
+    final int nextDay = loadedState.currentParserIndex + 1;
+    if (nextDay > 7) {
+      return;
+    }
+    emit(
+      loadedState.copyWith(
+        currentParserIndex: nextDay,
+        geoJsonParser: loadedState.geoJsonParsers[nextDay],
+      ),
+    );
   }
 }
 

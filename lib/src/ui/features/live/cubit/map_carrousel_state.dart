@@ -26,18 +26,6 @@ class MapCarrouselLoadingState extends MapCarrouselState {
   const MapCarrouselLoadingState() : super();
 }
 
-/// {@template map_carrousel_global_loaded_state}
-/// {@macro map_carrousel_state}
-/// The state when the entire map has been loaded without carrousel.
-/// {@endtemplate}
-class MapCarrouselGlobalLoadedState extends MapCarrouselState {
-  /// {@macro map_carrousel_global_loaded_state}
-  MapCarrouselGlobalLoadedState({required this.geoJsonParser});
-
-  /// The parser for the entire race.
-  final GeoJsonParser geoJsonParser;
-}
-
 /// {@template map_carrousel_race_loaded_state}
 /// {@macro map_carrousel_state}
 /// The state when the map carrousel has been loaded for during the race.
@@ -46,6 +34,7 @@ class MapCarrouselRaceLoadedState extends MapCarrouselState {
   /// {@macro map_carrousel_race_loaded_state}
   const MapCarrouselRaceLoadedState({
     required this.currentParserIndex,
+    required this.geoJsonParser,
     this.geoJsonParsers = const <int, GeoJsonParser>{},
   }) : super();
 
@@ -54,4 +43,20 @@ class MapCarrouselRaceLoadedState extends MapCarrouselState {
 
   /// All Parsers that have been loaded.
   final Map<int, GeoJsonParser> geoJsonParsers;
+
+  /// The parser for the entire race.
+  final GeoJsonParser geoJsonParser;
+
+  /// Copy the current state with the provided changes.
+  MapCarrouselRaceLoadedState copyWith({
+    int? currentParserIndex,
+    Map<int, GeoJsonParser>? geoJsonParsers,
+    GeoJsonParser? geoJsonParser,
+  }) {
+    return MapCarrouselRaceLoadedState(
+      currentParserIndex: currentParserIndex ?? this.currentParserIndex,
+      geoJsonParsers: geoJsonParsers ?? this.geoJsonParsers,
+      geoJsonParser: geoJsonParser ?? this.geoJsonParser,
+    );
+  }
 }
