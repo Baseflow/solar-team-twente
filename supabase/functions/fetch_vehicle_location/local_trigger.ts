@@ -1,6 +1,7 @@
-/// Manual trigger for the fetch_vehicle_location function.
-///
-/// Only works in a local development environment.
+/**
+ * Manual trigger for the fetch_vehicle_location function.
+ * Only works in a local development environment.
+ */
 const triggerFunction = async () => {
   const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY');
   try {
