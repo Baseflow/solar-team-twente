@@ -60,12 +60,12 @@ Deno.serve(async (_req) => {
         headers: { "content-type": "application/json" },
         status: response.status,
       });
-    } else {
-      return new Response(
-        response.statusText,
-        { status: response.status, },
-      );
     }
+    
+    return new Response(
+      response.statusText,
+      { status: response.status, },
+    );
   } catch (error) {
     console.error(error);
     return new Response(
