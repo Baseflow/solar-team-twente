@@ -1,8 +1,9 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.43.4";
 
-/// Fetches the vehicle location from the Solar API and upserts it into the database.
-///
-/// Skips upserting if the data is not more recent than the latest record in the database.
+/**
+ * Fetches the vehicle location from the Solar API and upserts it into the database.
+ * Skips upserting if the data is not more recent than the latest record in the database.
+ */
 Deno.serve(async (_req) => {
   const apikey = Deno.env.get("SOLAR_API_KEY")!;
   const baseUrl = Deno.env.get("SOLAR_BASE_URL")!;
