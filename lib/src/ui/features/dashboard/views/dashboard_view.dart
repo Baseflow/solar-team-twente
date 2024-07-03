@@ -21,7 +21,13 @@ class DashboardView extends StatelessWidget {
           title: Text(context.l10n.dashboardPageTitle),
         ),
         body: StateMessageView(
-          asset: Lottie.asset(Assets.animations.notFound),
+          asset: ConstrainedBox(
+            constraints: BoxConstraints.loose(const Size.fromHeight(400)),
+            child: Lottie.asset(
+              Assets.animations.notFound,
+              fit: BoxFit.fitHeight,
+            ),
+          ),
           message: context.l10n.soonAvailableMessage,
         ),
       ),
