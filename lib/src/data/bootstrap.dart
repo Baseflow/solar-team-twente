@@ -6,6 +6,7 @@ import '../../core.dart' as core;
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
+import 'repositories/leaderboard_repository.dart';
 import 'repositories/repositories.dart';
 
 /// Initializes the data library ensuring all dependencies
@@ -86,5 +87,8 @@ Future<void> _registerDependencies() async {
       () => SharedPreferencesThemeRepository(
         sharedPreferences: sharedPreferences,
       ),
+    )
+    ..registerFactory<core.LeaderboardRepository>(
+      MockLeaderboardRepository.new,
     );
 }
