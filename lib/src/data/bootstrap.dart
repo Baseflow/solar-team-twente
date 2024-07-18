@@ -6,7 +6,7 @@ import '../../core.dart' as core;
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
-import 'repositories/repositories.dart' as data;
+import 'repositories/repositories.dart';
 
 /// Initializes the data library ensuring all dependencies
 /// are registered.
@@ -44,26 +44,20 @@ Future<void> _registerDependencies() async {
 
     // Register data dependencies needed for the Authentication feature.
     ..registerFactory<AuthenticationClient>(
-      // TODO(mvanbeusekom): Replace the mock implementation with a real
-      //implementation for client applications.
+      // TODO(anyone): Replace the mock implementation with a real
+      // implementation for client applications.
       MockAuthenticationClient.new,
     )
     ..registerFactory<TokenDataStore>(
       FlutterSecureStorageTokenDataStore.new,
     )
     ..registerLazySingleton<core.AuthenticationRepository>(
-      () => data.AuthenticationRepository(
+      () => AuthenticationRepository(
         authenticationClient: ioc.get<AuthenticationClient>(),
         tokenDataStore: ioc.get<TokenDataStore>(),
       ),
     )
 
-    // Register data dependencies needed for the Language feature.
-    ..registerFactory<core.LanguageRepository>(
-      () => data.SharedPreferencesLanguageRepository(
-        sharedPreferences: sharedPreferences,
-      ),
-    )
     // Until auth is implemented, the following code is commented out.
     // ..registerLazySingleton<AuthenticationTokenInterceptor>(
     //   () => AuthenticationTokenInterceptor(
@@ -72,11 +66,6 @@ Future<void> _registerDependencies() async {
     //   ),
     // )
 
-    // Register data dependencies needed for the Project feature.
-    ..registerFactory<core.ProjectRepository>(
-      data.ApiProjectRepository.new,
-    )
-
     // Register data dependencies needed for the Profile feature.
     ..registerFactory<ProfileClient>(
       () => ProfileClient(
@@ -84,12 +73,17 @@ Future<void> _registerDependencies() async {
       ),
     )
     ..registerFactory<core.ProfileRepository>(
-      () => data.ApiProfileRepository(ioc.get<ProfileClient>()),
+      () => ApiProfileRepository(ioc.get<ProfileClient>()),
     )
 
-    // Register data dependencies needed for the Theme feature.
+    // Register other data dependencies.
+    ..registerFactory<core.LanguageRepository>(
+      () => SharedPreferencesLanguageRepository(
+        sharedPreferences: sharedPreferences,
+      ),
+    )
     ..registerFactory<core.ThemeRepository>(
-      () => data.SharedPreferencesThemeRepository(
+      () => SharedPreferencesThemeRepository(
         sharedPreferences: sharedPreferences,
       ),
     );

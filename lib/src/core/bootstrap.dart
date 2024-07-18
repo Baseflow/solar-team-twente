@@ -36,11 +36,6 @@ void _registerDependencies() {
         languageRepository: ioc.get<LanguageRepository>(),
       ),
     )
-    ..registerFactory<ProjectService>(
-      () => ProjectService(
-        projectRepository: ioc.get<ProjectRepository>(),
-      ),
-    )
     ..registerFactory<ProfileService>(
       () => ProfileService(
         profileRepository: ioc.get<ProfileRepository>(),
