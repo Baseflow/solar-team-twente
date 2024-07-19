@@ -34,6 +34,7 @@ class MapCarrouselCubit extends Cubit<MapCarrouselState> {
     // TODO(Floyd): Implement for when the race is happening.
   }
 
+  /// Jumps to the previous day in the race.
   void previous() {
     assert(state is MapCarrouselRaceLoadedState, 'State is not loaded');
     final MapCarrouselRaceLoadedState loadedState =
@@ -50,10 +51,11 @@ class MapCarrouselCubit extends Cubit<MapCarrouselState> {
     );
   }
 
+  /// Jumps to the next day in the race.
   void next() {
     assert(state is MapCarrouselRaceLoadedState, 'State is not loaded');
     final MapCarrouselRaceLoadedState loadedState =
-    state as MapCarrouselRaceLoadedState;
+        state as MapCarrouselRaceLoadedState;
     final int nextDay = loadedState.currentParserIndex + 1;
     if (nextDay > 7) {
       return;

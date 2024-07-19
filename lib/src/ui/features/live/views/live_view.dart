@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
-import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
@@ -108,7 +107,6 @@ class _FlutterMapState extends State<_FlutterMap>
 
     // Make sure the index is within bounds
     if (index >= 0 && index < bounds.length) {
-      print('here1');
       _animatedMapController.animatedFitCamera(
         cameraFit: CameraFit.bounds(bounds: bounds[index]),
       );
@@ -123,6 +121,9 @@ class _FlutterMapState extends State<_FlutterMap>
 
   @override
   Widget build(BuildContext context) {
+    final List<LatLng> markerPoints = widget.geoJsonParser.markers
+        .map((Marker marker) => marker.point)
+        .toList();
     return Column(
       children: <Widget>[
         Flexible(
@@ -152,23 +153,16 @@ class _FlutterMapState extends State<_FlutterMap>
               children: <Widget>[
                 TileLayer(
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  tileProvider: const FMTCStore('mapStore').getTileProvider(),
                 ),
-                // MarkerLayer(
-                //   markers: widget.geoJsonParser.markers.map((Marker marker) {
-                //     return Marker(
-                //       width: 2,
-                //       height: 2,
-                //       point: marker.point,
-                //       child: DecoratedBox(
-                //         decoration: BoxDecoration(
-                //           color: Theme.of(context).colorScheme.primary,
-                //           shape: BoxShape.circle,
-                //         ),
-                //       ),
-                //     );
-                //   }).toList(),
-                // ),
+                PolylineLayer<Object>(
+                  polylines: <Polyline<Object>>[
+                    Polyline<Object>(
+                      points: markerPoints,
+                      color: Colors.black,
+                      strokeWidth: 2,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
