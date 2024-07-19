@@ -16,7 +16,7 @@ class MapCarrouselCubit extends Cubit<MapCarrouselState> {
   /// Initializes the cubit by loading the relevant geojson files.
   Future<void> init() async {
     emit(const MapCarrouselLoadingState());
-    final int currentDay = raceDayFromDate(DateTime.now());
+    final int currentDay = _raceDayFromDate(DateTime.now());
 
     final String geoJson = await rootBundle.loadString(
       Assets.geojson.solarRace24,
@@ -72,6 +72,6 @@ class MapCarrouselCubit extends Cubit<MapCarrouselState> {
 /// Returns the number of days offset from the start of the race.
 ///
 /// If negative, the race has not started yet.
-int raceDayFromDate(DateTime date) {
+int _raceDayFromDate(DateTime date) {
   return DateTime.now().difference(UiConstants.raceStart).inDays;
 }

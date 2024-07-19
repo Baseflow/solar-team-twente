@@ -183,6 +183,7 @@ class _FlutterMapCarrousel extends StatelessWidget {
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
             icon: const Icon(Icons.arrow_back_ios),
