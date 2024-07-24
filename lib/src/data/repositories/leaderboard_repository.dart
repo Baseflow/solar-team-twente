@@ -1,26 +1,29 @@
-import '../../../core.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-// TODO(anyone): replace with real implementation.
-/// Implementations of the [LeaderboardRepository].
-class MockLeaderboardRepository implements LeaderboardRepository {
+import '../../../core.dart';
+import '../dto/race/race_team_dto.dart';
+
+/// {@template supabase_leaderboard_repository}
+/// Supabase implementation of the [LeaderboardRepository].
+/// {@endtemplate}
+class SupabaseLeaderboardRepository implements LeaderboardRepository {
+  /// {@macro supabase_leaderboard_repository}
+  SupabaseLeaderboardRepository(this._client);
+
+  final SupabaseClient _client;
+
   @override
-  Stream<List<RaceTeam>> getLeaderboardStream() {
-    return Stream<List<RaceTeam>>.value(
-      List<RaceTeam>.generate(
-        9,
-        (int index) => RaceTeam(
-          name: 'Team $index',
-          totalDrivenKilometers: index * 100,
-        ),
-      )
-        ..add(
-          RaceTeam(name: Constants.solarTeamName, totalDrivenKilometers: 550),
-        )
-        ..sort(
-          (RaceTeam a, RaceTeam b) => b.totalDrivenKilometers.compareTo(
-            a.totalDrivenKilometers,
-          ),
-        ),
+  Stream<List<RaceTeam>> get leaderboard {
+    final Stream<List<Map<String, dynamic>>> response = _client
+        .from('leaderboard')
+        .stream(primaryKey: <String>['id']).order('position', ascending: true);
+
+    return response.map(
+      (List<Map<String, dynamic>> data) => data.map<RaceTeam>(
+        (Map<String, dynamic> json) {
+          return RaceTeamDto.fromJson(json).toEntity();
+        },
+      ).toList(),
     );
   }
 }

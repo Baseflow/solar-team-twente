@@ -1,7 +1,8 @@
 /// {@template race_team}
 /// Contains the data related to a race team:
 /// - the [name] of the team
-/// - the [totalDrivenKilometers] the team has driven during the race
+/// - the [totalDrivenKilometers] the team has driven during the race, which
+///  is used to determine the team's position in the leaderboard.
 /// {@endtemplate}
 class RaceTeam {
   /// {@macro race_team}

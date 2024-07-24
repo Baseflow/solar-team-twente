@@ -5,5 +5,5 @@ import '../entities/race/race_team.dart';
 /// {@endtemplate}
 abstract class LeaderboardRepository {
   /// Returns a stream of the leaderboard.
-  Stream<List<RaceTeam>> getLeaderboardStream();
+  Stream<List<RaceTeam>> get leaderboard;
 }
