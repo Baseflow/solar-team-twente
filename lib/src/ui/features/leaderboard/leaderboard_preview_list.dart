@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core.dart';
 import '../../constants/sizes_constants.dart';
 import '../../extensions/build_context_extensions.dart';
+import '../../localizations/l10n.dart';
 import 'leaderboard_preview_cubit.dart';
 
 /// {@template leaderboard_preview_list}
