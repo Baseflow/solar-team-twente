@@ -48,6 +48,7 @@ class RaceTeamDto {
     return RaceTeam(
       name: name,
       totalDrivenKilometers: totalDrivenKilometers,
+      position: position,
     );
   }
 }

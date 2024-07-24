@@ -19,17 +19,53 @@ class LeaderboardPreviewList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
       builder: (BuildContext context, LeaderboardPreviewState state) {
-        return switch (state) {
-          final LeaderboardPreviewLoaded l =>
-            LeaderboardPreviewLoadedView(l.leaderboard),
-          final LeaderboardPreviewEmpty _ => const Text(
-              'No leaderboard available',
+        assert(
+          state is LeaderboardPreviewLoaded,
+          'State has to be of type LeaderboardPreviewLoaded at this point.',
+        );
+
+        final LeaderboardPreviewLoaded loadedState =
+            state as LeaderboardPreviewLoaded;
+        final List<RaceTeam> leaderboard = loadedState.leaderboard;
+        final RaceTeam solarTeamTwente = loadedState.solarTeamTwente;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              context.l10n.leaderboardTitle,
+              style: context.textTheme.titleLarge,
             ),
-          final LeaderboardPreviewError _ => const Text(
-              'Error loading leaderboard',
+            const SizedBox(height: Sizes.s4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Sizes.s8),
+              child: Text(
+                context.l10n.distanceCovered,
+                style: context.textTheme.bodySmall,
+                textAlign: TextAlign.end,
+              ),
             ),
-          _ => const SizedBox.shrink(),
-        };
+            const SizedBox(height: Sizes.s12),
+            if (solarTeamTwente.position > 3) ...<Widget>[
+              LeaderboardPositionRow(
+                team: solarTeamTwente,
+                racePosition: solarTeamTwente.position,
+              ),
+              const SizedBox(height: Sizes.s12),
+            ],
+            ListView.builder(
+              itemCount: 3,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                final RaceTeam team = leaderboard[index];
+                return LeaderboardPositionRow(
+                  team: team,
+                  racePosition: team.position,
+                );
+              },
+            ),
+          ],
+        );
       },
     );
   }
