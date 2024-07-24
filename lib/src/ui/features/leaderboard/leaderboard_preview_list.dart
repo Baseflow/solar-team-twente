@@ -58,7 +58,7 @@ class LeaderboardPreviewLoadedView extends StatelessWidget {
     final int solarTeamPosition = solarTeamIndex + 1;
     return Column(
       children: <Widget>[
-        if (solarTeamPosition > 3) ...[
+        if (solarTeamPosition > 3) ...<Widget>[
           LeaderboardPositionRow(
             team: leaderboard[solarTeamIndex],
             racePosition: solarTeamPosition,

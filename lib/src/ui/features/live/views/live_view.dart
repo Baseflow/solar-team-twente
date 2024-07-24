@@ -20,6 +20,7 @@ class LiveView extends StatelessWidget {
           title: Image.asset(
             context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
             fit: BoxFit.fitHeight,
+            semanticLabel: 'Solarteam Twente Logo',
             height: 64,
           ),
         ),

@@ -39,6 +39,7 @@ class LeaderboardPreviewContainer extends StatelessWidget {
                     highlightColor: context.colorScheme.primary,
                     child: Image.asset(
                       Assets.light.logo.path,
+                      semanticLabel: 'Solarteam Twente Logo',
                     ),
                   ),
                 );
