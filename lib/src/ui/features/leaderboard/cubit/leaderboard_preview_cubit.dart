@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core.dart';
+import '../../../../../core.dart';
 
 part 'leaderboard_preview_state.dart';
 

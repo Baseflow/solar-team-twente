@@ -8,7 +8,7 @@ import '../../../assets/generated/assets.gen.dart';
 import '../../extensions/build_context_extensions.dart';
 import '../../localizations/generated/app_localizations.dart';
 import '../../localizations/l10n.dart';
-import 'leaderboard_preview_cubit.dart';
+import 'cubit/leaderboard_preview_cubit.dart';
 import 'leaderboard_preview_list.dart';
 
 /// {@template leaderboard_preview}
