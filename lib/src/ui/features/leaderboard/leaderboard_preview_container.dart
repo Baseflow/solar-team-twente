@@ -5,8 +5,9 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core.dart';
 import '../../../assets/generated/assets.gen.dart';
-import '../../constants/sizes_constants.dart';
 import '../../extensions/build_context_extensions.dart';
+import '../../localizations/generated/app_localizations.dart';
+import '../../localizations/l10n.dart';
 import 'leaderboard_preview_cubit.dart';
 import 'leaderboard_preview_list.dart';
 
@@ -19,6 +20,7 @@ class LeaderboardPreviewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return BlocProvider<LeaderboardPreviewCubit>(
       create: (_) => LeaderboardPreviewCubit(
         LeaderboardService(
