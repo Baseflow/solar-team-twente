@@ -1,7 +1,7 @@
 /// The constants of the application.
 class Constants {
   /// The Solarteam name.
-  static const String solarTeamName = 'Solarteam Twente';
+  static const String solarTeamName = 'Solar Team Twente';
 
   /// The application legalese.
   static const String applicationLegalese = '©2024 ' 'Baseflow';

@@ -32,7 +32,6 @@ Future<void> _registerDependencies() async {
 
   // Register API client implementations
   ioc
-
     // Register data dependencies needed for the Analytics feature.
     ..registerLazySingleton<core.AnalyticsRepository>(
       FirebaseAnalyticsClient.new,
