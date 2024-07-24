@@ -33,13 +33,16 @@ class LeaderboardPreviewContainer extends StatelessWidget {
             builder: (BuildContext context, LeaderboardPreviewState state) {
               return switch (state) {
                 LeaderboardPreviewLoaded() => const LeaderboardPreviewList(),
-                final LeaderboardPreviewEmpty _ => Text(
+                LeaderboardPreviewEmpty() => Text(
                     l10n.leaderboardEmptyMessage,
-                    style: context.textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
                   ),
-                final LeaderboardPreviewError _ => Text(
+                LeaderboardPreviewError() => Text(
                     l10n.leaderboardErrorMessage,
-                    style: context.textTheme.bodyLarge,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      color: context.colorScheme.error,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 _ => SizedBox(
                     height: 100,

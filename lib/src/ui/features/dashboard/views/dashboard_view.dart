@@ -18,6 +18,7 @@ class DashboardView extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.all(Sizes.s24),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               LeaderboardPreviewContainer(),
             ],
