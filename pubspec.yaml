@@ -35,7 +35,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   flutter_web_plugins:
     sdk: flutter
-  form_builder_validators: ^10.0.1
+  form_builder_validators: ^11.0.0
   go_router: ^14.0.0
   google_fonts: ^6.2.1
   image_picker: ^1.1.0
@@ -52,10 +52,6 @@ dependencies:
   shimmer: ^3.0.0
   supabase_flutter: ^2.5.3
   url_launcher: ^6.2.6
-
-# Needs to override because some packages are not compatible with the latest version of intl
-dependency_overrides:
-  intl: ^0.18.1
 
 dev_dependencies:
   bloc_test: ^9.1.7
