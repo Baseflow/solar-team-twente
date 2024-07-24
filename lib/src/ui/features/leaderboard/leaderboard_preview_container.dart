@@ -31,41 +31,29 @@ class LeaderboardPreviewContainer extends StatelessWidget {
         builder: (BuildContext context) {
           return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
             builder: (BuildContext context, LeaderboardPreviewState state) {
-              if (state is LeaderboardPreviewInitial ||
-                  state is LeaderboardPreviewLoading) {
-                return SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Shimmer.fromColors(
-                    baseColor: context.colorScheme.secondary,
-                    highlightColor: context.colorScheme.primary,
-                    child: Image.asset(
-                      Assets.light.logo.path,
-                      semanticLabel: 'Solarteam Twente Logo',
+              return switch (state) {
+                LeaderboardPreviewLoaded() => const LeaderboardPreviewList(),
+                final LeaderboardPreviewEmpty _ => Text(
+                    l10n.leaderboardEmptyMessage,
+                    style: context.textTheme.bodyLarge,
+                  ),
+                final LeaderboardPreviewError _ => Text(
+                    l10n.leaderboardErrorMessage,
+                    style: context.textTheme.bodyLarge,
+                  ),
+                _ => SizedBox(
+                    height: 100,
+                    width: double.infinity,
+                    child: Shimmer.fromColors(
+                      baseColor: context.colorScheme.secondary,
+                      highlightColor: context.colorScheme.primary,
+                      child: Image.asset(
+                        Assets.light.logo.path,
+                        semanticLabel: 'Solarteam Twente Logo',
+                      ),
                     ),
                   ),
-                );
-              }
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(
-                    'Tussenstand',
-                    style: context.textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: Sizes.s4),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Sizes.s8),
-                    child: Text(
-                      'Afgelegde afstand',
-                      style: context.textTheme.bodySmall,
-                      textAlign: TextAlign.end,
-                    ),
-                  ),
-                  const SizedBox(height: Sizes.s12),
-                  const LeaderboardPreviewList(),
-                ],
-              );
+              };
             },
           );
         },
