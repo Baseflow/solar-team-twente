@@ -14,6 +14,7 @@ class LeaderboardService {
 
   /// Stream of the leaderboard, containing all teams and their driven
   /// kilometers.
-  Stream<List<RaceTeam>> get leaderboardStream =>
-      _leaderboardRepository.getLeaderboardStream();
+  Stream<List<RaceTeam>> get leaderboard {
+    return _leaderboardRepository.leaderboard;
+  }
 }

@@ -14,35 +14,33 @@ class LeaderboardPreviewCubit extends Cubit<LeaderboardPreviewState> {
   /// {@macro leaderboard_preview_cubit}
   LeaderboardPreviewCubit(LeaderboardService leaderboardService)
       : _leaderboardService = leaderboardService,
-        super(
-          LeaderboardPreviewInitial(),
-        );
+        super(LeaderboardPreviewInitial());
 
   final LeaderboardService _leaderboardService;
 
-  late StreamSubscription<List<RaceTeam>> _leaderboardSubscription;
+  late StreamSubscription<List<RaceTeam>>? _leaderboardSubscription;
+
+  @override
+  Future<void> close() {
+    _leaderboardSubscription?.cancel();
+    return super.close();
+  }
 
   /// Subscribes to the stream of the leaderboard.
   Future<void> initializeLeaderboard() async {
     emit(LeaderboardPreviewLoading());
-    await Future<void>.delayed(const Duration(seconds: 2));
-    _leaderboardSubscription = _leaderboardService.leaderboardStream.listen(
+
+    _leaderboardSubscription = _leaderboardService.leaderboard.listen(
       (List<RaceTeam> leaderboard) {
-        if (leaderboard.isEmpty) {
-          emit(LeaderboardPreviewEmpty());
-        } else {
-          emit(LeaderboardPreviewLoaded(leaderboard: leaderboard));
-        }
+        emit(
+          leaderboard.isEmpty
+              ? LeaderboardPreviewEmpty()
+              : LeaderboardPreviewLoaded(leaderboard: leaderboard),
+        );
       },
-      onError: (Object error) {
+      onError: (dynamic error) {
         emit(LeaderboardPreviewError());
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    _leaderboardSubscription.cancel();
-    return super.close();
   }
 }

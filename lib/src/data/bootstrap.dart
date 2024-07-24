@@ -43,6 +43,11 @@ Future<void> _registerDependencies() async {
       FirebaseCrashlyticsClient.new,
     )
 
+    // Register supabase client as a singleton.
+    ..registerLazySingleton<SupabaseClient>(
+      () => Supabase.instance.client,
+    )
+
     // Register data dependencies needed for the Authentication feature.
     ..registerFactory<AuthenticationClient>(
       // TODO(anyone): Replace the mock implementation with a real
@@ -89,6 +94,8 @@ Future<void> _registerDependencies() async {
       ),
     )
     ..registerFactory<core.LeaderboardRepository>(
-      MockLeaderboardRepository.new,
+      () => SupabaseLeaderboardRepository(
+        ioc.get<SupabaseClient>(),
+      ),
     );
 }
