@@ -5,6 +5,7 @@ import '../features/dashboard/views/dashboard_page.dart';
 import '../features/live/views/live_page.dart';
 import '../features/more/views/more_page.dart';
 import '../features/settings/views/settings_page.dart';
+import '../features/team/team_details_page.dart';
 import 'app_scaffold_shell.dart';
 import 'global_router.dart' as router show rootNavigatorKey;
 
@@ -38,6 +39,17 @@ class AuthenticatedRoutes {
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const MaterialPage<void>(child: DashboardPage());
               },
+              routes: <RouteBase>[
+                GoRoute(
+                  name: TeamDetailsPage.routeName,
+                  path: TeamDetailsPage.path,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return const MaterialPage<void>(
+                      child: TeamDetailsPage(),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
