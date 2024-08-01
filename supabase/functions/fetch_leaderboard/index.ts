@@ -41,6 +41,12 @@ Deno.serve(async (_req) => {
           last_updated: now,
         };
 
+        // Only upsert entries where vehicle_class is "challenger"
+        if (entry.vehicle_class !== "challenger") {
+          console.log("Skipping upsert for vehicle class:", entry.vehicle_class);
+          continue;
+        }
+
         const { error } = await supabase
           .from("leaderboard")
           .upsert(upsertData);
