@@ -32,20 +32,20 @@ Deno.serve(async (_req) => {
 
       const now = new Date().toISOString();
       for (const entry of data) {
+        // Only upsert entries where vehicle_class is "challenger"
+        if (entry.vehicle_class !== "challenger") {
+          console.log("Skipping upsert for vehicle class:", entry.vehicle_class);
+          continue;
+        }
+
         const upsertData = {
-          name: entry.name || "Unknown", // Accessing properties from 'entry'
+          name: entry.name, // Accessing properties from 'entry'
           position: entry.position,
           distance: entry.distance,
           number: entry.number,
           vehicle_class: entry.vehicle_class,
           last_updated: now,
         };
-
-        // Only upsert entries where vehicle_class is "challenger"
-        if (entry.vehicle_class !== "challenger") {
-          console.log("Skipping upsert for vehicle class:", entry.vehicle_class);
-          continue;
-        }
 
         const { error } = await supabase
           .from("leaderboard")
