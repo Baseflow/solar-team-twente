@@ -71,6 +71,6 @@ Deno.serve(async (_req) => {
     return new Response(
       error.message || "Internal Server Error", 
       { status: error.status || 500, }
-  );
+    );
   }
 });
