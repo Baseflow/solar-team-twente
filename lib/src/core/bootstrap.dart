@@ -46,6 +46,11 @@ void _registerDependencies() {
         themeRepository: ioc.get<ThemeRepository>(),
       ),
     )
+    ..registerFactory<VehicleLocationService>(
+      () => VehicleLocationService(
+        vehicleLocationRepository: ioc.get<VehicleLocationRepository>(),
+      ),
+    )
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(
         leaderboardRepository: ioc.get<LeaderboardRepository>(),
