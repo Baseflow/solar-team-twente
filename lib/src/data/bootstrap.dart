@@ -4,10 +4,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core.dart' as core;
 import 'clients/clients.dart';
+import 'clients/vehicle_location_client.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
 import 'repositories/leaderboard_repository.dart';
 import 'repositories/repositories.dart';
+import 'repositories/vehicle_location_repository.dart';
 
 /// Initializes the data library ensuring all dependencies
 /// are registered.
@@ -90,6 +92,11 @@ Future<void> _registerDependencies() async {
     ..registerFactory<core.ThemeRepository>(
       () => SharedPreferencesThemeRepository(
         sharedPreferences: sharedPreferences,
+      ),
+    )
+    ..registerFactory<core.VehicleLocationRepository>(
+      () => VehicleLocationRepositoryImpl(
+        vehicleLocationClient: ioc.get<VehicleLocationClient>(),
       ),
     )
     ..registerFactory<core.LeaderboardRepository>(
