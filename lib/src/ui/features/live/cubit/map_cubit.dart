@@ -28,10 +28,20 @@ class MapCubit extends Cubit<MapState> {
     final VehicleLocation vehicleLocation = results[1] as VehicleLocation;
     final GeoJsonParser globalParser = GeoJsonParser()
       ..parseGeoJsonAsString(geoJson);
-    emit(MapRaceLoaded(
-      geoJsonParser: globalParser,
-      vehicleLocation: vehicleLocation,
-    ));
+    emit(
+      MapRaceLoaded(
+        geoJsonParser: globalParser,
+        vehicleLocation: vehicleLocation,
+      ),
+    );
     return;
+  }
+
+  Future<void> onRefreshButtonPressed() async {
+    assert(state is MapRaceLoaded);
+    final MapRaceLoaded mapRaceLoaded = state as MapRaceLoaded;
+    emit(const MapLoading());
+    final VehicleLocation vehicleLocation = await _service.getVehicleLocation();
+    emit(mapRaceLoaded.copyWith(vehicleLocation: vehicleLocation));
   }
 }
