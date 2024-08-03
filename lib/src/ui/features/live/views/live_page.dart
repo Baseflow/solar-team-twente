@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ioc/flutter_ioc.dart';
 
+import '../../../../../core.dart';
 import '../../../localizations/l10n.dart';
+import '../cubit/map_cubit.dart';
 import 'live_view.dart';
 
 /// {@template live_page}
@@ -31,6 +35,11 @@ class LivePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LiveView();
+    return BlocProvider<MapCubit>(
+      create: (_) => MapCubit(
+        Ioc.container.get<VehicleLocationService>(),
+      )..started(),
+      child: const LiveView(),
+    );
   }
 }

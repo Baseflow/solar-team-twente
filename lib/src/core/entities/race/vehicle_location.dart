@@ -1,23 +1,21 @@
 import 'package:equatable/equatable.dart';
+import 'package:latlong2/latlong.dart';
 
 class VehicleLocation extends Equatable {
   const VehicleLocation({
     required this.name,
-    required this.longitude,
-    required this.latitude,
+    required this.coordinates,
     required this.lastSeen,
   });
 
   final String name;
-  final double longitude;
-  final double latitude;
+  final LatLng coordinates;
   final int lastSeen;
 
   @override
   List<Object?> get props => <Object?>[
         name,
-        longitude,
-        latitude,
+        coordinates,
         lastSeen,
       ];
 }

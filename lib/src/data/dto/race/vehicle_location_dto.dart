@@ -1,3 +1,5 @@
+import 'package:latlong2/latlong.dart';
+
 import '../../../../core.dart';
 
 class VehicleLocationDto {
@@ -20,8 +22,8 @@ class VehicleLocationDto {
   factory VehicleLocationDto.fromEntity(VehicleLocation vehicleLocation) {
     return VehicleLocationDto(
       name: vehicleLocation.name,
-      longitude: vehicleLocation.longitude,
-      latitude: vehicleLocation.latitude,
+      longitude: vehicleLocation.coordinates.longitude,
+      latitude: vehicleLocation.coordinates.latitude,
       lastSeen: vehicleLocation.lastSeen,
     );
   }
@@ -34,8 +36,7 @@ class VehicleLocationDto {
   VehicleLocation toEntity() {
     return VehicleLocation(
       name: name,
-      longitude: longitude,
-      latitude: latitude,
+      coordinates: LatLng(latitude, longitude),
       lastSeen: lastSeen,
     );
   }

@@ -8,8 +8,7 @@ class VehicleLocationCubit extends Cubit<VehicleLocationState> {
 
   Future<void> fetchVehicleLocations() async {
     emit(VehicleLocationLoading());
-    final VehicleLocation locations =
-        await _service.getVehicleLocation();
+    final VehicleLocation locations = await _service.getVehicleLocation();
     emit(VehicleLocationLoaded(locations));
   }
 }
