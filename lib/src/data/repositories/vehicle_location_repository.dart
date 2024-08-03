@@ -9,7 +9,7 @@ class VehicleLocationRepositoryImpl implements VehicleLocationRepository {
   final VehicleLocationClient _vehicleLocationClient;
 
   @override
-  Future<List<VehicleLocation>> getAllVehicleLocations() async {
-    return _vehicleLocationClient.getAllVehicleLocations();
+  Future<VehicleLocation> getVehicleLocation() async {
+    return _vehicleLocationClient.getVehicleLocation();
   }
 }
