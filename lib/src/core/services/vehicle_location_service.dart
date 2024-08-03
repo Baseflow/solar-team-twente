@@ -8,8 +8,7 @@ class VehicleLocationService {
 
   final VehicleLocationRepository _vehicleLocationRepository;
 
-  /// Retrieves all vehicle locations.
-  Future<List<VehicleLocation>> getAllVehicleLocations() {
-    return _vehicleLocationRepository.getAllVehicleLocations();
+  Future<VehicleLocation> getVehicleLocation() {
+    return _vehicleLocationRepository.getVehicleLocation();
   }
 }

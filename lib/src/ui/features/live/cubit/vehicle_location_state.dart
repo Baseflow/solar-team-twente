@@ -16,7 +16,7 @@ class VehicleLocationLoading extends VehicleLocationState {}
 
 class VehicleLocationLoaded extends VehicleLocationState {
   const VehicleLocationLoaded(this.vehicleLocations);
-  final List<VehicleLocation> vehicleLocations;
+  final VehicleLocation vehicleLocations;
 
   @override
   List<Object?> get props => <Object?>[vehicleLocations];
