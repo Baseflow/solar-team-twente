@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core.dart' as core;
 import 'clients/clients.dart';
-import 'clients/vehicle_location_client.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
 import 'repositories/leaderboard_repository.dart';
@@ -95,8 +94,8 @@ Future<void> _registerDependencies() async {
       ),
     )
     ..registerFactory<core.VehicleLocationRepository>(
-      () => VehicleLocationRepositoryImpl(
-        vehicleLocationClient: ioc.get<VehicleLocationClient>(),
+      () => SupabaseVehicleLocationRepository(
+        supabaseClient: ioc.get<SupabaseClient>(),
       ),
     )
     ..registerFactory<core.LeaderboardRepository>(
