@@ -78,6 +78,7 @@ flutter:
     - assets/light/
     - assets/animations/
     - assets/geojson/
+    - assets/icons/
 
 flutter_gen:
   output: lib/src/assets/generated

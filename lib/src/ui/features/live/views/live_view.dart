@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../assets/generated/assets.gen.dart';
@@ -93,7 +94,7 @@ class _FlutterMapState extends State<_FlutterMap>
             mapController: _animatedMapController.mapController,
             options: MapOptions(
               initialCenter: widget.currentLocation,
-              initialZoom: 5.2,
+              initialZoom: 8.2,
             ),
             children: <Widget>[
               TileLayer(
@@ -102,8 +103,13 @@ class _FlutterMapState extends State<_FlutterMap>
               MarkerLayer(
                 markers: <Marker>[
                   Marker(
+                    width: 80,
+                    height: 80,
                     point: widget.currentLocation,
-                    child: CircularProgressIndicator(),
+                    child: SvgPicture.asset(
+                      Assets.icons.solarCarIcon,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ],
               ),
