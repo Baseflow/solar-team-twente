@@ -20,6 +20,7 @@ class MapCubit extends Cubit<MapState> {
         rootBundle.loadString(Assets.geojson.fullMap);
     final Future<VehicleLocation> vehicleLocationFuture =
         _service.getVehicleLocation();
+    // Await two futures and then parse the geojson and vehicle location.
     final List<Object> results = await Future.wait<Object>(<Future<Object>>[
       geoJsonFuture,
       vehicleLocationFuture,
