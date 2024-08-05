@@ -32,9 +32,9 @@ Deno.serve(async (_req) => {
 
       const now = new Date().toISOString();
       for (const entry of data) {
-        // Only upsert entries where vehicle_class is "challenger"
-        if (entry.vehicle_class !== "challenger") {
-          console.log("Skipping upsert for vehicle class:", entry.vehicle_class);
+        const vehicleClass = String(entry.vehicle_class).toLowerCase().trim(); // Ensure string and normalize
+        if (vehicleClass !== "challenger") {
+          console.log("Skipping upsert for vehicle class:", vehicleClass);
           continue;
         }
 
