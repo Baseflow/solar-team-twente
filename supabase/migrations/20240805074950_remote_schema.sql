@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION public.fetch_leaderboard_scheduler()
 AS $function$select 
   cron.schedule(
     'fetch-leaderboard-scheduler',
-    '*/1 * * * *', -- Executes every 5 minutes
+    '*/5 * * * *', -- Executes every 5 minutes
     $$
     select 
       "net"."http_post"(
@@ -26,7 +26,7 @@ CREATE OR REPLACE FUNCTION public.fetch_location_scheduler()
 AS $function$select 
   cron.schedule(
     'fetch-vehicle-location-scheduler',
-    '*/1 * * * *', -- Executes every 5 minutes
+    '*/5 * * * *', -- Executes every 5 minutes
     $$
     select 
       "net"."http_post"(
