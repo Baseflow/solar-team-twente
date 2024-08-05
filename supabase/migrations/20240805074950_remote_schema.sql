@@ -13,7 +13,7 @@ AS $function$select
     select 
       "net"."http_post"(
         url:='https://sqqjlcwcjyclnhakdycb.supabase.co/functions/v1/fetch_leaderboard',
-        headers:='{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxcWpsY3djanljbG5oYWtkeWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgxOTM0MTEsImV4cCI6MjAzMzc2OTQxMX0.ifhRns2skLt7aDOjcXfBSSB3FxGt0EjNTxvAkJAWZEw"}'::jsonb,
+        headers:='{"Authorization": "Bearer SECRET"}'::jsonb,
         body:='{"name": "pg_net"}'::jsonb
       ) as "leaderboard_result";
     $$
@@ -31,7 +31,7 @@ AS $function$select
     select 
       "net"."http_post"(
         url:='https://sqqjlcwcjyclnhakdycb.supabase.co/functions/v1/fetch_vehicle_location',
-        headers:='{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxcWpsY3djanljbG5oYWtkeWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgxOTM0MTEsImV4cCI6MjAzMzc2OTQxMX0.ifhRns2skLt7aDOjcXfBSSB3FxGt0EjNTxvAkJAWZEw"}'::jsonb,
+        headers:='{"Authorization": "Bearer SECRET"}'::jsonb,
         body:='{"name": "pg_net"}'::jsonb
       ) as "vehicle_location";
     $$
