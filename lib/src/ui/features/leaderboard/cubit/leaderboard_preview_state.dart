@@ -28,16 +28,18 @@ final class LeaderboardPreviewLoaded extends LeaderboardPreviewState {
   final List<RaceTeam> leaderboard;
 
   /// The Solar Team Twente in the leaderboard.
-  RaceTeam get solarTeamTwente => leaderboard.firstWhere(
-        (RaceTeam team) => team.name == Constants.solarTeamName,
-        orElse: () {
-          return RaceTeam(
-            name: 'Solar Team Twente not found',
-            totalDrivenKilometers: -1,
-            position: -1,
-          );
-        },
-      );
+  RaceTeam get solarTeamTwente {
+    return leaderboard.firstWhere(
+      (RaceTeam team) => team.name == Constants.solarTeamName,
+      orElse: () {
+        return RaceTeam(
+          name: 'Solar Team Twente not found',
+          totalDrivenKilometers: -1,
+          position: -1,
+        );
+      },
+    );
+  }
 
   @override
   List<Object> get props => <Object>[leaderboard];
