@@ -8,6 +8,12 @@ class VehicleLocation extends Equatable {
     required this.lastSeen,
   });
 
+  /// Vehicle location when an error occurs.
+  const VehicleLocation.error()
+      : name = 'Whoops',
+        coordinates = const LatLng(26.2041, 28.0473),
+        lastSeen = -1;
+
   final String name;
   final LatLng coordinates;
   final int lastSeen;
