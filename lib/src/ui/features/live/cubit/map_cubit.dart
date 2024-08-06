@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
@@ -10,39 +12,48 @@ import 'map_state.dart';
 /// Manages the state of the map carrousel.
 /// {@endtemplate}
 class MapCubit extends Cubit<MapState> {
-  MapCubit(this._service) : super(MapInitial());
+  MapCubit(this._service) : super(const MapInitial());
   final VehicleLocationService _service;
+
+  late StreamSubscription<VehicleLocation> _vehicleLocationSubscription;
+
+  @override
+  Future<void> close() {
+    _vehicleLocationSubscription.cancel();
+    return super.close();
+  }
 
   /// Initializes the cubit by loading the relevant geo json files.
   Future<void> started() async {
     emit(const MapLoading());
-    final Future<String> geoJsonFuture =
-        rootBundle.loadString(Assets.geojson.fullMap);
-    final Future<VehicleLocation> vehicleLocationFuture =
-        _service.getVehicleLocation();
-    // Await two futures and then parse the geojson and vehicle location.
-    final List<Object> results = await Future.wait<Object>(<Future<Object>>[
-      geoJsonFuture,
-      vehicleLocationFuture,
-    ]);
-    final String geoJson = results[0] as String;
-    final VehicleLocation vehicleLocation = results[1] as VehicleLocation;
+    final String geoJson = await rootBundle.loadString(Assets.geojson.fullMap);
     final GeoJsonParser globalParser = GeoJsonParser()
       ..parseGeoJsonAsString(geoJson);
     emit(
       MapRaceLoaded(
         geoJsonParser: globalParser,
-        vehicleLocation: vehicleLocation,
+        vehicleLocation: const VehicleLocation.initial(),
       ),
     );
-    return;
+    _subscribeToVehicleLocation();
   }
 
-  Future<void> onRefreshButtonPressed() async {
-    assert(state is MapRaceLoaded);
-    final MapRaceLoaded mapRaceLoaded = state as MapRaceLoaded;
-    emit(const MapLoading());
-    final VehicleLocation vehicleLocation = await _service.getVehicleLocation();
-    emit(mapRaceLoaded.copyWith(vehicleLocation: vehicleLocation));
+  /// Subscribes to the stream of the vehicle location.
+  void _subscribeToVehicleLocation() {
+    assert(state is MapRaceLoaded, 'State must be MapRaceLoaded');
+
+    _vehicleLocationSubscription = _service.vehicleLocation.listen(
+      (VehicleLocation vehicleLocation) {
+        final MapRaceLoaded mapRaceLoaded = state as MapRaceLoaded;
+        emit(mapRaceLoaded.copyWith(vehicleLocation: vehicleLocation));
+      },
+      onError: (_) {
+        emit(
+          (state as MapRaceLoaded).copyWith(
+            vehicleLocation: const VehicleLocation.initial(),
+          ),
+        );
+      },
+    );
   }
 }

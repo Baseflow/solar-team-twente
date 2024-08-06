@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 
 import '../../../../../core.dart';
@@ -5,7 +6,7 @@ import '../../../../../core.dart';
 /// {@template map_carrousel_state}
 /// The state of the map carrousel.
 /// {@endtemplate}
-sealed class MapState {
+sealed class MapState extends Equatable {
   /// {@macro map_carrousel_state}
   const MapState();
 }
@@ -17,6 +18,9 @@ sealed class MapState {
 class MapInitial extends MapState {
   /// {@macro map_carrousel_initial_state}
   const MapInitial();
+
+  @override
+  List<Object?> get props => <Object?>[];
 }
 
 /// {@template map_carrousel_loading_state}
@@ -26,6 +30,9 @@ class MapInitial extends MapState {
 class MapLoading extends MapState {
   /// {@macro map_carrousel_loading_state}
   const MapLoading() : super();
+
+  @override
+  List<Object?> get props => <Object?>[];
 }
 
 /// {@template map_carrousel_race_loaded_state}
@@ -54,4 +61,7 @@ class MapRaceLoaded extends MapState {
       vehicleLocation: vehicleLocation ?? this.vehicleLocation,
     );
   }
+
+  @override
+  List<Object?> get props => <Object?>[geoJsonParser, vehicleLocation];
 }
