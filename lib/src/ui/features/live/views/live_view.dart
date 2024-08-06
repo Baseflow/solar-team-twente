@@ -32,13 +32,14 @@ class LiveView extends StatelessWidget {
         ),
       ),
       body: BlocBuilder<MapCubit, MapState>(
-        builder: (BuildContext _, MapState state) {
+        builder: (_, MapState state) {
           return switch (state) {
-            final MapInitial _ ||
-            final MapLoading _ =>
-              const Center(child: CircularProgressIndicator()),
-            final MapRaceLoaded _ =>
-              _FlutterMap(geoJsonParser: state.geoJsonParser),
+            final MapInitial _ || final MapLoading _ => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            final MapRaceLoaded l => _FlutterMap(
+                geoJsonParser: l.geoJsonParser,
+              ),
           };
         },
       ),

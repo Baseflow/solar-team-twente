@@ -8,7 +8,9 @@ class VehicleLocation extends Equatable {
     required this.lastSeen,
   });
 
-  /// Vehicle location when an error occurs.
+  /// Default vehicle location.
+  ///
+  /// Defaults to Johannesburg, South Africa.
   const VehicleLocation.initial()
       : name = 'Whoops',
         coordinates = const LatLng(26.2041, 28.0473),
