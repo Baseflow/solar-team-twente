@@ -95,7 +95,7 @@ Future<void> _registerDependencies() async {
     )
     ..registerFactory<core.VehicleLocationRepository>(
       () => SupabaseVehicleLocationRepository(
-        supabaseClient: ioc.get<SupabaseClient>(),
+        client: ioc.get<SupabaseClient>(),
       ),
     )
     ..registerFactory<core.LeaderboardRepository>(
