@@ -9,7 +9,7 @@ class VehicleLocation extends Equatable {
   });
 
   /// Vehicle location when an error occurs.
-  const VehicleLocation.error()
+  const VehicleLocation.initial()
       : name = 'Whoops',
         coordinates = const LatLng(26.2041, 28.0473),
         lastSeen = -1;

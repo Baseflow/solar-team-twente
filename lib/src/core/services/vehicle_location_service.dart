@@ -8,7 +8,7 @@ class VehicleLocationService {
 
   final VehicleLocationRepository _vehicleLocationRepository;
 
-  Future<VehicleLocation> getVehicleLocation() {
-    return _vehicleLocationRepository.getVehicleLocation();
+  Stream<VehicleLocation> get vehicleLocation {
+    return _vehicleLocationRepository.vehicleLocation;
   }
 }
