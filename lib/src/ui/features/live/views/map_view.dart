@@ -49,83 +49,76 @@ class _MapViewState extends State<MapView> with TickerProviderStateMixin {
     final List<LatLng> markerPoints = widget.geoJsonParser.markers
         .map((Marker marker) => marker.point)
         .toList();
-    return Column(
-      children: <Widget>[
-        Flexible(
-          child: BlocConsumer<MapCubit, MapState>(
-            listenWhen: (MapState previous, MapState current) {
-              return (previous is! MapRaceLoaded && current is MapRaceLoaded) ||
-                  ((previous is MapRaceLoaded && current is MapRaceLoaded) &&
-                      previous.vehicleLocation != current.vehicleLocation);
-            },
-            listener: (BuildContext context, MapState state) {
-              if (state is! MapRaceLoaded) {
-                return;
-              }
+    return BlocConsumer<MapCubit, MapState>(
+      listenWhen: (MapState previous, MapState current) {
+        return (previous is! MapRaceLoaded && current is MapRaceLoaded) ||
+            ((previous is MapRaceLoaded && current is MapRaceLoaded) &&
+                previous.vehicleLocation != current.vehicleLocation);
+      },
+      listener: (BuildContext context, MapState state) {
+        if (state is! MapRaceLoaded) {
+          return;
+        }
 
-              _animatedMapController.animateTo(
-                dest: state.vehicleLocation.coordinates,
-                zoom: _defaultZoom,
-              );
-            },
-            builder: (BuildContext context, MapState state) {
-              state as MapRaceLoaded;
-              return FlutterMap(
-                mapController: _animatedMapController.mapController,
-                options: MapOptions(
-                  initialCenter: state.vehicleLocation.coordinates,
-                  initialZoom: _defaultZoom,
-                  interactionOptions: const InteractionOptions(
-                    flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+        _animatedMapController.animateTo(
+          dest: state.vehicleLocation.coordinates,
+          zoom: _defaultZoom,
+        );
+      },
+      builder: (BuildContext context, MapState state) {
+        state as MapRaceLoaded;
+        return FlutterMap(
+          mapController: _animatedMapController.mapController,
+          options: MapOptions(
+            initialCenter: state.vehicleLocation.coordinates,
+            initialZoom: _defaultZoom,
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+            ),
+          ),
+          children: <Widget>[
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            ),
+            MarkerLayer(
+              markers: <Marker>[
+                Marker(
+                  width: 80,
+                  height: 80,
+                  point: state.vehicleLocation.coordinates,
+                  child: SvgPicture.asset(
+                    Assets.icons.solarCarIcon,
+                    semanticsLabel: 'Solarteam Car',
                   ),
                 ),
-                children: <Widget>[
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  ),
-                  MarkerLayer(
-                    markers: <Marker>[
-                      Marker(
-                        width: 80,
-                        height: 80,
-                        point: state.vehicleLocation.coordinates,
-                        child: SvgPicture.asset(
-                          Assets.icons.solarCarIcon,
-                          semanticsLabel: 'Solarteam Car',
-                        ),
-                      ),
-                    ],
-                  ),
-                  PolylineLayer<Object>(
-                    polylines: <Polyline<Object>>[
-                      Polyline<Object>(
-                        points: markerPoints,
-                        color: context.colorScheme.primary,
-                        strokeWidth: 3,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: Sizes.s8,
-                    right: Sizes.s16,
-                    child: FilledButton.icon(
-                      onPressed: () {
-                        _animatedMapController.animateTo(
-                          dest: state.vehicleLocation.coordinates,
-                          zoom: _defaultZoom,
-                        );
-                      },
-                      icon: const Icon(Icons.my_location_rounded),
-                      label: const Text('Live'),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-      ],
+              ],
+            ),
+            PolylineLayer<Object>(
+              polylines: <Polyline<Object>>[
+                Polyline<Object>(
+                  points: markerPoints,
+                  color: context.colorScheme.primary,
+                  strokeWidth: 3,
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: Sizes.s8,
+              right: Sizes.s16,
+              child: FilledButton.icon(
+                onPressed: () {
+                  _animatedMapController.animateTo(
+                    dest: state.vehicleLocation.coordinates,
+                    zoom: _defaultZoom,
+                  );
+                },
+                icon: const Icon(Icons.my_location_rounded),
+                label: const Text('Live'),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

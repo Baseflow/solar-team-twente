@@ -16,7 +16,7 @@ plugins {
 // Declares a variable to contain the dart-define.
 def dartDefines = [
     APP_TITLE: "[DEV] SolarTeamTwente",
-    APP_ID: "com.baseflow.solarteamtwente.dev"
+    APP_ID: "com.baseflow.solarapp.dev"
 ];
 if (project.hasProperty("dart-defines")) {
     // Decode dart-defines, which are comma-separated and encoded in Base64, and store them in a variable.

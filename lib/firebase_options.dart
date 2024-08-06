@@ -70,6 +70,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '639646983859',
     projectId: 'solarteam-twente',
     storageBucket: 'solarteam-twente.appspot.com',
-    iosBundleId: 'com.baseflow.solarteamtwente',
+    iosBundleId: 'com.baseflow.solarapp',
   );
 }
