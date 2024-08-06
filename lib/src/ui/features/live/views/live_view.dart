@@ -28,6 +28,7 @@ class LiveView extends StatelessWidget {
           context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
           fit: BoxFit.fitHeight,
           height: 64,
+          semanticLabel: 'Solarteam Logo',
         ),
       ),
       body: BlocBuilder<MapCubit, MapState>(
@@ -36,10 +37,8 @@ class LiveView extends StatelessWidget {
             final MapInitial _ ||
             final MapLoading _ =>
               const Center(child: CircularProgressIndicator()),
-            final MapRaceLoaded _ => _FlutterMap(
-                geoJsonParser: state.geoJsonParser,
-                currentLocation: state.vehicleLocation.coordinates,
-              ),
+            final MapRaceLoaded _ =>
+              _FlutterMap(geoJsonParser: state.geoJsonParser),
           };
         },
       ),
@@ -48,14 +47,9 @@ class LiveView extends StatelessWidget {
 }
 
 class _FlutterMap extends StatefulWidget {
-  const _FlutterMap({
-    required this.geoJsonParser,
-    required this.currentLocation,
-  });
+  const _FlutterMap({required this.geoJsonParser});
 
   final GeoJsonParser geoJsonParser;
-
-  final LatLng currentLocation;
 
   @override
   State<_FlutterMap> createState() => _FlutterMapState();
@@ -90,39 +84,56 @@ class _FlutterMapState extends State<_FlutterMap>
     return Column(
       children: <Widget>[
         Flexible(
-          child: FlutterMap(
-            mapController: _animatedMapController.mapController,
-            options: MapOptions(
-              initialCenter: widget.currentLocation,
-              initialZoom: 8.2,
-            ),
-            children: <Widget>[
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          child: BlocConsumer<MapCubit, MapState>(
+            listenWhen: (previous, current) {
+              return (previous is! MapRaceLoaded && current is MapRaceLoaded) ||
+                  ((previous is MapRaceLoaded && current is MapRaceLoaded) &&
+                      previous.vehicleLocation != current.vehicleLocation);
+            },
+            listener: (BuildContext context, MapState state) {
+              if (state is! MapRaceLoaded) {
+                return;
+              }
+
+              _animatedMapController.animateTo(
+                dest: state.vehicleLocation.coordinates,
+              );
+            },
+            builder: (BuildContext context, MapState state) => FlutterMap(
+              mapController: _animatedMapController.mapController,
+              options: MapOptions(
+                initialCenter:
+                    (state as MapRaceLoaded).vehicleLocation.coordinates,
+                initialZoom: 8.2,
               ),
-              MarkerLayer(
-                markers: <Marker>[
-                  Marker(
-                    width: 80,
-                    height: 80,
-                    point: widget.currentLocation,
-                    child: SvgPicture.asset(
-                      Assets.icons.solarCarIcon,
-                      fit: BoxFit.contain,
+              children: <Widget>[
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                ),
+                MarkerLayer(
+                  markers: <Marker>[
+                    Marker(
+                      width: 80,
+                      height: 80,
+                      point: state.vehicleLocation.coordinates,
+                      child: SvgPicture.asset(
+                        Assets.icons.solarCarIcon,
+                        semanticsLabel: 'Solarteam Car',
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              PolylineLayer<Object>(
-                polylines: <Polyline<Object>>[
-                  Polyline<Object>(
-                    points: markerPoints,
-                    color: Colors.black,
-                    strokeWidth: 20,
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                PolylineLayer<Object>(
+                  polylines: <Polyline<Object>>[
+                    Polyline<Object>(
+                      points: markerPoints,
+                      color: context.colorScheme.primary,
+                      strokeWidth: 3,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],
