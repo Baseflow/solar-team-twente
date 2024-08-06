@@ -18,11 +18,11 @@ class LeaderboardPreviewCubit extends Cubit<LeaderboardPreviewState> {
 
   final LeaderboardService _leaderboardService;
 
-  late StreamSubscription<List<RaceTeam>>? _leaderboardSubscription;
+  late StreamSubscription<List<RaceTeam>> _leaderboardSubscription;
 
   @override
   Future<void> close() {
-    _leaderboardSubscription?.cancel();
+    _leaderboardSubscription.cancel();
     return super.close();
   }
 
