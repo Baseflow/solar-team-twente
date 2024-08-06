@@ -106,6 +106,9 @@ class _FlutterMapState extends State<_FlutterMap>
                 initialCenter:
                     (state as MapRaceLoaded).vehicleLocation.coordinates,
                 initialZoom: 8.2,
+                interactionOptions: InteractionOptions(
+                  flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                ),
               ),
               children: <Widget>[
                 TileLayer(
