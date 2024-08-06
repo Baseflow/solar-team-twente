@@ -41,17 +41,7 @@ class LivePage extends StatelessWidget {
       )..started(),
       child: Builder(
         builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: context.read<MapCubit>().onRefreshButtonPressed,
-              ),
-              backgroundColor: Colors.transparent,
-            ),
-            extendBodyBehindAppBar: true,
-            body: const LiveView(),
-          );
+          return const LiveView();
         },
       ),
     );
