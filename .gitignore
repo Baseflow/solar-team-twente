@@ -1,6 +1,7 @@
 # Miscellaneous
 *.class
 *.lock
+!ios/Gemfile.lock
 *.log
 *.pyc
 *.swp
