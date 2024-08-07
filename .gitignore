@@ -13,10 +13,9 @@
 devtools_options.yaml
 
 # Environment files
-*.env.*
-*.env*
-!.env.example
+supabase/.env.*
 ios/Flutter/Dart-Defines.xcconfig
+.secrets/
 
 # IntelliJ related
 *.iml
@@ -89,6 +88,9 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+Runner.ipa
+Runner.app.dSYM.zip
+ios/.bundle/
 
 # macOS
 **/Flutter/ephemeral/
