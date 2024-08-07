@@ -4,7 +4,6 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
@@ -30,7 +29,6 @@ class ChangePasswordForm extends StatelessWidget {
           children: <Widget>[
             TextFormField(
               onChanged: cubit.updateCurrentPassword,
-              initialValue: AppConfig.defaultPassword,
               obscureText: true,
               enableSuggestions: false,
               autocorrect: false,

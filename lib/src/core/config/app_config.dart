@@ -45,16 +45,6 @@ class AppConfig {
   /// The authentication URL.
   static const String authUrl = String.fromEnvironment('AUTH_URL');
 
-  /// The default username for development or staging.
-  static String defaultUsername = _instance.kDebugMode
-      ? const String.fromEnvironment('DEFAULT_USERNAME')
-      : '';
-
-  /// The default password for development or staging.
-  static String defaultPassword = _instance.kDebugMode
-      ? const String.fromEnvironment('DEFAULT_PASSWORD')
-      : '';
-
   /// Supabase specific anon key, unique to the supabase project.
   static const String supabaseAnonKey =
       String.fromEnvironment('SUPABASE_ANON_KEY');
