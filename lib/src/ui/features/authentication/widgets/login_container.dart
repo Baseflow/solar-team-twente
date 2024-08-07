@@ -4,7 +4,6 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core.dart';
 import '../../../../assets/generated/assets.gen.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
@@ -58,7 +57,6 @@ class LoginContainer extends StatelessWidget {
                           children: <Widget>[
                             TextFormField(
                               onChanged: context.read<LoginCubit>().updateEmail,
-                              initialValue: AppConfig.defaultUsername,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
                               autovalidateMode:
@@ -85,7 +83,6 @@ class LoginContainer extends StatelessWidget {
                             TextFormField(
                               onChanged:
                                   context.read<LoginCubit>().updatePassword,
-                              initialValue: AppConfig.defaultPassword,
                               obscureText: true,
                               enableSuggestions: false,
                               autocorrect: false,
