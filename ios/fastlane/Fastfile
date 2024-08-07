@@ -1,0 +1,113 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+    def registerAppleApiKey()
+        app_store_connect_api_key(
+            issuer_id: "138f0eae-4c48-4815-8c85-12eeab935cda",
+            key_id: "DKR4T8DVUQ",
+            key_filepath: '../.secrets/solarteam_apple_app_store_connect_api_key.p8',
+            is_key_content_base64: false,
+            duration: 1200, # optional (maximum 1200)
+            in_house: false # optional but may be required if using match/sigh
+        )
+    end
+
+    def synchronizeCertificates()
+        match(
+            type: "appstore",
+            app_identifier: [
+                "com.baseflow.solarapp"
+            ],
+            force_for_new_devices: true
+        )
+    end
+
+    def parseConfigFile(fileName)
+        config = Hash.new
+        File.open("../../#{fileName}", "r") do |file_handle|
+            IO.foreach(file_handle).with_object({}) do |line|
+                next if line.to_s.empty?
+                next if line.start_with?('#')
+
+                key, value = line.split('=').map(&:strip)
+                config[key] = value
+            end
+        end
+
+        return config
+    end
+
+    # Synchronizes all certificates and provisioning profiles on the local machine.
+    #
+    # Usage:
+    # ```
+    # bundle exec fastlane certificates
+    # ```
+    lane :certificates do
+        # Setup authentication to allow Fastlane to access the Apple App Store Connect portal.
+        registerAppleApiKey()
+
+        # Synchronize certificates and provisioning profiles for the different Scoop versions.
+        synchronizeCertificates()
+    end
+
+    # Build and upload a beta version to TestFlight on the Apple App Store.
+    #
+    # This lane takes an `environment` parameter which is used to determine which
+    # compile time configuration file should be used when building the Flutter
+    # application. Valid values are:
+    # - dev, development: create a development version of the Flutter app.
+    # - stg, stag, staging: create a staging version of the Flutter app.
+    #
+    # If no parameter is supplied a production version of the Flutter
+    # application is build and uploaded to TestFlight.
+    #
+    # Usage:
+    # ```
+    # bundle exec fastlane beta environment:"dev"
+    # ```
+    lane :beta do |values|
+        # Get the contents of the `config` argument. If the argument is not specified fallback to the
+        # `settings.dev` configuration file.
+        configFile = values.fetch(:config, '.env.dev')
+        configuration = parseConfigFile(configFile)
+
+        # Setup authentication to allow Fastlane to access the Apple App Store Connect portal.
+        registerAppleApiKey()
+
+        # Synchronize certificates and provisioning profiles for the different Scoop versions.
+        synchronizeCertificates()
+
+        # Use a custom script to build the Flutter iOS application.
+        sh("../scripts/flutter_build_ios.sh", "-c", configFile, "-s", configuration["SECRETS_CONFIG_PATH"])
+
+        # Get the latest build number from TestFlight and increment it by one.
+        increment_build_number(build_number: latest_testflight_build_number + 1)
+
+        # Archive the iOS application (skipping the build stap as this is already done by the Flutter script).
+        build_app(
+            export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
+            skip_build_archive: true,
+            archive_path: "../build/ios/archive/Runner.xcarchive",
+            export_method: "app-store"
+        )
+
+        # Upload the build to Apple TestFlight.
+        upload_to_testflight()
+    end
+end

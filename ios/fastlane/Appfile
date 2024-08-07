@@ -1,0 +1,5 @@
+itc_team_id("119446294") # App Store Connect Team ID
+team_id("7624MWN53C") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
