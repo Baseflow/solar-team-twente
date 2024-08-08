@@ -24,7 +24,6 @@ void main() {
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
-    AppConfig.initialize();
     mockLoginCubit = MockLoginCubit();
     mockLanguageCubit = MockLanguageCubit();
 
