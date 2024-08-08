@@ -7,9 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:639646983859:android:39770e2df2d64bc99af2c6",
+        "mobilesdk_app_id": "1:639646983859:android:b7f3a5c410465af49af2c6",
         "android_client_info": {
-          "package_name": "com.baseflow.solarteamtwente.dev"
+          "package_name": "com.baseflow.solarapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJeuTol0sF1EqG7HuIHSis2YASbmuRGTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639646983859:android:9cf7bf8d0e034cf69af2c6",
+        "android_client_info": {
+          "package_name": "com.baseflow.solarapp.dev"
         }
       },
       "oauth_client": [],

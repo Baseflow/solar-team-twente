@@ -1,0 +1,71 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc 'Push a new beta build to Google Play Store test track'
+
+  def parseConfigFile(fileName)
+    config = Hash.new
+    File.open("../../#{fileName}", "r") do |file_handle|
+      IO.foreach(file_handle).with_object({}) do |line|
+        next if line.to_s.empty?
+        next if line.start_with?('#')
+
+        key, value = line.split('=').map(&:strip)
+        config[key] = value
+      end
+    end
+
+    return config
+  end
+
+  # Build and upload a beta version to the 'internal test' track of the Google
+  # Play Store.
+  #
+  # This lane takes an `environment` parameter which is used to determine which
+  # compile time configuration file should be used when building the Flutter
+  # application. Valid values are:
+  # - dev, development: create a development version of the Flutter app.
+  # - stg, stag, staging: create a staging version of the Flutter app.
+  #
+  # If no parameter is supplied a production version of the Flutter
+  # application is build and uploaded to the internal test track of the Google
+  # Play Store.
+  #
+  # Usage:
+  # ```
+  # bundle exec fastlane beta config:settings.prod
+  # ```
+  lane :beta do |values|
+    # Get the contents of the `config` argument. If the argument is not specified fallback to the
+    # `settings.dev` configuration file.
+    configFile = values.fetch(:config, '.env.prd');
+    configuration = parseConfigFile(configFile)
+
+    # Use a custom script to build the Flutter Android application.
+    sh("../scripts/flutter_build_android.sh", "-c", configFile, "-s", configuration["SECRETS_CONFIG_PATH"])
+
+    # Upload the build to the internal testing track on the Google Play Store.
+    upload_to_play_store(
+        aab: '../build/app/outputs/bundle/release/app-release.aab',
+        json_key: '../.secrets/Fastlane_Service_Account.json',
+        package_name: configuration['APP_ID'],
+        release_status: 'draft',
+        track: 'internal',
+    )
+  end
+end
