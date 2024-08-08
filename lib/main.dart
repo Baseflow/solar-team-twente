@@ -23,9 +23,6 @@ Future<void> main() async {
         FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
       }
 
-      // Load the environment variables from the .env file
-      core.AppConfig.initialize(kdDebugMode: kDebugMode);
-
       // Initialize the GetIt Ioc Container.
       GetItIocContainer.register();
 

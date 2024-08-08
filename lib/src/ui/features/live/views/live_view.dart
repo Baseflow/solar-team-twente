@@ -46,7 +46,7 @@ class _MapLoadedView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Expanded(child: MapView(geoJsonParser: state.geoJsonParser)),
-            const SizedBox.shrink()
+            const SizedBox.shrink(),
           ],
         );
       },

@@ -10,25 +10,6 @@
 /// flutter build apk --dart-define-from-file=.env.prod
 /// ```
 class AppConfig {
-  /// Creates a new instance of [AppConfig].
-  AppConfig._(
-    this.kDebugMode,
-  );
-
-  /// The [AppConfig] instance.
-  static late AppConfig _instance;
-
-  /// Initializes the [AppConfig] instance by setting [_instance] using the
-  /// private constructor.
-  static void initialize({
-    bool kdDebugMode = false,
-  }) {
-    _instance = AppConfig._(kdDebugMode);
-  }
-
-  /// Whether the application is in debug mode.
-  final bool kDebugMode;
-
   /// The current application flavor.
   static const String flavor =
       String.fromEnvironment('FLAVOR', defaultValue: 'development');

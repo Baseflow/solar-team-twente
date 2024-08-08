@@ -23,7 +23,6 @@ void main() {
     when(() => mockChangePasswordCubit.state).thenReturn(
       const ChangePasswordState(),
     );
-    AppConfig.initialize(kdDebugMode: true);
     formView = MaterialAppHelper(
       child: Scaffold(
         body: BlocProvider<ChangePasswordCubit>.value(
