@@ -15,7 +15,7 @@ plugins {
 
 // Declares a variable to contain the dart-define.
 def dartDefines = [
-    APP_TITLE: "[DEV] SolarTeamTwente",
+    APP_TITLE: "[DEV] Solar Tracker Twente",
     APP_ID: "com.baseflow.solarapp.dev"
 ];
 if (project.hasProperty("dart-defines")) {
@@ -48,7 +48,7 @@ if (flutterVersionName == null) {
 }
 
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file("key.properties")
+def keystorePropertiesFile = rootProject.file("../.secrets/key.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
@@ -56,7 +56,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "com.baseflow.solarteamtwente"
     compileSdkVersion 34 // flutter.compileSdkVersion
-    ndkVersion "25.1.8937393" // flutter.ndkVersion
+    ndkVersion "26.1.10909125" // flutter.ndkVersion
 
     compileOptions {
         // Flag to enable support for the new language APIs
@@ -80,7 +80,6 @@ android {
     defaultConfig {
         applicationId dartDefines.APP_ID
         resValue "string", "app_title", dartDefines.APP_TITLE
-        dimension "default"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21 // flutter.minSdkVersion
