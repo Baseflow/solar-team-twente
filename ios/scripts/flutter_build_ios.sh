@@ -9,6 +9,7 @@ usage()
     echo ""
     echo "Usage: $0 -c .env.prd"
     echo "  -c | --config-file        File containing the Flutter compile time configuration settings."
+    echo "  -s | --secrets            File containing the Flutter secrets configuration settings."
     echo "  -h | --help               Shows this help text."
 }
 
