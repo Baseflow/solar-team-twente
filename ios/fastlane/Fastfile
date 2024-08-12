@@ -96,9 +96,6 @@ platform :ios do
         # Use a custom script to build the Flutter iOS application.
         sh("../scripts/flutter_build_ios.sh", "-c", configFile, "-s", configuration["SECRETS_CONFIG_PATH"])
 
-        # Get the latest build number from TestFlight and increment it by one.
-        increment_build_number(build_number: latest_testflight_build_number + 1)
-
         # Archive the iOS application (skipping the build stap as this is already done by the Flutter script).
         build_app(
             export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
