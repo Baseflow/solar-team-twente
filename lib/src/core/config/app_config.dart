@@ -10,10 +10,6 @@
 /// flutter build apk --dart-define-from-file=.env.prod
 /// ```
 class AppConfig {
-  /// The current application flavor.
-  static const String flavor =
-      String.fromEnvironment('FLAVOR', defaultValue: 'development');
-
   /// The application ID.
   static const String appId = String.fromEnvironment('APP_ID');
 
