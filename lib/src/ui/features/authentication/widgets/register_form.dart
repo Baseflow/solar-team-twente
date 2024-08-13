@@ -140,14 +140,18 @@ class RegistrationForm extends StatelessWidget {
                               ..onTap = () {
                                 final Uri url =
                                     Uri.parse(Constants.appPrivacyPolicy);
-                                launchUrl(url).catchError((Object error) {
-                                  context.showSnackBar(
-                                    SnackBar(
-                                      content: Text(context.l10n.failLaunchUrl),
-                                    ),
-                                  );
-                                  return false;
-                                });
+                                launchUrl(url).catchError(
+                                  (Object error) async {
+                                    if (!context.mounted) return false;
+                                    await context.showSnackBar(
+                                      SnackBar(
+                                        content:
+                                            Text(context.l10n.failLaunchUrl),
+                                      ),
+                                    );
+                                    return false;
+                                  },
+                                );
                               },
                           ),
                           const TextSpan(text: '.'),

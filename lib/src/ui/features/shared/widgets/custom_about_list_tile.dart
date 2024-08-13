@@ -45,6 +45,9 @@ class CustomAboutListTile extends StatelessWidget {
                   onPressed: () {
                     final Uri url = Uri.parse(Constants.appWebsite);
                     launchUrl(url).catchError((Object error) {
+                      if (!context.mounted) {
+                        return false;
+                      }
                       context.showSnackBar(
                         SnackBar(
                           content: Text(context.l10n.failLaunchUrl),
