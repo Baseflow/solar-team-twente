@@ -100,7 +100,9 @@ class _ImageOptionButtonState extends State<ImageOptionButton> {
     final XFile? pickedImage = await ImagePicker().pickImage(source: source);
     if (pickedImage != null) {
       final Uint8List bytes = await pickedImage.readAsBytes();
-      await profileCubit.updateProfileImage(bytes).then((_) => context.pop());
+      await profileCubit.updateProfileImage(bytes);
+      if (!context.mounted) return;
+      context.pop();
     }
   }
 
@@ -113,7 +115,9 @@ class _ImageOptionButtonState extends State<ImageOptionButton> {
     );
     if (pickedImage != null) {
       final Uint8List bytes = await pickedImage.readAsBytes();
-      await profileCubit.updateProfileImage(bytes).then((_) => context.pop());
+      await profileCubit.updateProfileImage(bytes);
+      if (!context.mounted) return;
+      context.pop();
     }
   }
 }

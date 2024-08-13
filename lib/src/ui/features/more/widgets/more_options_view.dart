@@ -104,7 +104,7 @@ class MoreOptionsView extends StatelessWidget {
     final bool result = await launchUrl(url);
     if (result) return;
     if (!context.mounted) return;
-    context.showSnackBar(
+    await context.showSnackBar(
       SnackBar(
         content: Text(context.l10n.couldNotLaunch),
         duration: const Duration(seconds: 2),

@@ -27,7 +27,7 @@ extension ContextExtension on BuildContext {
       Theme.of(this).extension<AppThemeColorExtension>();
 
   /// Shows the given [snackBar].
-  void showSnackBar(SnackBar snackBar) {
+  Future<void> showSnackBar(SnackBar snackBar) async {
     ScaffoldMessenger.of(this).showSnackBar(snackBar);
   }
 }

@@ -58,7 +58,7 @@ class _CameraDialogState extends State<CameraDialog> {
         });
       } catch (e) {
         if (!mounted) return;
-        context.showSnackBar(
+        await context.showSnackBar(
           SnackBar(content: Text('${context.l10n.cameraAccessError} $e')),
         );
       }
@@ -100,9 +100,12 @@ class _CameraPreview extends StatelessWidget {
           onPressed: () async {
             if (controller == null) return;
             await _takePictureAndCloseDialog(context, profileCubit).onError(
-              (Object? error, StackTrace stackTrace) => context.showSnackBar(
-                SnackBar(content: Text(context.l10n.generalCameraError)),
-              ),
+              (Object? error, StackTrace stackTrace) async {
+                if (!context.mounted) return;
+                await context.showSnackBar(
+                  SnackBar(content: Text(context.l10n.generalCameraError)),
+                );
+              },
             );
           },
         ),
@@ -116,6 +119,8 @@ class _CameraPreview extends StatelessWidget {
   ) async {
     final XFile image = await controller!.takePicture();
     final Uint8List bytes = await image.readAsBytes();
-    await profileCubit.updateProfileImage(bytes).then((_) => context.pop());
+    await profileCubit.updateProfileImage(bytes);
+    if (!context.mounted) return;
+    context.pop();
   }
 }

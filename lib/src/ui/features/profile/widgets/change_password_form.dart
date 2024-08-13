@@ -140,7 +140,9 @@ class ChangePasswordForm extends StatelessWidget {
                     if (!_changePasswordFormKey.currentState!.validate()) {
                       return;
                     }
-                    cubit.changePassword().then((_) => context.pop());
+                    cubit.changePassword();
+                    if (!context.mounted) return;
+                    context.pop();
                   },
                   isLoading: state.isLoading,
                 );
