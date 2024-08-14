@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../../../assets/generated/assets.gen.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
+import 'solar_car_marker.dart';
 
 class MapView extends StatefulWidget {
   const MapView({
@@ -86,10 +85,7 @@ class _MapViewState extends State<MapView> with TickerProviderStateMixin {
                   width: 80,
                   height: 80,
                   point: state.vehicleLocation.coordinates,
-                  child: SvgPicture.asset(
-                    Assets.icons.solarCarIcon,
-                    semanticsLabel: 'Solarteam Car',
-                  ),
+                  child: const SolarCarMarker(),
                 ),
               ],
             ),
