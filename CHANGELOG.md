@@ -1,6 +1,8 @@
 ## 0.0.3
 
 * Updates splashscreen for both platforms
+* Fixes app title for ios
+* Updates the marker for the Solar Car, so it looks better
 
 ## 0.0.2
 
