@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Updates splashscreen for both platforms
+
 ## 0.0.2
 
 * Sets up Supabase for the Flutter project
