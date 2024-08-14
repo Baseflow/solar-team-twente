@@ -27,7 +27,6 @@ class SolarCarMarker extends StatelessWidget {
             semanticsLabel: 'Solarteam Car',
           ),
         ),
-        // Paint a custom small triangle here, upside down.
         CustomPaint(
           size: const Size(Sizes.s24, Sizes.s8),
           painter: _TrianglePainter(context.colorScheme.primary),
