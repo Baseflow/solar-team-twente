@@ -30,6 +30,9 @@ extension ContextExtension on BuildContext {
   Future<void> showSnackBar(SnackBar snackBar) async {
     ScaffoldMessenger.of(this).showSnackBar(snackBar);
   }
+
+  /// Returns the current locale from the current [BuildContext].
+  Locale get locale => Localizations.localeOf(this);
 }
 
 /// Extensions on [BuildContext] for [MediaQueryData].

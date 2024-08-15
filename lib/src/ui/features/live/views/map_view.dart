@@ -9,6 +9,7 @@ import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
+import 'race_days_carousel.dart';
 import 'solar_car_marker.dart';
 
 class MapView extends StatefulWidget {
@@ -98,23 +99,47 @@ class _MapViewState extends State<MapView> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            Positioned(
-              bottom: Sizes.s8,
-              right: Sizes.s16,
-              child: FilledButton.icon(
-                onPressed: () {
-                  _animatedMapController.animateTo(
-                    dest: state.vehicleLocation.coordinates,
-                    zoom: _defaultZoom,
-                  );
-                },
-                icon: const Icon(Icons.my_location_rounded),
-                label: const Text('Live'),
+            Positioned.fill(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  _LiveButton(
+                    onPressed: () {
+                      _animatedMapController.animateTo(
+                        dest: state.vehicleLocation.coordinates,
+                        zoom: _defaultZoom,
+                      );
+                    },
+                  ),
+                  const RaceDaysCarousel(),
+                ],
               ),
             ),
           ],
         );
       },
+    );
+  }
+}
+
+class _LiveButton extends StatelessWidget {
+  const _LiveButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.bottomRight,
+      padding: const EdgeInsets.only(
+        right: Sizes.s16,
+        bottom: Sizes.s16,
+      ),
+      child: FilledButton.icon(
+        onPressed: onPressed,
+        icon: const Icon(Icons.my_location_rounded),
+        label: const Text('Live'),
+      ),
     );
   }
 }

@@ -42,13 +42,7 @@ class _MapLoadedView extends StatelessWidget {
       },
       builder: (BuildContext context, MapState state) {
         state as MapRaceLoaded;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Expanded(child: MapView(geoJsonParser: state.geoJsonParser)),
-            const SizedBox.shrink(),
-          ],
-        );
+        return MapView(geoJsonParser: state.geoJsonParser);
       },
     );
   }
