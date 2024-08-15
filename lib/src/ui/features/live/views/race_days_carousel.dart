@@ -15,13 +15,13 @@ class RaceDaysCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: Sizes.carouselBottomSheetHeight,
       padding: const EdgeInsets.symmetric(vertical: Sizes.s16),
       decoration: BoxDecoration(
         color: context.colorScheme.surfaceContainerLow,
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(28),
-          topRight: Radius.circular(28),
+          topLeft: Radius.circular(Sizes.defaultBottomSheetCornerRadius),
+          topRight: Radius.circular(Sizes.defaultBottomSheetCornerRadius),
         ),
       ),
       child: Column(

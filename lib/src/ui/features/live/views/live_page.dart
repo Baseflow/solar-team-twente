@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ioc/flutter_ioc.dart';
 
 import '../../../../../core.dart';
+import '../../../constants/sizes_constants.dart';
 import '../../../localizations/l10n.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/race_day_carousel_cubit.dart';
@@ -53,7 +54,8 @@ class LivePage extends StatelessWidget {
       child: const Stack(
         children: <Widget>[
           Positioned.fill(
-            bottom: 200 - 28,
+            bottom: Sizes.carouselBottomSheetHeight -
+                Sizes.defaultBottomSheetCornerRadius,
             child: MapView(),
           ),
           Positioned(

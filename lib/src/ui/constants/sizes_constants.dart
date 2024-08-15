@@ -61,4 +61,10 @@ class Sizes {
 
   /// 1024 spacing.
   static const double s1024 = 1024;
+
+  /// The height of the carousel bottom sheet.
+  static const double carouselBottomSheetHeight = 200;
+
+  /// The default bottom sheet corner radius, as determined by Material 3.
+  static const double defaultBottomSheetCornerRadius = 28;
 }
