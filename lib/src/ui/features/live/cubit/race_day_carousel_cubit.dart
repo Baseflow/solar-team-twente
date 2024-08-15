@@ -56,4 +56,12 @@ class RaceDayCarouselCubit extends Cubit<RaceDayCarouselState> {
       ),
     );
   }
+
+  void selectCurrentRaceDay() {
+    emit(
+      state.copyWith(
+        selectedRaceDay: state.currentRaceDay,
+      ),
+    );
+  }
 }
