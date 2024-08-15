@@ -5,10 +5,12 @@ import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../../../../core.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
+import '../cubit/race_day_carousel_cubit.dart';
 import 'solar_car_marker.dart';
 
 class MapLoadedView extends StatefulWidget {
@@ -65,57 +67,93 @@ class _MapLoadedViewState extends State<MapLoadedView>
           zoom: _defaultZoom,
         );
       },
-      builder: (BuildContext context, MapState state) {
-        state as MapRaceLoaded;
-        return FlutterMap(
-          mapController: _animatedMapController.mapController,
-          options: MapOptions(
-            initialCenter: state.vehicleLocation.coordinates,
-            initialZoom: _defaultZoom,
-            interactionOptions: const InteractionOptions(
-              flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+      builder: (BuildContext context, MapState mapState) {
+        mapState as MapRaceLoaded;
+        return BlocListener<RaceDayCarouselCubit, RaceDayCarouselState>(
+          listenWhen: (previous, current) {
+            return previous.selectedRaceDay != current.selectedRaceDay;
+          },
+          listener: (BuildContext context, RaceDayCarouselState state) {
+            if (state.selectedRaceDay == RaceDayType.prep) {
+              _animatedMapController.animateTo(
+                dest: mapState.vehicleLocation.coordinates,
+                zoom: _defaultZoom,
+              );
+              return;
+            }
+            final GeoJsonParser parser = GeoJsonParser();
+            if (state.selectedRaceDay == RaceDayType.allDays ||
+                state.selectedRaceDay == RaceDayType.day8) {
+              parser.parseGeoJsonAsString(state.fullRaceGeoJson);
+            } else {
+              parser.parseGeoJsonAsString(
+                state.allRaceDaysGeoJson[state.selectedRaceDay.index],
+              );
+            }
+            _animatedMapController.animatedFitCamera(
+              cameraFit: CameraFit.coordinates(
+                maxZoom: state.selectedRaceDay == RaceDayType.allDays ? 5.5 : 7,
+                coordinates: <LatLng>[
+                  parser.markers.first.point,
+                  parser.markers.last.point,
+                ],
+              ),
+            );
+          },
+          child: FlutterMap(
+            mapController: _animatedMapController.mapController,
+            options: MapOptions(
+              initialCenter: mapState.vehicleLocation.coordinates,
+              initialZoom: _defaultZoom,
+              interactionOptions: const InteractionOptions(
+                flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+              ),
             ),
-          ),
-          children: [
-            Stack(
-              children: <Widget>[
-                TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                ),
-                MarkerLayer(
-                  markers: <Marker>[
-                    Marker(
-                      width: 80,
-                      height: 80,
-                      point: state.vehicleLocation.coordinates,
-                      child: const SolarCarMarker(),
-                    ),
-                  ],
-                ),
-                PolylineLayer<Object>(
-                  polylines: <Polyline<Object>>[
-                    Polyline<Object>(
-                      points: markerPoints,
-                      color: context.colorScheme.primary,
-                      strokeWidth: 3,
-                    ),
-                  ],
-                ),
-                Positioned(
-                  bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
-                  right: Sizes.s16,
-                  child: _LiveButton(
-                    onPressed: () {
-                      _animatedMapController.animateTo(
-                        dest: state.vehicleLocation.coordinates,
-                        zoom: _defaultZoom,
-                      );
-                    },
+            children: [
+              Stack(
+                children: <Widget>[
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   ),
-                ),
-              ],
-            ),
-          ],
+                  MarkerLayer(
+                    markers: <Marker>[
+                      Marker(
+                        width: 80,
+                        height: 80,
+                        point: mapState.vehicleLocation.coordinates,
+                        child: const SolarCarMarker(),
+                      ),
+                    ],
+                  ),
+                  PolylineLayer<Object>(
+                    polylines: <Polyline<Object>>[
+                      Polyline<Object>(
+                        points: markerPoints,
+                        color: context.colorScheme.primary,
+                        strokeWidth: 3,
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
+                    right: Sizes.s16,
+                    child: _LiveButton(
+                      onPressed: () async {
+                        context
+                            .read<RaceDayCarouselCubit>()
+                            .selectCurrentRaceDay();
+                        _animatedMapController.animateTo(
+                          dest: mapState.vehicleLocation.coordinates,
+                          zoom: _defaultZoom,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
