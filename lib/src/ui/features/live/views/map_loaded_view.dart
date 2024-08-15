@@ -102,7 +102,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
                   ],
                 ),
                 Positioned(
-                  bottom: 28 + Sizes.s16,
+                  bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
                   right: Sizes.s16,
                   child: _LiveButton(
                     onPressed: () {
