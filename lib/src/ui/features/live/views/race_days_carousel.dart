@@ -1,68 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core.dart';
-import '../../../constants/sizes_constants.dart';
-import '../../../extensions/build_context_extensions.dart';
+import '../cubit/race_day_carousel_cubit.dart';
 import 'count_down_view.dart';
+import 'race_day_view.dart';
 
 class RaceDaysCarousel extends StatelessWidget {
   const RaceDaysCarousel({super.key});
 
-  static DateTime startDate = Constants.startDate;
+  static final bool _hasRaceStarted = Constants.hasRaceStarted;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Sizes.carouselBottomSheetHeight,
-      padding: const EdgeInsets.symmetric(vertical: Sizes.s16),
-      decoration: BoxDecoration(
-        color: context.colorScheme.surfaceContainerLow,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(Sizes.defaultBottomSheetCornerRadius),
-          topRight: Radius.circular(Sizes.defaultBottomSheetCornerRadius),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.s16),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  DateFormat.yMMMMd(
-                    context.locale.toString(),
-                  ).format(DateTime.now()),
-                ),
-                const Gutter(),
-                Text('Dag ${DateTime.now().difference(startDate).inDays}'),
-                Expanded(
-                  child: Text(
-                    '0 km afgelegd',
-                    textAlign: TextAlign.end,
-                    style: context.textTheme.bodyMedium!.copyWith(
-                      color: context.colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const GutterLarge(),
-          SizedBox(
-            height: 100,
-            child: PageView(
-              children: const <Widget>[
-                CountDownView(),
-                CountDownView(),
-              ],
-            ),
-          ),
-        ],
+    return SizedBox(
+      height: 96,
+      child:
+          BlocSelector<RaceDayCarouselCubit, RaceDayCarouselState, RaceDayType>(
+        selector: (RaceDayCarouselState state) => state.currentRaceDay,
+        builder: (BuildContext context, RaceDayType currentRaceDay) {
+          return PageView(
+            onPageChanged: context.read<RaceDayCarouselCubit>().selectRaceDay,
+            children: <Widget>[
+              if (!_hasRaceStarted) const CountDownView(),
+              ...List<RaceDayView>.generate(
+                RaceDayType.values.length - 1,
+                (int index) {
+                  final int raceDayIndex = index + 1;
+                  return RaceDayView(
+                    showPreviousRace: raceDayIndex > 1 || !_hasRaceStarted,
+                    showNextRace: raceDayIndex < RaceDayType.values.length - 1,
+                    isCurrentRaceDone:
+                        currentRaceDay.index > raceDayIndex && _hasRaceStarted,
+                    isPreviousRaceDone:
+                        currentRaceDay.index >= raceDayIndex && _hasRaceStarted,
+                    isNextRaceDone:
+                        raceDayIndex < currentRaceDay.index && _hasRaceStarted,
+                    showCurrentRace:
+                        raceDayIndex != RaceDayType.values.last.index,
+                  );
+                },
+              ),
+            ],
+          );
+        },
       ),
     );
   }

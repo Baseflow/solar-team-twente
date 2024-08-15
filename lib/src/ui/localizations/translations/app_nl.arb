@@ -3,6 +3,42 @@
   "@appBarTitle": {
     "description": "Tekst die in de AppBar van paginas wordt weergegeven."
   },
+  "@day": {
+    "description": "Describes the time in days",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "@hour": {
+    "description": "Describes the time in hours",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "@minute": {
+    "description": "Describes the time in minutes",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "@second": {
+    "description": "Describes the time in seconds",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "about": "Over",
   "aboutThisApp": "Over deze app",
   "aboutThisTeam": "Over Solar Team Twente",
@@ -34,6 +70,7 @@
   "darkMode": "Donker thema",
   "dashboardPageTitle": "Dashboard",
   "dateOfBirth": "Geboortedatum",
+  "day": "{count, plural, =0{Dagen} =1{Dag} other{Dagen}}",
   "descriptionLaura": "Mijn naam is Laura Voogd. Ik ben 21 jaar oud en dit jaar vervul ik de rol van Teammanager van de eerste innovatie-editie van Solar Team Twente. Na het afronden van mijn bacheloropleiding Technology, Liberal Arts, and Sciences wilde ik mijn horizon verbreden door mij aan te sluiten bij dit baanbrekende team. Deze editie van Solar Team Twente zal in het teken staan \u200B\u200Bvan het verkennen, innoveren en realiseren van wat ons nog onbekend is. Mijn rol als teammanager zal dan ook draaien om het begeleiden van het team in deze nieuwe context, waar de mogelijkheden grenzeloos zijn en er spannende avonturen in het verschiet liggen!",
   "descriptionJeroen": "Mijn naam is Jeroen Pouwels, ik ben 22 jaar oud en ik ben accountmanager van de eerste innovatie-editie van Solar Team Twente. Na het afronden van mijn Bachelor Werktuigbouwkunde wilde ik mezelf op een andere manier uitdagen dan tijdens mijn studie. Solar Team Twente is de ideale kans om dit doel te bereiken, omdat het mij in staat stelt mijn passie voor techniek perfect af te stemmen op mijn interesse in externe zaken. Als Account Manager zijn mijn verantwoordelijkheden onder meer het in evenwicht brengen van het budget en het contact onderhouden met onze partners.",
   "descriptionsDaanDeJong": "Hallo, mijn naam is Daan de Jong en ik ben 22 jaar oud. Tijdens de eerste innovatie-editie van Solar Team Twente vervul ik de rol van Technisch Manager en Logistiek medewerker. We willen onszelf uitdagen om de manier waarop we naar Solar Racing kijken te veranderen en de auto te innoveren op manieren die nog niet eerder zijn gedaan. Samen met onze partners willen we kijken hoe we de technische systemen kunnen blijven verbeteren om tijdens races een voorsprong te behalen. Met kennis vanuit mijn Werktuigbouwkundige achtergrond hoop ik een stempel te drukken op Solar Team Twente en verbeteringen aan te brengen als nooit tevoren!",
@@ -58,8 +95,11 @@
   "errorResettingPassword": "Er is een fout opgetreden bij het opnieuw instellen van het wachtwoord.",
   "failLaunchUrl": "Kan URL niet starten.",
   "forgotPassword": "Wachtwoord vergeten?",
+  "fullRace": "Volledige race",
   "generalCameraError": "Oeps, er is iets misgegaan bij het gebruik van de camera of het maken van de foto.",
   "homeAddress": "Thuisadres",
+  "hour": "{count, plural, =0{Uren} =1{Uur} other{Uren}}",
+  "kilometersCovered": "km afgelegd",
   "language": "Taal",
   "leaderboardEmptyMessage": "Er is momenteel geen tussenstand beschikbaar.",
   "leaderboardErrorMessage": "Er is een fout opgetreden bij het ophalen van de tussenstand.",
@@ -67,6 +107,7 @@
   "linkedIn": "LinkedIn profiel",
   "lightMode": "Licht thema",
   "livePageTitle": "Live",
+  "minute": "{count, plural, =0{Minuten} =1{Minuut} other{Minuten}}",
   "more": "Meer",
   "myAccount": "Mijn account",
   "name": "Naam",
@@ -96,6 +137,7 @@
   "register": "Registreer",
   "resetPassword": "Vraag wachtwoord reset aan",
   "save": "Opslaan",
+  "second": "{count, plural, =0{Seconden} =1{Seconde} other{Seconden}}",
   "settings": "Instellingen",
   "signIn": "Inloggen",
   "signOut": "Uitloggen",

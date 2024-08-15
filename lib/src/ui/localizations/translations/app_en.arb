@@ -3,6 +3,42 @@
   "@appBarTitle": {
     "description": "Text shown in the AppBar of the pages"
   },
+  "@day": {
+    "description": "Describes the time in days",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "@hour": {
+    "description": "Describes the time in hours",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "@minute": {
+    "description": "Describes the time in minutes",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "@second": {
+    "description": "Describes the time in seconds",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "about": "About",
   "aboutThisApp": "About this app",
   "aboutThisTeam": "About Solar Team Twente",
@@ -34,6 +70,7 @@
   "darkMode": "Dark theme",
   "dashboardPageTitle": "Dashboard",
   "dateOfBirth": "Date of birth",
+  "day": "{count, plural, =0{Days} =1{Day} other{Days}}",
   "descriptionLaura": "My name is Laura Voogd. I am 21 years old, and this year I will fulfil the role of Team Manager of the first innovation edition of Solar Team Twente. After finalizing my bachelor’s degree in Technology, Liberal Arts, and Sciences I wanted to broaden my horizon by joining this trailblazing team. This edition of Solar Team Twente will focus on exploring, innovating and effectuating what is yet unknown to us. Hence, my role as team manager will revolve around guiding the team in this new context, where the possibilities are limitless and exciting adventurous lie ahead!",
   "descriptionJeroen": "My name is Jeroen Pouwels, I am 22 years old, and I am the Account Manager of the first innovation edition of Solar Team Twente. After finishing my Bachelor Mechanical Engineering, I wanted to challenge myself in a different way than during my studies. Solar Team Twente is the ideal opportunity to accomplish this goal since it enables me to perfectly align my passion for technology with my interest in external affairs. As Account Manager my responsibilities include balancing the budget and contacting our partners.",
   "descriptionDaanDeJong": "Hey, my name is Daan de Jong and I am 22 years old. During the first innovation edition of Solar Team Twente, I will take the roles of Technical Manager and Logistics officer. We want to challenge ourselves to change up the way we look at Solar Racing and Innovate the car in ways that have not been done before. Together with our partners we want to see how we can keep improving the technical systems to gain an edge during races. With knowledge from my Mechanical Engineering background, I hope to leave a mark on Solar Team Twente and make improvements like never before!",
@@ -58,8 +95,11 @@
   "errorResettingPassword": "There was an error resetting the password.",
   "failLaunchUrl": "Failed to launch URL.",
   "forgotPassword": "Forgot password?",
+  "fullRace": "Full race",
   "generalCameraError": "Whoops, something went wrong using the camera or taking the picture.",
   "homeAddress": "Home address",
+  "hour": "{count, plural, =0{Hours} =1{Hour} other{Hours}}",
+  "kilometersCovered": "km covered",
   "language": "Language",
   "leaderboardEmptyMessage": "Er is momenteel geen tussenstand beschikbaar.",
   "leaderboardErrorMessage": "Er is een fout opgetreden bij het ophalen van de tussenstand.",
@@ -67,6 +107,7 @@
   "linkedIn": "LinkedIn profile",
   "lightMode": "Light theme",
   "livePageTitle": "Live",
+  "minute": "{count, plural, =0{Minutes} =1{Minute} other{Minutes}}",
   "more": "More",
   "myAccount": "My account",
   "name": "Name",
@@ -96,6 +137,7 @@
   "register": "Register",
   "resetPassword": "Request password reset",
   "save": "Save",
+  "second": "{count, plural, =0{Seconds} =1{Second} other{Seconds}}",
   "settings": "Settings",
   "signIn": "Sign In",
   "signOut": "Sign Out",
