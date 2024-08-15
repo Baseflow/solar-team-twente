@@ -8,7 +8,7 @@ import '../../../localizations/l10n.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/race_day_carousel_cubit.dart';
 import 'map_view.dart';
-import 'race_days_carousel.dart';
+import 'race_days_bottom_sheet.dart';
 
 /// {@template live_page}
 /// Page to display the live data of the current Solarteam event, like the
@@ -47,7 +47,14 @@ class LivePage extends StatelessWidget {
         ),
         BlocProvider<RaceDayCarouselCubit>(
           create: (_) {
-            return RaceDayCarouselCubit()..loadAssets();
+            final bool hasRaceStarted =
+                Constants.startDate.isBefore(DateTime.now());
+            return RaceDayCarouselCubit(
+              currentRaceDay:
+                  hasRaceStarted ? RaceDayType.day1 : RaceDayType.prep,
+              selectedRaceDay:
+                  hasRaceStarted ? RaceDayType.day1 : RaceDayType.prep,
+            )..loadAssets();
           },
         ),
       ],
@@ -63,7 +70,7 @@ class LivePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Expanded(child: SizedBox.shrink()),
-                RaceDaysCarousel(),
+                RaceDaysBottomSheet(),
               ],
             ),
           )

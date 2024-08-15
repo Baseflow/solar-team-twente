@@ -1,4 +1,3 @@
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -6,6 +5,10 @@ import 'package:slide_countdown/slide_countdown.dart';
 import '../../../../../core.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
+import '../../../localizations/generated/app_localizations.dart';
+import '../../../localizations/l10n.dart';
+import 'time_line_dotted_line.dart';
+import 'time_line_marker.dart';
 
 class CountDownView extends StatefulWidget {
   const CountDownView({super.key});
@@ -38,6 +41,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -54,7 +58,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 CountDownItem(
-                  label: 'dagen',
+                  label: l10n.day(2),
                   items: <RawDigitItem>[
                     RawDigitItem(
                       duration: duration,
@@ -72,7 +76,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                 ),
                 const GutterSmall(),
                 CountDownItem(
-                  label: 'uren',
+                  label: l10n.hour(2),
                   items: <RawDigitItem>[
                     RawDigitItem(
                       duration: duration,
@@ -90,7 +94,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                 ),
                 const GutterSmall(),
                 CountDownItem(
-                  label: 'minuten',
+                  label: l10n.minute(2),
                   items: <RawDigitItem>[
                     RawDigitItem(
                       duration: duration,
@@ -108,7 +112,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                 ),
                 const GutterSmall(),
                 CountDownItem(
-                  label: 'secondes',
+                  label: l10n.second(2),
                   items: <RawDigitItem>[
                     RawDigitItem(
                       duration: duration,
@@ -129,14 +133,16 @@ class _SolarRaceCountDownState extends State<CountDownView> {
           },
         ),
         const Gutter(),
-        Expanded(
+        const Expanded(
           child: Align(
             alignment: Alignment.centerRight,
-            child: DottedLine(
-              lineThickness: 3,
-              dashLength: Sizes.s8,
-              dashGapLength: Sizes.s8,
-              dashColor: context.colorScheme.primary,
+            child: Row(
+              children: <Widget>[
+                TimeLineMarker(),
+                Expanded(
+                  child: TimeLineDottedLine(),
+                ),
+              ],
             ),
           ),
         ),

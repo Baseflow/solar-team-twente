@@ -2,41 +2,54 @@ part of 'race_day_carousel_cubit.dart';
 
 sealed class RaceDayCarouselState extends Equatable {
   const RaceDayCarouselState({
+    required this.currentRaceDay,
+    required this.selectedRaceDay,
     this.allRaceDaysGeoJson = const <String>[],
     this.fullRaceGeoJson = '',
   });
 
   final List<String> allRaceDaysGeoJson;
   final String fullRaceGeoJson;
-
-  int get currentRaceDay;
+  final RaceDayType selectedRaceDay;
+  final RaceDayType currentRaceDay;
 
   String get currentRaceDayGeoJson;
+  bool get hasRaceStarted;
 
   RaceDayCarouselState copyWith({
     List<String>? allRaceDaysGeoJson,
     String? fullRaceGeoJson,
+    RaceDayType? selectedRaceDay,
+    RaceDayType? currentRaceDay,
   });
 }
 
 final class RaceDayCarouselInitial extends RaceDayCarouselState {
-  const RaceDayCarouselInitial();
+  const RaceDayCarouselInitial({
+    required super.currentRaceDay,
+    required super.selectedRaceDay,
+  });
 
   @override
   List<Object> get props => <Object>[];
 
   @override
-  int get currentRaceDay => 0;
+  String get currentRaceDayGeoJson => '';
 
   @override
-  String get currentRaceDayGeoJson => '';
+  bool get hasRaceStarted => false;
 
   @override
   RaceDayCarouselState copyWith({
     List<String>? allRaceDaysGeoJson,
     String? fullRaceGeoJson,
+    RaceDayType? selectedRaceDay,
+    RaceDayType? currentRaceDay,
   }) {
-    return const RaceDayCarouselInitial();
+    return RaceDayCarouselInitial(
+      selectedRaceDay: selectedRaceDay ?? this.selectedRaceDay,
+      currentRaceDay: currentRaceDay ?? this.currentRaceDay,
+    );
   }
 }
 
@@ -44,16 +57,15 @@ final class RaceDayCarouselLoaded extends RaceDayCarouselState {
   const RaceDayCarouselLoaded({
     required super.allRaceDaysGeoJson,
     required super.fullRaceGeoJson,
-    int currentRaceDayIndex = 0,
-  }) : _currentRaceDayIndex = currentRaceDayIndex;
-
-  final int _currentRaceDayIndex;
-
-  @override
-  int get currentRaceDay => _currentRaceDayIndex + 1;
+    required super.currentRaceDay,
+    super.selectedRaceDay = RaceDayType.prep,
+  });
 
   @override
-  String get currentRaceDayGeoJson => allRaceDaysGeoJson[_currentRaceDayIndex];
+  String get currentRaceDayGeoJson => allRaceDaysGeoJson[currentRaceDay.index];
+
+  @override
+  bool get hasRaceStarted => currentRaceDay != RaceDayType.prep;
 
   @override
   List<Object> get props => <Object>[
@@ -61,18 +73,21 @@ final class RaceDayCarouselLoaded extends RaceDayCarouselState {
         currentRaceDay,
         currentRaceDayGeoJson,
         fullRaceGeoJson,
+        selectedRaceDay,
       ];
 
   @override
   RaceDayCarouselState copyWith({
     List<String>? allRaceDaysGeoJson,
     String? fullRaceGeoJson,
-    int? currentRaceDayIndex,
+    RaceDayType? selectedRaceDay,
+    RaceDayType? currentRaceDay,
   }) {
     return RaceDayCarouselLoaded(
       allRaceDaysGeoJson: allRaceDaysGeoJson ?? this.allRaceDaysGeoJson,
       fullRaceGeoJson: fullRaceGeoJson ?? this.fullRaceGeoJson,
-      currentRaceDayIndex: currentRaceDayIndex ?? _currentRaceDayIndex,
+      currentRaceDay: currentRaceDay ?? this.currentRaceDay,
+      selectedRaceDay: selectedRaceDay ?? this.selectedRaceDay,
     );
   }
 }

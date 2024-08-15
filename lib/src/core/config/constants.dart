@@ -17,5 +17,7 @@ class Constants {
       'https://assets.website-files.com/6005500917c6de66daae5341/6017ccadab020f74208417c3_baseflow_terms_conditions.pdf';
 
   /// The start date of the event.
-  static DateTime startDate = DateTime(2024, 9, 12);
+  static DateTime startDate = DateTime(2024, 9, 13);
+
+  static bool get hasRaceStarted => startDate.isBefore(DateTime.now());
 }
