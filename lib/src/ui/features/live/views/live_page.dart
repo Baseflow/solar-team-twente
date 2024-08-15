@@ -6,7 +6,8 @@ import '../../../../../core.dart';
 import '../../../localizations/l10n.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/race_day_carousel_cubit.dart';
-import 'live_view.dart';
+import 'map_view.dart';
+import 'race_days_carousel.dart';
 
 /// {@template live_page}
 /// Page to display the live data of the current Solarteam event, like the
@@ -49,10 +50,22 @@ class LivePage extends StatelessWidget {
           },
         ),
       ],
-      child: Builder(
-        builder: (BuildContext context) {
-          return const LiveView();
-        },
+      child: const Stack(
+        children: <Widget>[
+          Positioned.fill(
+            bottom: 200 - 28,
+            child: MapView(),
+          ),
+          Positioned(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Expanded(child: SizedBox.shrink()),
+                RaceDaysCarousel(),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
