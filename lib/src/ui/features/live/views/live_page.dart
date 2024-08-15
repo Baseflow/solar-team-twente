@@ -37,7 +37,7 @@ class LivePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+      providers: <BlocProvider<StateStreamableSource<Object?>>>[
         BlocProvider<MapCubit>(
           create: (_) => MapCubit(
             Ioc.container.get<VehicleLocationService>(),
