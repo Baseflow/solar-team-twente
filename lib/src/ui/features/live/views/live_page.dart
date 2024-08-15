@@ -5,6 +5,7 @@ import 'package:flutter_ioc/flutter_ioc.dart';
 import '../../../../../core.dart';
 import '../../../localizations/l10n.dart';
 import '../cubit/map_cubit.dart';
+import '../cubit/race_day_carousel_cubit.dart';
 import 'live_view.dart';
 
 /// {@template live_page}
@@ -35,10 +36,19 @@ class LivePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MapCubit>(
-      create: (_) => MapCubit(
-        Ioc.container.get<VehicleLocationService>(),
-      )..started(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MapCubit>(
+          create: (_) => MapCubit(
+            Ioc.container.get<VehicleLocationService>(),
+          )..started(),
+        ),
+        BlocProvider<RaceDayCarouselCubit>(
+          create: (_) {
+            return RaceDayCarouselCubit()..loadAssets();
+          },
+        ),
+      ],
       child: Builder(
         builder: (BuildContext context) {
           return const LiveView();

@@ -13,6 +13,7 @@ import 'map_state.dart';
 /// {@endtemplate}
 class MapCubit extends Cubit<MapState> {
   MapCubit(this._service) : super(const MapInitial());
+
   final VehicleLocationService _service;
 
   late StreamSubscription<VehicleLocation> _vehicleLocationSubscription;
