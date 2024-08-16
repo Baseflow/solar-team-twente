@@ -30,7 +30,7 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
         title: Text(l10n.teamPageTitle),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 30),
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -51,7 +51,7 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                top: 20,
+                top: 30,
                 left: 60,
                 right: 60,
               ),
