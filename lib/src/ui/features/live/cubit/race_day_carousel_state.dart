@@ -62,7 +62,12 @@ final class RaceDayCarouselLoaded extends RaceDayCarouselState {
   });
 
   @override
-  String get currentRaceDayGeoJson => allRaceDaysGeoJson[currentRaceDay.index];
+  String get currentRaceDayGeoJson {
+    return selectedRaceDay == RaceDayType.allDays ||
+            selectedRaceDay == RaceDayType.prep
+        ? fullRaceGeoJson
+        : allRaceDaysGeoJson[selectedRaceDay.index - 1];
+  }
 
   @override
   bool get hasRaceStarted => currentRaceDay != RaceDayType.prep;

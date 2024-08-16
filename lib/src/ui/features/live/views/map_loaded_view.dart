@@ -81,14 +81,8 @@ class _MapLoadedViewState extends State<MapLoadedView>
               BuildContext context,
               RaceDayCarouselState carouselState,
             ) {
-              final geoJsonString =
-                  carouselState.selectedRaceDay == RaceDayType.allDays ||
-                          carouselState.selectedRaceDay == RaceDayType.prep
-                      ? carouselState.fullRaceGeoJson
-                      : carouselState.allRaceDaysGeoJson[
-                          carouselState.selectedRaceDay.index - 1];
               final GeoJsonParser geoJson = GeoJsonParser()
-                ..parseGeoJsonAsString(geoJsonString);
+                ..parseGeoJsonAsString(carouselState.currentRaceDayGeoJson);
               return FlutterMap(
                 mapController: _animatedMapController.mapController,
                 options: MapOptions(
@@ -104,6 +98,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
                         'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   ),
                   MarkerLayer(
+                    alignment: Alignment.topCenter,
                     markers: <Marker>[
                       Marker(
                         width: 80,
