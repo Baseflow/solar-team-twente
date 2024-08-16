@@ -22,9 +22,7 @@ class MapView extends StatelessWidget {
           final MapInitial _ || final MapLoading _ => const Center(
               child: CircularProgressIndicator(),
             ),
-          final MapRaceLoaded l => MapLoadedView(
-              geoJsonParser: l.geoJsonParser,
-            ),
+          final MapRaceLoaded _ => const MapLoadedView(),
         };
       },
     );
