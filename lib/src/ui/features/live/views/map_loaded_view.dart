@@ -7,19 +7,13 @@ import 'package:latlong2/latlong.dart';
 
 import '../../../../../core.dart';
 import '../../../constants/sizes_constants.dart';
-import '../../../extensions/build_context_extensions.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
 import '../cubit/race_day_carousel_cubit.dart';
 import 'solar_car_marker.dart';
 
 class MapLoadedView extends StatefulWidget {
-  const MapLoadedView({
-    required this.geoJsonParser,
-    super.key,
-  });
-
-  final GeoJsonParser geoJsonParser;
+  const MapLoadedView({super.key});
 
   @override
   State<MapLoadedView> createState() => _MapLoadedViewState();
@@ -48,21 +42,18 @@ class _MapLoadedViewState extends State<MapLoadedView>
 
   @override
   Widget build(BuildContext context) {
-    final List<LatLng> markerPoints = widget.geoJsonParser.markers
-        .map((Marker marker) => marker.point)
-        .toList();
     return BlocConsumer<MapCubit, MapState>(
       listenWhen: (MapState previous, MapState current) {
         return (previous is! MapRaceLoaded && current is MapRaceLoaded) ||
             ((previous is MapRaceLoaded && current is MapRaceLoaded) &&
                 previous.vehicleLocation != current.vehicleLocation);
       },
-      listener: (BuildContext context, MapState state) {
+      listener: (BuildContext context, MapState state) async {
         if (state is! MapRaceLoaded) {
           return;
         }
 
-        _animatedMapController.animateTo(
+        await _animatedMapController.animateTo(
           dest: state.vehicleLocation.coordinates,
           zoom: _defaultZoom,
         );
@@ -70,47 +61,43 @@ class _MapLoadedViewState extends State<MapLoadedView>
       builder: (BuildContext context, MapState mapState) {
         mapState as MapRaceLoaded;
         return BlocListener<RaceDayCarouselCubit, RaceDayCarouselState>(
-          listenWhen: (previous, current) {
+          listenWhen: (
+            RaceDayCarouselState previous,
+            RaceDayCarouselState current,
+          ) {
             return previous.selectedRaceDay != current.selectedRaceDay;
           },
-          listener: (BuildContext context, RaceDayCarouselState state) {
-            if (state.selectedRaceDay == RaceDayType.prep) {
-              _animatedMapController.animateTo(
-                dest: mapState.vehicleLocation.coordinates,
-                zoom: _defaultZoom,
-              );
-              return;
-            }
-            final GeoJsonParser parser = GeoJsonParser();
-            if (state.selectedRaceDay == RaceDayType.allDays ||
-                state.selectedRaceDay == RaceDayType.day8) {
-              parser.parseGeoJsonAsString(state.fullRaceGeoJson);
-            } else {
-              parser.parseGeoJsonAsString(
-                state.allRaceDaysGeoJson[state.selectedRaceDay.index],
-              );
-            }
-            _animatedMapController.animatedFitCamera(
-              cameraFit: CameraFit.coordinates(
-                maxZoom: state.selectedRaceDay == RaceDayType.allDays ? 5.5 : 7,
-                coordinates: <LatLng>[
-                  parser.markers.first.point,
-                  parser.markers.last.point,
-                ],
-              ),
+          listener: (BuildContext context, RaceDayCarouselState state) async {
+            await _animateToSection(
+              state,
+              mapState.vehicleLocation.coordinates,
             );
           },
-          child: FlutterMap(
-            mapController: _animatedMapController.mapController,
-            options: MapOptions(
-              initialCenter: mapState.vehicleLocation.coordinates,
-              initialZoom: _defaultZoom,
-              interactionOptions: const InteractionOptions(
-                flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-              ),
-            ),
-            children: [
-              Stack(
+          child: BlocBuilder<RaceDayCarouselCubit, RaceDayCarouselState>(
+            buildWhen: (_, RaceDayCarouselState current) {
+              return current is RaceDayCarouselLoaded;
+            },
+            builder: (
+              BuildContext context,
+              RaceDayCarouselState carouselState,
+            ) {
+              final geoJsonString =
+                  carouselState.selectedRaceDay == RaceDayType.allDays ||
+                          carouselState.selectedRaceDay == RaceDayType.prep
+                      ? carouselState.fullRaceGeoJson
+                      : carouselState.allRaceDaysGeoJson[
+                          carouselState.selectedRaceDay.index - 1];
+              final GeoJsonParser geoJson = GeoJsonParser()
+                ..parseGeoJsonAsString(geoJsonString);
+              return FlutterMap(
+                mapController: _animatedMapController.mapController,
+                options: MapOptions(
+                  initialCenter: mapState.vehicleLocation.coordinates,
+                  initialZoom: _defaultZoom,
+                  interactionOptions: const InteractionOptions(
+                    flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                  ),
+                ),
                 children: <Widget>[
                   TileLayer(
                     urlTemplate:
@@ -124,16 +111,14 @@ class _MapLoadedViewState extends State<MapLoadedView>
                         point: mapState.vehicleLocation.coordinates,
                         child: const SolarCarMarker(),
                       ),
+                      ...geoJson.markers,
                     ],
                   ),
+                  PolygonLayer<Object>(
+                    polygons: geoJson.polygons,
+                  ),
                   PolylineLayer<Object>(
-                    polylines: <Polyline<Object>>[
-                      Polyline<Object>(
-                        points: markerPoints,
-                        color: context.colorScheme.primary,
-                        strokeWidth: 3,
-                      ),
-                    ],
+                    polylines: geoJson.polylines,
                   ),
                   Positioned(
                     bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
@@ -143,7 +128,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
                         context
                             .read<RaceDayCarouselCubit>()
                             .selectCurrentRaceDay();
-                        _animatedMapController.animateTo(
+                        await _animatedMapController.animateTo(
                           dest: mapState.vehicleLocation.coordinates,
                           zoom: _defaultZoom,
                         );
@@ -151,11 +136,41 @@ class _MapLoadedViewState extends State<MapLoadedView>
                     ),
                   ),
                 ],
-              ),
-            ],
+              );
+            },
           ),
         );
       },
+    );
+  }
+
+  Future<void> _animateToSection(
+    RaceDayCarouselState state,
+    LatLng vehicleLocation,
+  ) async {
+    if (state.selectedRaceDay == RaceDayType.prep) {
+      await _animatedMapController.animateTo(
+        dest: vehicleLocation,
+        zoom: _defaultZoom,
+      );
+      return;
+    }
+    final GeoJsonParser parser = GeoJsonParser();
+    if (state.selectedRaceDay == RaceDayType.allDays) {
+      parser.parseGeoJsonAsString(state.fullRaceGeoJson);
+    } else {
+      parser.parseGeoJsonAsString(
+        state.allRaceDaysGeoJson[state.selectedRaceDay.index - 1],
+      );
+    }
+    await _animatedMapController.animatedFitCamera(
+      cameraFit: CameraFit.coordinates(
+        maxZoom: state.selectedRaceDay == RaceDayType.allDays ? 5.5 : 7,
+        coordinates: <LatLng>[
+          parser.markers.first.point,
+          parser.markers.last.point,
+        ],
+      ),
     );
   }
 }
