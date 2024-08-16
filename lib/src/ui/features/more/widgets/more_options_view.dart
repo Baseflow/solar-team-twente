@@ -8,6 +8,7 @@ import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
 import '../../settings/views/settings_page.dart';
 import '../../shared/widgets/custom_about_list_tile.dart';
+import '../../team/team_details_page.dart';
 import '../views/terms_and_conditions_page.dart';
 
 /// The options for a user displayed in the `MoreView`.
@@ -40,6 +41,12 @@ class MoreOptionsView extends StatelessWidget {
           title: Text(l10n.privacyPolicy),
           trailing: const Icon(Icons.chevron_right),
           onTap: () => _launchPrivacyPolicyUrl(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.groups),
+          title: Text(l10n.aboutThisTeam),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.goNamed(TeamDetailsPage.routeName),
         ),
         CustomAboutListTile(
           child: Text(l10n.about),
