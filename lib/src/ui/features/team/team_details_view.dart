@@ -32,11 +32,9 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 30),
         child: Column(
-          // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             CarouselSlider(
               options: CarouselOptions(
-                // height: carouselHeight,
                 aspectRatio: 1.8,
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
                 onPageChanged: (int index, CarouselPageChangedReason reason) {
@@ -87,85 +85,84 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
       ),
     );
   }
-}
 
-final List<Widget> _imageSliders = teamMember
-    .map(
-      (TeamMember member) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(25)),
-              child: Stack(
-                children: <Widget>[
-                  CachedNetworkImage(
-                    imageUrl: member.imageUrl,
-                    fit: BoxFit.cover,
-                    //width: 500,
-                    placeholder: (BuildContext context, String url) =>
-                        const Center(
-                      child: CircularProgressIndicator(),
+  final List<Widget> _imageSliders = teamMember
+      .map(
+        (TeamMember member) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                child: Stack(
+                  children: <Widget>[
+                    CachedNetworkImage(
+                      imageUrl: member.imageUrl,
+                      fit: BoxFit.cover,
+                      placeholder: (BuildContext context, String url) =>
+                          const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      errorWidget:
+                          (BuildContext context, String url, Object error) =>
+                              const Icon(Icons.error),
                     ),
-                    errorWidget:
-                        (BuildContext context, String url, Object error) =>
-                            const Icon(Icons.error),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color.fromARGB(200, 0, 0, 0),
-                            Color.fromARGB(0, 0, 0, 0),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0),
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              member.name,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              member.profession,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
                           ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
                         ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 20,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            member.name,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            member.profession,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    )
-    .toList();
+          ],
+        ),
+      )
+      .toList();
 
-Future<void> _launchURL(String url) async {
-  if (await canLaunchUrlString(url)) {
-    await launchUrlString(url, mode: LaunchMode.inAppBrowserView);
-  } else {
-    throw UnimplementedError('Could not launch $url');
+  Future<void> _launchURL(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url, mode: LaunchMode.inAppBrowserView);
+    } else {
+      throw UnimplementedError('Could not launch $url');
+    }
   }
 }
