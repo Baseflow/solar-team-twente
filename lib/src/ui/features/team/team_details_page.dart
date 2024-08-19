@@ -17,6 +17,6 @@ class TeamDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TeamDetailsView();
+    return TeamDetailsView();
   }
 }
