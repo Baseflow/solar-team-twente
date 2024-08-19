@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// {@template team_member}
 /// The data related to a team member:
 /// {@endtemplate}
@@ -14,10 +12,8 @@ class TeamMember {
   });
 
   final String name;
-  final String Function(BuildContext context) description;
+  final String description;
   final String imageUrl;
   final String profession;
   final String linkedUrl;
-
-  String getDescriptionText(BuildContext context) => description(context);
 }
