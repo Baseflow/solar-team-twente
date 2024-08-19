@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../constants/sizes_constants.dart';
 import '../../localizations/generated/app_localizations.dart';
 import '../../localizations/l10n.dart';
 import 'team_member_view_model.dart';
@@ -30,7 +31,7 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
         title: Text(l10n.teamPageTitle),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: Sizes.s32),
         child: Column(
           children: <Widget>[
             CarouselSlider(
@@ -45,13 +46,13 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
                   );
                 },
               ),
-              items: _imageSliders,
+              items: _imageSliders(),
             ),
             Padding(
               padding: const EdgeInsets.only(
-                top: 30,
-                left: 60,
-                right: 60,
+                top: Sizes.s32,
+                left: Sizes.s64,
+                right: Sizes.s64,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,21 +60,27 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
                   Text(
                     teamMember[_currentIndex].getDescriptionText(context),
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: Sizes.s12,
                     ),
                   ),
                   const Gutter(),
                   FilledButton.tonalIcon(
                     onPressed: () =>
                         _launchURL(teamMember[_currentIndex].linkedUrl),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.only(
+                        left: Sizes.s12,
+                        right: Sizes.s12,
+                      ),
+                    ),
                     label: const Text(
                       'LinkedIn profile',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: Sizes.s12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    icon: const Icon(Icons.open_in_new, size: 16),
+                    icon: const Icon(Icons.open_in_new, size: Sizes.s16),
                     iconAlignment: IconAlignment.end,
                   ),
                   const Gutter(),
@@ -86,27 +93,32 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
     );
   }
 
-  final List<Widget> _imageSliders = teamMember
-      .map(
-        (TeamMember member) => Column(
+  List<Widget> _imageSliders() {
+    return teamMember.map(
+      (TeamMember member) {
+        return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Expanded(
               child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(Sizes.s24),
+                ),
                 child: Stack(
                   children: <Widget>[
                     CachedNetworkImage(
                       imageUrl: member.imageUrl,
                       fit: BoxFit.cover,
-                      placeholder: (BuildContext context, String url) =>
-                          const Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                      placeholder: (BuildContext context, String url) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
                       errorWidget:
-                          (BuildContext context, String url, Object error) =>
-                              const Icon(Icons.error),
+                          (BuildContext context, String url, Object error) {
+                        return const Icon(Icons.error);
+                      },
                     ),
                     Positioned(
                       bottom: 0,
@@ -116,16 +128,16 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: <Color>[
-                              Color.fromARGB(200, 0, 0, 0),
-                              Color.fromARGB(0, 0, 0, 0),
+                              Colors.black87,
+                              Colors.transparent,
                             ],
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                           ),
                         ),
                         padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 20,
+                          vertical: Sizes.s12,
+                          horizontal: Sizes.s24,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +146,7 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
                               member.name,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: Sizes.s16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -142,7 +154,7 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
                               member.profession,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: Sizes.s12,
                               ),
                             ),
                           ],
@@ -154,9 +166,10 @@ class _TeamDetailsViewState extends State<TeamDetailsView> {
               ),
             ),
           ],
-        ),
-      )
-      .toList();
+        );
+      },
+    ).toList();
+  }
 
   Future<void> _launchURL(String url) async {
     if (await canLaunchUrlString(url)) {
