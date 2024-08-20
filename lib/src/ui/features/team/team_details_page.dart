@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../localizations/l10n.dart';
+import 'cubit/team_details_cubit.dart';
 import 'team_details_view.dart';
 
 /// {@template team_details_page}
@@ -17,6 +20,9 @@ class TeamDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TeamDetailsView(context: context);
+    return BlocProvider<TeamDetailsCubit>(
+      create: (_) => TeamDetailsCubit(),
+      child: TeamDetailsView(l10n: context.l10n),
+    );
   }
 }
