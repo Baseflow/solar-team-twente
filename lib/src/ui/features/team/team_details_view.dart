@@ -74,7 +74,7 @@ class TeamDetailsView extends StatelessWidget {
                         label: Text(
                           l10n.linkedIn,
                           style: context.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         icon: const Icon(Icons.open_in_new, size: Sizes.s16),
@@ -145,7 +145,7 @@ class TeamDetailsView extends StatelessWidget {
                               member.name,
                               style: context.textTheme.bodyLarge?.copyWith(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
