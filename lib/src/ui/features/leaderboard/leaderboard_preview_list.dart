@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core.dart';
 import '../../constants/sizes_constants.dart';
 import '../../extensions/build_context_extensions.dart';
 import '../../localizations/l10n.dart';
 import 'cubit/leaderboard_preview_cubit.dart';
+import 'views/leaderboard_page.dart';
 import 'views/leaderboard_preview_loaded_view.dart';
 
 /// {@template leaderboard_preview_list}
@@ -67,6 +69,10 @@ class LeaderboardPreviewList extends StatelessWidget {
                 );
               },
             ),
+            FilledButton(
+                onPressed: () =>
+                    context.pushNamed(LeaderboardPage.routeName),
+                child: Text(context.l10n.leaderboardTitle),),
           ],
         );
       },
