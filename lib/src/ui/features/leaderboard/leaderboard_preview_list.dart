@@ -70,9 +70,9 @@ class LeaderboardPreviewList extends StatelessWidget {
               },
             ),
             FilledButton(
-                onPressed: () =>
-                    context.pushNamed(LeaderboardPage.routeName),
-                child: Text(context.l10n.leaderboardTitle),),
+              onPressed: () => context.pushNamed(LeaderboardPage.routeName),
+              child: Text(context.l10n.leaderboardTitle),
+            ),
           ],
         );
       },
