@@ -26,24 +26,27 @@ class OverallRankingTab extends StatelessWidget {
         final List<RaceTeam> leaderboard = loadedState.leaderboard;
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.s12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const SizedBox(height: Sizes.s12),
-              ...leaderboard.take(3).map(
-                    (RaceTeam team) => TopThreeRanking(
-                      team: team,
-                      position: leaderboard.indexOf(team) + 1,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const SizedBox(height: Sizes.s12),
+                ...leaderboard.take(3).map(
+                      (RaceTeam team) => TopThreeRanking(
+                        team: team,
+                        position: leaderboard.indexOf(team) + 1,
+                      ),
                     ),
-                  ),
-              const SizedBox(height: Sizes.s12),
-              ...leaderboard.skip(3).map(
-                    (RaceTeam team) => LeaderboardPosition(
-                      team: team,
-                      racePosition: leaderboard.indexOf(team) + 1,
+                const SizedBox(height: Sizes.s12),
+                ...leaderboard.skip(3).map(
+                      (RaceTeam team) => LeaderboardPosition(
+                        team: team,
+                        racePosition: leaderboard.indexOf(team) + 1,
+                      ),
                     ),
-                  ),
-            ],
+                const SizedBox(height: Sizes.s12),
+              ],
+            ),
           ),
         );
       },
