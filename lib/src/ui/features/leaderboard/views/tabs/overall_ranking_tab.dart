@@ -32,7 +32,7 @@ class OverallRankingTab extends StatelessWidget {
               children: <Widget>[
                 const SizedBox(height: Sizes.s12),
                 ...leaderboard.take(3).map(
-                      (RaceTeam team) => TopThreeRanking(
+                      (RaceTeam team) => TopThreeRankingView(
                         team: team,
                         position: leaderboard.indexOf(team) + 1,
                       ),
