@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/dashboard/views/dashboard_page.dart';
+import '../features/leaderboard/views/leaderboard_page.dart';
 import '../features/live/views/live_page.dart';
 import '../features/more/views/more_page.dart';
 import '../features/settings/views/settings_page.dart';
@@ -46,6 +47,18 @@ class AuthenticatedRoutes {
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return const MaterialPage<void>(
                       child: TeamDetailsPage(),
+                    );
+                  },
+                ),
+                GoRoute(
+                  name: LeaderboardPage.routeName,
+                  path: LeaderboardPage.path,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return const MaterialPage<void>(
+                      child: LeaderboardPage(
+                        key: ValueKey<String>(LeaderboardPage.routeName),
+                        tabIndex: 0,
+                      ),
                     );
                   },
                 ),
