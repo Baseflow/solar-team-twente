@@ -5,12 +5,12 @@ import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
 
 /// {@template top_three_ranking}
-/// A [TopThreeRanking] displaying the top three ranking of the team
+/// A [TopThreeRankingView] displaying the top three ranking of the team
 /// in the leaderboard.
 /// {@endtemplate}
-class TopThreeRanking extends StatelessWidget {
+class TopThreeRankingView extends StatelessWidget {
   /// {@macro top_three_ranking}
-  const TopThreeRanking({
+  const TopThreeRankingView({
     required this.team,
     required this.position,
     super.key,
