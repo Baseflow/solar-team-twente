@@ -46,7 +46,7 @@ class TeamDetailsView extends StatelessWidget {
               items: _imageSliders(context),
             ),
             BlocBuilder<TeamDetailsCubit, int>(
-              builder: (BuildContext context, int state) {
+              builder: (BuildContext context, int currentIndex) {
                 return Padding(
                   padding: const EdgeInsets.only(
                     top: Sizes.s32,
@@ -57,13 +57,13 @@ class TeamDetailsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        teamMembers[state].description,
+                        teamMembers[currentIndex].description,
                         style: context.textTheme.bodySmall,
                       ),
                       const Gutter(),
                       FilledButton.tonalIcon(
                         onPressed: () => _launchURL(
-                          teamMembers[state].linkedUrl,
+                          teamMembers[currentIndex].linkedUrl,
                         ),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
