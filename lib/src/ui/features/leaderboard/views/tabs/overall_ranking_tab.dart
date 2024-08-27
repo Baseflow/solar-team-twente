@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core.dart';
 import '../../../../constants/sizes_constants.dart';
+import '../../../../extensions/build_context_extensions.dart';
 import '../../cubit/leaderboard_preview_cubit.dart';
 import '../../widgets/top_three_leaderboard_view.dart';
 
@@ -67,7 +68,7 @@ class LeaderboardPosition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: Sizes.s16),
       child: Row(
         children: <Widget>[
           SizedBox(
@@ -83,6 +84,7 @@ class LeaderboardPosition extends StatelessWidget {
           ),
           Text(
             '${team.totalDrivenKilometers} km',
+            style: context.textTheme.bodySmall,
           ),
         ],
       ),
