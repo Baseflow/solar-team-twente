@@ -4,7 +4,7 @@ import 'package:flutter_ioc/flutter_ioc.dart';
 
 import '../../../../../core.dart';
 import '../cubit/leaderboard_preview_cubit.dart';
-import 'overall_ranking_view.dart';
+import 'overall_leaderboard_view.dart';
 
 /// {@template leaderboard_view}
 /// The view displaying the leaderboard.
@@ -34,7 +34,7 @@ class LeaderboardView extends StatelessWidget {
                     LeaderboardPreviewState state,
                   ) {
                     if (state is LeaderboardPreviewLoaded) {
-                      return const OverallRankingView();
+                      return const OverallLeaderboardView();
                     } else {
                       return const Center(
                         child: CircularProgressIndicator(),
