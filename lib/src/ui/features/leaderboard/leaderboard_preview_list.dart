@@ -69,9 +69,20 @@ class LeaderboardPreviewList extends StatelessWidget {
                 );
               },
             ),
-            FilledButton(
-              onPressed: () => context.pushNamed(LeaderboardPage.routeName),
-              child: Text(context.l10n.leaderboardTitle),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                icon: const Icon(Icons.chevron_right),
+                iconAlignment: IconAlignment.end,
+                onPressed: () => context.pushNamed(LeaderboardPage.routeName),
+                label: Text(
+                  context.l10n.completeRanking,
+                  style: context.textTheme.bodySmall!.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         );
