@@ -40,22 +40,24 @@ class LivePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: <BlocProvider<StateStreamableSource<Object?>>>[
+        BlocProvider<RaceDayCarouselCubit>(
+          create: (_) {
+            final int daysSinceStart =
+                DateTime.now().difference(Constants.startDate).inDays;
+            return RaceDayCarouselCubit(
+              selectedRaceDay: Constants.hasRaceStarted
+                  ? RaceDayType.values[daysSinceStart + 1]
+                  : RaceDayType.prep,
+              currentRaceDay: Constants.hasRaceStarted
+                  ? RaceDayType.values[daysSinceStart + 1]
+                  : RaceDayType.prep,
+            );
+          },
+        ),
         BlocProvider<MapCubit>(
           create: (_) => MapCubit(
             Ioc.container.get<VehicleLocationService>(),
-          )..started(),
-        ),
-        BlocProvider<RaceDayCarouselCubit>(
-          create: (_) {
-            final bool hasRaceStarted =
-                Constants.startDate.isBefore(DateTime.now());
-            return RaceDayCarouselCubit(
-              currentRaceDay:
-                  hasRaceStarted ? RaceDayType.day1 : RaceDayType.prep,
-              selectedRaceDay:
-                  hasRaceStarted ? RaceDayType.day1 : RaceDayType.prep,
-            )..loadAssets();
-          },
+          )..loadAssets(),
         ),
       ],
       child: const Stack(

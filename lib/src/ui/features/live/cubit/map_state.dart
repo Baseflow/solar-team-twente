@@ -8,7 +8,21 @@ import '../../../../../core.dart';
 /// {@endtemplate}
 sealed class MapState extends Equatable {
   /// {@macro map_carrousel_state}
-  const MapState();
+  const MapState({
+    this.vehicleLocation = const VehicleLocation.initial(),
+    this.allRaceDaysGeoJson = const <GeoJsonParser>[],
+    this.selectedRaceDayGeoJson,
+  });
+
+  final VehicleLocation vehicleLocation;
+  final List<GeoJsonParser> allRaceDaysGeoJson;
+  final GeoJsonParser? selectedRaceDayGeoJson;
+
+  MapState copyWith({
+    VehicleLocation? vehicleLocation,
+    List<GeoJsonParser>? allRaceDaysGeoJson,
+    GeoJsonParser? selectedRaceDayGeoJson,
+  });
 }
 
 /// {@template map_carrousel_initial_state}
@@ -21,6 +35,15 @@ class MapInitial extends MapState {
 
   @override
   List<Object?> get props => <Object?>[];
+
+  @override
+  MapState copyWith({
+    VehicleLocation? vehicleLocation,
+    List<GeoJsonParser>? allRaceDaysGeoJson,
+    GeoJsonParser? selectedRaceDayGeoJson,
+  }) {
+    return const MapInitial();
+  }
 }
 
 /// {@template map_carrousel_loading_state}
@@ -33,6 +56,15 @@ class MapLoading extends MapState {
 
   @override
   List<Object?> get props => <Object?>[];
+
+  @override
+  MapState copyWith({
+    VehicleLocation? vehicleLocation,
+    List<GeoJsonParser>? allRaceDaysGeoJson,
+    GeoJsonParser? selectedRaceDayGeoJson,
+  }) {
+    return const MapLoading();
+  }
 }
 
 /// {@template map_carrousel_race_loaded_state}
@@ -42,26 +74,30 @@ class MapLoading extends MapState {
 class MapRaceLoaded extends MapState {
   /// {@macro map_carrousel_race_loaded_state}
   const MapRaceLoaded({
-    required this.geoJsonParser,
-    required this.vehicleLocation,
+    required super.vehicleLocation,
+    required super.allRaceDaysGeoJson,
+    required super.selectedRaceDayGeoJson,
   });
 
-  /// The parser for the entire race.
-  final GeoJsonParser geoJsonParser;
-
-  final VehicleLocation vehicleLocation;
-
   /// Copy the current state with the provided changes.
-  MapRaceLoaded copyWith({
-    GeoJsonParser? geoJsonParser,
+  @override
+  MapState copyWith({
     VehicleLocation? vehicleLocation,
+    List<GeoJsonParser>? allRaceDaysGeoJson,
+    GeoJsonParser? selectedRaceDayGeoJson,
   }) {
     return MapRaceLoaded(
-      geoJsonParser: geoJsonParser ?? this.geoJsonParser,
       vehicleLocation: vehicleLocation ?? this.vehicleLocation,
+      allRaceDaysGeoJson: allRaceDaysGeoJson ?? this.allRaceDaysGeoJson,
+      selectedRaceDayGeoJson:
+          selectedRaceDayGeoJson ?? this.selectedRaceDayGeoJson,
     );
   }
 
   @override
-  List<Object?> get props => <Object?>[geoJsonParser, vehicleLocation];
+  List<Object?> get props => <Object?>[
+        vehicleLocation,
+        allRaceDaysGeoJson,
+        selectedRaceDayGeoJson,
+      ];
 }

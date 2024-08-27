@@ -48,7 +48,7 @@ Deno.serve(async (_req) => {
       if (shouldUpsert) {
         await supabase
         .from("vehicle_locations")
-        .upsert({
+        .insert({
           name: data.name,
           longitude: data.longitude,
           latitude: data.latitude,
