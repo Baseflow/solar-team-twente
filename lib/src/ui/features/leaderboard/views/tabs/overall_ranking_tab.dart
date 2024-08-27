@@ -8,11 +8,11 @@ import '../../cubit/leaderboard_preview_cubit.dart';
 import '../../widgets/top_three_leaderboard_view.dart';
 
 /// {@template overall_ranking_tab}
-/// The view displaying the [OverallRankingTab] of the  event.
+/// The view displaying the [OverallRankingView] of the  event.
 /// {@endtemplate}
-class OverallRankingTab extends StatelessWidget {
+class OverallRankingView extends StatelessWidget {
   /// {@macro overall_ranking_tab}
-  const OverallRankingTab({super.key});
+  const OverallRankingView({super.key});
 
   @override
   Widget build(BuildContext context) {
