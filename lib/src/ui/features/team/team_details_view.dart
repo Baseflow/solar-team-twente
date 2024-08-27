@@ -10,7 +10,6 @@ import '../../extensions/build_context_extensions.dart';
 import '../../localizations/generated/app_localizations.dart';
 import '../../localizations/l10n.dart';
 import 'cubit/team_details_cubit.dart';
-import 'cubit/team_details_state.dart';
 import 'team_member_view_model.dart';
 
 /// {@template team_details_view}
@@ -46,8 +45,8 @@ class TeamDetailsView extends StatelessWidget {
               ),
               items: _imageSliders(context),
             ),
-            BlocBuilder<TeamDetailsCubit, TeamDetailsState>(
-              builder: (BuildContext context, TeamDetailsState state) {
+            BlocBuilder<TeamDetailsCubit, int>(
+              builder: (BuildContext context, int state) {
                 return Padding(
                   padding: const EdgeInsets.only(
                     top: Sizes.s32,
@@ -58,13 +57,13 @@ class TeamDetailsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        teamMembers[state.currentIndex].description,
+                        teamMembers[state].description,
                         style: context.textTheme.bodySmall,
                       ),
                       const Gutter(),
                       FilledButton.tonalIcon(
                         onPressed: () => _launchURL(
-                          teamMembers[state.currentIndex].linkedUrl,
+                          teamMembers[state].linkedUrl,
                         ),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
