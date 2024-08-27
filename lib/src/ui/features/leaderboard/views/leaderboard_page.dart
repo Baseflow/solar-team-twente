@@ -10,7 +10,7 @@ import 'leaderboard_view.dart';
 /// {@endtemplate}
 class LeaderboardPage extends StatelessWidget {
   /// {@macro leaderboard_page}
-  const LeaderboardPage({this.tabIndex, super.key});
+  const LeaderboardPage({super.key});
 
   /// The path of the leaderboard page.
   static const String path = 'leaderboard';
@@ -18,13 +18,11 @@ class LeaderboardPage extends StatelessWidget {
   /// The route name of the leaderboard page.
   static const String routeName = 'Leaderboard';
 
-  final int? tabIndex;
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(context.l10n.leaderboardTitle),
         ),
-        body: LeaderboardView(tabIndex: tabIndex),
+        body: const LeaderboardView(),
       );
 }

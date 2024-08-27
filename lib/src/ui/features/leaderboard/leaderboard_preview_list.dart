@@ -76,7 +76,7 @@ class LeaderboardPreviewList extends StatelessWidget {
                 iconAlignment: IconAlignment.end,
                 onPressed: () => context.pushNamed(LeaderboardPage.routeName),
                 label: Text(
-                  context.l10n.completeRanking,
+                  context.l10n.more,
                   style: context.textTheme.bodySmall!.copyWith(
                     color: context.colorScheme.primary,
                     fontWeight: FontWeight.bold,
