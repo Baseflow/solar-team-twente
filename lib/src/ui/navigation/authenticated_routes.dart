@@ -55,10 +55,7 @@ class AuthenticatedRoutes {
                   path: LeaderboardPage.path,
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return const MaterialPage<void>(
-                      child: LeaderboardPage(
-                        key: ValueKey<String>(LeaderboardPage.routeName),
-                        tabIndex: 0,
-                      ),
+                      child: LeaderboardPage(),
                     );
                   },
                 ),
