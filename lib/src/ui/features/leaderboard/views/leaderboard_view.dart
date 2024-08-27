@@ -4,7 +4,7 @@ import 'package:flutter_ioc/flutter_ioc.dart';
 
 import '../../../../../core.dart';
 import '../cubit/leaderboard_preview_cubit.dart';
-import 'tabs/overall_ranking_tab.dart';
+import 'overall_ranking_view.dart';
 
 /// {@template leaderboard_view}
 /// The view displaying the leaderboard.
