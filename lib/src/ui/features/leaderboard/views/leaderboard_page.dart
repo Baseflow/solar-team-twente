@@ -19,10 +19,12 @@ class LeaderboardPage extends StatelessWidget {
   static const String routeName = 'Leaderboard';
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.leaderboardTitle),
-        ),
-        body: const LeaderboardView(),
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(context.l10n.leaderboardTitle),
+      ),
+      body: const LeaderboardView(),
+    );
+  }
 }

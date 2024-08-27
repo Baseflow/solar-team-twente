@@ -8,11 +8,11 @@ import '../cubit/leaderboard_preview_cubit.dart';
 import '../widgets/top_three_leaderboard_view.dart';
 
 /// {@template overall_ranking_tab}
-/// The view displaying the [OverallRankingView] of the  event.
+/// The view displaying the [OverallLeaderboardView] of the  event.
 /// {@endtemplate}
-class OverallRankingView extends StatelessWidget {
+class OverallLeaderboardView extends StatelessWidget {
   /// {@macro overall_ranking_tab}
-  const OverallRankingView({super.key});
+  const OverallLeaderboardView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +35,12 @@ class OverallRankingView extends StatelessWidget {
                 ...leaderboard.take(3).map(
                       (RaceTeam team) => TopThreeRankingView(
                         team: team,
-                        position: leaderboard.indexOf(team) + 1,
                       ),
                     ),
                 const SizedBox(height: Sizes.s12),
                 ...leaderboard.skip(3).map(
                       (RaceTeam team) => LeaderboardPosition(
                         team: team,
-                        racePosition: leaderboard.indexOf(team) + 1,
                       ),
                     ),
                 const SizedBox(height: Sizes.s12),
@@ -58,12 +56,10 @@ class OverallRankingView extends StatelessWidget {
 class LeaderboardPosition extends StatelessWidget {
   const LeaderboardPosition({
     required this.team,
-    required this.racePosition,
     super.key,
   });
 
   final RaceTeam team;
-  final int racePosition;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +70,7 @@ class LeaderboardPosition extends StatelessWidget {
           SizedBox(
             width: Sizes.s32,
             child: Text(
-              racePosition.toString(),
+              team.position.toString(),
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/entities/race/race_team.dart';
+import '../../../../../core.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
 
@@ -12,12 +12,10 @@ class TopThreeRankingView extends StatelessWidget {
   /// {@macro top_three_ranking}
   const TopThreeRankingView({
     required this.team,
-    required this.position,
     super.key,
   });
 
   final RaceTeam team;
-  final int position;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class TopThreeRankingView extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: Sizes.s4),
       decoration: BoxDecoration(
-        border: Border.all(color: colors[position - 1], width: Sizes.s2),
+        border: Border.all(color: colors[team.position - 1], width: Sizes.s2),
         borderRadius: BorderRadius.circular(Sizes.s4),
       ),
       child: Padding(
@@ -39,11 +37,11 @@ class TopThreeRankingView extends StatelessWidget {
             SizedBox(
               width: Sizes.s96,
               child: Text(
-                '$position',
+                '${team.position}',
                 textAlign: TextAlign.center,
                 style: context.textTheme.displayMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: colors[position - 1],
+                  color: colors[team.position - 1],
                 ),
               ),
             ),
