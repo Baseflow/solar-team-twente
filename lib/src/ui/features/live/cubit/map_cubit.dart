@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,29 +25,11 @@ class MapCubit extends Cubit<MapState> {
     return super.close();
   }
 
-  /// Initializes the cubit by loading the relevant geo json files.
-  Future<void> started() async {
-    emit(const MapLoading());
-    final String geoJson = await rootBundle.loadString(Assets.geojson.fullMap);
-    final GeoJsonParser globalParser = GeoJsonParser()
-      ..parseGeoJsonAsString(geoJson);
-    emit(
-      MapRaceLoaded(
-        geoJsonParser: globalParser,
-        vehicleLocation: const VehicleLocation.initial(),
-      ),
-    );
-    _subscribeToVehicleLocation();
-  }
-
   /// Subscribes to the stream of the vehicle location.
   void _subscribeToVehicleLocation() {
-    assert(state is MapRaceLoaded, 'State must be MapRaceLoaded');
-
     _vehicleLocationSubscription = _service.vehicleLocation.listen(
       (VehicleLocation vehicleLocation) {
-        final MapRaceLoaded mapRaceLoaded = state as MapRaceLoaded;
-        emit(mapRaceLoaded.copyWith(vehicleLocation: vehicleLocation));
+        emit(state.copyWith(vehicleLocation: vehicleLocation));
       },
       onError: (_) {
         emit(
@@ -55,6 +38,60 @@ class MapCubit extends Cubit<MapState> {
           ),
         );
       },
+    );
+  }
+
+  Future<void> loadAssets() async {
+    final List<dynamic> combinedRaceDays = <dynamic>[];
+    final List<GeoJsonParser> allRaceDaysGeoJson = <GeoJsonParser>[];
+    for (int i = 0; i < Assets.geojson.values.length - 1; i++) {
+      final String jsonString = await rootBundle.loadString(
+        Assets.geojson.values[i],
+      );
+      final Map<String, dynamic> json =
+          jsonDecode(jsonString) as Map<String, dynamic>;
+      allRaceDaysGeoJson.add(GeoJsonParser()..parseGeoJson(json));
+      for (final dynamic feature in json['features'] as List<dynamic>) {
+        combinedRaceDays.add(feature);
+      }
+    }
+
+    final Map<String, dynamic> combinedGeoJson = <String, dynamic>{
+      'type': 'FeatureCollection',
+      'features': combinedRaceDays,
+    };
+
+    final GeoJsonParser geoJson = GeoJsonParser()
+      ..parseGeoJson(combinedGeoJson);
+    allRaceDaysGeoJson.add(geoJson);
+
+    final bool hasRaceStarted =
+        Constants.startDate.difference(DateTime.now()).inMinutes < 0;
+    final int daysSinceStart =
+        DateTime.now().difference(Constants.startDate).inDays;
+
+    emit(
+      MapRaceLoaded(
+        vehicleLocation: const VehicleLocation.initial(),
+        allRaceDaysGeoJson: allRaceDaysGeoJson,
+        selectedRaceDayGeoJson: hasRaceStarted
+            ? allRaceDaysGeoJson[daysSinceStart + 1]
+            : allRaceDaysGeoJson[0],
+      ),
+    );
+    _subscribeToVehicleLocation();
+  }
+
+  void loadSelectedDay(int index) {
+    int selectedRaceDayIndex = Constants.hasRaceStarted ? index + 1 : index;
+    if (Constants.hasRaceStarted && index == 0) {
+      selectedRaceDayIndex = state.allRaceDaysGeoJson.length - 1;
+    }
+
+    emit(
+      state.copyWith(
+        selectedRaceDayGeoJson: state.allRaceDaysGeoJson[selectedRaceDayIndex],
+      ),
     );
   }
 }

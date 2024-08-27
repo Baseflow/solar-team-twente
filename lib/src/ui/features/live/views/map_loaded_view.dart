@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
-import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../../../core.dart';
 import '../../../constants/sizes_constants.dart';
+import '../../../extensions/build_context_extensions.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
 import '../cubit/race_day_carousel_cubit.dart';
@@ -67,10 +67,12 @@ class _MapLoadedViewState extends State<MapLoadedView>
           ) {
             return previous.selectedRaceDay != current.selectedRaceDay;
           },
-          listener: (BuildContext context, RaceDayCarouselState state) async {
+          listener:
+              (BuildContext context, RaceDayCarouselState carouselState) async {
             await _animateToSection(
-              state,
+              mapState.selectedRaceDayGeoJson!.markers,
               mapState.vehicleLocation.coordinates,
+              carouselState.selectedRaceDay,
             );
           },
           child: BlocBuilder<RaceDayCarouselCubit, RaceDayCarouselState>(
@@ -81,8 +83,6 @@ class _MapLoadedViewState extends State<MapLoadedView>
               BuildContext context,
               RaceDayCarouselState carouselState,
             ) {
-              final GeoJsonParser geoJson = GeoJsonParser()
-                ..parseGeoJsonAsString(carouselState.currentRaceDayGeoJson);
               return FlutterMap(
                 mapController: _animatedMapController.mapController,
                 options: MapOptions(
@@ -106,14 +106,32 @@ class _MapLoadedViewState extends State<MapLoadedView>
                         point: mapState.vehicleLocation.coordinates,
                         child: const SolarCarMarker(),
                       ),
-                      ...geoJson.markers,
+                      if (carouselState.selectedRaceDay == RaceDayType.prep ||
+                          carouselState.selectedRaceDay == RaceDayType.allDays)
+                        ...mapState.selectedRaceDayGeoJson!.markers.map<Marker>(
+                          (Marker marker) => Marker(
+                            point: marker.point,
+                            height: 2,
+                            width: 2,
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: ColoredBox(
+                                color: context.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        )
+                      else
+                        ...mapState.selectedRaceDayGeoJson!.markers,
                     ],
                   ),
                   PolygonLayer<Object>(
-                    polygons: geoJson.polygons,
+                    polygons: mapState.selectedRaceDayGeoJson!.polygons,
                   ),
                   PolylineLayer<Object>(
-                    polylines: geoJson.polylines,
+                    polylines: mapState.selectedRaceDayGeoJson!.polylines,
                   ),
                   Positioned(
                     bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
@@ -140,30 +158,23 @@ class _MapLoadedViewState extends State<MapLoadedView>
   }
 
   Future<void> _animateToSection(
-    RaceDayCarouselState state,
+    List<Marker> markers,
     LatLng vehicleLocation,
+    RaceDayType selectedRaceDay,
   ) async {
-    if (state.selectedRaceDay == RaceDayType.prep) {
+    if (selectedRaceDay == RaceDayType.prep) {
       await _animatedMapController.animateTo(
         dest: vehicleLocation,
         zoom: _defaultZoom,
       );
       return;
     }
-    final GeoJsonParser parser = GeoJsonParser();
-    if (state.selectedRaceDay == RaceDayType.allDays) {
-      parser.parseGeoJsonAsString(state.fullRaceGeoJson);
-    } else {
-      parser.parseGeoJsonAsString(
-        state.allRaceDaysGeoJson[state.selectedRaceDay.index - 1],
-      );
-    }
     await _animatedMapController.animatedFitCamera(
       cameraFit: CameraFit.coordinates(
-        maxZoom: state.selectedRaceDay == RaceDayType.allDays ? 5.5 : 7,
+        maxZoom: selectedRaceDay == RaceDayType.allDays ? 5.5 : 7,
         coordinates: <LatLng>[
-          parser.markers.first.point,
-          parser.markers.last.point,
+          markers.first.point,
+          markers.last.point,
         ],
       ),
     );

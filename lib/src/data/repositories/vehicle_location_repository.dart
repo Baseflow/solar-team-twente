@@ -14,7 +14,7 @@ class SupabaseVehicleLocationRepository implements VehicleLocationRepository {
     final SupabaseStreamBuilder response = _client
         .from('vehicle_locations')
         .stream(primaryKey: <String>['id'])
-        .order('last_seen', ascending: true)
+        .order('last_seen')
         .limit(1);
 
     return response.map(

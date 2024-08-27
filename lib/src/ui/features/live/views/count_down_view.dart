@@ -44,8 +44,9 @@ class _SolarRaceCountDownState extends State<CountDownView> {
     final AppLocalizations l10n = context.l10n;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        const Expanded(child: SizedBox.shrink()),
+        const Expanded(child: SizedBox.expand()),
         const Gutter(),
         RawSlideCountdown(
           streamDuration: streamDuration,
