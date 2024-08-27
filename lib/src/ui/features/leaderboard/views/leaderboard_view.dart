@@ -24,14 +24,13 @@ class LeaderboardView extends StatelessWidget {
     return ColoredBox(
       color: context.colorScheme.surface,
       child: DefaultTabController(
-        length: 1, // 2 for the DailyRankingTab
+        length: 1,
         initialIndex: tabIndex ?? 0,
         child: Column(
           children: <Widget>[
             TabBar(
               tabs: <Widget>[
                 Tab(text: l10n.overallRanking),
-                //Tab(text: l10n.dailyRanking),
               ],
             ),
             Expanded(
@@ -64,7 +63,6 @@ class LeaderboardView extends StatelessWidget {
                       },
                     ),
                   ),
-                  //  const DailyRankingTab(),
                 ],
               ),
             ),
