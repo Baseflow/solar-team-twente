@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core.dart';
-import '../../../../constants/sizes_constants.dart';
-import '../../../../extensions/build_context_extensions.dart';
-import '../../cubit/leaderboard_preview_cubit.dart';
-import '../../widgets/top_three_leaderboard_view.dart';
+import '../../../../../core.dart';
+import '../../../constants/sizes_constants.dart';
+import '../../../extensions/build_context_extensions.dart';
+import '../cubit/leaderboard_preview_cubit.dart';
+import '../widgets/top_three_leaderboard_view.dart';
 
 /// {@template overall_ranking_tab}
 /// The view displaying the [OverallRankingView] of the  event.
