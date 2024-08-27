@@ -11,7 +11,7 @@ import 'tabs/overall_ranking_tab.dart';
 /// {@endtemplate}
 class LeaderboardView extends StatelessWidget {
   /// {@macro leaderboard_view}
-  const LeaderboardView({ super.key});
+  const LeaderboardView({super.key});
 
   @override
   Widget build(BuildContext context) {
