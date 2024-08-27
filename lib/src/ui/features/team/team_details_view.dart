@@ -169,7 +169,7 @@ class TeamDetailsView extends StatelessWidget {
 
   Future<void> _launchURL(String url) async {
     if (await canLaunchUrlString(url)) {
-      await launchUrlString(url, mode: LaunchMode.inAppBrowserView);
+      await launchUrlString(url, mode: LaunchMode.externalApplication);
     } else {
       throw UnimplementedError('Could not launch $url');
     }
