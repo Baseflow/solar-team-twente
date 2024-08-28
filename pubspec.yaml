@@ -81,7 +81,15 @@ flutter:
     - assets/dark/
     - assets/light/
     - assets/animations/
-    - assets/geojson/
+    - assets/geojson/day_1.geojson
+    - assets/geojson/day_2.geojson
+    - assets/geojson/day_3.geojson
+    - assets/geojson/day_4.geojson
+    - assets/geojson/day_5.geojson
+    - assets/geojson/day_6.geojson
+    - assets/geojson/day_7.geojson
+    - assets/geojson/day_8.geojson
+    - assets/geojson/full_map.geojson
     - assets/icons/
 
 flutter_gen:

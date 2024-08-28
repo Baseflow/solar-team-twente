@@ -37,7 +37,10 @@ class _RaceDaysCarouselState extends State<RaceDaysCarousel> {
       child:
           BlocSelector<RaceDayCarouselCubit, RaceDayCarouselState, RaceDayType>(
         selector: (RaceDayCarouselState state) => state.currentRaceDay,
-        builder: (BuildContext context, RaceDayType currentRaceDay) {
+        builder: (
+          BuildContext context,
+          RaceDayType currentRaceDay,
+        ) {
           return BlocListener<RaceDayCarouselCubit, RaceDayCarouselState>(
             listenWhen: (
               RaceDayCarouselState previous,

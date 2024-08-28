@@ -60,7 +60,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
       },
       builder: (BuildContext context, MapState mapState) {
         mapState as MapRaceLoaded;
-        return BlocListener<RaceDayCarouselCubit, RaceDayCarouselState>(
+        return BlocConsumer<RaceDayCarouselCubit, RaceDayCarouselState>(
           listenWhen: (
             RaceDayCarouselState previous,
             RaceDayCarouselState current,
@@ -69,89 +69,96 @@ class _MapLoadedViewState extends State<MapLoadedView>
           },
           listener:
               (BuildContext context, RaceDayCarouselState carouselState) async {
-            await _animateToSection(
-              mapState.selectedRaceDayGeoJson!.markers,
-              mapState.vehicleLocation.coordinates,
-              carouselState.selectedRaceDay,
-            );
+            if(carouselState.selectedRaceDay.index > 0){
+              await context
+                  .read<MapCubit>()
+                  .loadSelectedDay(carouselState.selectedRaceDay.index - 1)
+                  .then((void x) async {
+                await _animateToSection(
+                  mapState.selectedRaceDayGeoJson!.markers,
+                  mapState.vehicleLocation.coordinates,
+                  carouselState.selectedRaceDay,
+                );
+              });
+            } else {
+              await _animateToSection(
+                mapState.selectedRaceDayGeoJson!.markers,
+                mapState.vehicleLocation.coordinates,
+                carouselState.selectedRaceDay,
+              );
+            }
           },
-          child: BlocBuilder<RaceDayCarouselCubit, RaceDayCarouselState>(
-            buildWhen: (_, RaceDayCarouselState current) {
-              return current is RaceDayCarouselLoaded;
-            },
-            builder: (
-              BuildContext context,
-              RaceDayCarouselState carouselState,
-            ) {
-              return FlutterMap(
-                mapController: _animatedMapController.mapController,
-                options: MapOptions(
-                  initialCenter: mapState.vehicleLocation.coordinates,
-                  initialZoom: _defaultZoom,
-                  interactionOptions: const InteractionOptions(
-                    flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-                  ),
+          builder: (
+            BuildContext context,
+            RaceDayCarouselState carouselState,
+          ) {
+            return FlutterMap(
+              mapController: _animatedMapController.mapController,
+              options: MapOptions(
+                initialCenter: mapState.vehicleLocation.coordinates,
+                initialZoom: _defaultZoom,
+                interactionOptions: const InteractionOptions(
+                  flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
                 ),
-                children: <Widget>[
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  ),
-                  MarkerLayer(
-                    alignment: Alignment.topCenter,
-                    markers: <Marker>[
-                      Marker(
-                        width: 80,
-                        height: 80,
-                        point: mapState.vehicleLocation.coordinates,
-                        child: const SolarCarMarker(),
-                      ),
-                      if (carouselState.selectedRaceDay == RaceDayType.prep ||
-                          carouselState.selectedRaceDay == RaceDayType.allDays)
-                        ...mapState.selectedRaceDayGeoJson!.markers.map<Marker>(
-                          (Marker marker) => Marker(
-                            point: marker.point,
-                            height: 2,
-                            width: 2,
-                            child: DecoratedBox(
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: ColoredBox(
-                                color: context.colorScheme.primary,
-                              ),
+              ),
+              children: <Widget>[
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                ),
+                MarkerLayer(
+                  alignment: Alignment.topCenter,
+                  markers: <Marker>[
+                    Marker(
+                      width: 80,
+                      height: 80,
+                      point: mapState.vehicleLocation.coordinates,
+                      child: const SolarCarMarker(),
+                    ),
+                    if (carouselState.selectedRaceDay == RaceDayType.prep ||
+                        carouselState.selectedRaceDay == RaceDayType.allDays)
+                      ...mapState.selectedRaceDayGeoJson!.markers.map<Marker>(
+                        (Marker marker) => Marker(
+                          point: marker.point,
+                          height: 2,
+                          width: 2,
+                          child: DecoratedBox(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: ColoredBox(
+                              color: context.colorScheme.primary,
                             ),
                           ),
-                        )
-                      else
-                        ...mapState.selectedRaceDayGeoJson!.markers,
-                    ],
+                        ),
+                      )
+                    else
+                      ...mapState.selectedRaceDayGeoJson!.markers,
+                  ],
+                ),
+                PolygonLayer<Object>(
+                  polygons: mapState.selectedRaceDayGeoJson!.polygons,
+                ),
+                PolylineLayer<Object>(
+                  polylines: mapState.selectedRaceDayGeoJson!.polylines,
+                ),
+                Positioned(
+                  bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
+                  right: Sizes.s16,
+                  child: _LiveButton(
+                    onPressed: () async {
+                      context
+                          .read<RaceDayCarouselCubit>()
+                          .selectCurrentRaceDay();
+                      await _animatedMapController.animateTo(
+                        dest: mapState.vehicleLocation.coordinates,
+                        zoom: _defaultZoom,
+                      );
+                    },
                   ),
-                  PolygonLayer<Object>(
-                    polygons: mapState.selectedRaceDayGeoJson!.polygons,
-                  ),
-                  PolylineLayer<Object>(
-                    polylines: mapState.selectedRaceDayGeoJson!.polylines,
-                  ),
-                  Positioned(
-                    bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
-                    right: Sizes.s16,
-                    child: _LiveButton(
-                      onPressed: () async {
-                        context
-                            .read<RaceDayCarouselCubit>()
-                            .selectCurrentRaceDay();
-                        await _animatedMapController.animateTo(
-                          dest: mapState.vehicleLocation.coordinates,
-                          zoom: _defaultZoom,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          },
         );
       },
     );
@@ -171,7 +178,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
     }
     await _animatedMapController.animatedFitCamera(
       cameraFit: CameraFit.coordinates(
-        maxZoom: selectedRaceDay == RaceDayType.allDays ? 5.5 : 7,
+        maxZoom: selectedRaceDay == RaceDayType.allDays ? 4 : 5.5,
         coordinates: <LatLng>[
           markers.first.point,
           markers.last.point,
