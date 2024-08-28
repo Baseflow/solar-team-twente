@@ -82,7 +82,7 @@ class MapCubit extends Cubit<MapState> {
     _subscribeToVehicleLocation();
   }
 
-  void loadSelectedDay(int index) {
+  Future<void> loadSelectedDay(int index) async {
     int selectedRaceDayIndex = Constants.hasRaceStarted ? index + 1 : index;
     if (Constants.hasRaceStarted && index == 0) {
       selectedRaceDayIndex = state.allRaceDaysGeoJson.length - 1;
