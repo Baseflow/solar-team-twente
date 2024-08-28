@@ -165,7 +165,7 @@ class CountDownItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Stack(
           alignment: Alignment.center,
           children: <Widget>[

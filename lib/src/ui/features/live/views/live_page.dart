@@ -75,7 +75,7 @@ class LivePage extends StatelessWidget {
                 RaceDaysBottomSheet(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
