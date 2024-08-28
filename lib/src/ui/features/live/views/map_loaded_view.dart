@@ -141,10 +141,6 @@ class _MapLoadedViewState extends State<MapLoadedView>
                       context
                           .read<RaceDayCarouselCubit>()
                           .selectCurrentRaceDay();
-                      await _animatedMapController.animateTo(
-                        dest: mapState.vehicleLocation.coordinates,
-                        zoom: _defaultZoom,
-                      );
                     },
                   ),
                 ),
