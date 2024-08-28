@@ -73,17 +73,12 @@ class _MapLoadedViewState extends State<MapLoadedView>
               context
                   .read<MapCubit>()
                   .loadSelectedDay(carouselState.selectedRaceDay.index - 1);
-              // await _animateToSection(
-              //   mapState.selectedRaceDayGeoJson!.markers,
-              //   mapState.vehicleLocation.coordinates,
-              //   carouselState.selectedRaceDay,
-              // );
             }
-              await _animateToSection(
-                mapState.selectedRaceDayGeoJson!.markers,
-                mapState.vehicleLocation.coordinates,
-                carouselState.selectedRaceDay,
-              );
+            await _animateToSection(
+              mapState.selectedRaceDayGeoJson!.markers,
+              mapState.vehicleLocation.coordinates,
+              carouselState.selectedRaceDay,
+            );
           },
           builder: (
             BuildContext context,
