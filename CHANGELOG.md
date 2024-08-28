@@ -3,8 +3,12 @@
 * Updates splashscreen for both platforms
 * Fixes app title for ios
 * Updates the marker for the Solar Car, so it looks better
-* Updates the team details page with information about every team member.
+* Updates the team details page with information about every team member
 * Implements full leaderboard page
+* Implements geojson map with the route of different racing days
+* Implements the carousel to show the different racing days
+* Implements the countdown timer towards the race
+* Instead of upserting vehicle location data, we now insert new rows for every location update
 
 ## 0.0.2
 
