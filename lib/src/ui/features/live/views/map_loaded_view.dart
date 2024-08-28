@@ -69,17 +69,15 @@ class _MapLoadedViewState extends State<MapLoadedView>
           },
           listener:
               (BuildContext context, RaceDayCarouselState carouselState) async {
-            if(carouselState.selectedRaceDay.index > 0){
-              await context
+            if (carouselState.selectedRaceDay.index > 0) {
+              context
                   .read<MapCubit>()
-                  .loadSelectedDay(carouselState.selectedRaceDay.index - 1)
-                  .then((void x) async {
-                await _animateToSection(
-                  mapState.selectedRaceDayGeoJson!.markers,
-                  mapState.vehicleLocation.coordinates,
-                  carouselState.selectedRaceDay,
-                );
-              });
+                  .loadSelectedDay(carouselState.selectedRaceDay.index - 1);
+              await _animateToSection(
+                mapState.selectedRaceDayGeoJson!.markers,
+                mapState.vehicleLocation.coordinates,
+                carouselState.selectedRaceDay,
+              );
             } else {
               await _animateToSection(
                 mapState.selectedRaceDayGeoJson!.markers,
