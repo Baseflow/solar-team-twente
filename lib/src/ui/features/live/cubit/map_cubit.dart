@@ -25,22 +25,6 @@ class MapCubit extends Cubit<MapState> {
     return super.close();
   }
 
-  /// Subscribes to the stream of the vehicle location.
-  void _subscribeToVehicleLocation() {
-    _vehicleLocationSubscription = _service.vehicleLocation.listen(
-      (VehicleLocation vehicleLocation) {
-        emit(state.copyWith(vehicleLocation: vehicleLocation));
-      },
-      onError: (_) {
-        emit(
-          (state as MapRaceLoaded).copyWith(
-            vehicleLocation: const VehicleLocation.initial(),
-          ),
-        );
-      },
-    );
-  }
-
   Future<void> loadAssets() async {
     final List<dynamic> combinedRaceDays = <dynamic>[];
     final List<GeoJsonParser> allRaceDaysGeoJson = <GeoJsonParser>[];
@@ -82,7 +66,7 @@ class MapCubit extends Cubit<MapState> {
     _subscribeToVehicleLocation();
   }
 
-  Future<void> loadSelectedDay(int index) async {
+  void loadSelectedDay(int index) {
     int selectedRaceDayIndex = Constants.hasRaceStarted ? index + 1 : index;
     if (Constants.hasRaceStarted && index == 0) {
       selectedRaceDayIndex = state.allRaceDaysGeoJson.length - 1;
@@ -92,6 +76,22 @@ class MapCubit extends Cubit<MapState> {
       state.copyWith(
         selectedRaceDayGeoJson: state.allRaceDaysGeoJson[selectedRaceDayIndex],
       ),
+    );
+  }
+
+  /// Subscribes to the stream of the vehicle location.
+  void _subscribeToVehicleLocation() {
+    _vehicleLocationSubscription = _service.vehicleLocation.listen(
+      (VehicleLocation vehicleLocation) {
+        emit(state.copyWith(vehicleLocation: vehicleLocation));
+      },
+      onError: (_) {
+        emit(
+          (state as MapRaceLoaded).copyWith(
+            vehicleLocation: const VehicleLocation.initial(),
+          ),
+        );
+      },
     );
   }
 }
