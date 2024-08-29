@@ -200,17 +200,14 @@ class _MapLoadedViewState extends State<MapLoadedView>
     LatLng vehicleLocation,
     List<List<LatLng>> coordinates,
   ) async {
-    // Make sure the index is within bounds
     if (index > 0 && index < 10) {
       await _animatedMapController.animatedFitCamera(
-        // dest: bounds.,
         cameraFit: CameraFit.coordinates(
           padding: const EdgeInsets.symmetric(
             horizontal: Sizes.s16,
             vertical: Sizes.s32,
           ),
           coordinates: coordinates[index - 1],
-          // padding: const EdgeInsets.all(150),
         ),
       );
       return;
@@ -223,36 +220,6 @@ class _MapLoadedViewState extends State<MapLoadedView>
       return;
     }
   }
-
-// Future<void> _animateToSection(
-//   List<Marker> markers,
-//   LatLng vehicleLocation,
-//   RaceDayType selectedRaceDay,
-// ) async {
-//   if (selectedRaceDay == RaceDayType.prep) {
-//     await _animatedMapController.animateTo(
-//       dest: vehicleLocation,
-//       zoom: _defaultZoom,
-//     );
-//     return;
-//   }
-//   await _animatedMapController.animatedFitCamera(
-//     // cameraFit: CameraFit.coordinates(
-//     //   maxZoom: selectedRaceDay == RaceDayType.allDays ? 4 : 5.5,
-//     //   coordinates: <LatLng>[
-//     //     markers.first.point,
-//     //     markers.last.point,
-//     //   ],
-//     // ),
-//     cameraFit: CameraFit.insideBounds(
-//       // maxZoom: 6,
-//       bounds: LatLngBounds(
-//         markers.first.point,
-//         markers.last.point,
-//       ),
-//     ),
-//   );
-// }
 }
 
 class _LiveButton extends StatelessWidget {
