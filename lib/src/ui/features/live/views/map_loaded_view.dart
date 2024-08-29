@@ -42,6 +42,49 @@ class _MapLoadedViewState extends State<MapLoadedView>
 
   @override
   Widget build(BuildContext context) {
+    final List<List<LatLng>> coordinates = <List<LatLng>>[
+      <LatLng>[
+        const LatLng(-27.318422, 27.824081),
+        const LatLng(-26.320134, 29.18415),
+      ],
+      <LatLng>[
+        const LatLng(-26.8903773, 26.082086),
+        const LatLng(-25.517609, 27.831684),
+      ],
+      <LatLng>[
+        const LatLng(-27.471608, 23.402627),
+        const LatLng(-25.541249, 26.082988),
+      ],
+      <LatLng>[
+        const LatLng(-28.769597, 20.341723),
+        const LatLng(-27.471124, 23.402675),
+      ],
+      <LatLng>[
+        const LatLng(-29.662415, 17.887869),
+        const LatLng(-28.623128, 20.534983),
+      ],
+      <LatLng>[
+        const LatLng(-31.748007, 17.833363),
+        const LatLng(-29.661212, 18.730951),
+      ],
+      <LatLng>[
+        const LatLng(-33.380566, 18.340278),
+        const LatLng(-31.559386, 18.899053),
+      ],
+      <LatLng>[
+        const LatLng(-34.026167, 18.422593),
+        const LatLng(-33.300209, 19.49382),
+      ],
+      <LatLng>[
+        const LatLng(-27.318422, 27.824081),
+        const LatLng(-26.320134, 29.18415),
+        const LatLng(-31.748007, 17.833363),
+        const LatLng(-29.661212, 18.730951),
+        const LatLng(-33.3805549630841, 18.8992070280719),
+        const LatLng(-33.9079862706016, 18.4225931269598),
+      ],
+    ];
+
     return BlocConsumer<MapCubit, MapState>(
       listenWhen: (MapState previous, MapState current) {
         return (previous is! MapRaceLoaded && current is MapRaceLoaded) ||
@@ -74,10 +117,10 @@ class _MapLoadedViewState extends State<MapLoadedView>
                   .read<MapCubit>()
                   .loadSelectedDay(carouselState.selectedRaceDay.index - 1);
             }
-            await _animateToSection(
-              mapState.selectedRaceDayGeoJson!.markers,
+            await _animateMap(
+              carouselState.selectedRaceDay.index,
               mapState.vehicleLocation.coordinates,
-              carouselState.selectedRaceDay,
+              coordinates,
             );
           },
           builder: (
@@ -152,28 +195,64 @@ class _MapLoadedViewState extends State<MapLoadedView>
     );
   }
 
-  Future<void> _animateToSection(
-    List<Marker> markers,
+  Future<void> _animateMap(
+    int index,
     LatLng vehicleLocation,
-    RaceDayType selectedRaceDay,
+    List<List<LatLng>> coordinates,
   ) async {
-    if (selectedRaceDay == RaceDayType.prep) {
+    // Make sure the index is within bounds
+    if (index > 0 && index < 10) {
+      await _animatedMapController.animatedFitCamera(
+        // dest: bounds.,
+        cameraFit: CameraFit.coordinates(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.s16,
+            vertical: Sizes.s32,
+          ),
+          coordinates: coordinates[index - 1],
+          // padding: const EdgeInsets.all(150),
+        ),
+      );
+      return;
+    }
+    if (index == 0) {
       await _animatedMapController.animateTo(
         dest: vehicleLocation,
         zoom: _defaultZoom,
       );
       return;
     }
-    await _animatedMapController.animatedFitCamera(
-      cameraFit: CameraFit.coordinates(
-        maxZoom: selectedRaceDay == RaceDayType.allDays ? 4 : 5.5,
-        coordinates: <LatLng>[
-          markers.first.point,
-          markers.last.point,
-        ],
-      ),
-    );
   }
+
+// Future<void> _animateToSection(
+//   List<Marker> markers,
+//   LatLng vehicleLocation,
+//   RaceDayType selectedRaceDay,
+// ) async {
+//   if (selectedRaceDay == RaceDayType.prep) {
+//     await _animatedMapController.animateTo(
+//       dest: vehicleLocation,
+//       zoom: _defaultZoom,
+//     );
+//     return;
+//   }
+//   await _animatedMapController.animatedFitCamera(
+//     // cameraFit: CameraFit.coordinates(
+//     //   maxZoom: selectedRaceDay == RaceDayType.allDays ? 4 : 5.5,
+//     //   coordinates: <LatLng>[
+//     //     markers.first.point,
+//     //     markers.last.point,
+//     //   ],
+//     // ),
+//     cameraFit: CameraFit.insideBounds(
+//       // maxZoom: 6,
+//       bounds: LatLngBounds(
+//         markers.first.point,
+//         markers.last.point,
+//       ),
+//     ),
+//   );
+// }
 }
 
 class _LiveButton extends StatelessWidget {
