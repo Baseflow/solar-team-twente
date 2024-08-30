@@ -74,10 +74,10 @@ class _MapLoadedViewState extends State<MapLoadedView>
                   .read<MapCubit>()
                   .loadSelectedDay(carouselState.selectedRaceDay.index - 1);
             }
-            await _animateToSection(
-              mapState.selectedRaceDayGeoJson!.markers,
+            await _animateMap(
+              carouselState.selectedRaceDay.index,
               mapState.vehicleLocation.coordinates,
-              carouselState.selectedRaceDay,
+              Constants.coordinates,
             );
           },
           builder: (
@@ -152,27 +152,27 @@ class _MapLoadedViewState extends State<MapLoadedView>
     );
   }
 
-  Future<void> _animateToSection(
-    List<Marker> markers,
+  Future<void> _animateMap(
+    int index,
     LatLng vehicleLocation,
-    RaceDayType selectedRaceDay,
+    List<List<LatLng>> coordinates,
   ) async {
-    if (selectedRaceDay == RaceDayType.prep) {
+    if (index > 0 && index < 10) {
+      await _animatedMapController.animatedFitCamera(
+        cameraFit: CameraFit.coordinates(
+          padding: const EdgeInsets.all(80),
+          coordinates: coordinates[index - 1],
+        ),
+      );
+      return;
+    }
+    if (index == 0) {
       await _animatedMapController.animateTo(
         dest: vehicleLocation,
         zoom: _defaultZoom,
       );
       return;
     }
-    await _animatedMapController.animatedFitCamera(
-      cameraFit: CameraFit.coordinates(
-        maxZoom: selectedRaceDay == RaceDayType.allDays ? 4 : 5.5,
-        coordinates: <LatLng>[
-          markers.first.point,
-          markers.last.point,
-        ],
-      ),
-    );
   }
 }
 
