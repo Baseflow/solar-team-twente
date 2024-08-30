@@ -10,6 +10,7 @@ import '../../../extensions/build_context_extensions.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
 import '../cubit/race_day_carousel_cubit.dart';
+import '../haversine_formula.dart';
 import 'solar_car_marker.dart';
 
 class MapLoadedView extends StatefulWidget {
@@ -117,6 +118,15 @@ class _MapLoadedViewState extends State<MapLoadedView>
                   .read<MapCubit>()
                   .loadSelectedDay(carouselState.selectedRaceDay.index - 1);
             }
+            HaversineFormula().distanceBetweenAllCoordinates(
+              mapState
+                  .allRaceDaysGeoJson[carouselState.selectedRaceDay.index - 1]
+                  .polylines
+                  .expand(
+                    (Polyline<Object> polyline) => polyline.points,
+                  )
+                  .toList(),
+            );
             await _animateMap(
               carouselState.selectedRaceDay.index,
               mapState.vehicleLocation.coordinates,
