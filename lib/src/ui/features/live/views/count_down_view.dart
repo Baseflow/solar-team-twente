@@ -55,81 +55,86 @@ class _SolarRaceCountDownState extends State<CountDownView> {
             Duration duration,
             bool shouldCountUp,
           ) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                CountDownItem(
-                  label: l10n.day(2),
-                  items: <RawDigitItem>[
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.days,
-                      digitType: DigitType.first,
-                      countUp: shouldCountUp,
-                    ),
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.days,
-                      digitType: DigitType.second,
-                      countUp: shouldCountUp,
-                    ),
-                  ],
-                ),
-                const GutterSmall(),
-                CountDownItem(
-                  label: l10n.hour(2),
-                  items: <RawDigitItem>[
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.hours,
-                      digitType: DigitType.first,
-                      countUp: shouldCountUp,
-                    ),
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.hours,
-                      digitType: DigitType.second,
-                      countUp: shouldCountUp,
-                    ),
-                  ],
-                ),
-                const GutterSmall(),
-                CountDownItem(
-                  label: l10n.minute(2),
-                  items: <RawDigitItem>[
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.minutes,
-                      digitType: DigitType.first,
-                      countUp: shouldCountUp,
-                    ),
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.minutes,
-                      digitType: DigitType.second,
-                      countUp: shouldCountUp,
-                    ),
-                  ],
-                ),
-                const GutterSmall(),
-                CountDownItem(
-                  label: l10n.second(2),
-                  items: <RawDigitItem>[
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.seconds,
-                      digitType: DigitType.first,
-                      countUp: shouldCountUp,
-                    ),
-                    RawDigitItem(
-                      duration: duration,
-                      timeUnit: TimeUnit.seconds,
-                      digitType: DigitType.second,
-                      countUp: shouldCountUp,
-                    ),
-                  ],
-                ),
-              ],
+            return DefaultTextStyle(
+              style: context.textTheme.bodyMedium!.copyWith(
+                color: Colors.black,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  CountDownItem(
+                    label: l10n.day(2),
+                    items: <RawDigitItem>[
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.days,
+                        digitType: DigitType.first,
+                        countUp: shouldCountUp,
+                      ),
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.days,
+                        digitType: DigitType.second,
+                        countUp: shouldCountUp,
+                      ),
+                    ],
+                  ),
+                  const GutterSmall(),
+                  CountDownItem(
+                    label: l10n.hour(2),
+                    items: <RawDigitItem>[
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.hours,
+                        digitType: DigitType.first,
+                        countUp: shouldCountUp,
+                      ),
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.hours,
+                        digitType: DigitType.second,
+                        countUp: shouldCountUp,
+                      ),
+                    ],
+                  ),
+                  const GutterSmall(),
+                  CountDownItem(
+                    label: l10n.minute(2),
+                    items: <RawDigitItem>[
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.minutes,
+                        digitType: DigitType.first,
+                        countUp: shouldCountUp,
+                      ),
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.minutes,
+                        digitType: DigitType.second,
+                        countUp: shouldCountUp,
+                      ),
+                    ],
+                  ),
+                  const GutterSmall(),
+                  CountDownItem(
+                    label: l10n.second(2),
+                    items: <RawDigitItem>[
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.seconds,
+                        digitType: DigitType.first,
+                        countUp: shouldCountUp,
+                      ),
+                      RawDigitItem(
+                        duration: duration,
+                        timeUnit: TimeUnit.seconds,
+                        digitType: DigitType.second,
+                        countUp: shouldCountUp,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           },
         ),
