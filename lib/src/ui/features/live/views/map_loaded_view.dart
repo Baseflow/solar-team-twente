@@ -160,10 +160,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
     if (index > 0 && index < 10) {
       await _animatedMapController.animatedFitCamera(
         cameraFit: CameraFit.coordinates(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.s16,
-            vertical: Sizes.s32,
-          ),
+          padding: const EdgeInsets.all(80),
           coordinates: coordinates[index - 1],
         ),
       );
