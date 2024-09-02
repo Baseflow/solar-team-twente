@@ -49,15 +49,15 @@ class MoreOptionsView extends StatelessWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () => context.goNamed(TeamDetailsPage.routeName),
         ),
+        ListTile(
+          leading: const Icon(Icons.admin_panel_settings_rounded),
+          title: Text(l10n.admin),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.goNamed(AdminPage.routeName),
+        ),
         CustomAboutListTile(
           child: Text(l10n.about),
         ),
-        ListTile(
-          leading: const Icon(Icons.login),
-          title: Text(l10n.signIn),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.goNamed(AdminPage.routeName),
-        )
       ],
     );
 

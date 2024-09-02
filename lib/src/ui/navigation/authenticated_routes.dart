@@ -63,13 +63,6 @@ class AuthenticatedRoutes {
                     );
                   },
                 ),
-                GoRoute(
-                  name: AdminPage.routeName,
-                  path: AdminPage.path,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return const MaterialPage<void>(child: AdminPage());
-                  },
-                ),
               ],
             ),
           ],
@@ -154,6 +147,13 @@ class AuthenticatedRoutes {
               path: SettingsPage.path,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const MaterialPage<void>(child: SettingsPage());
+              },
+            ),
+            GoRoute(
+              name: AdminPage.routeName,
+              path: AdminPage.path,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return const MaterialPage<void>(child: AdminPage());
               },
             ),
           ],
