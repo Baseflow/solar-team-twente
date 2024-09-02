@@ -19,7 +19,7 @@ class AuthView extends StatelessWidget {
         padding: const EdgeInsets.all(Sizes.s12),
         child: SupaMagicAuth(
           onSuccess: (_) => context.go(DashboardPage.path),
-          redirectUrl: kIsWeb ? null : 'io.supabase.flutter://reset-callback/',
+          redirectUrl: kIsWeb ? null : 'solarteam://auth',
         ),
       ),
     );
