@@ -6,6 +6,7 @@ import '../../../../../core.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
+import '../../admin/admin_page.dart';
 import '../../settings/views/settings_page.dart';
 import '../../shared/widgets/custom_about_list_tile.dart';
 import '../../team/team_details_page.dart';
@@ -51,6 +52,12 @@ class MoreOptionsView extends StatelessWidget {
         CustomAboutListTile(
           child: Text(l10n.about),
         ),
+        ListTile(
+          leading: const Icon(Icons.login),
+          title: Text(l10n.signIn),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.goNamed(AdminPage.routeName),
+        )
       ],
     );
 
