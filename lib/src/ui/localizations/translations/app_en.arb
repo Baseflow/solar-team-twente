@@ -39,6 +39,7 @@
       }
     }
   },
+  "admin": "Admin",
   "about": "About",
   "aboutThisApp": "About this app",
   "aboutThisTeam": "About Solar Team Twente",
