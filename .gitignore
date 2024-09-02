@@ -11,7 +11,6 @@
 .history
 .svn/
 devtools_options.yaml
-.fvm/
 
 # Environment files
 supabase/.env.*
@@ -152,3 +151,5 @@ node_modules/
 
 # FVM Version Cache
 .fvm/
+
+untranslated.txt
