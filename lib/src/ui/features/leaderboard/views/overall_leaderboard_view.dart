@@ -26,9 +26,10 @@ class OverallLeaderboardView extends StatelessWidget {
             state as LeaderboardPreviewLoaded;
         final List<RaceTeam> leaderboard = loadedState.leaderboard;
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.s16),
+          padding: const EdgeInsets.symmetric(horizontal: Sizes.s12),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const SizedBox(height: Sizes.s12),
                 ...leaderboard.take(3).map(
