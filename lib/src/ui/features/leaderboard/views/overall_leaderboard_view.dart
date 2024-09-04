@@ -26,10 +26,10 @@ class OverallLeaderboardView extends StatelessWidget {
             state as LeaderboardPreviewLoaded;
         final List<RaceTeam> leaderboard = loadedState.leaderboard;
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.s12),
+          padding: const EdgeInsets.symmetric(horizontal: Sizes.s16),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              //crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const SizedBox(height: Sizes.s12),
                 ...leaderboard.take(3).map(
@@ -78,9 +78,12 @@ class LeaderboardPosition extends StatelessWidget {
           Expanded(
             child: Text(team.name),
           ),
-          Text(
-            '${team.totalDrivenKilometers} km',
-            style: context.textTheme.bodySmall,
+          Padding(
+            padding: const EdgeInsets.only(right: Sizes.s16),
+            child: Text(
+              '${team.totalDrivenKilometers} km',
+              style: context.textTheme.bodySmall,
+            ),
           ),
         ],
       ),
