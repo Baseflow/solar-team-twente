@@ -9,7 +9,6 @@ import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
 import '../../shared/widgets/filled_loading_button.dart';
-import '../cubit/admin_cubit.dart';
 
 final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
 

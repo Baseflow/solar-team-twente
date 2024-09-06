@@ -58,10 +58,5 @@ void _registerDependencies() {
       () => LeaderboardService(
         leaderboardRepository: ioc.get<LeaderboardRepository>(),
       ),
-    )
-    ..registerFactory<AdminService>(
-      () => AdminService(
-        adminRepository: ioc.get<AdminRepository>(),
-      ),
     );
 }

@@ -6,7 +6,6 @@ import '../../core.dart' as core;
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
-import 'repositories/admin_repository.dart';
 import 'repositories/leaderboard_repository.dart';
 import 'repositories/repositories.dart';
 import 'repositories/vehicle_location_repository.dart';
@@ -48,19 +47,12 @@ Future<void> _registerDependencies() async {
     ..registerLazySingleton<SupabaseClient>(
       () => Supabase.instance.client,
     )
-
-    // Register data dependencies needed for the Authentication feature.
-    ..registerFactory<AuthenticationClient>(
-      // TODO(anyone): Replace the mock implementation with a real
-      // implementation for client applications.
-      MockAuthenticationClient.new,
-    )
     ..registerFactory<TokenDataStore>(
       FlutterSecureStorageTokenDataStore.new,
     )
     ..registerLazySingleton<core.AuthenticationRepository>(
-      () => AuthenticationRepository(
-        authenticationClient: ioc.get<AuthenticationClient>(),
+      () => SupabaseAuthenticationRepository(
+        authenticationClient: ioc.get<SupabaseClient>(),
         tokenDataStore: ioc.get<TokenDataStore>(),
       ),
     )
@@ -101,11 +93,6 @@ Future<void> _registerDependencies() async {
     )
     ..registerFactory<core.LeaderboardRepository>(
       () => SupabaseLeaderboardRepository(
-        ioc.get<SupabaseClient>(),
-      ),
-    )
-    ..registerFactory<core.AdminRepository>(
-      () => SupabaseAdminRepository(
         ioc.get<SupabaseClient>(),
       ),
     );
