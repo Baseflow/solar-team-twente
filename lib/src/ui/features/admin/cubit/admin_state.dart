@@ -11,7 +11,11 @@ class AdminState extends Equatable {
     this.user,
     this.isLoading = false,
     this.loginSuccessful = false,
+    this.errorMessage = '',
   });
+
+  /// The error message.
+  final String errorMessage;
 
   /// The email address.
   final String email;
@@ -35,6 +39,7 @@ class AdminState extends Equatable {
     User? user,
     bool? isLoading,
     bool? loginSuccessful,
+    String? errorMessage,
   }) {
     return AdminState(
       email: email ?? this.email,
@@ -42,6 +47,7 @@ class AdminState extends Equatable {
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
       loginSuccessful: loginSuccessful ?? this.loginSuccessful,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
@@ -52,5 +58,6 @@ class AdminState extends Equatable {
         user,
         isLoading,
         loginSuccessful,
+        errorMessage,
       ];
 }
