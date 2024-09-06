@@ -22,7 +22,6 @@ class AdminCubit extends Cubit<AdminState> {
 
   late final StreamSubscription<AuthState> _authStateSubscription;
 
-
   /// Signs in the user.
   Future<void> signIn() async {
     emit(state.copyWith(isLoading: true));
@@ -68,6 +67,7 @@ class AdminCubit extends Cubit<AdminState> {
       emit(state.copyWith(loginSuccessful: false));
     }
   }
+
   @override
   Future<void> close() {
     _authStateSubscription.cancel();

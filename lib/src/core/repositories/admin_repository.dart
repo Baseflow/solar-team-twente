@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// Contract for the admin authentication repository.
 /// {@endtemplate}
 abstract interface class AdminRepository {
-
   /// Only emits [AuthState] changes.
   Stream<AuthState> get authStateChanges;
 
@@ -16,5 +15,4 @@ abstract interface class AdminRepository {
 
   /// Signs out the user.
   Future<void> signOut();
-
 }
