@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Implements the admin authentication page
+
 ## 0.0.3
 
 * Updates splashscreen for both platforms

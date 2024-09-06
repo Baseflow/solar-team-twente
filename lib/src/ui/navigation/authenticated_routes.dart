@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/admin/admin_page.dart';
+import '../features/admin/view/admin_page.dart';
 import '../features/dashboard/views/dashboard_page.dart';
 import '../features/leaderboard/views/leaderboard_page.dart';
 import '../features/live/views/live_page.dart';

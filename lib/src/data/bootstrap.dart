@@ -6,6 +6,7 @@ import '../../core.dart' as core;
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
+import 'repositories/admin_repository.dart';
 import 'repositories/leaderboard_repository.dart';
 import 'repositories/repositories.dart';
 import 'repositories/vehicle_location_repository.dart';
@@ -100,6 +101,11 @@ Future<void> _registerDependencies() async {
     )
     ..registerFactory<core.LeaderboardRepository>(
       () => SupabaseLeaderboardRepository(
+        ioc.get<SupabaseClient>(),
+      ),
+    )
+    ..registerFactory<core.AdminRepository>(
+      () => SupabaseAdminRepository(
         ioc.get<SupabaseClient>(),
       ),
     );

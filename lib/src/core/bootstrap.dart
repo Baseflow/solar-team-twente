@@ -1,6 +1,7 @@
 import 'package:flutter_ioc/flutter_ioc.dart';
 
 import '../../core.dart';
+import 'services/admin_service.dart';
 
 /// Initializes the core library ensuring all dependencies are
 /// registered.
@@ -57,6 +58,11 @@ void _registerDependencies() {
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(
         leaderboardRepository: ioc.get<LeaderboardRepository>(),
+      ),
+    )
+    ..registerFactory<AdminService>(
+      () => AdminService(
+        adminRepository: ioc.get<AdminRepository>(),
       ),
     );
 }
