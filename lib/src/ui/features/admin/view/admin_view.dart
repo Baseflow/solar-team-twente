@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../localizations/l10n.dart';
-import '../cubit/admin_cubit.dart';
 import 'admin_container.dart';
 
 /// {@template admin_view}

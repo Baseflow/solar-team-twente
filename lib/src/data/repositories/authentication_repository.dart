@@ -1,56 +1,56 @@
 import 'package:meta/meta.dart';
+import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 
-import '../../../core.dart' as core;
-import '../clients/authentication_client.dart';
+import '../../../core.dart';
 import '../data_stores/token_data_store.dart';
 import '../dto/authentication/token_dto.dart';
 
 /// Provides access to the authentication token.
 ///
 /// Once the authentication token is acquired via the [signIn] method the
-/// [core.Token] instance is kept in memory and persisted to a local store.
+/// [Token] instance is kept in memory and persisted to a local store.
 ///
 /// The [getToken] method can be used to access the token. If the token is not
 /// available directly from memory, the token will be retrieved from the data
 /// store.
 ///
-/// The [AuthenticationRepository] also allows revoking a token using the
+/// The [SupabaseAuthenticationRepository] also allows revoking a token using the
 /// [endSession] method or refreshing a token via the [refreshToken] method.
-class AuthenticationRepository implements core.AuthenticationRepository {
-  /// Returns an instance of the [AuthenticationRepository] class.
+class SupabaseAuthenticationRepository implements AuthenticationRepository {
+  /// Returns an instance of the [SupabaseAuthenticationRepository] class.
   ///
   /// If an instance is already created, the existing instance will be returned.
   /// Otherwise a new instance will be returned.
-  factory AuthenticationRepository({
-    required AuthenticationClient authenticationClient,
+  factory SupabaseAuthenticationRepository({
+    required SupabaseClient authenticationClient,
     required TokenDataStore tokenDataStore,
   }) {
-    return _repositoryInstance ??= AuthenticationRepository.private(
+    return _repositoryInstance ??= SupabaseAuthenticationRepository.private(
       authenticationClient: authenticationClient,
       tokenDataStore: tokenDataStore,
     );
   }
 
-  /// Creates a new [AuthenticationRepository].
+  /// Creates a new [SupabaseAuthenticationRepository].
   ///
   /// This constructor is visible for testing only and should not be used
   /// outside of this class.
   @visibleForTesting
-  AuthenticationRepository.private({
-    required AuthenticationClient authenticationClient,
+  SupabaseAuthenticationRepository.private({
+    required SupabaseClient authenticationClient,
     required TokenDataStore tokenDataStore,
   })  : _authenticationClient = authenticationClient,
         _tokenDataStore = tokenDataStore;
 
-  static AuthenticationRepository? _repositoryInstance;
+  static SupabaseAuthenticationRepository? _repositoryInstance;
 
-  final AuthenticationClient _authenticationClient;
+  final SupabaseClient _authenticationClient;
   final TokenDataStore _tokenDataStore;
 
-  core.Token? _currentToken;
+  Token? _currentToken;
 
   @override
-  Future<core.Token?> getToken() async {
+  Future<Token?> getToken() async {
     if (_currentToken != null) {
       return _currentToken!;
     }
@@ -60,14 +60,29 @@ class AuthenticationRepository implements core.AuthenticationRepository {
   }
 
   @override
-  Future<core.Token> signIn({
+  Future<Token> signIn({
     required String email,
     required String password,
   }) async {
-    await Future<void>.delayed(const Duration(seconds: 2));
-    final TokenDTO tokenDto = await _authenticationClient.loginWithCredentials(
+    final AuthResponse response =
+        await _authenticationClient.auth.signInWithPassword(
       email: email,
       password: password,
+    );
+
+    // TODO(Jurijs): Handle error
+    if (response.session == null || response.user == null) {
+      throw Exception('Fix this');
+    }
+
+    final DateTime expiresAt = DateTime.parse(
+      response.session!.expiresAt!.toString(),
+    );
+
+    final TokenDTO tokenDto = TokenDTO(
+      accessToken: response.session!.accessToken,
+      refreshToken: response.session!.refreshToken!,
+      expiresAt: expiresAt,
     );
 
     await _tokenDataStore.saveToken(token: tokenDto);
@@ -78,7 +93,7 @@ class AuthenticationRepository implements core.AuthenticationRepository {
 
   @override
   Future<void> endSession() async {
-    final core.Token? token = _currentToken;
+    final Token? token = _currentToken;
 
     if (token == null) {
       return;
@@ -86,7 +101,7 @@ class AuthenticationRepository implements core.AuthenticationRepository {
 
     final TokenDTO tokenDto = TokenDTO.fromEntity(token);
 
-    await _authenticationClient.signOut(token: tokenDto);
+    await _authenticationClient.auth.signOut();
 
     await _tokenDataStore.deleteToken(token: tokenDto);
 
@@ -94,44 +109,44 @@ class AuthenticationRepository implements core.AuthenticationRepository {
   }
 
   @override
-  Future<core.Token> refreshToken(core.Token token) async {
-    final TokenDTO tokenDto = await _authenticationClient.refreshToken(
-      tokenToRefresh: TokenDTO.fromEntity(token),
-    );
-
-    await _tokenDataStore.saveToken(token: tokenDto);
-
-    _currentToken = tokenDto.toEntity();
+  Future<Token> refreshToken(Token token) async {
+    // final TokenDTO tokenDto = await _authenticationClient.refreshToken(
+    //   tokenToRefresh: TokenDTO.fromEntity(token),
+    // );
+    //
+    // await _tokenDataStore.saveToken(token: tokenDto);
+    //
+    // _currentToken = tokenDto.toEntity();
     return _currentToken!;
   }
 
   @override
-  Future<core.Token> registerAccount({
+  Future<Token> registerAccount({
     required String email,
     required String password,
   }) async {
-    final TokenDTO tokenDto =
-        await _authenticationClient.registerWithCredentials(
-      email: email,
-      password: password,
-    );
-
-    await _tokenDataStore.saveToken(token: tokenDto);
-
-    _currentToken = tokenDto.toEntity();
+    // final TokenDTO tokenDto =
+    //     await _authenticationClient.registerWithCredentials(
+    //   email: email,
+    //   password: password,
+    // );
+    //
+    // await _tokenDataStore.saveToken(token: tokenDto);
+    //
+    // _currentToken = tokenDto.toEntity();
     return _currentToken!;
   }
 
   @override
-  Future<core.Token> updatePassword({required String newPassword}) async {
-    final TokenDTO tokenDto = await _authenticationClient.updatePassword(
-      newPassword: newPassword,
-    );
-
-    await _tokenDataStore.saveToken(token: tokenDto);
-    await Future<void>.delayed(const Duration(seconds: 2));
-
-    _currentToken = tokenDto.toEntity();
+  Future<Token> updatePassword({required String newPassword}) async {
+    // final TokenDTO tokenDto = await _authenticationClient.updatePassword(
+    //   newPassword: newPassword,
+    // );
+    //
+    // await _tokenDataStore.saveToken(token: tokenDto);
+    // await Future<void>.delayed(const Duration(seconds: 2));
+    //
+    // _currentToken = tokenDto.toEntity();
     return _currentToken!;
   }
 }

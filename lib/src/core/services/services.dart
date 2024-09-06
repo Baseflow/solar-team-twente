@@ -1,4 +1,3 @@
-export 'admin_service.dart';
 export 'analytics_service.dart';
 export 'authentication_service.dart';
 export 'crashlytics_service.dart';
