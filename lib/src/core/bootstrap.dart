@@ -1,7 +1,6 @@
 import 'package:flutter_ioc/flutter_ioc.dart';
 
 import '../../core.dart';
-import 'services/admin_service.dart';
 
 /// Initializes the core library ensuring all dependencies are
 /// registered.
