@@ -26,18 +26,16 @@ class OverallLeaderboardView extends StatelessWidget {
             state as LeaderboardPreviewLoaded;
         final List<RaceTeam> leaderboard = loadedState.leaderboard;
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.s12),
+          padding: const EdgeInsets.all(Sizes.s16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const SizedBox(height: Sizes.s12),
                 ...leaderboard.take(3).map(
                       (RaceTeam team) => TopThreeRankingView(
                         team: team,
                       ),
                     ),
-                const SizedBox(height: Sizes.s12),
                 ...leaderboard.skip(3).map(
                       (RaceTeam team) => LeaderboardPosition(
                         team: team,
@@ -71,19 +69,14 @@ class LeaderboardPosition extends StatelessWidget {
             width: Sizes.s32,
             child: Text(
               team.position.toString(),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(
-            child: Text(team.name),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: Sizes.s12),
-            child: Text(
-              '${team.totalDrivenKilometers} km',
-              style: context.textTheme.bodySmall,
-            ),
+          Expanded(child: Text(team.name)),
+          Text(
+            '${team.totalDrivenKilometers} km',
+            style: context.textTheme.bodySmall,
           ),
         ],
       ),

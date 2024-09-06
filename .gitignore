@@ -11,6 +11,7 @@
 .history
 .svn/
 devtools_options.yaml
+.fvm/
 
 # Environment files
 supabase/.env.*
