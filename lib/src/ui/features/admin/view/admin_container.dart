@@ -107,13 +107,12 @@ class AdminContainer extends StatelessWidget {
                             const Gutter(),
                             const Gutter(),
                             FilledLoadingButton(
-
                               onPressed: () {
                                 context.read<AdminCubit>().signIn();
                               },
                               buttonText: l10n.signIn,
                               isLoading: context.select<AdminCubit, bool>(
-                                    (AdminCubit value) {
+                                (AdminCubit value) {
                                   return value.state.isLoading;
                                 },
                               ),

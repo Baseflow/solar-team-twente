@@ -47,10 +47,10 @@ class AdminState extends Equatable {
 
   @override
   List<Object?> get props => <Object?>[
-    email,
-    password,
-    user,
-    isLoading,
-    loginSuccessful,
-  ];
+        email,
+        password,
+        user,
+        isLoading,
+        loginSuccessful,
+      ];
 }
