@@ -1,8 +1,9 @@
 {
   "editor.formatOnSave": true,
   "[dart]": {
-      "editor.formatOnSave": true
+    "editor.formatOnSave": true
   },
   "java.configuration.updateBuildConfiguration": "disabled",
-  "deno.enable": true
+  "deno.enable": true,
+  "dart.flutterSdkPath": ".fvm/versions/stable"
 }

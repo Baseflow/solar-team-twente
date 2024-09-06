@@ -148,3 +148,6 @@ injectable.config.dart
 
 # Node dependency directories
 node_modules/
+
+# FVM Version Cache
+.fvm/
