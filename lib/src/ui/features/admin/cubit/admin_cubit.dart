@@ -43,9 +43,19 @@ class AdminCubit extends Cubit<AdminState> {
 
   /// Signs out the user.
   Future<void> signOut() async {
-    emit(state.copyWith(isLoading: true, loginSuccessful: true));
-    await _adminService.signOut();
-    emit(state.copyWith(isLoading: false, loginSuccessful: false));
+    if (isClosed) return;
+    try {
+      emit(state.copyWith(isLoading: true, loginSuccessful: true));
+      await _adminService.signOut();
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          loginSuccessful: false,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 
   /// Updates the email.
