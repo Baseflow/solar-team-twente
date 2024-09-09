@@ -5,6 +5,7 @@ import '../features/dashboard/views/dashboard_page.dart';
 import '../features/leaderboard/views/leaderboard_page.dart';
 import '../features/live/views/live_page.dart';
 import '../features/more/views/more_page.dart';
+import '../features/news/widgets/news_page.dart';
 import '../features/settings/views/settings_page.dart';
 import '../features/team/team_details_page.dart';
 import 'app_scaffold_shell.dart';
@@ -14,6 +15,8 @@ final GlobalKey<NavigatorState> _liveNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'home');
 final GlobalKey<NavigatorState> _dashboardNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'dashboard');
+final GlobalKey<NavigatorState> _newsNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'news');
 final GlobalKey<NavigatorState> _moreNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'more');
 
@@ -71,6 +74,18 @@ class AuthenticatedRoutes {
               path: LivePage.path,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const MaterialPage<void>(child: LivePage());
+              },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _newsNavigatorKey,
+          routes: <RouteBase>[
+            GoRoute(
+              name: NewsPage.routeName,
+              path: NewsPage.path,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return const MaterialPage<void>(child: NewsPage());
               },
             ),
           ],
