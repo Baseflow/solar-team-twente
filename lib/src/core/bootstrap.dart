@@ -51,6 +51,9 @@ void _registerDependencies() {
         vehicleLocationRepository: ioc.get<VehicleLocationRepository>(),
       ),
     )
+    ..registerFactory<NewsService>(
+      NewsService.new,
+    )
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(
         leaderboardRepository: ioc.get<LeaderboardRepository>(),

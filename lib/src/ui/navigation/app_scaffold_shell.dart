@@ -8,6 +8,7 @@ import '../extensions/build_context_extensions.dart';
 import '../features/dashboard/views/dashboard_page.dart';
 import '../features/live/views/live_page.dart';
 import '../features/more/views/more_page.dart';
+import '../features/news/widgets/news_page.dart';
 
 /// The [AppScaffoldShell] is the main scaffold for the application.
 ///
@@ -63,6 +64,7 @@ class AppScaffoldShell extends StatelessWidget {
           return switch (e.defaultRoute?.name) {
             LivePage.routeName => LivePage.destination(context),
             DashboardPage.routeName => DashboardPage.destination(context),
+            NewsPage.routeName => NewsPage.destination(context),
             MorePage.name => MorePage.destination(context),
             _ => throw UnimplementedError(
                 'The route ${e.defaultRoute?.name} is not implemented.',
