@@ -58,7 +58,6 @@ dependencies:
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
   slide_countdown: ^1.6.1
-  supabase_auth_ui: ^0.5.1
   supabase_flutter: ^2.5.3
   url_launcher: ^6.2.6
 
