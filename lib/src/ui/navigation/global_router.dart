@@ -5,7 +5,6 @@ import 'app_scaffold_shell.dart';
 import 'authenticated_routes.dart';
 import 'navigation_error_page.dart';
 import 'shared_routes.dart';
-import 'unauthenticated_routes.dart';
 
 /// The root navigator key for the main router of the app.
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -57,7 +56,7 @@ class GlobalRouter {
     //   return null;
     // },
     routes: <RouteBase>[
-      UnauthenticatedRoutes.value,
+      //  UnauthenticatedRoutes.value,
       AuthenticatedRoutes.value,
       ...SharedRoutes.values,
     ],

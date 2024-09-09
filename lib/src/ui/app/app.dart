@@ -53,32 +53,19 @@ class App extends StatelessWidget {
           },
         ),
       ],
-      child: MultiBlocListener(
-        listeners: <BlocListener<AuthenticationCubit, AuthenticationState>>[
-          BlocListener<AuthenticationCubit, AuthenticationState>(
-            listenWhen:
-                (AuthenticationState previous, AuthenticationState current) {
-              return previous.authStatus != current.authStatus;
-            },
-            listener: (BuildContext context, AuthenticationState state) {
-              GlobalRouter.router.refresh();
-            },
-          ),
-          BlocListener<AuthenticationCubit, AuthenticationState>(
-            listenWhen: (
-              AuthenticationState previous,
-              AuthenticationState current,
-            ) {
-              return previous.authStatus != current.authStatus &&
-                  current.authStatus != AuthenticationStatus.initializing;
-            },
-            listener: (BuildContext context, AuthenticationState state) {
-              if (!kIsWeb) {
-                FlutterNativeSplash.remove();
-              }
-            },
-          ),
-        ],
+      child: BlocListener<AuthenticationCubit, AuthenticationState>(
+        listenWhen: (
+          AuthenticationState previous,
+          AuthenticationState current,
+        ) {
+          return previous.authStatus != current.authStatus &&
+              current.authStatus != AuthenticationStatus.initializing;
+        },
+        listener: (BuildContext context, AuthenticationState state) {
+          if (!kIsWeb) {
+            FlutterNativeSplash.remove();
+          }
+        },
         child: Builder(
           builder: (BuildContext context) {
             return MaterialApp.router(
