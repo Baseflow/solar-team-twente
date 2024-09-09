@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:supabase_auth_ui/supabase_auth_ui.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core.dart';
 import '../data_stores/token_data_store.dart';
@@ -14,8 +14,8 @@ import '../dto/authentication/token_dto.dart';
 /// available directly from memory, the token will be retrieved from the data
 /// store.
 ///
-/// The [SupabaseAuthenticationRepository] also allows revoking a token using the
-/// [endSession] method or refreshing a token via the [refreshToken] method.
+/// The [SupabaseAuthenticationRepository] also allows revoking a token using
+/// the [endSession] method or refreshing a token via the [refreshToken] method.
 class SupabaseAuthenticationRepository implements AuthenticationRepository {
   /// Returns an instance of the [SupabaseAuthenticationRepository] class.
   ///
@@ -72,7 +72,7 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
 
     // TODO(Jurijs): Handle error
     if (response.session == null || response.user == null) {
-      throw Exception('Fix this');
+      throw Exception('Failed to sign in');
     }
 
     final DateTime expiresAt = DateTime.parse(
@@ -149,4 +149,7 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
     // _currentToken = tokenDto.toEntity();
     return _currentToken!;
   }
+
+  @override
+  User? get currentUser => _authenticationClient.auth.currentUser;
 }

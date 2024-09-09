@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../repositories/authentication_repository.dart';
 import '../types/authentication_status.dart';
 
@@ -78,4 +80,6 @@ class AuthenticationService {
       _authStatusController.add(AuthenticationStatus.unauthenticated);
     }
   }
+
+  User? get currentUser => _authenticationRepository.currentUser;
 }

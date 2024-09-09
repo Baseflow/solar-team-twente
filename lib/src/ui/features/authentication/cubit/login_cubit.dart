@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../core.dart';
 
@@ -41,4 +42,6 @@ class LoginCubit extends Cubit<LoginState> {
       );
     }
   }
+
+  User? get currentUser => _authenticationService.currentUser;
 }
