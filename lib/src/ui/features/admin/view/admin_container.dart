@@ -8,6 +8,7 @@ import '../../../constants/sizes_constants.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
+import '../../authentication/cubit/login_cubit.dart';
 import '../../shared/widgets/filled_loading_button.dart';
 
 final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
@@ -43,8 +44,8 @@ class AdminContainer extends StatelessWidget {
                   ),
                 ),
                 const GutterLarge(),
-                BlocBuilder<AdminCubit, AdminState>(
-                  builder: (BuildContext context, AdminState state) {
+                BlocBuilder<LoginCubit, LoginState>(
+                  builder: (BuildContext context, LoginState state) {
                     return Form(
                       key: _loginFormKey,
                       child: AutofillGroup(
@@ -53,7 +54,7 @@ class AdminContainer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
                             TextFormField(
-                              onChanged: context.read<AdminCubit>().updateEmail,
+                              onChanged: context.read<LoginCubit>().updateEmail,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
                               autovalidateMode:
@@ -79,7 +80,7 @@ class AdminContainer extends StatelessWidget {
                             const Gutter(),
                             TextFormField(
                               onChanged:
-                                  context.read<AdminCubit>().updatePassword,
+                                  context.read<LoginCubit>().updatePassword,
                               obscureText: true,
                               enableSuggestions: false,
                               autocorrect: false,
@@ -100,18 +101,21 @@ class AdminContainer extends StatelessWidget {
                                 if (!_loginFormKey.currentState!.validate()) {
                                   return;
                                 }
-                                context.read<AdminCubit>().signIn();
+                                context.read<LoginCubit>().signIn();
                               },
                             ),
                             const Gutter(),
                             const Gutter(),
                             FilledLoadingButton(
                               onPressed: () {
-                                context.read<AdminCubit>().signIn();
+                                if (!_loginFormKey.currentState!.validate()) {
+                                  return;
+                                }
+                                context.read<LoginCubit>().signIn();
                               },
                               buttonText: l10n.signIn,
-                              isLoading: context.select<AdminCubit, bool>(
-                                (AdminCubit value) {
+                              isLoading: context.select<LoginCubit, bool>(
+                                (LoginCubit value) {
                                   return value.state.isLoading;
                                 },
                               ),

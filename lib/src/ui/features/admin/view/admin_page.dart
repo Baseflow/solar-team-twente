@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ioc/flutter_ioc.dart';
 
+import '../../../../../core.dart';
+import '../../authentication/cubit/login_cubit.dart';
 import 'admin_view.dart';
 
 /// {@template admin_page}
@@ -17,6 +21,11 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AdminView();
+    return BlocProvider<LoginCubit>(
+      create: (BuildContext context) => LoginCubit(
+        Ioc.container.get<AuthenticationService>(),
+      ),
+      child: const AdminView(),
+    );
   }
 }

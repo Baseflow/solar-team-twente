@@ -1,3 +1,5 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../entities/auth/token.dart';
 
 /// A repository to handle authenticating a user.
@@ -40,4 +42,6 @@ abstract interface class AuthenticationRepository {
   /// Returns a [Token] if the update in was successful and stays logged in.
   /// Throws an exception if the update failed.
   Future<Token> updatePassword({required String newPassword});
+
+  User? get currentUser;
 }

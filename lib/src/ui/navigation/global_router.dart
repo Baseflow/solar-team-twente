@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core.dart';
-import '../features/authentication/cubit/authentication_cubit.dart';
-import '../features/authentication/views/login_page.dart';
-import '../features/live/views/live_page.dart';
 import 'app_scaffold_shell.dart';
 import 'authenticated_routes.dart';
 import 'navigation_error_page.dart';
@@ -29,38 +24,38 @@ class GlobalRouter {
       debugPrint('Error: ${state.error}');
       return const MaterialPage<void>(child: NavigationErrorPage());
     },
-    redirect: (BuildContext context, GoRouterState state) async {
-      // Check if the route we want navigate to is a shared route, so we don't
-      // need to check auth status.
-      if (SharedRoutes.values.any(
-        (GoRoute e) => state.fullPath?.contains(e.path) ?? false,
-      )) {
-        return null;
-      }
-
-      final AuthenticationStatus authStatus =
-          context.read<AuthenticationCubit>().state.authStatus;
-
-      // If the user is not logged in but still wants to go to a page that does
-      // not need authentication, such as the forgot password page.
-      if (authStatus == AuthenticationStatus.unauthenticated &&
-          (state.fullPath?.contains(LoginPage.path) ?? false)) {
-        return null;
-      }
-
-      // If the user is not logged in, get kicked back to login page
-      if (authStatus == AuthenticationStatus.unauthenticated) {
-        return LoginPage.path;
-      }
-
-      // If the user is successfully logged in but still on login, go to home.
-      if (state.fullPath == LoginPage.path) {
-        return LivePage.path;
-      }
-
-      // In any other case the redirect can be safely ignored and handled as is.
-      return null;
-    },
+    // redirect: (BuildContext context, GoRouterState state) async {
+    //   // Check if the route we want navigate to is a shared route, so we don't
+    //   // need to check auth status.
+    //   if (SharedRoutes.values.any(
+    //     (GoRoute e) => state.fullPath?.contains(e.path) ?? false,
+    //   )) {
+    //     return null;
+    //   }
+    //
+    //   final AuthenticationStatus authStatus =
+    //       context.read<AuthenticationCubit>().state.authStatus;
+    //
+    //   // If the user is not logged in but still wants to go to a page that does
+    //   // not need authentication, such as the forgot password page.
+    //   if (authStatus == AuthenticationStatus.unauthenticated &&
+    //       (state.fullPath?.contains(AdminPage.path) ?? false)) {
+    //     return null;
+    //   }
+    //
+    //   // If the user is not logged in, get kicked back to login page
+    //   if (authStatus == AuthenticationStatus.unauthenticated) {
+    //     return AdminPage.path;
+    //   }
+    //
+    //   // If the user is successfully logged in but still on login, go to home.
+    //   if (state.fullPath == LoginPage.path) {
+    //     return LivePage.path;
+    //   }
+    //
+    //   // In any other case the redirect can be safely ignored and handled as is.
+    //   return null;
+    // },
     routes: <RouteBase>[
       UnauthenticatedRoutes.value,
       AuthenticatedRoutes.value,
