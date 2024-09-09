@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core.dart';
-import '../../../../core/entities/news_message.dart';
 
 part 'news_state.dart';
 
