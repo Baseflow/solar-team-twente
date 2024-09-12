@@ -1,4 +1,3 @@
-export 'admin_repository.dart';
 export 'analytics_repository.dart';
 export 'authentication_repository.dart';
 export 'crashlytics_repository.dart';
