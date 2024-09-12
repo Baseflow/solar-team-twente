@@ -35,9 +35,7 @@ class DashboardView extends StatelessWidget {
                 child: FilledButton.icon(
                   onPressed: () async {
                     final Uri uri = Uri.parse(_urlString);
-                    if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri);
-                    }
+                    await launchUrl(uri);
                   },
                   icon: const Icon(Icons.open_in_new_rounded),
                   iconAlignment: IconAlignment.end,
