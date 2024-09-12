@@ -9,7 +9,10 @@ import '../../authentication/cubit/authentication_cubit.dart';
 /// {@endtemplate}
 class AuthorizedAdminView extends StatelessWidget {
   /// {@macro authorized_admin_view}
-  const AuthorizedAdminView({required this.user, super.key});
+  const AuthorizedAdminView({
+    required this.user,
+    super.key,
+  });
 
   final User? user;
 
@@ -23,9 +26,7 @@ class AuthorizedAdminView extends StatelessWidget {
           Text('Signed in as: ${user?.email}'),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () {
-              context.read<AuthenticationCubit>().signOut();
-            },
+            onPressed: context.read<AuthenticationCubit>().signOut,
             child: const Text('Sign Out'),
           ),
         ],

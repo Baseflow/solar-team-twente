@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../repositories/authentication_repository.dart';
-import '../types/authentication_status.dart';
+import '../../../core.dart';
 
 /// Takes care of all authentication related business logic.
 class AuthenticationService {
@@ -64,18 +63,17 @@ class AuthenticationService {
   Future<void> ensureValidToken() async {
     try {
       // Token is temporarily disabled until authentication will be implemented.
-      // Token? token = await _authenticationRepository.getToken();
-      //
-      // if (token?.isExpired ?? false) {
-      //   token = await _authenticationRepository.refreshToken(token!);
-      // }
+      Token? token = await _authenticationRepository.getToken();
 
-      // _authStatusController.add(
-      //   token != null
-      //       ? AuthenticationStatus.authenticated
-      //       : AuthenticationStatus.unauthenticated,
-      // );
-      _authStatusController.add(AuthenticationStatus.authenticated);
+      if (token?.isExpired ?? false) {
+        token = await _authenticationRepository.refreshToken(token!);
+      }
+
+      _authStatusController.add(
+        token != null
+            ? AuthenticationStatus.authenticated
+            : AuthenticationStatus.unauthenticated,
+      );
     } catch (e) {
       _authStatusController.add(AuthenticationStatus.unauthenticated);
     }

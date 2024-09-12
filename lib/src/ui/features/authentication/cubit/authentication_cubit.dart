@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../core.dart';
 
@@ -16,6 +17,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         _subscription = null,
         super(const AuthenticationState());
 
+  final AuthenticationService _authenticationService;
+
   /// Stream of status changes provided by the [AuthenticationService].
   final Stream<AuthenticationStatus> _authStatusStream;
 
@@ -23,7 +26,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   /// [ensureValidToken] method.
   StreamSubscription<AuthenticationStatus>? _subscription;
 
-  final AuthenticationService _authenticationService;
+  User? get currentUser => _authenticationService.currentUser;
 
   @override
   Future<void> close() async {
