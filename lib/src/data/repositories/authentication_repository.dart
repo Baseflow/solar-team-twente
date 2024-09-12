@@ -110,13 +110,29 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Token> refreshToken(Token token) async {
-    // final TokenDTO tokenDto = await _authenticationClient.refreshToken(
-    //   tokenToRefresh: TokenDTO.fromEntity(token),
-    // );
-    //
-    // await _tokenDataStore.saveToken(token: tokenDto);
-    //
-    // _currentToken = tokenDto.toEntity();
+    final AuthResponse response =
+        await _authenticationClient.auth.refreshSession(
+      TokenDTO.fromEntity(token).refreshToken,
+    );
+
+    // TODO(Jurijs): Handle error
+    if (response.session == null || response.user == null) {
+      throw Exception('Failed to refresh token');
+    }
+
+    final DateTime expiresAt = DateTime.parse(
+      response.session!.expiresAt!.toString(),
+    );
+
+    final TokenDTO tokenDto = TokenDTO(
+      accessToken: response.session!.accessToken,
+      refreshToken: response.session!.refreshToken!,
+      expiresAt: expiresAt,
+    );
+
+    await _tokenDataStore.saveToken(token: tokenDto);
+
+    _currentToken = tokenDto.toEntity();
     return _currentToken!;
   }
 
