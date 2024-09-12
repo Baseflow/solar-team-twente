@@ -43,7 +43,7 @@ class NewsMessageCard extends StatelessWidget {
         title: Text(title),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: <Widget>[
             Text(newsMessage),
             const GutterTiny(),
             Text(
