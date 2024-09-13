@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../core.dart';
 import '../../../localizations/l10n.dart';
 import '../../authentication/cubit/authentication_cubit.dart';
-import '../../authentication/cubit/login_cubit.dart';
 import 'admin_container.dart';
 import 'admin_page.dart';
 import 'authorized_admin_view.dart';
@@ -20,7 +18,6 @@ class AdminView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final User? user = context.read<LoginCubit>().currentUser;
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.admin),

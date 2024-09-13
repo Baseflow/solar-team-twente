@@ -137,7 +137,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
                 PolylineLayer<Object>(
                   polylines: mapState.selectedRaceDayGeoJson!.polylines,
                 ),
-                Positioned(
+                const Positioned(
                   bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
                   right: Sizes.s16,
                   child: _LiveButton(),
