@@ -3,6 +3,7 @@
 * Implements the admin authentication page
 * Implements the admin dashboard page to send news messages
 * Implements the news page to show the news messages
+* Fixes a bug where the carousel wasn't working correctly
 
 ## 0.0.3
 
