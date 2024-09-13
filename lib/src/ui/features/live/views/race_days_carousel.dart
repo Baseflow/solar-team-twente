@@ -46,17 +46,20 @@ class _RaceDaysCarouselState extends State<RaceDaysCarousel> {
               RaceDayCarouselState previous,
               RaceDayCarouselState current,
             ) {
-              final double currentPage = _pageController.page ?? 0;
-              final int currentPageIndex = currentPage.round();
+              final double currentPageIndex = _pageController.page ?? 0;
               return previous.selectedRaceDay != current.selectedRaceDay &&
-                  currentPageIndex != current.selectedRaceDay.index;
+                  currentPageIndex == currentPageIndex.round() &&
+                  currentPageIndex != current.currentRaceDay.index - 1;
             },
             listener: (BuildContext context, RaceDayCarouselState state) {
-              _pageController.animateToPage(
-                state.selectedRaceDay.index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.bounceInOut,
-              );
+              final double currentPageIndex = _pageController.page ?? 0;
+              if (currentPageIndex == currentPageIndex.round()) {
+                _pageController.animateToPage(
+                  state.selectedRaceDay.index - 1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.bounceInOut,
+                );
+              }
             },
             child: PageView(
               controller: _pageController,
