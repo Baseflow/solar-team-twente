@@ -25,28 +25,25 @@ class AdminView extends StatelessWidget {
       appBar: AppBar(
         title: Text(context.l10n.admin),
       ),
-      body: Center(
-        child: BlocConsumer<AuthenticationCubit, AuthenticationState>(
-          listenWhen:
-              (AuthenticationState previous, AuthenticationState current) {
-            return previous.authStatus != current.authStatus;
-          },
-          listener: (BuildContext context, AuthenticationState state) {
-            if (state.authStatus == AuthenticationStatus.unauthenticated) {
-              context.goNamed(AdminPage.routeName);
-            }
-          },
-          builder: (BuildContext context, AuthenticationState state) {
-            return switch (state.authStatus) {
-              AuthenticationStatus.unauthenticated => const AdminContainer(),
-              AuthenticationStatus.authenticated => AuthorizedAdminView(
-                  user: context.read<AuthenticationCubit>().currentUser,
-                ),
-              AuthenticationStatus.initializing =>
-                const CircularProgressIndicator(),
-            };
-          },
-        ),
+      body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
+        listenWhen:
+            (AuthenticationState previous, AuthenticationState current) {
+          return previous.authStatus != current.authStatus;
+        },
+        listener: (BuildContext context, AuthenticationState state) {
+          if (state.authStatus == AuthenticationStatus.unauthenticated) {
+            context.goNamed(AdminPage.routeName);
+          }
+        },
+        builder: (BuildContext context, AuthenticationState state) {
+          return switch (state.authStatus) {
+            AuthenticationStatus.unauthenticated => const AdminContainer(),
+            AuthenticationStatus.authenticated => AuthorizedAdminView(
+                user: context.read<AuthenticationCubit>().currentUser,
+              ),
+            _ => const CircularProgressIndicator(),
+          };
+        },
       ),
     );
   }

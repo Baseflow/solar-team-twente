@@ -27,13 +27,19 @@ class NewsView extends StatelessWidget {
               );
             }
 
+            if (state.newsMessages.isEmpty) {
+              return Center(
+                child: Text(context.l10n.noNewsMessages),
+              );
+            }
+
             return ListView.separated(
               itemBuilder: (BuildContext context, int index) {
                 final NewsMessage newsMessage = state.newsMessages[index];
                 return NewsMessageCard(
                   title: newsMessage.title,
                   newsMessage: newsMessage.message,
-                  dateSubmitted: newsMessage.dateSubmitted,
+                  dateSubmitted: newsMessage.dateSubmitted!,
                 );
               },
               separatorBuilder: (_, __) => const GutterSmall(),

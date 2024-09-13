@@ -4,7 +4,7 @@ class NewsMessage {
   const NewsMessage({
     required this.title,
     required this.message,
-    required this.dateSubmitted,
+    this.dateSubmitted,
   });
 
   /// The title of the news message.
@@ -14,5 +14,5 @@ class NewsMessage {
   final String message;
 
   /// The date the news message was submitted.
-  final DateTime dateSubmitted;
+  final DateTime? dateSubmitted;
 }
