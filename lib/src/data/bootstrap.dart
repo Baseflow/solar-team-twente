@@ -91,6 +91,11 @@ Future<void> _registerDependencies() async {
         client: ioc.get<SupabaseClient>(),
       ),
     )
+    ..registerFactory<core.NewsRepository>(
+      () => SupabaseNewsRepository(
+        ioc.get<SupabaseClient>(),
+      ),
+    )
     ..registerFactory<core.LeaderboardRepository>(
       () => SupabaseLeaderboardRepository(
         ioc.get<SupabaseClient>(),

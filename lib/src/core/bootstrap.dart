@@ -52,7 +52,7 @@ void _registerDependencies() {
       ),
     )
     ..registerFactory<NewsService>(
-      NewsService.new,
+      () => NewsService(ioc.get<NewsRepository>()),
     )
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(

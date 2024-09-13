@@ -1,0 +1,4 @@
+enum AdminErrorCode {
+  missingTitleOrBody,
+  sendingMessageFailed,
+}

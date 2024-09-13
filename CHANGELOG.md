@@ -1,6 +1,8 @@
-## 0.0.4
+## 1.1.0
 
 * Implements the admin authentication page
+* Implements the admin dashboard page to send news messages
+* Implements the news page to show the news messages
 
 ## 0.0.3
 
