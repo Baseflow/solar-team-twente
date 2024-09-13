@@ -5,32 +5,34 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000248">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000265">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: app_store_connect_api_key" time="0.001732">
+      <testcase classname="fastlane.lanes" name="1: app_store_connect_api_key" time="0.007202">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: match" time="4.790959">
+      <testcase classname="fastlane.lanes" name="2: match" time="5.212419">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: ../scripts/flutter_build_ios.sh -c .env.prd -s .secrets/.secrets.prd" time="67.885081">
+      <testcase classname="fastlane.lanes" name="3: ../scripts/flutter_build_ios.sh -c .env.prd -s .secrets/.secrets.prd" time="142.714579">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: build_app" time="64.326637">
+      <testcase classname="fastlane.lanes" name="4: build_app" time="70.82377">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: upload_to_testflight" time="370.404621">
+      <testcase classname="fastlane.lanes" name="5: upload_to_testflight" time="61.299604">
+        
+          <failure message="/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:229:in `chdir'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:229:in `execute_action'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing'&#10;Fastfile:108:in `block (2 levels) in parsing_binding'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/lane.rb:41:in `call'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/lane_manager.rb:46:in `cruise_lane'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/command_line_handler.rb:34:in `handle'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/commander-4.6.0/lib/commander/command.rb:187:in `call'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/commander-4.6.0/lib/commander/command.rb:157:in `run'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/commands_generator.rb:354:in `run'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/commands_generator.rb:43:in `start'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off'&#10;/Users/rickvandijk/gems/ruby/2.6.0/gems/fastlane-2.219.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/Users/rickvandijk/gems/ruby/2.6.0/bin/fastlane:23:in `load'&#10;/Users/rickvandijk/gems/ruby/2.6.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/cli/exec.rb:58:in `load'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/cli/exec.rb:58:in `kernel_load'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/cli/exec.rb:23:in `run'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/cli.rb:492:in `exec'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/vendor/thor/lib/thor/command.rb:28:in `run'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/vendor/thor/lib/thor/invocation.rb:127:in `invoke_command'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/vendor/thor/lib/thor.rb:527:in `dispatch'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/cli.rb:34:in `dispatch'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/vendor/thor/lib/thor/base.rb:584:in `start'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/cli.rb:28:in `start'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/exe/bundle:37:in `block in &lt;top (required)&gt;'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/lib/bundler/friendly_errors.rb:117:in `with_friendly_errors'&#10;/Users/rickvandijk/.gem/gems/bundler-2.4.22/exe/bundle:29:in `&lt;top (required)&gt;'&#10;/usr/local/bin/bundle:23:in `load'&#10;/usr/local/bin/bundle:23:in `&lt;main&gt;'&#10;&#10;Error uploading ipa file: &#10; [Application Loader Error Output]: ERROR: [ContentDelivery.Uploader] Asset validation failed (90474) Invalid bundle. The “UIInterfaceOrientationPortrait,UIInterfaceOrientationPortraitUpsideDown” orientations were provided for the UISupportedInterfaceOrientations Info.plist key in the com.baseflow.solarapp bundle, but you need to include all of the “UIInterfaceOrientationPortrait,UIInterfaceOrientationPortraitUpsideDown,UIInterfaceOrientationLandscapeLeft,UIInterfaceOrientationLandscapeRight” orientations to support iPad multitasking. For details, visit: https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations. (ID: 3c8f892f-de09-48fc-908e-8c9bdd16fb85)&#10;[Application Loader Error Output]: Error uploading '/var/folders/7r/pq1_3bgs6fzfr3mjq9sd6dx40000gn/T/b896a87a-1495-4ca6-a996-7b8b42f04285.ipa'.&#10;[Application Loader Error Output]: Asset validation failed Invalid bundle. The “UIInterfaceOrientationPortrait,UIInterfaceOrientationPortraitUpsideDown” orientations were provided for the UISupportedInterfaceOrientations Info.plist key in the com.baseflow.solarapp bundle, but you need to include all of the “UIInterfaceOrientationPortrait,UIInterfaceOrientationPortraitUpsideDown,UIInterfaceOrientationLandscapeLeft,UIInterfaceOrientationLandscapeRight” orientations to support iPad multitasking. For details, visit: https://developer.apple.com/documentation/bundleresources/information_property_list/uisupportedinterfaceorientations. (ID: 3c8f892f-de09-48fc-908e-8c9bdd16fb85) (90474)&#10;[Application Loader Error Output]: The call to the altool completed with a non-zero exit status: 1. This indicates a failure." />
         
       </testcase>
     
