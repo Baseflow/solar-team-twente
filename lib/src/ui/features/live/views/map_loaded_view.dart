@@ -21,7 +21,7 @@ class MapLoadedView extends StatefulWidget {
 
 class _MapLoadedViewState extends State<MapLoadedView>
     with TickerProviderStateMixin {
-  static const double _defaultZoom = 8.2;
+  static const double _defaultZoom = 12;
   late final AnimatedMapController _animatedMapController;
 
   @override
@@ -53,10 +53,13 @@ class _MapLoadedViewState extends State<MapLoadedView>
           return;
         }
 
-        await _animatedMapController.animateTo(
-          dest: state.vehicleLocation.coordinates,
-          zoom: _defaultZoom,
-        );
+        if (state.vehicleLocation.coordinates !=
+            const LatLng(26.2041, 28.0473)) {
+          await _animatedMapController.animateTo(
+            dest: state.vehicleLocation.coordinates,
+            zoom: _defaultZoom,
+          );
+        }
       },
       builder: (BuildContext context, MapState mapState) {
         mapState as MapRaceLoaded;
@@ -78,6 +81,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
               mapState.selectedRaceDayGeoJson!.markers,
               mapState.vehicleLocation.coordinates,
               carouselState.selectedRaceDay,
+              carouselState.currentRaceDay,
             );
           },
           builder: (
@@ -136,13 +140,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
                 Positioned(
                   bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
                   right: Sizes.s16,
-                  child: _LiveButton(
-                    onPressed: () async {
-                      context
-                          .read<RaceDayCarouselCubit>()
-                          .selectCurrentRaceDay();
-                    },
-                  ),
+                  child: _LiveButton(),
                 ),
               ],
             );
@@ -156,35 +154,34 @@ class _MapLoadedViewState extends State<MapLoadedView>
     List<Marker> markers,
     LatLng vehicleLocation,
     RaceDayType selectedRaceDay,
+    RaceDayType currentRaceDay,
   ) async {
-    if (selectedRaceDay == RaceDayType.prep) {
+    if (selectedRaceDay == currentRaceDay) {
       await _animatedMapController.animateTo(
         dest: vehicleLocation,
         zoom: _defaultZoom,
       );
       return;
     }
+    final double maxZoom = selectedRaceDay == RaceDayType.allDays ? 4 : 5.5;
     await _animatedMapController.animatedFitCamera(
-      cameraFit: CameraFit.coordinates(
-        maxZoom: selectedRaceDay == RaceDayType.allDays ? 4 : 5.5,
-        coordinates: <LatLng>[
-          markers.first.point,
-          markers.last.point,
-        ],
+      cameraFit: CameraFit.insideBounds(
+        bounds: LatLngBounds.fromPoints(
+          markers.map((Marker marker) => marker.point).toList(),
+        ),
+        maxZoom: maxZoom,
       ),
     );
   }
 }
 
 class _LiveButton extends StatelessWidget {
-  const _LiveButton({required this.onPressed});
-
-  final VoidCallback onPressed;
+  const _LiveButton();
 
   @override
   Widget build(BuildContext context) {
     return FilledButton.icon(
-      onPressed: onPressed,
+      onPressed: context.read<RaceDayCarouselCubit>().selectCurrentRaceDay,
       icon: const Icon(Icons.my_location_rounded),
       label: const Text('Live'),
     );

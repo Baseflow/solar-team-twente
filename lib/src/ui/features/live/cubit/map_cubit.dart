@@ -59,7 +59,7 @@ class MapCubit extends Cubit<MapState> {
         vehicleLocation: const VehicleLocation.initial(),
         allRaceDaysGeoJson: allRaceDaysGeoJson,
         selectedRaceDayGeoJson: hasRaceStarted
-            ? allRaceDaysGeoJson[daysSinceStart + 1]
+            ? allRaceDaysGeoJson[daysSinceStart]
             : allRaceDaysGeoJson[0],
       ),
     );
@@ -67,14 +67,9 @@ class MapCubit extends Cubit<MapState> {
   }
 
   void loadSelectedDay(int index) {
-    int selectedRaceDayIndex = Constants.hasRaceStarted ? index + 1 : index;
-    if (Constants.hasRaceStarted && index == 0) {
-      selectedRaceDayIndex = state.allRaceDaysGeoJson.length - 1;
-    }
-
     emit(
       state.copyWith(
-        selectedRaceDayGeoJson: state.allRaceDaysGeoJson[selectedRaceDayIndex],
+        selectedRaceDayGeoJson: state.allRaceDaysGeoJson[index],
       ),
     );
   }
