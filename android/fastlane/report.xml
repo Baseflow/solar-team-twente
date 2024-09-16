@@ -5,17 +5,17 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000216">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000412">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: ../scripts/flutter_build_android.sh -c .env.prd -s .secrets/.secrets.prd" time="116.271301">
+      <testcase classname="fastlane.lanes" name="1: ../scripts/flutter_build_android.sh -c .env.prd -s .secrets/.secrets.prd" time="112.963552">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: upload_to_play_store" time="27.402085">
+      <testcase classname="fastlane.lanes" name="2: upload_to_play_store" time="24.869884">
         
       </testcase>
     
