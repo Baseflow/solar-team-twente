@@ -21,7 +21,9 @@ class _RaceDaysCarouselState extends State<RaceDaysCarousel> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    final int daysSinceStart =
+        DateTime.now().difference(Constants.startDate).inDays;
+    _pageController = PageController(initialPage: daysSinceStart);
   }
 
   @override

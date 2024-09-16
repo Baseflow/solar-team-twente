@@ -19,6 +19,7 @@ class RaceDaysBottomSheet extends StatelessWidget {
     final AppLocalizations l10n = context.l10n;
     return Container(
       height: Sizes.carouselBottomSheetHeight,
+      width: context.width,
       padding: const EdgeInsets.symmetric(vertical: Sizes.s16),
       decoration: BoxDecoration(
         color: context.colorScheme.surfaceContainerLow,
@@ -50,33 +51,23 @@ class RaceDaysBottomSheet extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     if (state.selectedRaceDay.index != 9)
-                      Text(
-                        DateFormat.yMMMMd(
-                          context.locale.toString(),
-                        ).format(dateToDisplay),
+                      Flexible(
+                        child: Text(
+                          DateFormat.yMMMMd(
+                            context.locale.toString(),
+                          ).format(dateToDisplay.toLocal()),
+                        ),
                       ),
                     if (state.selectedRaceDay.index > 0) ...<Widget>[
                       if (state.selectedRaceDay.index != 9) ...<Widget>[
                         const GutterSmall(),
                         const Text('·'),
                         const GutterSmall(),
-                      ],
-                      if (state.selectedRaceDay.index == 9)
-                        Text(l10n.fullRace)
-                      else
                         Text(
                           '${l10n.day(1)} ${state.selectedRaceDay.index}',
                         ),
-                      Expanded(
-                        child: Text(
-                          '0 ${l10n.kilometersCovered}',
-                          textAlign: TextAlign.end,
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            color: context.colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                      ] else
+                        Text(l10n.fullRace),
                     ],
                   ],
                 ),

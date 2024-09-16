@@ -23,10 +23,11 @@ class DashboardView extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(Sizes.s24),
+          padding: const EdgeInsets.symmetric(horizontal: Sizes.s16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              const GutterSmall(),
               const LeaderboardPreviewContainer(),
               const GutterLarge(),
               const TeamCard(),
@@ -42,6 +43,7 @@ class DashboardView extends StatelessWidget {
                   label: Text(context.l10n.polarstepsCallToAction),
                 ),
               ),
+              const Gutter(),
             ],
           ),
         ),

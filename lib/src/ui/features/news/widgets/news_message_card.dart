@@ -19,6 +19,10 @@ class NewsMessageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String formattedSubmissionTime = DateFormat(
+      'd MMM, hh:mm',
+      context.locale.countryCode,
+    ).format(dateSubmitted.toLocal());
     return Card(
       child: ListTile(
         isThreeLine: true,
@@ -47,10 +51,7 @@ class NewsMessageCard extends StatelessWidget {
             Text(newsMessage),
             const GutterTiny(),
             Text(
-              DateFormat(
-                'd MMM, hh:mm',
-                context.locale.countryCode,
-              ).format(dateSubmitted),
+              formattedSubmissionTime,
               textAlign: TextAlign.end,
               style: context.textTheme.labelSmall!.copyWith(
                 color: context.colorScheme.onPrimaryContainer.withOpacity(0.5),

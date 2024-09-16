@@ -34,6 +34,7 @@ class ProfileHeader extends StatelessWidget {
                     context.theme.brightness == Brightness.dark
                         ? Assets.dark.logo.path
                         : Assets.light.logo.path,
+                    semanticLabel: 'Logo Solarteam',
                   ),
                 ),
               ),

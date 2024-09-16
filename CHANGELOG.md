@@ -1,3 +1,10 @@
+## 1.1.1
+
+* Improves tile loading for the map by adding tile provider
+* Minor UI improvements with spacing in ScrollViews
+* Fixes time representations in local values
+* Fixes the carousel to initially show the current race day
+
 ## 1.1.0
 
 * Implements the admin authentication page

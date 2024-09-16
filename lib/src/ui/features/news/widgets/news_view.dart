@@ -18,7 +18,7 @@ class NewsView extends StatelessWidget {
         title: Text(context.l10n.newsPageTitle),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Sizes.s16),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.s16),
         child: BlocBuilder<NewsCubit, NewsState>(
           builder: (BuildContext context, NewsState state) {
             if (state is! NewsLoaded) {

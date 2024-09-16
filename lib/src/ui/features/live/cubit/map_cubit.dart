@@ -54,6 +54,8 @@ class MapCubit extends Cubit<MapState> {
     final int daysSinceStart =
         DateTime.now().difference(Constants.startDate).inDays;
 
+    await Future<void>.delayed(const Duration(seconds: 2));
+
     emit(
       MapRaceLoaded(
         vehicleLocation: const VehicleLocation.initial(),
