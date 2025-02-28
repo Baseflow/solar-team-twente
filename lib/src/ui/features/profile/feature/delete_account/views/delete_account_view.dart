@@ -21,9 +21,7 @@ class DeleteAccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.deleteAccount),
-      ),
+      appBar: AppBar(title: Text(context.l10n.deleteAccount)),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(
@@ -90,14 +88,13 @@ class _DeleteAccountForm extends StatelessWidget {
                   prefixIcon: const Icon(Icons.lock),
                   labelText: context.l10n.deleteAccountConfirmPassword,
                 ),
-                validator: FormBuilderValidators.compose(
-                  <FormFieldValidator<String>>[
-                    FormBuilderValidators.required(
-                      errorText: context.l10n.deleteAccountPasswordRequired,
-                    ),
-                    (_) => _validatePassword(context),
-                  ],
-                ),
+                validator:
+                    FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                      FormBuilderValidators.required(
+                        errorText: context.l10n.deleteAccountPasswordRequired,
+                      ),
+                      (_) => _validatePassword(context),
+                    ]),
               ),
               const Gutter(),
               FilledLoadingButton(

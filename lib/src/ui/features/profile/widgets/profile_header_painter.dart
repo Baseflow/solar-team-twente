@@ -10,21 +10,23 @@ class ProfilePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    final Paint paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
 
-    final Path path = Path()
-      ..moveTo(0, size.height * 0.2)
-      ..quadraticBezierTo(
-        size.width * 0.5,
-        size.height * 0.8,
-        size.width,
-        size.height * 0.2,
-      )
-      ..lineTo(size.width, 0)
-      ..lineTo(0, 0)
-      ..close();
+    final Path path =
+        Path()
+          ..moveTo(0, size.height * 0.2)
+          ..quadraticBezierTo(
+            size.width * 0.5,
+            size.height * 0.8,
+            size.width,
+            size.height * 0.2,
+          )
+          ..lineTo(size.width, 0)
+          ..lineTo(0, 0)
+          ..close();
 
     canvas.drawPath(path, paint);
   }

@@ -27,10 +27,7 @@ final class RaceDayCarouselLoaded extends RaceDayCarouselState {
   bool get hasRaceStarted => currentRaceDay != RaceDayType.prep;
 
   @override
-  List<Object> get props => <Object>[
-        currentRaceDay,
-        selectedRaceDay,
-      ];
+  List<Object> get props => <Object>[currentRaceDay, selectedRaceDay];
 
   @override
   RaceDayCarouselState copyWith({

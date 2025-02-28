@@ -22,9 +22,7 @@ class RegisterView extends StatelessWidget {
         padding: const EdgeInsets.all(Sizes.s32),
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: Sizes.s384,
-            ),
+            constraints: const BoxConstraints(maxWidth: Sizes.s384),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,

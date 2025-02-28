@@ -23,9 +23,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     } on ProfileException catch (e) {
       emit(ProfileErrorState(code: e.errorCode));
     } on Exception {
-      emit(
-        const ProfileErrorState(code: ProfileExceptionCode.unknown),
-      );
+      emit(const ProfileErrorState(code: ProfileExceptionCode.unknown));
     }
   }
 
@@ -41,8 +39,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       final Profile profile = (state as ProfileLoadedState).profile;
       emit(const ProfileLoadingState());
-      final Profile updatedProfile =
-          profile.copyWith(profileImage: newImageAsBytes);
+      final Profile updatedProfile = profile.copyWith(
+        profileImage: newImageAsBytes,
+      );
       emit(ProfileLoadedState(updatedProfile));
     } on ProfileException catch (e) {
       emit(ProfileErrorState(code: e.errorCode));

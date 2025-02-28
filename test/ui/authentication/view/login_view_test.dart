@@ -29,9 +29,7 @@ void main() {
 
     when(() => mockLoginCubit.state).thenReturn(const LoginState());
     when(() => mockLanguageCubit.state).thenReturn('en');
-    when(() => mockLanguageCubit.getCountryCode()).thenReturn(
-      'US',
-    );
+    when(() => mockLanguageCubit.getCountryCode()).thenReturn('US');
   });
 
   group('LoginContainer', () {
@@ -69,113 +67,104 @@ void main() {
       },
     );
 
-    testWidgets(
-      'should disable the sign in button while loading',
-      (WidgetTester tester) async {
-        whenListen(
-          mockLoginCubit,
-          Stream<LoginState>.fromIterable(
-            <LoginState>[const LoginState(isLoading: true)],
+    testWidgets('should disable the sign in button while loading', (
+      WidgetTester tester,
+    ) async {
+      whenListen(
+        mockLoginCubit,
+        Stream<LoginState>.fromIterable(<LoginState>[
+          const LoginState(isLoading: true),
+        ]),
+        initialState: const LoginState(),
+      );
+      await tester.pumpWidget(
+        MaterialAppHelper(
+          child: BlocProvider<LoginCubit>.value(
+            value: mockLoginCubit,
+            child: const LoginContainer(),
           ),
-          initialState: const LoginState(),
-        );
-        await tester.pumpWidget(
-          MaterialAppHelper(
-            child: BlocProvider<LoginCubit>.value(
-              value: mockLoginCubit,
-              child: const LoginContainer(),
-            ),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 100));
+
+      final Finder buttonFinder = find.byType(FilledLoadingButton);
+      expect(buttonFinder, findsOneWidget);
+
+      final FilledLoadingButton button = tester.widget<FilledLoadingButton>(
+        buttonFinder,
+      );
+
+      expect(button.isLoading, isTrue);
+    });
+
+    testWidgets('should enable the sign in button when not loading and valid '
+        'credentials are entered', (WidgetTester tester) async {
+      whenListen(
+        mockLoginCubit,
+        Stream<LoginState>.fromIterable(<LoginState>[
+          const LoginState(
+            email: 'test@example.com',
+            password: 'validPassword',
           ),
-        );
-        await tester.pump(const Duration(milliseconds: 100));
+        ]),
+        initialState: const LoginState(isLoading: true),
+      );
 
-        final Finder buttonFinder = find.byType(FilledLoadingButton);
-        expect(buttonFinder, findsOneWidget);
-
-        final FilledLoadingButton button =
-            tester.widget<FilledLoadingButton>(buttonFinder);
-
-        expect(
-          button.isLoading,
-          isTrue,
-        );
-      },
-    );
-
-    testWidgets(
-      'should enable the sign in button when not loading and valid '
-      'credentials are entered',
-      (WidgetTester tester) async {
-        whenListen(
-          mockLoginCubit,
-          Stream<LoginState>.fromIterable(<LoginState>[
-            const LoginState(
-              email: 'test@example.com',
-              password: 'validPassword',
-            ),
-          ]),
-          initialState: const LoginState(isLoading: true),
-        );
-
-        await tester.pumpWidget(
-          MaterialAppHelper(
-            child: BlocProvider<LoginCubit>.value(
-              value: mockLoginCubit,
-              child: const LoginContainer(),
-            ),
+      await tester.pumpWidget(
+        MaterialAppHelper(
+          child: BlocProvider<LoginCubit>.value(
+            value: mockLoginCubit,
+            child: const LoginContainer(),
           ),
-        );
-        await tester.pump();
+        ),
+      );
+      await tester.pump();
 
-        final Finder filledLoadingButtonFinder =
-            find.byType(FilledLoadingButton);
-        expect(filledLoadingButtonFinder, findsOneWidget);
+      final Finder filledLoadingButtonFinder = find.byType(FilledLoadingButton);
+      expect(filledLoadingButtonFinder, findsOneWidget);
 
-        final FilledLoadingButton button =
-            tester.widget<FilledLoadingButton>(filledLoadingButtonFinder);
-        expect(button.isLoading, isFalse);
-      },
-    );
+      final FilledLoadingButton button = tester.widget<FilledLoadingButton>(
+        filledLoadingButtonFinder,
+      );
+      expect(button.isLoading, isFalse);
+    });
 
-    testWidgets(
-      'should show an error message if the login fails',
-      (WidgetTester tester) async {
-        whenListen(
-          mockLoginCubit,
-          Stream<LoginState>.fromIterable(<LoginState>[
-            const LoginState(isLoading: true), // Simulate loading
-            const LoginState(
-              authErrorCode: AuthenticationExceptionCode.invalidCredentials,
-            ),
-          ]),
-          initialState: const LoginState(),
-        );
+    testWidgets('should show an error message if the login fails', (
+      WidgetTester tester,
+    ) async {
+      whenListen(
+        mockLoginCubit,
+        Stream<LoginState>.fromIterable(<LoginState>[
+          const LoginState(isLoading: true), // Simulate loading
+          const LoginState(
+            authErrorCode: AuthenticationExceptionCode.invalidCredentials,
+          ),
+        ]),
+        initialState: const LoginState(),
+      );
 
-        await tester.pumpWidget(
-          MultiBlocProvider(
-            providers: <BlocProvider<StateStreamableSource<Object?>>>[
-              BlocProvider<LoginCubit>.value(value: mockLoginCubit),
-              BlocProvider<LanguageCubit>.value(value: mockLanguageCubit),
+      await tester.pumpWidget(
+        MultiBlocProvider(
+          providers: <BlocProvider<StateStreamableSource<Object?>>>[
+            BlocProvider<LoginCubit>.value(value: mockLoginCubit),
+            BlocProvider<LanguageCubit>.value(value: mockLanguageCubit),
+          ],
+          child: MaterialApp(
+            home: Builder(builder: (BuildContext context) => const LoginView()),
+            localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
-            child: MaterialApp(
-              home: Builder(
-                builder: (BuildContext context) => const LoginView(),
-              ),
-              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
-            ),
+            supportedLocales: AppLocalizations.supportedLocales,
           ),
-        );
+        ),
+      );
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        expect(find.byType(SnackBar), findsOneWidget);
-      },
-    );
+      expect(find.byType(SnackBar), findsOneWidget);
+    });
   });
 }

@@ -32,9 +32,7 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NewsCubit>(
-      create: (_) => NewsCubit(
-        Ioc.container.get<NewsService>(),
-      )..initialize(),
+      create: (_) => NewsCubit(Ioc.container.get<NewsService>())..initialize(),
       child: const NewsView(),
     );
   }

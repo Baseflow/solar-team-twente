@@ -14,10 +14,7 @@ class TimeLineMarker extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         shape: BoxShape.circle,
-        border: Border.all(
-          color: context.colorScheme.primary,
-          width: Sizes.s4,
-        ),
+        border: Border.all(color: context.colorScheme.primary, width: Sizes.s4),
       ),
     );
   }

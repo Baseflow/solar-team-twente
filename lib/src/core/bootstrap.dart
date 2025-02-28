@@ -32,28 +32,20 @@ void _registerDependencies() {
       ),
     )
     ..registerFactory<LanguageService>(
-      () => LanguageService(
-        languageRepository: ioc.get<LanguageRepository>(),
-      ),
+      () => LanguageService(languageRepository: ioc.get<LanguageRepository>()),
     )
     ..registerFactory<ProfileService>(
-      () => ProfileService(
-        profileRepository: ioc.get<ProfileRepository>(),
-      ),
+      () => ProfileService(profileRepository: ioc.get<ProfileRepository>()),
     )
     ..registerFactory<ThemeService>(
-      () => ThemeService(
-        themeRepository: ioc.get<ThemeRepository>(),
-      ),
+      () => ThemeService(themeRepository: ioc.get<ThemeRepository>()),
     )
     ..registerFactory<VehicleLocationService>(
       () => VehicleLocationService(
         vehicleLocationRepository: ioc.get<VehicleLocationRepository>(),
       ),
     )
-    ..registerFactory<NewsService>(
-      () => NewsService(ioc.get<NewsRepository>()),
-    )
+    ..registerFactory<NewsService>(() => NewsService(ioc.get<NewsRepository>()))
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(
         leaderboardRepository: ioc.get<LeaderboardRepository>(),

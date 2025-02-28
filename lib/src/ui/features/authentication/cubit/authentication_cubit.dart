@@ -13,9 +13,9 @@ part 'authentication_state.dart';
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   /// Creates a new instance of [AuthenticationCubit].
   AuthenticationCubit(this._authenticationService)
-      : _authStatusStream = _authenticationService.authStatusStream,
-        _subscription = null,
-        super(const AuthenticationState());
+    : _authStatusStream = _authenticationService.authStatusStream,
+      _subscription = null,
+      super(const AuthenticationState());
 
   final AuthenticationService _authenticationService;
 
@@ -37,11 +37,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   /// Initializes the [AuthenticationCubit] by starting starting the token
   /// lifecycle in the [AuthenticationService].
   Future<void> ensureValidToken() async {
-    _subscription = _authStatusStream.listen(
-      (AuthenticationStatus status) {
-        emit(state.copyWith(authStatus: status));
-      },
-    );
+    _subscription = _authStatusStream.listen((AuthenticationStatus status) {
+      emit(state.copyWith(authStatus: status));
+    });
     await _authenticationService.ensureValidToken();
   }
 

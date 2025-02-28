@@ -114,11 +114,11 @@ class AdminContainer extends StatelessWidget {
                                 context.read<LoginCubit>().signIn();
                               },
                               buttonText: l10n.signIn,
-                              isLoading: context.select<LoginCubit, bool>(
-                                (LoginCubit value) {
-                                  return value.state.isLoading;
-                                },
-                              ),
+                              isLoading: context.select<LoginCubit, bool>((
+                                LoginCubit value,
+                              ) {
+                                return value.state.isLoading;
+                              }),
                             ),
                             const GutterSmall(),
                           ],

@@ -20,10 +20,11 @@ class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ChangePasswordCubit>(
-      create: (BuildContext context) => ChangePasswordCubit(
-        Ioc.container.get<AuthenticationService>(),
-        const ChangePasswordState(),
-      ),
+      create:
+          (BuildContext context) => ChangePasswordCubit(
+            Ioc.container.get<AuthenticationService>(),
+            const ChangePasswordState(),
+          ),
       child: const ChangePasswordView(),
     );
   }

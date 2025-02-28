@@ -46,13 +46,14 @@ class ProfileContent extends StatelessWidget {
                     trailing: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: ProfileAvatar(
-                        onTap: () => showModalBottomSheet<void>(
-                          context: context,
-                          useSafeArea: true,
-                          builder: (BuildContext context) {
-                            return const ImagePickerOptions();
-                          },
-                        ),
+                        onTap:
+                            () => showModalBottomSheet<void>(
+                              context: context,
+                              useSafeArea: true,
+                              builder: (BuildContext context) {
+                                return const ImagePickerOptions();
+                              },
+                            ),
                       ),
                     ),
                   ),

@@ -13,9 +13,7 @@ import '../layouts/slot_child_layout.dart';
 /// The [TrailingNavigationRail] widget used in the AppScaffoldShell.
 class TrailingNavigationRail extends StatelessWidget {
   /// Creates a new instance of the [TrailingNavigationRail].
-  const TrailingNavigationRail({
-    super.key,
-  });
+  const TrailingNavigationRail({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,7 @@ sealed class Result<T extends Object> {}
 /// Indicates that the result was a success and contains a value of type `T`.
 class SuccessResult<T extends Object> extends Result<T> {
   /// Constructs a failure result with a required value.
-  SuccessResult({
-    required this.value,
-  });
+  SuccessResult({required this.value});
 
   /// The value of the result.
   final T value;
@@ -15,9 +13,7 @@ class SuccessResult<T extends Object> extends Result<T> {
 /// Indicates that the result was a failure and contains a failure code.
 class FailureResult<T extends Object> extends Result<T> {
   /// Constructs a failure result with a required [FailureCode].
-  FailureResult({
-    required this.failure,
-  });
+  FailureResult({required this.failure});
 
   /// The [FailureCode] of the result.
   final FailureCode failure;
@@ -43,5 +39,5 @@ enum FailureCode {
   notFound,
 
   /// Unknown placeholder failure.
-  unknown;
+  unknown,
 }

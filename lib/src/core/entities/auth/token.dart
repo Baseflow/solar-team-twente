@@ -25,9 +25,5 @@ class Token extends Equatable {
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 
   @override
-  List<Object?> get props => <Object?>[
-        accessToken,
-        refreshToken,
-        expiresAt,
-      ];
+  List<Object?> get props => <Object?>[accessToken, refreshToken, expiresAt];
 }

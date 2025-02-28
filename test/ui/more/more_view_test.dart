@@ -16,78 +16,72 @@ class MockAuthenticationCubit extends MockCubit<AuthenticationState>
     implements AuthenticationCubit {}
 
 void main() {
-  group(
-    'MoreView',
-    () {
-      late MockAuthenticationCubit mockAuthenticationCubit;
-      late MockProfileCubit mockProfileCubit;
+  group('MoreView', () {
+    late MockAuthenticationCubit mockAuthenticationCubit;
+    late MockProfileCubit mockProfileCubit;
 
-      setUp(() {
-        mockAuthenticationCubit = MockAuthenticationCubit();
-        mockProfileCubit = MockProfileCubit();
-      });
+    setUp(() {
+      mockAuthenticationCubit = MockAuthenticationCubit();
+      mockProfileCubit = MockProfileCubit();
+    });
 
-      testWidgets(
-        'should display a transparent Scaffold to ensure the '
-        'background is visible',
-        (WidgetTester tester) async {
-          when(() => mockProfileCubit.state).thenReturn(
-            const ProfileInitialState(),
-          );
+    testWidgets('should display a transparent Scaffold to ensure the '
+        'background is visible', (WidgetTester tester) async {
+      when(
+        () => mockProfileCubit.state,
+      ).thenReturn(const ProfileInitialState());
 
-          await tester.pumpWidget(
-            _buildMoreView(mockAuthenticationCubit, mockProfileCubit),
-          );
-
-          expect(find.byType(Scaffold), findsOneWidget);
-          expect(
-            tester.widget<Scaffold>(find.byType(Scaffold)).backgroundColor,
-            Colors.transparent,
-          );
-        },
+      await tester.pumpWidget(
+        _buildMoreView(mockAuthenticationCubit, mockProfileCubit),
       );
 
-// TODO(anyone): implement these tests after profile is implemented.
-// testWidgets(
-//   'should display user name in AppBar when profile is loaded',
-//   (WidgetTester tester) async {
-//     when(() => mockProfileCubit.state).thenReturn(
-//       ProfileLoadedState(
-//         Profile(
-//           name: 'Test User',
-//           address: '',
-//           email: '',
-//           phoneNumber: '',
-//         ),
-//       ),
-//     );
-//
-//     await tester.pumpWidget(
-//       _buildMoreView(mockAuthenticationCubit, mockProfileCubit),
-//     );
-//
-//     find.byType(AppBar);
-//     expect(find.text('Test User'), findsOneWidget);
-//   },
-// );
+      expect(find.byType(Scaffold), findsOneWidget);
+      expect(
+        tester.widget<Scaffold>(find.byType(Scaffold)).backgroundColor,
+        Colors.transparent,
+      );
+    });
 
-// testWidgets(
-//   'should display profile title in AppBar when no profile is loaded yet',
-//   (WidgetTester tester) async {
-//     when(() => mockProfileCubit.state).thenReturn(
-//       const ProfileInitialState(),
-//     );
-//
-//     await tester.pumpWidget(
-//       _buildMoreView(mockAuthenticationCubit, mockProfileCubit),
-//     );
-//
-//     find.byType(AppBar);
-//     expect(find.text('Profile'), findsOneWidget);
-//   },
-// );
-    },
-  );
+    // TODO(anyone): implement these tests after profile is implemented.
+    // testWidgets(
+    //   'should display user name in AppBar when profile is loaded',
+    //   (WidgetTester tester) async {
+    //     when(() => mockProfileCubit.state).thenReturn(
+    //       ProfileLoadedState(
+    //         Profile(
+    //           name: 'Test User',
+    //           address: '',
+    //           email: '',
+    //           phoneNumber: '',
+    //         ),
+    //       ),
+    //     );
+    //
+    //     await tester.pumpWidget(
+    //       _buildMoreView(mockAuthenticationCubit, mockProfileCubit),
+    //     );
+    //
+    //     find.byType(AppBar);
+    //     expect(find.text('Test User'), findsOneWidget);
+    //   },
+    // );
+
+    // testWidgets(
+    //   'should display profile title in AppBar when no profile is loaded yet',
+    //   (WidgetTester tester) async {
+    //     when(() => mockProfileCubit.state).thenReturn(
+    //       const ProfileInitialState(),
+    //     );
+    //
+    //     await tester.pumpWidget(
+    //       _buildMoreView(mockAuthenticationCubit, mockProfileCubit),
+    //     );
+    //
+    //     find.byType(AppBar);
+    //     expect(find.text('Profile'), findsOneWidget);
+    //   },
+    // );
+  });
 }
 
 MaterialAppHelper _buildMoreView(
@@ -97,12 +91,8 @@ MaterialAppHelper _buildMoreView(
   return MaterialAppHelper(
     child: MultiBlocProvider(
       providers: <BlocProvider<Cubit<Object>>>[
-        BlocProvider<AuthenticationCubit>.value(
-          value: mockAuthenticationCubit,
-        ),
-        BlocProvider<ProfileCubit>.value(
-          value: mockProfileCubit,
-        ),
+        BlocProvider<AuthenticationCubit>.value(value: mockAuthenticationCubit),
+        BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
       ],
       child: const MoreView(),
     ),

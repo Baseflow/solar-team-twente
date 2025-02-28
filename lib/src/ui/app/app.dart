@@ -24,9 +24,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<AuthenticationCubit>(
-          create: (BuildContext context) => AuthenticationCubit(
-            Ioc.container.get<AuthenticationService>(),
-          )..ensureValidToken(),
+          create:
+              (BuildContext context) => AuthenticationCubit(
+                Ioc.container.get<AuthenticationService>(),
+              )..ensureValidToken(),
         ),
         BlocProvider<LanguageCubit>(
           create: (BuildContext languageContext) {
@@ -39,9 +40,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ThemeCubit>(
           create: (_) {
-            return ThemeCubit(
-              Ioc.container.get<ThemeService>(),
-            )..loadTheme();
+            return ThemeCubit(Ioc.container.get<ThemeService>())..loadTheme();
           },
         ),
       ],

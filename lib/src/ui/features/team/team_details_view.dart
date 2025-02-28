@@ -18,16 +18,14 @@ import 'team_member_view_model.dart';
 class TeamDetailsView extends StatelessWidget {
   /// {@macro team_details_view}
   TeamDetailsView({required AppLocalizations l10n, super.key})
-      : teamMembers = _getTeamMembers(l10n);
+    : teamMembers = _getTeamMembers(l10n);
   final List<TeamMember> teamMembers;
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.teamPageTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.teamPageTitle)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: Sizes.s32),
         child: Column(
@@ -36,10 +34,7 @@ class TeamDetailsView extends StatelessWidget {
               options: CarouselOptions(
                 aspectRatio: 1.8,
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
-                onPageChanged: (
-                  int index,
-                  CarouselPageChangedReason reason,
-                ) {
+                onPageChanged: (int index, CarouselPageChangedReason reason) {
                   context.read<TeamDetailsCubit>().selectTeamMember(index);
                 },
               ),
@@ -62,9 +57,9 @@ class TeamDetailsView extends StatelessWidget {
                       ),
                       const Gutter(),
                       FilledButton.tonalIcon(
-                        onPressed: () => _launchURL(
-                          teamMembers[currentIndex].linkedUrl,
-                        ),
+                        onPressed:
+                            () =>
+                                _launchURL(teamMembers[currentIndex].linkedUrl),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: Sizes.s12,
@@ -92,79 +87,73 @@ class TeamDetailsView extends StatelessWidget {
   }
 
   List<Widget> _imageSliders(BuildContext context) {
-    return teamMembers.map(
-      (TeamMember member) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Expanded(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(Sizes.s24),
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    CachedNetworkImage(
-                      imageUrl: member.imageUrl,
-                      fit: BoxFit.cover,
-                      placeholder: (BuildContext context, String url) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      errorWidget:
-                          (BuildContext context, String url, Object error) {
-                        return const Icon(Icons.error);
-                      },
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Colors.black87,
-                              Colors.transparent,
-                            ],
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                          ),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Sizes.s12,
-                          horizontal: Sizes.s24,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              member.name,
-                              style: context.textTheme.bodyLarge?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              member.profession,
-                              style: context.textTheme.bodySmall?.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+    return teamMembers.map((TeamMember member) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Expanded(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(Sizes.s24)),
+              child: Stack(
+                children: <Widget>[
+                  CachedNetworkImage(
+                    imageUrl: member.imageUrl,
+                    fit: BoxFit.cover,
+                    placeholder: (BuildContext context, String url) {
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                    errorWidget: (
+                      BuildContext context,
+                      String url,
+                      Object error,
+                    ) {
+                      return const Icon(Icons.error);
+                    },
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[Colors.black87, Colors.transparent],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
                         ),
                       ),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: Sizes.s12,
+                        horizontal: Sizes.s24,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            member.name,
+                            style: context.textTheme.bodyLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            member.profession,
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        );
-      },
-    ).toList();
+          ),
+        ],
+      );
+    }).toList();
   }
 
   Future<void> _launchURL(String url) async {

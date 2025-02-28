@@ -21,9 +21,7 @@ class LeaderboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.leaderboardTitle),
-      ),
+      appBar: AppBar(title: Text(context.l10n.leaderboardTitle)),
       body: const LeaderboardView(),
     );
   }

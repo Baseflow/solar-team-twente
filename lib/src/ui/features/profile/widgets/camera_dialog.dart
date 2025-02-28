@@ -67,9 +67,7 @@ class _CameraDialogState extends State<CameraDialog> {
 }
 
 class _CameraPreview extends StatelessWidget {
-  const _CameraPreview({
-    required this.controller,
-  });
+  const _CameraPreview({required this.controller});
 
   final CameraController? controller;
 
@@ -99,14 +97,15 @@ class _CameraPreview extends StatelessWidget {
           ),
           onPressed: () async {
             if (controller == null) return;
-            await _takePictureAndCloseDialog(context, profileCubit).onError(
-              (Object? error, StackTrace stackTrace) async {
-                if (!context.mounted) return;
-                await context.showSnackBar(
-                  SnackBar(content: Text(context.l10n.generalCameraError)),
-                );
-              },
-            );
+            await _takePictureAndCloseDialog(context, profileCubit).onError((
+              Object? error,
+              StackTrace stackTrace,
+            ) async {
+              if (!context.mounted) return;
+              await context.showSnackBar(
+                SnackBar(content: Text(context.l10n.generalCameraError)),
+              );
+            });
           },
         ),
       ],

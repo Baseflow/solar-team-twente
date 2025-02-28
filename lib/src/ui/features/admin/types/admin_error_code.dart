@@ -1,4 +1,1 @@
-enum AdminErrorCode {
-  missingTitleOrBody,
-  sendingMessageFailed,
-}
+enum AdminErrorCode { missingTitleOrBody, sendingMessageFailed }

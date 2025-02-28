@@ -39,8 +39,8 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
   SupabaseAuthenticationRepository.private({
     required SupabaseClient authenticationClient,
     required TokenDataStore tokenDataStore,
-  })  : _authenticationClient = authenticationClient,
-        _tokenDataStore = tokenDataStore;
+  }) : _authenticationClient = authenticationClient,
+       _tokenDataStore = tokenDataStore;
 
   static SupabaseAuthenticationRepository? _repositoryInstance;
 
@@ -64,11 +64,8 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    final AuthResponse response =
-        await _authenticationClient.auth.signInWithPassword(
-      email: email,
-      password: password,
-    );
+    final AuthResponse response = await _authenticationClient.auth
+        .signInWithPassword(email: email, password: password);
 
     // TODO(Jurijs): Handle error
     if (response.session == null || response.user == null) {
@@ -110,10 +107,8 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Token> refreshToken(Token token) async {
-    final AuthResponse response =
-        await _authenticationClient.auth.refreshSession(
-      TokenDTO.fromEntity(token).refreshToken,
-    );
+    final AuthResponse response = await _authenticationClient.auth
+        .refreshSession(TokenDTO.fromEntity(token).refreshToken);
 
     // TODO(Jurijs): Handle error
     if (response.session == null || response.user == null) {

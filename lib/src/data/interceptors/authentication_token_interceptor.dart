@@ -9,8 +9,8 @@ class AuthenticationTokenInterceptor implements Interceptor {
   AuthenticationTokenInterceptor({
     required AuthenticationRepository authenticationRepository,
     required Dio dio,
-  })  : _dioClient = dio,
-        _authenticationRepository = authenticationRepository;
+  }) : _dioClient = dio,
+       _authenticationRepository = authenticationRepository;
 
   final Dio _dioClient;
   final AuthenticationRepository _authenticationRepository;
@@ -32,16 +32,15 @@ class AuthenticationTokenInterceptor implements Interceptor {
     try {
       newToken = await _authenticationRepository.refreshToken(token);
     } catch (error) {
-      throw const TokenException(
-        errorCode: TokenExceptionCode.refreshFailed,
-      );
+      throw const TokenException(errorCode: TokenExceptionCode.refreshFailed);
     }
 
     try {
       err.requestOptions.headers['Authorization'] =
           'Bearer ${newToken.accessToken}';
-      final Response<dynamic> newResponse =
-          await _dioClient.fetch(err.requestOptions);
+      final Response<dynamic> newResponse = await _dioClient.fetch(
+        err.requestOptions,
+      );
       handler.resolve(newResponse);
     } on DioException catch (error) {
       handler.next(error);
@@ -56,13 +55,13 @@ class AuthenticationTokenInterceptor implements Interceptor {
     final Token? token = await _authenticationRepository.getToken();
 
     if (token == null) {
-      throw const TokenException(
-        errorCode: TokenExceptionCode.noTokenFound,
-      );
+      throw const TokenException(errorCode: TokenExceptionCode.noTokenFound);
     }
 
-    options.headers
-        .putIfAbsent('Authorization', () => 'Bearer ${token.accessToken}');
+    options.headers.putIfAbsent(
+      'Authorization',
+      () => 'Bearer ${token.accessToken}',
+    );
 
     handler.next(options);
   }

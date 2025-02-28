@@ -11,10 +11,7 @@ import '../../../extensions/build_context_extensions.dart';
 @visibleForTesting
 class LeaderboardPreviewLoadedView extends StatelessWidget {
   /// {@macro leaderboard_preview_loaded_view}
-  const LeaderboardPreviewLoadedView(
-    this.leaderboard, {
-    super.key,
-  });
+  const LeaderboardPreviewLoadedView(this.leaderboard, {super.key});
 
   /// The leaderboard to display.
   final List<RaceTeam> leaderboard;
@@ -39,10 +36,7 @@ class LeaderboardPreviewLoadedView extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             final RaceTeam team = leaderboard[index];
-            return LeaderboardPositionRow(
-              team: team,
-              racePosition: index + 1,
-            );
+            return LeaderboardPositionRow(team: team, racePosition: index + 1);
           },
         ),
       ],
@@ -74,9 +68,10 @@ class LeaderboardPositionRow extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Sizes.s8),
-        color: team.name == Constants.solarTeamName
-            ? context.colorScheme.primaryContainer
-            : null,
+        color:
+            team.name == Constants.solarTeamName
+                ? context.colorScheme.primaryContainer
+                : null,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(

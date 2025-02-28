@@ -43,14 +43,13 @@ class AdaptiveSplitLayout extends StatelessWidget {
       ),
       secondaryBody: SlotLayout(
         config: <Breakpoint, SlotLayoutConfig>{
-          Breakpoints.small: SlotLayout.from(
-            key: const Key('Body Small'),
-          ),
+          Breakpoints.small: SlotLayout.from(key: const Key('Body Small')),
           Breakpoints.largeDesktop: SlotLayout.from(
             key: const Key('Body Medium'),
-            builder: secondaryBody != null
-                ? (_) => secondaryBody!
-                : AdaptiveScaffold.emptyBuilder,
+            builder:
+                secondaryBody != null
+                    ? (_) => secondaryBody!
+                    : AdaptiveScaffold.emptyBuilder,
           ),
         },
       ),

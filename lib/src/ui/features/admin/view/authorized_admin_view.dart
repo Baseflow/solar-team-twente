@@ -18,10 +18,7 @@ import '../types/admin_error_code.dart';
 /// {@endtemplate}
 class AuthorizedAdminView extends StatefulWidget {
   /// {@macro authorized_admin_view}
-  const AuthorizedAdminView({
-    required this.user,
-    super.key,
-  });
+  const AuthorizedAdminView({required this.user, super.key});
 
   final User? user;
 
@@ -53,9 +50,9 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: BlocProvider<AdminCubit>(
-          create: (BuildContext context) => AdminCubit(
-            newsService: Ioc.container.get<NewsService>(),
-          ),
+          create:
+              (BuildContext context) =>
+                  AdminCubit(newsService: Ioc.container.get<NewsService>()),
           child: BlocConsumer<AdminCubit, AdminState>(
             listenWhen: (AdminState previous, AdminState current) {
               return current is AdminMessageSent;
@@ -137,19 +134,14 @@ class _ErrorContainer extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: Sizes.s16),
       decoration: BoxDecoration(
         color: context.colorScheme.error.withValues(alpha: 0.1),
-        border: Border.all(
-          color: context.colorScheme.error,
-        ),
+        border: Border.all(color: context.colorScheme.error),
         borderRadius: BorderRadius.circular(Sizes.s4),
       ),
       padding: const EdgeInsets.all(Sizes.s8),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(
-            Icons.warning_amber_rounded,
-            color: context.colorScheme.error,
-          ),
+          Icon(Icons.warning_amber_rounded, color: context.colorScheme.error),
           const GutterSmall(),
           Text(
             switch (errorCode) {
@@ -185,10 +177,7 @@ class _MessageSubmittedContainer extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Icon(
-            Icons.check_circle_outline_rounded,
-            color: Colors.green,
-          ),
+          const Icon(Icons.check_circle_outline_rounded, color: Colors.green),
           const GutterSmall(),
           Text(
             l10n.messageSent,

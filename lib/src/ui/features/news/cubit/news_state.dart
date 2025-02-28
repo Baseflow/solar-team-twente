@@ -1,9 +1,7 @@
 part of 'news_cubit.dart';
 
 abstract class NewsState extends Equatable {
-  const NewsState({
-    required this.newsMessages,
-  });
+  const NewsState({required this.newsMessages});
 
   final List<NewsMessage> newsMessages;
 }

@@ -71,12 +71,14 @@ class _MapLoadedViewState extends State<MapLoadedView>
           ) {
             return previous.selectedRaceDay != current.selectedRaceDay;
           },
-          listener:
-              (BuildContext context, RaceDayCarouselState carouselState) async {
+          listener: (
+            BuildContext context,
+            RaceDayCarouselState carouselState,
+          ) async {
             if (carouselState.selectedRaceDay.index > 0) {
-              context
-                  .read<MapCubit>()
-                  .loadSelectedDay(carouselState.selectedRaceDay.index - 1);
+              context.read<MapCubit>().loadSelectedDay(
+                carouselState.selectedRaceDay.index - 1,
+              );
             }
             await _animateToSection(
               mapState.selectedRaceDayGeoJson!.markers,
@@ -85,10 +87,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
               carouselState.currentRaceDay,
             );
           },
-          builder: (
-            BuildContext context,
-            RaceDayCarouselState carouselState,
-          ) {
+          builder: (BuildContext context, RaceDayCarouselState carouselState) {
             return FlutterMap(
               mapController: _animatedMapController.mapController,
               options: MapOptions(

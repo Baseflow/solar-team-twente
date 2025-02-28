@@ -7,8 +7,9 @@ import 'navigation_error_page.dart';
 import 'shared_routes.dart';
 
 /// The root navigator key for the main router of the app.
-final GlobalKey<NavigatorState> rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'root',
+);
 
 /// The [GlobalRouter] maintains the main route configuration for the app.
 ///

@@ -5,7 +5,7 @@ import '../dto/race/vehicle_location_dto.dart';
 
 class SupabaseVehicleLocationRepository implements VehicleLocationRepository {
   SupabaseVehicleLocationRepository({required SupabaseClient client})
-      : _client = client;
+    : _client = client;
 
   final SupabaseClient _client;
 
@@ -17,10 +17,8 @@ class SupabaseVehicleLocationRepository implements VehicleLocationRepository {
         .order('last_seen')
         .limit(1);
 
-    return response.map(
-      (List<Map<String, dynamic>> data) {
-        return VehicleLocationDto.fromJson(data.single).toEntity();
-      },
-    );
+    return response.map((List<Map<String, dynamic>> data) {
+      return VehicleLocationDto.fromJson(data.single).toEntity();
+    });
   }
 }

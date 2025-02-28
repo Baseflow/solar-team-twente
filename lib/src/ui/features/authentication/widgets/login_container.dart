@@ -118,11 +118,11 @@ class LoginContainer extends StatelessWidget {
                             ),
                             const Gutter(),
                             FilledLoadingButton(
-                              isLoading: context.select<LoginCubit, bool>(
-                                (LoginCubit value) {
-                                  return value.state.isLoading;
-                                },
-                              ),
+                              isLoading: context.select<LoginCubit, bool>((
+                                LoginCubit value,
+                              ) {
+                                return value.state.isLoading;
+                              }),
                               onPressed: () {
                                 if (!_loginFormKey.currentState!.validate()) {
                                   return;
@@ -146,9 +146,10 @@ class LoginContainer extends StatelessWidget {
                                 const SizedBox(width: Sizes.s4),
                                 Flexible(
                                   child: TextButton(
-                                    onPressed: () => context.pushNamed(
-                                      RegisterPage.name,
-                                    ),
+                                    onPressed:
+                                        () => context.pushNamed(
+                                          RegisterPage.name,
+                                        ),
                                     child: Text(
                                       '${l10n.register}.',
                                       style: const TextStyle(

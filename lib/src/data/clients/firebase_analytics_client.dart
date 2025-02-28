@@ -37,9 +37,8 @@ class FirebaseAnalyticsClient implements AnalyticsRepository {
   ///
   /// The [identifier] parameter specifies the user identifier.
   @override
-  Future<void> setUserId(String identifier) async => _analytics.setUserId(
-        id: identifier,
-      );
+  Future<void> setUserId(String identifier) async =>
+      _analytics.setUserId(id: identifier);
 
   /// Updates the user properties for analytics.
   @override

@@ -14,9 +14,7 @@ class TermsAndConditionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.termsAndConditions),
-      ),
+      appBar: AppBar(title: Text(l10n.termsAndConditions)),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(Sizes.s16),

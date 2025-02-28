@@ -33,10 +33,7 @@ class Section extends StatelessWidget {
           padding: const EdgeInsets.only(left: Sizes.s16, top: Sizes.s16),
           child: Row(
             children: <Widget>[
-              if (icon != null) ...<Widget>[
-                Icon(icon),
-                const Gutter(),
-              ],
+              if (icon != null) ...<Widget>[Icon(icon), const Gutter()],
               Text(title, style: context.theme.textTheme.titleMedium),
             ],
           ),

@@ -12,14 +12,17 @@ import '../features/team/team_details_page.dart';
 import 'app_scaffold_shell.dart';
 import 'global_router.dart' as router show rootNavigatorKey;
 
-final GlobalKey<NavigatorState> _liveNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'home');
+final GlobalKey<NavigatorState> _liveNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'home',
+);
 final GlobalKey<NavigatorState> _dashboardNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'dashboard');
-final GlobalKey<NavigatorState> _newsNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'news');
-final GlobalKey<NavigatorState> _moreNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'more');
+final GlobalKey<NavigatorState> _newsNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'news',
+);
+final GlobalKey<NavigatorState> _moreNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'more',
+);
 
 /// Stores the routes that are accessible to authenticated users.
 class AuthenticatedRoutes {
@@ -49,18 +52,14 @@ class AuthenticatedRoutes {
                   name: TeamDetailsPage.routeName,
                   path: TeamDetailsPage.path,
                   pageBuilder: (BuildContext context, GoRouterState state) {
-                    return const MaterialPage<void>(
-                      child: TeamDetailsPage(),
-                    );
+                    return const MaterialPage<void>(child: TeamDetailsPage());
                   },
                 ),
                 GoRoute(
                   name: LeaderboardPage.routeName,
                   path: LeaderboardPage.path,
                   pageBuilder: (BuildContext context, GoRouterState state) {
-                    return const MaterialPage<void>(
-                      child: LeaderboardPage(),
-                    );
+                    return const MaterialPage<void>(child: LeaderboardPage());
                   },
                 ),
               ],

@@ -11,30 +11,26 @@ void main() {
   );
 
   group('resetPassword', () {
-    test(
-      'should call repository with correct email',
-      () async {
-        const String email = 'test@email.com';
-        when(() => mockProfileRepository.resetPassword(email))
-            .thenAnswer((_) async => Future<void>.value());
-        await profileService.resetPassword(email);
-        verify(() => mockProfileRepository.resetPassword(email)).called(1);
-      },
-    );
+    test('should call repository with correct email', () async {
+      const String email = 'test@email.com';
+      when(
+        () => mockProfileRepository.resetPassword(email),
+      ).thenAnswer((_) async => Future<void>.value());
+      await profileService.resetPassword(email);
+      verify(() => mockProfileRepository.resetPassword(email)).called(1);
+    });
   });
 
   group('deleteAccount', () {
-    test(
-      'should call repository with valid password',
-      () async {
-        const String password = 'password';
-        when(() => mockProfileRepository.deleteAccount(password: password))
-            .thenAnswer((_) async => Future<void>.value());
-        await profileService.deleteAccount(password: password);
-        verify(
-          () => mockProfileRepository.deleteAccount(password: password),
-        ).called(1);
-      },
-    );
+    test('should call repository with valid password', () async {
+      const String password = 'password';
+      when(
+        () => mockProfileRepository.deleteAccount(password: password),
+      ).thenAnswer((_) async => Future<void>.value());
+      await profileService.deleteAccount(password: password);
+      verify(
+        () => mockProfileRepository.deleteAccount(password: password),
+      ).called(1);
+    });
   });
 }

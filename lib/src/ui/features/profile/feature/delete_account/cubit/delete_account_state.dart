@@ -10,9 +10,7 @@ sealed class DeleteAccountState extends Equatable {
   final String? password;
 
   /// Copy the state with new values.
-  DeleteAccountState copyWith({
-    String? password,
-  });
+  DeleteAccountState copyWith({String? password});
 }
 
 /// The initial state for the delete account feature.
@@ -24,21 +22,15 @@ class DeleteAccountInitial extends DeleteAccountState {
   List<Object?> get props => <Object?>[password];
 
   @override
-  DeleteAccountInitial copyWith({
-    String? password,
-  }) {
-    return DeleteAccountInitial(
-      password: password ?? this.password,
-    );
+  DeleteAccountInitial copyWith({String? password}) {
+    return DeleteAccountInitial(password: password ?? this.password);
   }
 }
 
 /// State for when the delete account feature is loading.
 class DeleteAccountLoadingState extends DeleteAccountInitial {
   /// Creates a new [DeleteAccountLoadingState] instance.
-  const DeleteAccountLoadingState({
-    required super.password,
-  });
+  const DeleteAccountLoadingState({required super.password});
 
   @override
   List<Object?> get props => <Object?>[password];
@@ -47,9 +39,7 @@ class DeleteAccountLoadingState extends DeleteAccountInitial {
 /// State for when the delete account feature has been successful.
 class DeleteAccountSuccessState extends DeleteAccountInitial {
   /// Creates a new [DeleteAccountSuccessState] instance.
-  const DeleteAccountSuccessState({
-    required super.password,
-  });
+  const DeleteAccountSuccessState({required super.password});
 
   @override
   List<Object> get props => <Object>[];

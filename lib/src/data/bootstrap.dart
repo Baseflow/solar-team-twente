@@ -34,29 +34,20 @@ Future<void> _registerDependencies() async {
   // Register API client implementations
   ioc
     // Register data dependencies needed for the Analytics feature.
-    ..registerLazySingleton<AnalyticsRepository>(
-      FirebaseAnalyticsClient.new,
-    )
-
+    ..registerLazySingleton<AnalyticsRepository>(FirebaseAnalyticsClient.new)
     // Register data dependencies needed for the Crashlytics feature.
     ..registerLazySingleton<CrashlyticsRepository>(
       FirebaseCrashlyticsClient.new,
     )
-
     // Register supabase client as a singleton.
-    ..registerLazySingleton<SupabaseClient>(
-      () => Supabase.instance.client,
-    )
-    ..registerFactory<TokenDataStore>(
-      FlutterSecureStorageTokenDataStore.new,
-    )
+    ..registerLazySingleton<SupabaseClient>(() => Supabase.instance.client)
+    ..registerFactory<TokenDataStore>(FlutterSecureStorageTokenDataStore.new)
     ..registerLazySingleton<AuthenticationRepository>(
       () => SupabaseAuthenticationRepository(
         authenticationClient: ioc.get<SupabaseClient>(),
         tokenDataStore: ioc.get<TokenDataStore>(),
       ),
     )
-
     // Until auth is implemented, the following code is commented out.
     // ..registerLazySingleton<AuthenticationTokenInterceptor>(
     //   () => AuthenticationTokenInterceptor(
@@ -64,17 +55,13 @@ Future<void> _registerDependencies() async {
     //     dio: DioFactory.getOrCreateAuthenticationDio(),
     //   ),
     // )
-
     // Register data dependencies needed for the Profile feature.
     ..registerFactory<ProfileClient>(
-      () => ProfileClient(
-        DioFactory.getOrCreateGeneralDio(),
-      ),
+      () => ProfileClient(DioFactory.getOrCreateGeneralDio()),
     )
     ..registerFactory<ProfileRepository>(
       () => ApiProfileRepository(ioc.get<ProfileClient>()),
     )
-
     // Register other data dependencies.
     ..registerFactory<LanguageRepository>(
       () => SharedPreferencesLanguageRepository(
@@ -87,18 +74,13 @@ Future<void> _registerDependencies() async {
       ),
     )
     ..registerFactory<VehicleLocationRepository>(
-      () => SupabaseVehicleLocationRepository(
-        client: ioc.get<SupabaseClient>(),
-      ),
+      () =>
+          SupabaseVehicleLocationRepository(client: ioc.get<SupabaseClient>()),
     )
     ..registerFactory<NewsRepository>(
-      () => SupabaseNewsRepository(
-        ioc.get<SupabaseClient>(),
-      ),
+      () => SupabaseNewsRepository(ioc.get<SupabaseClient>()),
     )
     ..registerFactory<LeaderboardRepository>(
-      () => SupabaseLeaderboardRepository(
-        ioc.get<SupabaseClient>(),
-      ),
+      () => SupabaseLeaderboardRepository(ioc.get<SupabaseClient>()),
     );
 }

@@ -40,20 +40,20 @@ class ChangePasswordForm extends StatelessWidget {
                 prefixIcon: const Icon(Icons.lock),
                 labelText: l10n.currentPassword,
               ),
-              validator: FormBuilderValidators.compose(
-                <FormFieldValidator<String>>[
-                  FormBuilderValidators.required(
-                    errorText: l10n.passwordRequired,
-                  ),
-                  FormBuilderValidators.minLength(
-                    8,
-                    errorText: l10n.passwordMinimum8Char,
-                  ),
-                  (_) => cubit.state.currentAndNewPasswordMatch
-                      ? l10n.newPasswordShouldBeDifferent
-                      : null,
-                ],
-              ),
+              validator:
+                  FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                    FormBuilderValidators.required(
+                      errorText: l10n.passwordRequired,
+                    ),
+                    FormBuilderValidators.minLength(
+                      8,
+                      errorText: l10n.passwordMinimum8Char,
+                    ),
+                    (_) =>
+                        cubit.state.currentAndNewPasswordMatch
+                            ? l10n.newPasswordShouldBeDifferent
+                            : null,
+                  ]),
             ),
             const Gutter(),
             TextFormField(
@@ -69,20 +69,20 @@ class ChangePasswordForm extends StatelessWidget {
                 prefixIcon: const Icon(Icons.lock),
                 labelText: l10n.newPassword,
               ),
-              validator: FormBuilderValidators.compose(
-                <FormFieldValidator<String>>[
-                  FormBuilderValidators.required(
-                    errorText: l10n.passwordRequired,
-                  ),
-                  FormBuilderValidators.minLength(
-                    8,
-                    errorText: l10n.passwordMinimum8Char,
-                  ),
-                  (_) => !cubit.state.newPasswordsMatch
-                      ? l10n.passwordsNotMatching
-                      : null,
-                ],
-              ),
+              validator:
+                  FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                    FormBuilderValidators.required(
+                      errorText: l10n.passwordRequired,
+                    ),
+                    FormBuilderValidators.minLength(
+                      8,
+                      errorText: l10n.passwordMinimum8Char,
+                    ),
+                    (_) =>
+                        !cubit.state.newPasswordsMatch
+                            ? l10n.passwordsNotMatching
+                            : null,
+                  ]),
             ),
             const Gutter(),
             TextFormField(
@@ -98,20 +98,20 @@ class ChangePasswordForm extends StatelessWidget {
                 prefixIcon: const Icon(Icons.lock),
                 labelText: l10n.confirmNewPassword,
               ),
-              validator: FormBuilderValidators.compose(
-                <FormFieldValidator<String>>[
-                  FormBuilderValidators.required(
-                    errorText: l10n.passwordRequired,
-                  ),
-                  FormBuilderValidators.minLength(
-                    8,
-                    errorText: l10n.passwordMinimum8Char,
-                  ),
-                  (_) => !cubit.state.newPasswordsMatch
-                      ? l10n.passwordsNotMatching
-                      : null,
-                ],
-              ),
+              validator:
+                  FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                    FormBuilderValidators.required(
+                      errorText: l10n.passwordRequired,
+                    ),
+                    FormBuilderValidators.minLength(
+                      8,
+                      errorText: l10n.passwordMinimum8Char,
+                    ),
+                    (_) =>
+                        !cubit.state.newPasswordsMatch
+                            ? l10n.passwordsNotMatching
+                            : null,
+                  ]),
             ),
             const GutterLarge(),
             BlocConsumer<ChangePasswordCubit, ChangePasswordState>(

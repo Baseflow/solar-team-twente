@@ -4,9 +4,8 @@ import '../repositories/profile_repository.dart';
 /// Service for managing user profiles.
 class ProfileService {
   /// Creates a new [ProfileService] instance.
-  const ProfileService({
-    required ProfileRepository profileRepository,
-  }) : _profileRepository = profileRepository;
+  const ProfileService({required ProfileRepository profileRepository})
+    : _profileRepository = profileRepository;
 
   final ProfileRepository _profileRepository;
 

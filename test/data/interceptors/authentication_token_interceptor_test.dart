@@ -42,35 +42,29 @@ void main() {
   group(
     'Add token',
     () => <void>{
-      test(
-        'Should add token to request',
-        () async {
-          when(() => mockAuthenticationRepository.getToken()).thenAnswer(
-            (_) => Future<Token?>.value(
-              Token(
-                accessToken: 'accessToken',
-                refreshToken: 'refreshToken',
-                expiresAt: DateTime.now().add(const Duration(days: 1)),
-              ),
-            ),
-          );
-
-          final RequestOptions requestOptions = RequestOptions(path: '/');
-          await tokenInterceptor.onRequest(
-            requestOptions,
-            RequestInterceptorHandler(),
-          );
-
-          expect(
-            requestOptions.headers['Authorization'],
-            'Bearer accessToken',
-          );
-        },
-      ),
-      test('Should not add token if no token is available', () async {
+      test('Should add token to request', () async {
         when(() => mockAuthenticationRepository.getToken()).thenAnswer(
-          (_) => Future<Token?>.value(),
+          (_) => Future<Token?>.value(
+            Token(
+              accessToken: 'accessToken',
+              refreshToken: 'refreshToken',
+              expiresAt: DateTime.now().add(const Duration(days: 1)),
+            ),
+          ),
         );
+
+        final RequestOptions requestOptions = RequestOptions(path: '/');
+        await tokenInterceptor.onRequest(
+          requestOptions,
+          RequestInterceptorHandler(),
+        );
+
+        expect(requestOptions.headers['Authorization'], 'Bearer accessToken');
+      }),
+      test('Should not add token if no token is available', () async {
+        when(
+          () => mockAuthenticationRepository.getToken(),
+        ).thenAnswer((_) => Future<Token?>.value());
 
         final RequestOptions requestOptions = RequestOptions(path: '/');
 
@@ -80,9 +74,7 @@ void main() {
             RequestInterceptorHandler(),
           ),
           throwsA(
-            const TokenException(
-              errorCode: TokenExceptionCode.noTokenFound,
-            ),
+            const TokenException(errorCode: TokenExceptionCode.noTokenFound),
           ),
         );
       }),
@@ -90,25 +82,21 @@ void main() {
         final Token initialToken = Token(
           accessToken: 'accessToken',
           refreshToken: 'refreshToken',
-          expiresAt: DateTime.now().add(
-            const Duration(days: -1),
-          ),
+          expiresAt: DateTime.now().add(const Duration(days: -1)),
         );
 
         final Token refreshedToken = Token(
           accessToken: 'newAccessToken',
           refreshToken: 'newRefreshToken',
-          expiresAt: DateTime.now().add(
-            const Duration(days: 1),
-          ),
+          expiresAt: DateTime.now().add(const Duration(days: 1)),
         );
 
-        when(() => mockAuthenticationRepository.getToken()).thenAnswer(
-          (_) => Future<Token?>.value(initialToken),
-        );
-        when(() => mockAuthenticationRepository.refreshToken(any())).thenAnswer(
-          (_) => Future<Token>.value(refreshedToken),
-        );
+        when(
+          () => mockAuthenticationRepository.getToken(),
+        ).thenAnswer((_) => Future<Token?>.value(initialToken));
+        when(
+          () => mockAuthenticationRepository.refreshToken(any()),
+        ).thenAnswer((_) => Future<Token>.value(refreshedToken));
 
         when(() => mockDio.fetch<dynamic>(any())).thenAnswer(
           (_) => Future<Response<dynamic>>.value(
@@ -129,10 +117,7 @@ void main() {
           response: response,
         );
 
-        await tokenInterceptor.onError(
-          dioException,
-          ErrorInterceptorHandler(),
-        );
+        await tokenInterceptor.onError(dioException, ErrorInterceptorHandler());
 
         verify(() => mockAuthenticationRepository.getToken()).called(1);
 
@@ -145,21 +130,18 @@ void main() {
         final Token token = Token(
           accessToken: 'accessToken',
           refreshToken: 'refreshToken',
-          expiresAt: DateTime.now().add(
-            const Duration(days: 1),
-          ),
+          expiresAt: DateTime.now().add(const Duration(days: 1)),
         );
-        when(() => mockAuthenticationRepository.getToken()).thenAnswer(
-          (_) => Future<Token?>.value(token),
-        );
+        when(
+          () => mockAuthenticationRepository.getToken(),
+        ).thenAnswer((_) => Future<Token?>.value(token));
         when(() => mockAuthenticationRepository.refreshToken(token)).thenThrow(
-          const TokenException(
-            errorCode: TokenExceptionCode.localSaveFailed,
-          ),
+          const TokenException(errorCode: TokenExceptionCode.localSaveFailed),
         );
 
-        final RequestOptions requestOptions =
-            RequestOptions(path: 'https://example.com');
+        final RequestOptions requestOptions = RequestOptions(
+          path: 'https://example.com',
+        );
 
         expect(
           () async => tokenInterceptor.onError(
@@ -172,46 +154,45 @@ void main() {
             ),
             ErrorInterceptorHandler(),
           ),
-          throwsA(
-            const TypeMatcher<TokenException>(),
-          ),
+          throwsA(const TypeMatcher<TokenException>()),
         );
       }),
-      test('Should forward exceptions when a non-401 exception is thrown',
-          () async {
-        when(() => mockAuthenticationRepository.getToken()).thenAnswer(
-          (_) => Future<Token?>.value(
-            Token(
-              accessToken: 'accessToken',
-              refreshToken: 'refreshToken',
-              expiresAt: DateTime.now().add(
-                const Duration(days: -1),
+      test(
+        'Should forward exceptions when a non-401 exception is thrown',
+        () async {
+          when(() => mockAuthenticationRepository.getToken()).thenAnswer(
+            (_) => Future<Token?>.value(
+              Token(
+                accessToken: 'accessToken',
+                refreshToken: 'refreshToken',
+                expiresAt: DateTime.now().add(const Duration(days: -1)),
               ),
             ),
-          ),
-        );
+          );
 
-        final Response<dynamic> response = Response<dynamic>(
-          statusCode: 403,
-          requestOptions: RequestOptions(path: '/some-path'),
-        );
-        final DioException dioException = DioException.badResponse(
-          statusCode: 403,
-          requestOptions: RequestOptions(path: '/some-path'),
-          response: response,
-        );
+          final Response<dynamic> response = Response<dynamic>(
+            statusCode: 403,
+            requestOptions: RequestOptions(path: '/some-path'),
+          );
+          final DioException dioException = DioException.badResponse(
+            statusCode: 403,
+            requestOptions: RequestOptions(path: '/some-path'),
+            response: response,
+          );
 
-        when(() => mockErrorInterceptorHandler.next(dioException))
-            .thenThrow(dioException);
+          when(
+            () => mockErrorInterceptorHandler.next(dioException),
+          ).thenThrow(dioException);
 
-        expect(
-          () => tokenInterceptor.onError(
-            dioException,
-            mockErrorInterceptorHandler,
-          ),
-          throwsA(dioException),
-        );
-      }),
+          expect(
+            () => tokenInterceptor.onError(
+              dioException,
+              mockErrorInterceptorHandler,
+            ),
+            throwsA(dioException),
+          );
+        },
+      ),
     },
   );
 }

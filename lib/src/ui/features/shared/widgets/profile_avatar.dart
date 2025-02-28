@@ -7,11 +7,7 @@ import '../../profile/cubit/profile_cubit.dart';
 /// The avatar of the profile page.
 class ProfileAvatar extends StatelessWidget {
   /// Creates a new instance of [ProfileAvatar].
-  const ProfileAvatar({
-    this.onTap,
-    this.size = const Size(52, 52),
-    super.key,
-  });
+  const ProfileAvatar({this.onTap, this.size = const Size(52, 52), super.key});
 
   /// Creates a new instance of [ProfileAvatar] for a `small` avatar.
   const ProfileAvatar.small({
@@ -32,24 +28,29 @@ class ProfileAvatar extends StatelessWidget {
       selector: (ProfileState state) {
         return state is ProfileLoadedState ? state.profile.profileImage : null;
       },
-      builder: (BuildContext context, Uint8List? image) => GestureDetector(
-        onTap: onTap,
-        child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          child: ClipOval(
-            child: SizedBox(
-              height: size.height,
-              width: size.width,
-              child: ColoredBox(
-                color: Colors.grey,
-                child: image == null
-                    ? const Icon(Icons.person_outlined, color: Colors.white)
-                    : Image.memory(image, fit: BoxFit.cover),
+      builder:
+          (BuildContext context, Uint8List? image) => GestureDetector(
+            onTap: onTap,
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: ClipOval(
+                child: SizedBox(
+                  height: size.height,
+                  width: size.width,
+                  child: ColoredBox(
+                    color: Colors.grey,
+                    child:
+                        image == null
+                            ? const Icon(
+                              Icons.person_outlined,
+                              color: Colors.white,
+                            )
+                            : Image.memory(image, fit: BoxFit.cover),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
     );
   }
 }

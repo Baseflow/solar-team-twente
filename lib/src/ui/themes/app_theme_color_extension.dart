@@ -22,10 +22,7 @@ class AppThemeColorExtension extends ThemeExtension<AppThemeColorExtension> {
   }
 
   @override
-  AppThemeColorExtension lerp(
-    AppThemeColorExtension? other,
-    double t,
-  ) {
+  AppThemeColorExtension lerp(AppThemeColorExtension? other, double t) {
     if (other is! AppThemeColorExtension) {
       return this;
     }

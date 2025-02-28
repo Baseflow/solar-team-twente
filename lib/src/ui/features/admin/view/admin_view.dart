@@ -19,12 +19,12 @@ class AdminView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.admin),
-      ),
+      appBar: AppBar(title: Text(context.l10n.admin)),
       body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
-        listenWhen:
-            (AuthenticationState previous, AuthenticationState current) {
+        listenWhen: (
+          AuthenticationState previous,
+          AuthenticationState current,
+        ) {
           return previous.authStatus != current.authStatus;
         },
         listener: (BuildContext context, AuthenticationState state) {
@@ -36,8 +36,8 @@ class AdminView extends StatelessWidget {
           return switch (state.authStatus) {
             AuthenticationStatus.unauthenticated => const AdminContainer(),
             AuthenticationStatus.authenticated => AuthorizedAdminView(
-                user: context.read<AuthenticationCubit>().currentUser,
-              ),
+              user: context.read<AuthenticationCubit>().currentUser,
+            ),
             _ => const CircularProgressIndicator(),
           };
         },

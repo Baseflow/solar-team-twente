@@ -21,14 +21,8 @@ class AuthenticationService {
       _authStatusController.stream;
 
   /// Signs in the user with the given [email] and [password].
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
-    await _authenticationRepository.signIn(
-      email: email,
-      password: password,
-    );
+  Future<void> signIn({required String email, required String password}) async {
+    await _authenticationRepository.signIn(email: email, password: password);
     _authStatusController.add(AuthenticationStatus.authenticated);
   }
 

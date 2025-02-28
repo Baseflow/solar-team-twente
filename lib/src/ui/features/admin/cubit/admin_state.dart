@@ -1,37 +1,22 @@
 part of 'admin_cubit.dart';
 
 abstract class AdminState extends Equatable {
-  const AdminState({
-    this.newsMessageTitle,
-    this.newsMessageBody,
-  });
+  const AdminState({this.newsMessageTitle, this.newsMessageBody});
 
   final String? newsMessageTitle;
   final String? newsMessageBody;
 
-  AdminState copyWith({
-    String? newsMessageTitle,
-    String? newsMessageBody,
-  });
+  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody});
 }
 
 class AdminInitial extends AdminState {
-  const AdminInitial({
-    super.newsMessageTitle,
-    super.newsMessageBody,
-  });
+  const AdminInitial({super.newsMessageTitle, super.newsMessageBody});
 
   @override
-  List<Object?> get props => <Object?>[
-        newsMessageTitle,
-        newsMessageBody,
-      ];
+  List<Object?> get props => <Object?>[newsMessageTitle, newsMessageBody];
 
   @override
-  AdminState copyWith({
-    String? newsMessageTitle,
-    String? newsMessageBody,
-  }) {
+  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody}) {
     return AdminInitial(
       newsMessageTitle: newsMessageTitle ?? this.newsMessageTitle,
       newsMessageBody: newsMessageBody ?? this.newsMessageBody,
@@ -50,10 +35,10 @@ class AdminError extends AdminState {
 
   @override
   List<Object?> get props => <Object?>[
-        errorCode,
-        newsMessageTitle,
-        newsMessageBody,
-      ];
+    errorCode,
+    newsMessageTitle,
+    newsMessageBody,
+  ];
 
   @override
   AdminState copyWith({
@@ -72,16 +57,10 @@ class AdminMessageSent extends AdminState {
   });
 
   @override
-  List<Object> get props => <Object>[
-        newsMessageTitle!,
-        newsMessageBody!,
-      ];
+  List<Object> get props => <Object>[newsMessageTitle!, newsMessageBody!];
 
   @override
-  AdminState copyWith({
-    String? newsMessageTitle,
-    String? newsMessageBody,
-  }) {
+  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody}) {
     return AdminMessageSent(
       newsMessageTitle: newsMessageTitle ?? this.newsMessageTitle!,
       newsMessageBody: newsMessageBody ?? this.newsMessageBody!,
@@ -90,22 +69,13 @@ class AdminMessageSent extends AdminState {
 }
 
 class AdminLoading extends AdminState {
-  const AdminLoading({
-    super.newsMessageBody,
-    super.newsMessageTitle,
-  });
+  const AdminLoading({super.newsMessageBody, super.newsMessageTitle});
 
   @override
-  List<Object?> get props => <Object?>[
-        newsMessageTitle,
-        newsMessageBody,
-      ];
+  List<Object?> get props => <Object?>[newsMessageTitle, newsMessageBody];
 
   @override
-  AdminState copyWith({
-    String? newsMessageTitle,
-    String? newsMessageBody,
-  }) {
+  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody}) {
     return AdminLoading(
       newsMessageTitle: newsMessageTitle ?? this.newsMessageTitle,
       newsMessageBody: newsMessageBody ?? this.newsMessageBody,

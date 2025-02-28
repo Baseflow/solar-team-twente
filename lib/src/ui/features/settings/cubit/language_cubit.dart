@@ -10,9 +10,9 @@ class LanguageCubit extends Cubit<String> {
   LanguageCubit({
     required LanguageService languageService,
     required String defaultLanguageCode,
-  })  : _languageService = languageService,
-        _defaultLanguageCode = defaultLanguageCode,
-        super(defaultLanguageCode);
+  }) : _languageService = languageService,
+       _defaultLanguageCode = defaultLanguageCode,
+       super(defaultLanguageCode);
 
   /// The [LanguageService] to manage the language of the app.
   final LanguageService _languageService;
@@ -29,22 +29,19 @@ class LanguageCubit extends Cubit<String> {
   Future<void> fetchLanguage() async {
     final String? fetchedLanguageCode = _languageService.fetchLanguageCode();
 
-    final String languageCode = <String?>[
-      fetchedLanguageCode,
-      _defaultLanguageCode,
-      'en',
-    ].firstWhere(
-      _isSupportedLanguage,
-      orElse: () => AppLocalizations.supportedLocales.first.languageCode,
-    )!;
+    final String languageCode =
+        <String?>[fetchedLanguageCode, _defaultLanguageCode, 'en'].firstWhere(
+          _isSupportedLanguage,
+          orElse: () => AppLocalizations.supportedLocales.first.languageCode,
+        )!;
 
     emit(languageCode);
   }
 
   /// The current [Locale] of the app.
   Locale get currentLocale => AppLocalizations.supportedLocales.firstWhere(
-        (Locale locale) => locale.languageCode == state,
-      );
+    (Locale locale) => locale.languageCode == state,
+  );
 
   bool _isSupportedLanguage(String? languageCode) {
     return AppLocalizations.supportedLocales.any(

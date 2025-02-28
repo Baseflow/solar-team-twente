@@ -61,25 +61,21 @@ class _ForgotPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
-      listenWhen: (
-        ForgotPasswordState previous,
-        ForgotPasswordState current,
-      ) {
+      listenWhen: (ForgotPasswordState previous, ForgotPasswordState current) {
         final bool isEmailSentSuccessfully =
             previous.emailSentSuccessfully != current.emailSentSuccessfully &&
-                current.emailSentSuccessfully;
+            current.emailSentSuccessfully;
         final bool isAuthError =
             previous.authErrorCode != current.authErrorCode &&
-                current.authErrorCode != null;
+            current.authErrorCode != null;
         return isEmailSentSuccessfully || isAuthError;
       },
       listener: (BuildContext context, ForgotPasswordState state) {
-        final String snackBarText = state.emailSentSuccessfully
-            ? context.l10n.passwordChangeRequestSuccess
-            : context.l10n.errorResettingPassword;
-        context.showSnackBar(
-          SnackBar(content: Text(snackBarText)),
-        );
+        final String snackBarText =
+            state.emailSentSuccessfully
+                ? context.l10n.passwordChangeRequestSuccess
+                : context.l10n.errorResettingPassword;
+        context.showSnackBar(SnackBar(content: Text(snackBarText)));
         if (state.emailSentSuccessfully) {
           context.pop();
         }
@@ -98,9 +94,7 @@ class _ForgotPasswordForm extends StatelessWidget {
                     onChanged: cubit.updateEmail,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    autofillHints: const <String>[
-                      AutofillHints.email,
-                    ],
+                    autofillHints: const <String>[AutofillHints.email],
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.person),
@@ -125,10 +119,7 @@ class _ForgotPasswordForm extends StatelessWidget {
                   ),
                   const GutterLarge(),
                   BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
-                    builder: (
-                      BuildContext context,
-                      ForgotPasswordState state,
-                    ) {
+                    builder: (BuildContext context, ForgotPasswordState state) {
                       return FilledLoadingButton(
                         buttonText: context.l10n.resetPassword,
                         onPressed: () {

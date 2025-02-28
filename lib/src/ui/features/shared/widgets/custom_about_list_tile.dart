@@ -49,9 +49,7 @@ class CustomAboutListTile extends StatelessWidget {
                         return false;
                       }
                       context.showSnackBar(
-                        SnackBar(
-                          content: Text(context.l10n.failLaunchUrl),
-                        ),
+                        SnackBar(content: Text(context.l10n.failLaunchUrl)),
                       );
                       return false;
                     });

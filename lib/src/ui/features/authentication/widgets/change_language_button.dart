@@ -22,9 +22,7 @@ class ChangeLanguageButton extends StatelessWidget {
             height: 20,
             width: 20,
           ),
-          label: Text(
-            languageCode.toUpperCase(),
-          ),
+          label: Text(languageCode.toUpperCase()),
         );
       },
     );

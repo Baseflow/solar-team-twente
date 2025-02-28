@@ -21,35 +21,39 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockForgotPasswordCubit = MockForgotPasswordCubit();
     mockGoRouter = MockGoRouter();
-    when(() => mockForgotPasswordCubit.state)
-        .thenReturn(const ForgotPasswordState());
+    when(
+      () => mockForgotPasswordCubit.state,
+    ).thenReturn(const ForgotPasswordState());
   });
 
   group('ForgotPasswordView', () {
-    testWidgets('should show a loading indicator when state.isLoading is true',
-        (WidgetTester tester) async {
-      whenListen(
-        mockForgotPasswordCubit,
-        Stream<ForgotPasswordState>.fromIterable(
-          <ForgotPasswordState>[const ForgotPasswordState(isLoading: true)],
-        ),
-        initialState: const ForgotPasswordState(),
-      );
-      await tester.pumpWidget(
-        MaterialAppHelper(
-          child: BlocProvider<ForgotPasswordCubit>.value(
-            value: mockForgotPasswordCubit,
-            child: const ForgotPasswordView(),
+    testWidgets(
+      'should show a loading indicator when state.isLoading is true',
+      (WidgetTester tester) async {
+        whenListen(
+          mockForgotPasswordCubit,
+          Stream<ForgotPasswordState>.fromIterable(<ForgotPasswordState>[
+            const ForgotPasswordState(isLoading: true),
+          ]),
+          initialState: const ForgotPasswordState(),
+        );
+        await tester.pumpWidget(
+          MaterialAppHelper(
+            child: BlocProvider<ForgotPasswordCubit>.value(
+              value: mockForgotPasswordCubit,
+              child: const ForgotPasswordView(),
+            ),
           ),
-        ),
-      );
-      await tester.pump();
+        );
+        await tester.pump();
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    });
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      },
+    );
 
-    testWidgets('should show a snackbar when emailSentSuccessfully is true',
-        (WidgetTester tester) async {
+    testWidgets('should show a snackbar when emailSentSuccessfully is true', (
+      WidgetTester tester,
+    ) async {
       whenListen(
         mockForgotPasswordCubit,
         Stream<ForgotPasswordState>.fromIterable(<ForgotPasswordState>[
@@ -75,8 +79,9 @@ void main() {
       expect(find.text('Password reset email was sent.'), findsOneWidget);
     });
 
-    testWidgets('should show a snackbar when there is an error',
-        (WidgetTester tester) async {
+    testWidgets('should show a snackbar when there is an error', (
+      WidgetTester tester,
+    ) async {
       whenListen(
         mockForgotPasswordCubit,
         Stream<ForgotPasswordState>.fromIterable(<ForgotPasswordState>[

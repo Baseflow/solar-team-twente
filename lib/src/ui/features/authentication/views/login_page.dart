@@ -28,9 +28,9 @@ class LoginPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<LoginCubit>(
-          create: (BuildContext context) => LoginCubit(
-            Ioc.container.get<AuthenticationService>(),
-          ),
+          create:
+              (BuildContext context) =>
+                  LoginCubit(Ioc.container.get<AuthenticationService>()),
         ),
         BlocProvider<AboutCubit>(
           create: (BuildContext context) => AboutCubit()..fetchAppDetails(),
@@ -41,10 +41,7 @@ class LoginPage extends StatelessWidget {
         secondaryBody: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Image.asset(
-              Assets.hero.path,
-              fit: BoxFit.cover,
-            ),
+            Image.asset(Assets.hero.path, fit: BoxFit.cover),
             Padding(
               padding: const EdgeInsets.all(Sizes.s32),
               child: Column(
@@ -64,8 +61,9 @@ class LoginPage extends StatelessWidget {
                       return Text(
                         state.appVersion,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onPrimary
-                              .withValues(alpha: 0.8),
+                          color: context.colorScheme.onPrimary.withValues(
+                            alpha: 0.8,
+                          ),
                         ),
                       );
                     },
