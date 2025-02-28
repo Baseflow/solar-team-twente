@@ -2,12 +2,7 @@
 name: Android Prod Release
 
 # For now only configure the release workflow to run when manually triggered.
-# on: workflow_dispatch
-
-on:
-  push:
-    branches:
-      - fastlane-setup-android
+on: workflow_dispatch
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
