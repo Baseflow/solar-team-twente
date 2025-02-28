@@ -35,6 +35,9 @@ jobs:
       - name: Generate Localization Files
         run: flutter gen-l10n
         working-directory: ${{ env.working_directory }}
+      - name: Generate .g.dart files
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+        working-directory: ${{ env.working_directory }}
       - name: Format
         run: dart format $(find . -name "*.dart" -not -wholename "*/generated/*" -not -name "*.mocks.dart" -not -wholename "./.dart_tool/*") --set-exit-if-changed
         working-directory: ${{ env.working_directory }}
