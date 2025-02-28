@@ -146,10 +146,9 @@ class LoginContainer extends StatelessWidget {
                                 const SizedBox(width: Sizes.s4),
                                 Flexible(
                                   child: TextButton(
-                                    onPressed:
-                                        () => context.pushNamed(
-                                          RegisterPage.name,
-                                        ),
+                                    onPressed: () => context.pushNamed(
+                                      RegisterPage.name,
+                                    ),
                                     child: Text(
                                       '${l10n.register}.',
                                       style: const TextStyle(

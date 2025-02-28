@@ -28,9 +28,8 @@ class LoginPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<LoginCubit>(
-          create:
-              (BuildContext context) =>
-                  LoginCubit(Ioc.container.get<AuthenticationService>()),
+          create: (BuildContext context) =>
+              LoginCubit(Ioc.container.get<AuthenticationService>()),
         ),
         BlocProvider<AboutCubit>(
           create: (BuildContext context) => AboutCubit()..fetchAppDetails(),

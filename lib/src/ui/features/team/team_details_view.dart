@@ -18,7 +18,7 @@ import 'team_member_view_model.dart';
 class TeamDetailsView extends StatelessWidget {
   /// {@macro team_details_view}
   TeamDetailsView({required AppLocalizations l10n, super.key})
-    : teamMembers = _getTeamMembers(l10n);
+      : teamMembers = _getTeamMembers(l10n);
   final List<TeamMember> teamMembers;
 
   @override
@@ -57,9 +57,8 @@ class TeamDetailsView extends StatelessWidget {
                       ),
                       const Gutter(),
                       FilledButton.tonalIcon(
-                        onPressed:
-                            () =>
-                                _launchURL(teamMembers[currentIndex].linkedUrl),
+                        onPressed: () =>
+                            _launchURL(teamMembers[currentIndex].linkedUrl),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: Sizes.s12,
