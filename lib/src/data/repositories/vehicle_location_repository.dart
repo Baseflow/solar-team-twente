@@ -5,7 +5,7 @@ import '../dto/race/vehicle_location_dto.dart';
 
 class SupabaseVehicleLocationRepository implements VehicleLocationRepository {
   SupabaseVehicleLocationRepository({required SupabaseClient client})
-    : _client = client;
+      : _client = client;
 
   final SupabaseClient _client;
 

@@ -45,29 +45,24 @@ class LivePage extends StatelessWidget {
             final int daysSinceStart =
                 DateTime.now().difference(Constants.startDate).inDays;
             return RaceDayCarouselCubit(
-              selectedRaceDay:
-                  Constants.hasRaceStarted
-                      ? RaceDayType.values[daysSinceStart + 1]
-                      : RaceDayType.prep,
-              currentRaceDay:
-                  Constants.hasRaceStarted
-                      ? RaceDayType.values[daysSinceStart + 1]
-                      : RaceDayType.prep,
+              selectedRaceDay: Constants.hasRaceStarted
+                  ? RaceDayType.values[daysSinceStart + 1]
+                  : RaceDayType.prep,
+              currentRaceDay: Constants.hasRaceStarted
+                  ? RaceDayType.values[daysSinceStart + 1]
+                  : RaceDayType.prep,
             );
           },
         ),
         BlocProvider<MapCubit>(
-          create:
-              (_) =>
-                  MapCubit(Ioc.container.get<VehicleLocationService>())
-                    ..loadAssets(),
+          create: (_) => MapCubit(Ioc.container.get<VehicleLocationService>())
+            ..loadAssets(),
         ),
       ],
       child: const Stack(
         children: <Widget>[
           Positioned.fill(
-            bottom:
-                Sizes.carouselBottomSheetHeight -
+            bottom: Sizes.carouselBottomSheetHeight -
                 Sizes.defaultBottomSheetCornerRadius,
             child: MapView(),
           ),
