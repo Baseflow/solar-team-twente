@@ -26,20 +26,19 @@ class FilledLoadingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: isLoading ? null : onPressed,
-      child:
-          isLoading
-              ? Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const SizedBox.square(
-                    dimension: Sizes.s24,
-                    child: CircularProgressIndicator(strokeWidth: 3),
-                  ),
-                  const GutterSmall(),
-                  Text(buttonText),
-                ],
-              )
-              : Text(buttonText),
+      child: isLoading
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox.square(
+                  dimension: Sizes.s24,
+                  child: CircularProgressIndicator(strokeWidth: 3),
+                ),
+                const GutterSmall(),
+                Text(buttonText),
+              ],
+            )
+          : Text(buttonText),
     );
   }
 }

@@ -7,7 +7,7 @@ import '../types/types.dart';
 class ThemeService {
   /// Creates a new instance of [ThemeService].
   ThemeService({required ThemeRepository themeRepository})
-    : _themeRepository = themeRepository;
+      : _themeRepository = themeRepository;
 
   final ThemeRepository _themeRepository;
 

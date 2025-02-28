@@ -25,7 +25,8 @@ void main() {
       mockProfileCubit = MockProfileCubit();
     });
 
-    testWidgets('should display a transparent Scaffold to ensure the '
+    testWidgets(
+        'should display a transparent Scaffold to ensure the '
         'background is visible', (WidgetTester tester) async {
       when(
         () => mockProfileCubit.state,

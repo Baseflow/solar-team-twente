@@ -90,11 +90,11 @@ class _DeleteAccountForm extends StatelessWidget {
                 ),
                 validator:
                     FormBuilderValidators.compose(<FormFieldValidator<String>>[
-                      FormBuilderValidators.required(
-                        errorText: context.l10n.deleteAccountPasswordRequired,
-                      ),
-                      (_) => _validatePassword(context),
-                    ]),
+                  FormBuilderValidators.required(
+                    errorText: context.l10n.deleteAccountPasswordRequired,
+                  ),
+                  (_) => _validatePassword(context),
+                ]),
               ),
               const Gutter(),
               FilledLoadingButton(

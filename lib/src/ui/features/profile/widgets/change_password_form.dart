@@ -42,18 +42,17 @@ class ChangePasswordForm extends StatelessWidget {
               ),
               validator:
                   FormBuilderValidators.compose(<FormFieldValidator<String>>[
-                    FormBuilderValidators.required(
-                      errorText: l10n.passwordRequired,
-                    ),
-                    FormBuilderValidators.minLength(
-                      8,
-                      errorText: l10n.passwordMinimum8Char,
-                    ),
-                    (_) =>
-                        cubit.state.currentAndNewPasswordMatch
-                            ? l10n.newPasswordShouldBeDifferent
-                            : null,
-                  ]),
+                FormBuilderValidators.required(
+                  errorText: l10n.passwordRequired,
+                ),
+                FormBuilderValidators.minLength(
+                  8,
+                  errorText: l10n.passwordMinimum8Char,
+                ),
+                (_) => cubit.state.currentAndNewPasswordMatch
+                    ? l10n.newPasswordShouldBeDifferent
+                    : null,
+              ]),
             ),
             const Gutter(),
             TextFormField(
@@ -71,18 +70,17 @@ class ChangePasswordForm extends StatelessWidget {
               ),
               validator:
                   FormBuilderValidators.compose(<FormFieldValidator<String>>[
-                    FormBuilderValidators.required(
-                      errorText: l10n.passwordRequired,
-                    ),
-                    FormBuilderValidators.minLength(
-                      8,
-                      errorText: l10n.passwordMinimum8Char,
-                    ),
-                    (_) =>
-                        !cubit.state.newPasswordsMatch
-                            ? l10n.passwordsNotMatching
-                            : null,
-                  ]),
+                FormBuilderValidators.required(
+                  errorText: l10n.passwordRequired,
+                ),
+                FormBuilderValidators.minLength(
+                  8,
+                  errorText: l10n.passwordMinimum8Char,
+                ),
+                (_) => !cubit.state.newPasswordsMatch
+                    ? l10n.passwordsNotMatching
+                    : null,
+              ]),
             ),
             const Gutter(),
             TextFormField(
@@ -100,18 +98,17 @@ class ChangePasswordForm extends StatelessWidget {
               ),
               validator:
                   FormBuilderValidators.compose(<FormFieldValidator<String>>[
-                    FormBuilderValidators.required(
-                      errorText: l10n.passwordRequired,
-                    ),
-                    FormBuilderValidators.minLength(
-                      8,
-                      errorText: l10n.passwordMinimum8Char,
-                    ),
-                    (_) =>
-                        !cubit.state.newPasswordsMatch
-                            ? l10n.passwordsNotMatching
-                            : null,
-                  ]),
+                FormBuilderValidators.required(
+                  errorText: l10n.passwordRequired,
+                ),
+                FormBuilderValidators.minLength(
+                  8,
+                  errorText: l10n.passwordMinimum8Char,
+                ),
+                (_) => !cubit.state.newPasswordsMatch
+                    ? l10n.passwordsNotMatching
+                    : null,
+              ]),
             ),
             const GutterLarge(),
             BlocConsumer<ChangePasswordCubit, ChangePasswordState>(

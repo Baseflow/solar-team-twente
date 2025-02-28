@@ -28,29 +28,27 @@ class ProfileAvatar extends StatelessWidget {
       selector: (ProfileState state) {
         return state is ProfileLoadedState ? state.profile.profileImage : null;
       },
-      builder:
-          (BuildContext context, Uint8List? image) => GestureDetector(
-            onTap: onTap,
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              child: ClipOval(
-                child: SizedBox(
-                  height: size.height,
-                  width: size.width,
-                  child: ColoredBox(
-                    color: Colors.grey,
-                    child:
-                        image == null
-                            ? const Icon(
-                              Icons.person_outlined,
-                              color: Colors.white,
-                            )
-                            : Image.memory(image, fit: BoxFit.cover),
-                  ),
-                ),
+      builder: (BuildContext context, Uint8List? image) => GestureDetector(
+        onTap: onTap,
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          child: ClipOval(
+            child: SizedBox(
+              height: size.height,
+              width: size.width,
+              child: ColoredBox(
+                color: Colors.grey,
+                child: image == null
+                    ? const Icon(
+                        Icons.person_outlined,
+                        color: Colors.white,
+                      )
+                    : Image.memory(image, fit: BoxFit.cover),
               ),
             ),
           ),
+        ),
+      ),
     );
   }
 }

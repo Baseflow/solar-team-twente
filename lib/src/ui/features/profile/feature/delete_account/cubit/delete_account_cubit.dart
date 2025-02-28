@@ -10,7 +10,7 @@ part 'delete_account_state.dart';
 class DeleteAccountCubit extends Cubit<DeleteAccountState> {
   /// Creates a new [DeleteAccountCubit] instance.
   DeleteAccountCubit(this._profileService)
-    : super(const DeleteAccountInitial());
+      : super(const DeleteAccountInitial());
 
   final ProfileService _profileService;
 
