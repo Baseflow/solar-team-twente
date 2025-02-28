@@ -71,9 +71,7 @@ jobs:
           bundler-cache: true
 
       - name: Install and update Bundler
-        run: |
-          gem install bundler
-          bundle update --bundler
+        run: gem install bundler
         working-directory: ${{ env.working_directory_android }}
 
       - name: Install dependencies
