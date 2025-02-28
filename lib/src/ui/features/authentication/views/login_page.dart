@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: <BlocProvider<StateStreamableSource<Object?>>>[
+      providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<LoginCubit>(
           create: (BuildContext context) => LoginCubit(
             Ioc.container.get<AuthenticationService>(),
@@ -64,7 +64,8 @@ class LoginPage extends StatelessWidget {
                       return Text(
                         state.appVersion,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onPrimary.withOpacity(0.8),
+                          color: context.colorScheme.onPrimary
+                              .withValues(alpha: 0.8),
                         ),
                       );
                     },

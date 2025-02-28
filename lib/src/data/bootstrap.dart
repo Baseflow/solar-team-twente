@@ -2,7 +2,7 @@ import 'package:flutter_ioc/flutter_ioc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../core.dart' as core;
+import '../../core.dart';
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
 import 'network/dio_factory.dart';
@@ -17,8 +17,8 @@ import 'repositories/vehicle_location_repository.dart';
 /// the application.
 Future<void> bootstrap() async {
   await Supabase.initialize(
-    url: core.AppConfig.baseUrl,
-    anonKey: core.AppConfig.supabaseAnonKey,
+    url: AppConfig.baseUrl,
+    anonKey: AppConfig.supabaseAnonKey,
   );
 
   // Register implementation for the repositories defined in the core library.
@@ -34,12 +34,12 @@ Future<void> _registerDependencies() async {
   // Register API client implementations
   ioc
     // Register data dependencies needed for the Analytics feature.
-    ..registerLazySingleton<core.AnalyticsRepository>(
+    ..registerLazySingleton<AnalyticsRepository>(
       FirebaseAnalyticsClient.new,
     )
 
     // Register data dependencies needed for the Crashlytics feature.
-    ..registerLazySingleton<core.CrashlyticsRepository>(
+    ..registerLazySingleton<CrashlyticsRepository>(
       FirebaseCrashlyticsClient.new,
     )
 
@@ -50,7 +50,7 @@ Future<void> _registerDependencies() async {
     ..registerFactory<TokenDataStore>(
       FlutterSecureStorageTokenDataStore.new,
     )
-    ..registerLazySingleton<core.AuthenticationRepository>(
+    ..registerLazySingleton<AuthenticationRepository>(
       () => SupabaseAuthenticationRepository(
         authenticationClient: ioc.get<SupabaseClient>(),
         tokenDataStore: ioc.get<TokenDataStore>(),
@@ -60,7 +60,7 @@ Future<void> _registerDependencies() async {
     // Until auth is implemented, the following code is commented out.
     // ..registerLazySingleton<AuthenticationTokenInterceptor>(
     //   () => AuthenticationTokenInterceptor(
-    //     authenticationRepository: ioc.get<core.AuthenticationRepository>(),
+    //     authenticationRepository: ioc.get<AuthenticationRepository>(),
     //     dio: DioFactory.getOrCreateAuthenticationDio(),
     //   ),
     // )
@@ -71,32 +71,32 @@ Future<void> _registerDependencies() async {
         DioFactory.getOrCreateGeneralDio(),
       ),
     )
-    ..registerFactory<core.ProfileRepository>(
+    ..registerFactory<ProfileRepository>(
       () => ApiProfileRepository(ioc.get<ProfileClient>()),
     )
 
     // Register other data dependencies.
-    ..registerFactory<core.LanguageRepository>(
+    ..registerFactory<LanguageRepository>(
       () => SharedPreferencesLanguageRepository(
         sharedPreferences: sharedPreferences,
       ),
     )
-    ..registerFactory<core.ThemeRepository>(
+    ..registerFactory<ThemeRepository>(
       () => SharedPreferencesThemeRepository(
         sharedPreferences: sharedPreferences,
       ),
     )
-    ..registerFactory<core.VehicleLocationRepository>(
+    ..registerFactory<VehicleLocationRepository>(
       () => SupabaseVehicleLocationRepository(
         client: ioc.get<SupabaseClient>(),
       ),
     )
-    ..registerFactory<core.NewsRepository>(
+    ..registerFactory<NewsRepository>(
       () => SupabaseNewsRepository(
         ioc.get<SupabaseClient>(),
       ),
     )
-    ..registerFactory<core.LeaderboardRepository>(
+    ..registerFactory<LeaderboardRepository>(
       () => SupabaseLeaderboardRepository(
         ioc.get<SupabaseClient>(),
       ),

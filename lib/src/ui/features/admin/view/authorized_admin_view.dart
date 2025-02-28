@@ -102,7 +102,6 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
                   else
                     FilledButton(
                       onPressed: context.read<AdminCubit>().submitNewsMessage,
-                      iconAlignment: IconAlignment.end,
                       child: Text(l10n.sendMessage),
                     ),
                   if (state is AdminMessageSent) ...<Widget>[
@@ -137,7 +136,7 @@ class _ErrorContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: Sizes.s16),
       decoration: BoxDecoration(
-        color: context.colorScheme.error.withOpacity(0.1),
+        color: context.colorScheme.error.withValues(alpha: 0.1),
         border: Border.all(
           color: context.colorScheme.error,
         ),
@@ -178,7 +177,7 @@ class _MessageSubmittedContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: Sizes.s16),
       decoration: BoxDecoration(
-        color: Colors.green.withOpacity(0.1),
+        color: Colors.green.withValues(alpha: 0.1),
         border: Border.all(color: Colors.green),
         borderRadius: BorderRadius.circular(Sizes.s4),
       ),

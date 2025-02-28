@@ -1,4 +1,4 @@
-import '../entities/data/data_response_code.dart';
+import '../response/data_response_code.dart';
 
 /// Extension on [int] to convert a http status code to a [DataResponseCode].
 extension StatusCodeExtension on int? {

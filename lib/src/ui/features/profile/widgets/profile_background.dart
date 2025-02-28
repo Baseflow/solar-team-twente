@@ -32,7 +32,7 @@ class ProfileBackground extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha: 0.1),
               ),
             ),
           ),
