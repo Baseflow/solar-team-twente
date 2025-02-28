@@ -32,13 +32,9 @@ class LoginView extends StatelessWidget {
               (current.authErrorCode != null || current.tokenErrorCode != null);
         },
         listener: (BuildContext context, LoginState state) {
-          context.showSnackBar(
-            SnackBar(content: Text(state.errorMessage)),
-          );
+          context.showSnackBar(SnackBar(content: Text(state.errorMessage)));
         },
-        child: const SingleChildScrollView(
-          child: LoginContainer(),
-        ),
+        child: const SingleChildScrollView(child: LoginContainer()),
       ),
     );
   }

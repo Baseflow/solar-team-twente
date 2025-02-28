@@ -16,9 +16,7 @@ class NavigationErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Whooops'),
-      ),
+      appBar: AppBar(title: const Text('Whooops')),
       body: StateMessageView(
         asset: Lottie.asset(Assets.animations.notFound),
         message: context.l10n.notFoundErrorMessage,

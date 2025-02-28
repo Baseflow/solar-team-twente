@@ -7,9 +7,6 @@ class TimeLineFilledLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 4,
-      color: context.colorScheme.primary,
-    );
+    return Container(height: 4, color: context.colorScheme.primary);
   }
 }

@@ -13,18 +13,14 @@ class SharedRoutes {
         name: LanguagePage.name,
         path: LanguagePage.path,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage<void>(
-            child: LanguagePage(),
-          );
+          return const MaterialPage<void>(child: LanguagePage());
         },
       ),
       GoRoute(
         name: TermsAndConditionsPage.name,
         path: TermsAndConditionsPage.path,
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage<void>(
-            child: TermsAndConditionsPage(),
-          );
+          return const MaterialPage<void>(child: TermsAndConditionsPage());
         },
       ),
     ];

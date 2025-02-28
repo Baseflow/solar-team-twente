@@ -48,8 +48,9 @@ void main() {
     blocTest<LanguageCubit, String>(
       'should use default language code',
       build: () {
-        when(() => mockLanguageService.saveLanguageCode(defaultLanguageCode))
-            .thenAnswer((_) {
+        when(
+          () => mockLanguageService.saveLanguageCode(defaultLanguageCode),
+        ).thenAnswer((_) {
           return Future<String>.value(defaultLanguageCode);
         });
         return LanguageCubit(
@@ -63,8 +64,9 @@ void main() {
     blocTest<LanguageCubit, String>(
       'should change to NL language code',
       build: () {
-        when(() => mockLanguageService.saveLanguageCode(dutchLanguageCode))
-            .thenAnswer((_) {
+        when(
+          () => mockLanguageService.saveLanguageCode(dutchLanguageCode),
+        ).thenAnswer((_) {
           return Future<String>.value(dutchLanguageCode);
         });
         return LanguageCubit(
@@ -78,8 +80,9 @@ void main() {
     blocTest<LanguageCubit, String>(
       'should called getCountryCode once',
       build: () {
-        when(() => mockLanguageService.getCountryCode(defaultLanguageCode))
-            .thenReturn('GB');
+        when(
+          () => mockLanguageService.getCountryCode(defaultLanguageCode),
+        ).thenReturn('GB');
         return LanguageCubit(
           languageService: mockLanguageService,
           defaultLanguageCode: defaultLanguageCode,
@@ -87,16 +90,18 @@ void main() {
       },
       act: (LanguageCubit cubit) => cubit.getCountryCode(),
       verify: (_) {
-        verify(() => mockLanguageService.getCountryCode(defaultLanguageCode))
-            .called(1);
+        verify(
+          () => mockLanguageService.getCountryCode(defaultLanguageCode),
+        ).called(1);
       },
     );
     blocTest<LanguageCubit, String>(
       'should currentLocale return default language code',
-      build: () => LanguageCubit(
-        languageService: mockLanguageService,
-        defaultLanguageCode: defaultLanguageCode,
-      ),
+      build:
+          () => LanguageCubit(
+            languageService: mockLanguageService,
+            defaultLanguageCode: defaultLanguageCode,
+          ),
       act: (LanguageCubit cubit) => cubit.currentLocale,
       verify: (LanguageCubit cubit) {
         expect(cubit.currentLocale.languageCode, defaultLanguageCode);

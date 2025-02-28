@@ -19,9 +19,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.settings),
-      ),
+      appBar: AppBar(title: Text(context.l10n.settings)),
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -30,10 +28,11 @@ class SettingsView extends StatelessWidget {
               builder: (BuildContext context, String languageCode) {
                 return BaseListTile(
                   title: l10n.language,
-                  subtitle: context
-                      .read<LanguageCubit>()
-                      .currentLocale
-                      .nativeDisplayLanguage,
+                  subtitle:
+                      context
+                          .read<LanguageCubit>()
+                          .currentLocale
+                          .nativeDisplayLanguage,
                   leadingIcon: const Icon(Icons.language),
                   onTap: () => context.pushNamed(LanguagePage.name),
                 );

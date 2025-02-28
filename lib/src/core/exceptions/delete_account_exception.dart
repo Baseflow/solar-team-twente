@@ -4,10 +4,7 @@ import 'repository_exception.dart';
 class DeleteAccountException
     extends RepositoryException<DeleteAccountExceptionCode> {
   /// Creates a new [DeleteAccountException].
-  const DeleteAccountException({
-    required super.errorCode,
-    super.message,
-  });
+  const DeleteAccountException({required super.errorCode, super.message});
 }
 
 /// [DeleteAccountExceptionCode] providing error codes for different exceptions.
@@ -22,5 +19,5 @@ enum DeleteAccountExceptionCode {
   deleteFailed,
 
   /// Indicates that an unknown error occurred.
-  unknown;
+  unknown,
 }

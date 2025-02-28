@@ -145,9 +145,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
             child: Row(
               children: <Widget>[
                 TimeLineMarker(),
-                Expanded(
-                  child: TimeLineDottedLine(),
-                ),
+                Expanded(child: TimeLineDottedLine()),
               ],
             ),
           ),
@@ -158,11 +156,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
 }
 
 class CountDownItem extends StatelessWidget {
-  const CountDownItem({
-    required this.items,
-    required this.label,
-    super.key,
-  });
+  const CountDownItem({required this.items, required this.label, super.key});
 
   final List<RawDigitItem> items;
   final String label;
@@ -174,19 +168,12 @@ class CountDownItem extends StatelessWidget {
         Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            const Icon(
-              Icons.sunny,
-              color: Colors.yellow,
-              size: Sizes.s64,
-            ),
+            const Icon(Icons.sunny, color: Colors.yellow, size: Sizes.s64),
             Row(children: items),
           ],
         ),
         const GutterSmall(),
-        Text(
-          label,
-          style: context.textTheme.labelSmall,
-        ),
+        Text(label, style: context.textTheme.labelSmall),
       ],
     );
   }

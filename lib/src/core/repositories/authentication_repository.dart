@@ -8,10 +8,7 @@ abstract interface class AuthenticationRepository {
   ///
   /// Returns a [Token] if the sign in was successful.
   /// Throws an exception if the sign in failed.
-  Future<Token> signIn({
-    required String email,
-    required String password,
-  });
+  Future<Token> signIn({required String email, required String password});
 
   /// Ends a users session.
   ///

@@ -22,137 +22,125 @@ void main() {
   const Size highEndOfMedium = Size(839 * pixelRatio, 800 * pixelRatio);
   const Size lowEndOfLarge = Size(840 * pixelRatio, 800 * pixelRatio);
 
-  group(
-    'SlotChildLayout',
-    () {
-      testWidgets(
-        'should show `Small` text on small screens',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(testLayout);
+  group('SlotChildLayout', () {
+    testWidgets('should show `Small` text on small screens', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(testLayout);
 
-          // GOOD WEATHER (just right, high end)
-          tester.view.physicalSize = highEndOfSmall;
-          await tester.pump();
-          expect(find.text('Small'), findsOneWidget);
+      // GOOD WEATHER (just right, high end)
+      tester.view.physicalSize = highEndOfSmall;
+      await tester.pump();
+      expect(find.text('Small'), findsOneWidget);
 
-          // BAD WEATHER (too large)
-          tester.view.physicalSize = lowEndOfMedium;
-          await tester.pump();
-          expect(find.text('Small'), findsNothing);
+      // BAD WEATHER (too large)
+      tester.view.physicalSize = lowEndOfMedium;
+      await tester.pump();
+      expect(find.text('Small'), findsNothing);
 
-          addTearDown(() => tester.view.resetPhysicalSize());
-        },
+      addTearDown(() => tester.view.resetPhysicalSize());
+    });
+
+    testWidgets('should show `Medium` text on medium screens', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(testLayout);
+
+      // GOOD WEATHER (just right, low end)
+      tester.view.physicalSize = lowEndOfMedium;
+      await tester.pump();
+      expect(find.text('Medium'), findsOneWidget);
+
+      // GOOD WEATHER (just right, high end)
+      tester.view.physicalSize = highEndOfMedium;
+      await tester.pump();
+      expect(find.text('Medium'), findsOneWidget);
+
+      // BAD WEATHER (too small)
+      tester.view.physicalSize = highEndOfSmall;
+      await tester.pump();
+      expect(find.text('Medium'), findsNothing);
+
+      // BAD WEATHER (too large)
+      tester.view.physicalSize = lowEndOfLarge;
+      await tester.pump();
+      expect(find.text('Medium'), findsNothing);
+
+      addTearDown(() => tester.view.resetPhysicalSize());
+    });
+
+    testWidgets('should show `Large` text on larger screens', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(testLayout);
+
+      // GOOD WEATHER
+      tester.view.physicalSize = lowEndOfLarge;
+      await tester.pump();
+      expect(find.text('Large'), findsOneWidget);
+
+      // BAD WEATHER
+      tester.view.physicalSize = highEndOfMedium;
+      await tester.pump();
+      expect(find.text('Large'), findsNothing);
+
+      addTearDown(() => tester.view.resetPhysicalSize());
+    });
+
+    testWidgets('should show smallBody when mediumBody is null', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        const MaterialAppHelper(
+          child: SlotChildLayout(smallBody: Text('Small')),
+        ),
       );
 
-      testWidgets(
-        'should show `Medium` text on medium screens',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(testLayout);
+      tester.view.physicalSize = lowEndOfMedium;
+      await tester.pump();
+      expect(find.text('Small'), findsOneWidget);
 
-          // GOOD WEATHER (just right, low end)
-          tester.view.physicalSize = lowEndOfMedium;
-          await tester.pump();
-          expect(find.text('Medium'), findsOneWidget);
+      tester.view.physicalSize = highEndOfMedium;
+      await tester.pump();
+      expect(find.text('Small'), findsOneWidget);
 
-          // GOOD WEATHER (just right, high end)
-          tester.view.physicalSize = highEndOfMedium;
-          await tester.pump();
-          expect(find.text('Medium'), findsOneWidget);
+      addTearDown(() => tester.view.resetPhysicalSize());
+    });
 
-          // BAD WEATHER (too small)
-          tester.view.physicalSize = highEndOfSmall;
-          await tester.pump();
-          expect(find.text('Medium'), findsNothing);
-
-          // BAD WEATHER (too large)
-          tester.view.physicalSize = lowEndOfLarge;
-          await tester.pump();
-          expect(find.text('Medium'), findsNothing);
-
-          addTearDown(() => tester.view.resetPhysicalSize());
-        },
+    testWidgets('should show mediumBody when largeBody is null', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        const MaterialAppHelper(
+          child: SlotChildLayout(
+            smallBody: Text('Small'),
+            mediumBody: Text('Medium'),
+          ),
+        ),
       );
 
-      testWidgets(
-        'should show `Large` text on larger screens',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(testLayout);
+      tester.view.physicalSize = lowEndOfLarge;
+      await tester.pump();
+      expect(find.text('Medium'), findsOneWidget);
 
-          // GOOD WEATHER
-          tester.view.physicalSize = lowEndOfLarge;
-          await tester.pump();
-          expect(find.text('Large'), findsOneWidget);
+      addTearDown(() => tester.view.resetPhysicalSize());
+    });
 
-          // BAD WEATHER
-          tester.view.physicalSize = highEndOfMedium;
-          await tester.pump();
-          expect(find.text('Large'), findsNothing);
+    testWidgets(
+      'should show smallBody when mediumBody and largeBody are null',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          const MaterialAppHelper(
+            child: SlotChildLayout(smallBody: Text('Small')),
+          ),
+        );
 
-          addTearDown(() => tester.view.resetPhysicalSize());
-        },
-      );
+        tester.view.physicalSize = lowEndOfLarge;
+        await tester.pump();
+        expect(find.text('Small'), findsOneWidget);
 
-      testWidgets(
-        'should show smallBody when mediumBody is null',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(
-            const MaterialAppHelper(
-              child: SlotChildLayout(
-                smallBody: Text('Small'),
-              ),
-            ),
-          );
-
-          tester.view.physicalSize = lowEndOfMedium;
-          await tester.pump();
-          expect(find.text('Small'), findsOneWidget);
-
-          tester.view.physicalSize = highEndOfMedium;
-          await tester.pump();
-          expect(find.text('Small'), findsOneWidget);
-
-          addTearDown(() => tester.view.resetPhysicalSize());
-        },
-      );
-
-      testWidgets(
-        'should show mediumBody when largeBody is null',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(
-            const MaterialAppHelper(
-              child: SlotChildLayout(
-                smallBody: Text('Small'),
-                mediumBody: Text('Medium'),
-              ),
-            ),
-          );
-
-          tester.view.physicalSize = lowEndOfLarge;
-          await tester.pump();
-          expect(find.text('Medium'), findsOneWidget);
-
-          addTearDown(() => tester.view.resetPhysicalSize());
-        },
-      );
-
-      testWidgets(
-        'should show smallBody when mediumBody and largeBody are null',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(
-            const MaterialAppHelper(
-              child: SlotChildLayout(
-                smallBody: Text('Small'),
-              ),
-            ),
-          );
-
-          tester.view.physicalSize = lowEndOfLarge;
-          await tester.pump();
-          expect(find.text('Small'), findsOneWidget);
-
-          addTearDown(() => tester.view.resetPhysicalSize());
-        },
-      );
-    },
-  );
+        addTearDown(() => tester.view.resetPhysicalSize());
+      },
+    );
+  });
 }

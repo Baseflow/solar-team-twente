@@ -18,43 +18,34 @@ class MockAuthenticationCubit extends MockCubit<AuthenticationState>
     implements AuthenticationCubit {}
 
 void main() {
-  group(
-    'ProfileContent',
-    () {
-      late MockAuthenticationCubit mockAuthenticationCubit;
-      late MockProfileCubit mockProfileCubit;
+  group('ProfileContent', () {
+    late MockAuthenticationCubit mockAuthenticationCubit;
+    late MockProfileCubit mockProfileCubit;
 
-      setUp(() {
-        mockAuthenticationCubit = MockAuthenticationCubit();
-        mockProfileCubit = MockProfileCubit();
-      });
+    setUp(() {
+      mockAuthenticationCubit = MockAuthenticationCubit();
+      mockProfileCubit = MockProfileCubit();
+    });
 
-      testWidgets(
-        'should display sign out button',
-        (WidgetTester tester) async {
-          when(() => mockProfileCubit.state).thenReturn(
-            ProfileLoadedState(
-              Profile(
-                name: 'Test User',
-                address: '',
-                email: '',
-                phoneNumber: '',
-              ),
-            ),
-          );
-
-          await tester.pumpWidget(
-            _buildProfileContentView(mockAuthenticationCubit, mockProfileCubit),
-          );
-
-          final Finder signOutButton =
-              find.widgetWithText(FilledLoadingButton, 'Sign Out');
-
-          expect(signOutButton, findsOneWidget);
-        },
+    testWidgets('should display sign out button', (WidgetTester tester) async {
+      when(() => mockProfileCubit.state).thenReturn(
+        ProfileLoadedState(
+          Profile(name: 'Test User', address: '', email: '', phoneNumber: ''),
+        ),
       );
-    },
-  );
+
+      await tester.pumpWidget(
+        _buildProfileContentView(mockAuthenticationCubit, mockProfileCubit),
+      );
+
+      final Finder signOutButton = find.widgetWithText(
+        FilledLoadingButton,
+        'Sign Out',
+      );
+
+      expect(signOutButton, findsOneWidget);
+    });
+  });
 }
 
 MaterialAppHelper _buildProfileContentView(
@@ -64,12 +55,8 @@ MaterialAppHelper _buildProfileContentView(
   return MaterialAppHelper(
     child: MultiBlocProvider(
       providers: <BlocProvider<dynamic>>[
-        BlocProvider<AuthenticationCubit>.value(
-          value: mockAuthenticationCubit,
-        ),
-        BlocProvider<ProfileCubit>.value(
-          value: mockProfileCubit,
-        ),
+        BlocProvider<AuthenticationCubit>.value(value: mockAuthenticationCubit),
+        BlocProvider<ProfileCubit>.value(value: mockProfileCubit),
       ],
       child: const SingleChildScrollView(child: ProfileContent()),
     ),

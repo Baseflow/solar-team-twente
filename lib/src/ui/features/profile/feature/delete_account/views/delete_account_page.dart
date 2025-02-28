@@ -20,9 +20,7 @@ class DeleteAccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DeleteAccountCubit>(
-      create: (_) => DeleteAccountCubit(
-        Ioc.container.get<ProfileService>(),
-      ),
+      create: (_) => DeleteAccountCubit(Ioc.container.get<ProfileService>()),
       child: const DeleteAccountView(),
     );
   }

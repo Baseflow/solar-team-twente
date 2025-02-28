@@ -7,5 +7,5 @@ enum AppThemeMode {
   light,
 
   /// [dark] - The dark theme mode.
-  dark
+  dark,
 }

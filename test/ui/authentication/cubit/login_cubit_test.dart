@@ -20,98 +20,86 @@ void main() {
     ).thenAnswer((_) async => <String, String>{});
   });
 
-  group(
-    'updateEmail',
-    () {
-      blocTest<LoginCubit, LoginState>(
-        'should emit state with updated email',
-        build: () => LoginCubit(mockAuthenticationService),
-        act: (LoginCubit cubit) => cubit.updateEmail('email@example.com'),
-        expect: () => <LoginState>[
-          const LoginState(email: 'email@example.com'),
-        ],
-      );
-    },
-  );
+  group('updateEmail', () {
+    blocTest<LoginCubit, LoginState>(
+      'should emit state with updated email',
+      build: () => LoginCubit(mockAuthenticationService),
+      act: (LoginCubit cubit) => cubit.updateEmail('email@example.com'),
+      expect: () => <LoginState>[const LoginState(email: 'email@example.com')],
+    );
+  });
 
-  group(
-    'signIn',
-    () {
-      blocTest<LoginCubit, LoginState>(
-        'should emit loading, then success state on successful sign in',
-        setUp: () {
-          when(
-            () => mockAuthenticationService.signIn(
-              email: any(named: 'email'),
-              password: any(named: 'password'),
+  group('signIn', () {
+    blocTest<LoginCubit, LoginState>(
+      'should emit loading, then success state on successful sign in',
+      setUp: () {
+        when(
+          () => mockAuthenticationService.signIn(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+          ),
+        ).thenAnswer((_) async => Future<void>.value());
+      },
+      build: () => LoginCubit(mockAuthenticationService),
+      act: (LoginCubit cubit) async {
+        cubit
+          ..updateEmail('test@example.com')
+          ..updatePassword('password');
+        await cubit.signIn();
+      },
+      expect:
+          () => <LoginState>[
+            const LoginState(email: 'test@example.com'),
+            const LoginState(email: 'test@example.com', password: 'password'),
+            const LoginState(
+              email: 'test@example.com',
+              password: 'password',
+              isLoading: true,
             ),
-          ).thenAnswer((_) async => Future<void>.value());
-        },
-        build: () => LoginCubit(mockAuthenticationService),
-        act: (LoginCubit cubit) async {
-          cubit
-            ..updateEmail('test@example.com')
-            ..updatePassword('password');
-          await cubit.signIn();
-        },
-        expect: () => <LoginState>[
-          const LoginState(email: 'test@example.com'),
-          const LoginState(
-            email: 'test@example.com',
-            password: 'password',
-          ),
-          const LoginState(
-            email: 'test@example.com',
-            password: 'password',
-            isLoading: true,
-          ),
-          const LoginState(
-            email: 'test@example.com',
-            password: 'password',
-            loginSuccessful: true,
-          ),
-        ],
-      );
+            const LoginState(
+              email: 'test@example.com',
+              password: 'password',
+              loginSuccessful: true,
+            ),
+          ],
+    );
 
-      blocTest<LoginCubit, LoginState>(
-        'should emit loading, then error state when sign in fails',
-        setUp: () {
-          when(
-            () => mockAuthenticationService.signIn(
-              email: any(named: 'email'),
-              password: any(named: 'password'),
+    blocTest<LoginCubit, LoginState>(
+      'should emit loading, then error state when sign in fails',
+      setUp: () {
+        when(
+          () => mockAuthenticationService.signIn(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+          ),
+        ).thenThrow(
+          const AuthenticationException(
+            errorCode: AuthenticationExceptionCode.userNotFound,
+          ),
+        );
+      },
+      build: () => LoginCubit(mockAuthenticationService),
+      act: (LoginCubit cubit) async {
+        cubit
+          ..updateEmail('test@example.com')
+          ..updatePassword('password');
+        await cubit.signIn();
+      },
+      expect:
+          () => <LoginState>[
+            const LoginState(email: 'test@example.com'),
+            const LoginState(email: 'test@example.com', password: 'password'),
+            const LoginState(
+              email: 'test@example.com',
+              password: 'password',
+              isLoading: true,
             ),
-          ).thenThrow(
-            const AuthenticationException(
-              errorCode: AuthenticationExceptionCode.userNotFound,
+            const LoginState(
+              email: 'test@example.com',
+              password: 'password',
+              authErrorCode: AuthenticationExceptionCode.userNotFound,
             ),
-          );
-        },
-        build: () => LoginCubit(mockAuthenticationService),
-        act: (LoginCubit cubit) async {
-          cubit
-            ..updateEmail('test@example.com')
-            ..updatePassword('password');
-          await cubit.signIn();
-        },
-        expect: () => <LoginState>[
-          const LoginState(email: 'test@example.com'),
-          const LoginState(
-            email: 'test@example.com',
-            password: 'password',
-          ),
-          const LoginState(
-            email: 'test@example.com',
-            password: 'password',
-            isLoading: true,
-          ),
-          const LoginState(
-            email: 'test@example.com',
-            password: 'password',
-            authErrorCode: AuthenticationExceptionCode.userNotFound,
-          ),
-        ],
-      );
-    },
-  );
+          ],
+    );
+  });
 }

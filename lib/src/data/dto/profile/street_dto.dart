@@ -6,10 +6,7 @@ part 'street_dto.g.dart';
 @JsonSerializable(createToJson: false)
 class StreetDTO {
   /// Creates a new [StreetDTO] instance.
-  StreetDTO({
-    required this.number,
-    required this.name,
-  });
+  StreetDTO({required this.number, required this.name});
 
   /// Creates a new [StreetDTO] instance from a [json] map.
   factory StreetDTO.fromJson(Map<String, dynamic> json) =>

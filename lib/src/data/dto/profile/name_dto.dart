@@ -6,11 +6,7 @@ part 'name_dto.g.dart';
 @JsonSerializable(createToJson: false)
 class NameDTO {
   /// Creates a new [NameDTO] instance.
-  NameDTO({
-    required this.title,
-    required this.first,
-    required this.last,
-  });
+  NameDTO({required this.title, required this.first, required this.last});
 
   /// Creates a new [NameDTO] instance from a [json] map.
   factory NameDTO.fromJson(Map<String, dynamic> json) =>

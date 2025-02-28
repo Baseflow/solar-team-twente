@@ -10,32 +10,28 @@ import '../../helpers/material_app_helper.dart';
 class MockLanguageCubit extends MockCubit<String> implements LanguageCubit {}
 
 void main() {
-  group(
-    'Change language button',
-    () {
-      late MockLanguageCubit mockLanguageCubit;
+  group('Change language button', () {
+    late MockLanguageCubit mockLanguageCubit;
 
-      setUp(() {
-        mockLanguageCubit = MockLanguageCubit();
-      });
+    setUp(() {
+      mockLanguageCubit = MockLanguageCubit();
+    });
 
-      testWidgets(
-        'should display the EN language code',
-        (WidgetTester tester) async {
-          when(() => mockLanguageCubit.state).thenReturn('EN');
-          when(() => mockLanguageCubit.getCountryCode()).thenReturn('EN');
-          await tester.pumpWidget(
-            MaterialAppHelper(
-              child: BlocProvider<LanguageCubit>.value(
-                value: mockLanguageCubit,
-                child: const ChangeLanguageButton(),
-              ),
-            ),
-          );
-
-          expect(find.text('EN'), findsOneWidget);
-        },
+    testWidgets('should display the EN language code', (
+      WidgetTester tester,
+    ) async {
+      when(() => mockLanguageCubit.state).thenReturn('EN');
+      when(() => mockLanguageCubit.getCountryCode()).thenReturn('EN');
+      await tester.pumpWidget(
+        MaterialAppHelper(
+          child: BlocProvider<LanguageCubit>.value(
+            value: mockLanguageCubit,
+            child: const ChangeLanguageButton(),
+          ),
+        ),
       );
-    },
-  );
+
+      expect(find.text('EN'), findsOneWidget);
+    });
+  });
 }

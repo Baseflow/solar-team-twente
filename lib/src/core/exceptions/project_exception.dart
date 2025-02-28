@@ -3,10 +3,7 @@ import 'repository_exception.dart';
 /// [ProjectException] providing the error codes for the repository.
 class ProjectException extends RepositoryException<ProjectExceptionCode> {
   /// Creates a new [ProjectException].
-  const ProjectException({
-    required super.errorCode,
-    super.message,
-  });
+  const ProjectException({required super.errorCode, super.message});
 }
 
 /// [ProjectExceptionCode] providing the error codes for different exceptions.
@@ -15,5 +12,5 @@ enum ProjectExceptionCode {
   getFailed,
 
   /// Indicates that some of the profile actions have failed, but it's unknown.
-  unknown;
+  unknown,
 }

@@ -6,9 +6,8 @@ import '../types/types.dart';
 /// the shared preferences.
 class ThemeService {
   /// Creates a new instance of [ThemeService].
-  ThemeService({
-    required ThemeRepository themeRepository,
-  }) : _themeRepository = themeRepository;
+  ThemeService({required ThemeRepository themeRepository})
+    : _themeRepository = themeRepository;
 
   final ThemeRepository _themeRepository;
 

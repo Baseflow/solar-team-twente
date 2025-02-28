@@ -15,10 +15,7 @@ class ProfileHeader extends StatelessWidget {
       children: <Widget>[
         CustomPaint(
           painter: ProfilePainter(context.colorScheme.primary),
-          child: const SizedBox(
-            height: 160,
-            width: double.infinity,
-          ),
+          child: const SizedBox(height: 160, width: double.infinity),
         ),
         Positioned.fill(
           top: 16,

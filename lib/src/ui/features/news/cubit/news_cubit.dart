@@ -22,9 +22,7 @@ class NewsCubit extends Cubit<NewsState> {
 
   void initialize() {
     _newsSubscription = _newsService.messages.listen(
-      (
-        List<NewsMessage> newsMessages,
-      ) {
+      (List<NewsMessage> newsMessages) {
         emit(NewsLoaded(newsMessages: newsMessages));
       },
       onError: (Object error) {

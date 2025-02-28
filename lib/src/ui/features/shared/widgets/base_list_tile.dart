@@ -15,18 +15,11 @@ class BaseListTile extends ListTile {
     Icon? leadingIcon,
     super.key,
   }) : super(
-          title: Text(
-            title,
-            style: titleStyle,
-          ),
-          subtitle: subtitle != null
-              ? Text(
-                  subtitle,
-                  style: subtitleStyle,
-                )
-              : null,
-          trailing: trailingIcon,
-          leading: leadingIcon,
-          onTap: onTap,
-        );
+         title: Text(title, style: titleStyle),
+         subtitle:
+             subtitle != null ? Text(subtitle, style: subtitleStyle) : null,
+         trailing: trailingIcon,
+         leading: leadingIcon,
+         onTap: onTap,
+       );
 }

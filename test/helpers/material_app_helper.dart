@@ -6,11 +6,7 @@ import 'package:solar_team_twente/src/ui/localizations/generated/app_localizatio
 /// With this the app can be tested with localizations.
 class MaterialAppHelper extends StatelessWidget {
   /// Creates a new instance of the [MaterialAppHelper] widget.
-  const MaterialAppHelper({
-    required this.child,
-    this.locale = 'en',
-    super.key,
-  });
+  const MaterialAppHelper({required this.child, this.locale = 'en', super.key});
 
   /// The widget that is going to be tested.
   final Widget child;

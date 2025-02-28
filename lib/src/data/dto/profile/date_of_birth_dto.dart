@@ -6,10 +6,7 @@ part 'date_of_birth_dto.g.dart';
 @JsonSerializable(createToJson: false)
 class DateOfBirthDTO {
   /// Creates a new [DateOfBirthDTO] instance.
-  const DateOfBirthDTO({
-    required this.date,
-    required this.age,
-  });
+  const DateOfBirthDTO({required this.date, required this.age});
 
   /// Creates a new [DateOfBirthDTO] instance from a [json] map.
   factory DateOfBirthDTO.fromJson(Map<String, dynamic> json) =>

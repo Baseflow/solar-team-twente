@@ -15,9 +15,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.myAccount),
-      ),
+      appBar: AppBar(title: Text(l10n.myAccount)),
       body: SingleChildScrollView(
         child: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (BuildContext context, ProfileState state) {

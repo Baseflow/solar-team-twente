@@ -4,7 +4,9 @@ class Constants {
   static const String solarTeamName = 'Solar Team Twente';
 
   /// The application legalese.
-  static const String applicationLegalese = '©2025 ' 'Baseflow';
+  static const String applicationLegalese =
+      '©2025 '
+      'Baseflow';
 
   /// The application website.
   static const String appWebsite = 'https://www.solarteam.nl';

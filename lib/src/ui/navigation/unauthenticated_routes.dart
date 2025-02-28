@@ -20,18 +20,14 @@ class UnauthenticatedRoutes {
           name: ForgotPasswordPage.name,
           path: ForgotPasswordPage.path,
           pageBuilder: (BuildContext context, GoRouterState state) {
-            return const MaterialPage<void>(
-              child: ForgotPasswordPage(),
-            );
+            return const MaterialPage<void>(child: ForgotPasswordPage());
           },
         ),
         GoRoute(
           name: RegisterPage.name,
           path: RegisterPage.path,
           pageBuilder: (BuildContext context, GoRouterState state) {
-            return const MaterialPage<void>(
-              child: RegisterPage(),
-            );
+            return const MaterialPage<void>(child: RegisterPage());
           },
         ),
       ],

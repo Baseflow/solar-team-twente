@@ -20,9 +20,9 @@ void main() {
   setUp(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockChangePasswordCubit = MockChangePasswordCubit();
-    when(() => mockChangePasswordCubit.state).thenReturn(
-      const ChangePasswordState(),
-    );
+    when(
+      () => mockChangePasswordCubit.state,
+    ).thenReturn(const ChangePasswordState());
     formView = MaterialAppHelper(
       child: Scaffold(
         body: BlocProvider<ChangePasswordCubit>.value(
@@ -33,110 +33,90 @@ void main() {
     );
   });
 
-  group(
-    'ChangePasswordForm Widget Tests',
-    () {
-      testWidgets('displays 3 input text fields', (WidgetTester tester) async {
-        await tester.pumpWidget(formView);
-        expect(find.byType(TextFormField), findsNWidgets(3));
-      });
+  group('ChangePasswordForm Widget Tests', () {
+    testWidgets('displays 3 input text fields', (WidgetTester tester) async {
+      await tester.pumpWidget(formView);
+      expect(find.byType(TextFormField), findsNWidgets(3));
+    });
 
-      testWidgets(
-        'displays 1 filled loading button widget',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(formView);
-          expect(find.byType(FilledLoadingButton), findsOneWidget);
-        },
-      );
-    },
-  );
+    testWidgets('displays 1 filled loading button widget', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(formView);
+      expect(find.byType(FilledLoadingButton), findsOneWidget);
+    });
+  });
 
-  group(
-    'FilledLoadingButton Widget Tests',
-    () {
-      testWidgets(
-        'displays a CircularLoadingIndicator when in loading state',
-        (WidgetTester tester) async {
-          when(() => mockChangePasswordCubit.state).thenReturn(
-            const ChangePasswordState(isLoading: true),
-          );
+  group('FilledLoadingButton Widget Tests', () {
+    testWidgets('displays a CircularLoadingIndicator when in loading state', (
+      WidgetTester tester,
+    ) async {
+      when(
+        () => mockChangePasswordCubit.state,
+      ).thenReturn(const ChangePasswordState(isLoading: true));
 
-          await tester.pumpWidget(formView);
+      await tester.pumpWidget(formView);
 
-          expect(find.byType(CircularProgressIndicator), findsOne);
-        },
-      );
+      expect(find.byType(CircularProgressIndicator), findsOne);
+    });
 
-      testWidgets(
-        'does not display a CircularLoadingIndicator when '
-        'not in loading state',
-        (WidgetTester tester) async {
-          when(() => mockChangePasswordCubit.state).thenReturn(
-            const ChangePasswordState(),
-          );
+    testWidgets('does not display a CircularLoadingIndicator when '
+        'not in loading state', (WidgetTester tester) async {
+      when(
+        () => mockChangePasswordCubit.state,
+      ).thenReturn(const ChangePasswordState());
 
-          await tester.pumpWidget(formView);
+      await tester.pumpWidget(formView);
 
-          expect(find.byType(CircularProgressIndicator), findsNothing);
-        },
-      );
-    },
-  );
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+    });
+  });
 
-  group(
-    'SnackBar Tests',
-    () {
-      testWidgets(
-        'shows snack bar when task executed successfully',
-        (WidgetTester tester) async {
-          when(mockChangePasswordCubit.changePassword).thenAnswer(
-            (_) => Future<void>.value(),
-          );
+  group('SnackBar Tests', () {
+    testWidgets('shows snack bar when task executed successfully', (
+      WidgetTester tester,
+    ) async {
+      when(
+        mockChangePasswordCubit.changePassword,
+      ).thenAnswer((_) => Future<void>.value());
 
-          whenListen(
-            mockChangePasswordCubit,
-            Stream<ChangePasswordState>.fromIterable(
-              <ChangePasswordState>[
-                const ChangePasswordState(isLoading: true),
-                const ChangePasswordState(changePasswordSuccessful: true),
-              ],
-            ),
-            initialState: const ChangePasswordState(),
-          );
-
-          await tester.pumpWidget(formView);
-          await tester.pumpAndSettle();
-
-          expect(find.byType(SnackBar), findsOne);
-        },
+      whenListen(
+        mockChangePasswordCubit,
+        Stream<ChangePasswordState>.fromIterable(<ChangePasswordState>[
+          const ChangePasswordState(isLoading: true),
+          const ChangePasswordState(changePasswordSuccessful: true),
+        ]),
+        initialState: const ChangePasswordState(),
       );
 
-      testWidgets(
-        'shows snack bar when task does not succeed',
-        (WidgetTester tester) async {
-          when(mockChangePasswordCubit.changePassword).thenAnswer(
-            (_) => Future<void>.value(),
-          );
+      await tester.pumpWidget(formView);
+      await tester.pumpAndSettle();
 
-          whenListen(
-            mockChangePasswordCubit,
-            Stream<ChangePasswordState>.fromIterable(
-              <ChangePasswordState>[
-                const ChangePasswordState(isLoading: true),
-                const ChangePasswordState(
-                  authErrorCode: AuthenticationExceptionCode.invalidCredentials,
-                ),
-              ],
-            ),
-            initialState: const ChangePasswordState(),
-          );
+      expect(find.byType(SnackBar), findsOne);
+    });
 
-          await tester.pumpWidget(formView);
-          await tester.pumpAndSettle();
+    testWidgets('shows snack bar when task does not succeed', (
+      WidgetTester tester,
+    ) async {
+      when(
+        mockChangePasswordCubit.changePassword,
+      ).thenAnswer((_) => Future<void>.value());
 
-          expect(find.byType(SnackBar), findsOne);
-        },
+      whenListen(
+        mockChangePasswordCubit,
+        Stream<ChangePasswordState>.fromIterable(<ChangePasswordState>[
+          const ChangePasswordState(isLoading: true),
+          const ChangePasswordState(
+            authErrorCode: AuthenticationExceptionCode.invalidCredentials,
+          ),
+        ]),
+        initialState: const ChangePasswordState(),
       );
-    },
-  );
+
+      await tester.pumpWidget(formView);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SnackBar), findsOne);
+    });
+  });
 }

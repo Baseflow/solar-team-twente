@@ -11,20 +11,13 @@ import '../../../extensions/build_context_extensions.dart';
 /// {@endtemplate}
 class TopThreeRankingView extends StatelessWidget {
   /// {@macro top_three_ranking}
-  const TopThreeRankingView({
-    required this.team,
-    super.key,
-  });
+  const TopThreeRankingView({required this.team, super.key});
 
   final RaceTeam team;
 
   @override
   Widget build(BuildContext context) {
-    final List<Color> colors = <Color>[
-      Colors.amber,
-      Colors.grey,
-      Colors.brown,
-    ];
+    final List<Color> colors = <Color>[Colors.amber, Colors.grey, Colors.brown];
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: colors[team.position - 1], width: Sizes.s2),
@@ -52,12 +45,11 @@ class TopThreeRankingView extends StatelessWidget {
               children: <Widget>[
                 Text(
                   team.name,
-                  style: context.textTheme.bodyMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                Text(
-                  '${team.totalDrivenKilometers} km',
-                ),
+                Text('${team.totalDrivenKilometers} km'),
               ],
             ),
           ),

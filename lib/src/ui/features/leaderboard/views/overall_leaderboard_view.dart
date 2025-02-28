@@ -31,16 +31,12 @@ class OverallLeaderboardView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                ...leaderboard.take(3).map(
-                      (RaceTeam team) => TopThreeRankingView(
-                        team: team,
-                      ),
-                    ),
-                ...leaderboard.skip(3).map(
-                      (RaceTeam team) => LeaderboardPosition(
-                        team: team,
-                      ),
-                    ),
+                ...leaderboard
+                    .take(3)
+                    .map((RaceTeam team) => TopThreeRankingView(team: team)),
+                ...leaderboard
+                    .skip(3)
+                    .map((RaceTeam team) => LeaderboardPosition(team: team)),
                 const SizedBox(height: Sizes.s12),
               ],
             ),
@@ -52,10 +48,7 @@ class OverallLeaderboardView extends StatelessWidget {
 }
 
 class LeaderboardPosition extends StatelessWidget {
-  const LeaderboardPosition({
-    required this.team,
-    super.key,
-  });
+  const LeaderboardPosition({required this.team, super.key});
 
   final RaceTeam team;
 

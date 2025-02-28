@@ -12,23 +12,20 @@ class SupabaseNewsRepository implements NewsRepository {
   Stream<List<NewsMessage>> get newsMessages {
     final SupabaseStreamBuilder response = _client
         .from('news_messages')
-        .stream(primaryKey: <String>['id']).order('created_at');
+        .stream(primaryKey: <String>['id'])
+        .order('created_at');
 
-    return response.map(
-      (List<Map<String, dynamic>> data) {
-        return data.map(
-          (Map<String, dynamic> json) {
-            return NewsMessageDTO.fromJson(json).toEntity();
-          },
-        ).toList();
-      },
-    );
+    return response.map((List<Map<String, dynamic>> data) {
+      return data.map((Map<String, dynamic> json) {
+        return NewsMessageDTO.fromJson(json).toEntity();
+      }).toList();
+    });
   }
 
   @override
   Future<void> submitNewsMessage(NewsMessage newsMessage) {
-    return _client.from('news_messages').upsert(
-          NewsMessageDTO.fromEntity(newsMessage).toJson(),
-        );
+    return _client
+        .from('news_messages')
+        .upsert(NewsMessageDTO.fromEntity(newsMessage).toJson());
   }
 }

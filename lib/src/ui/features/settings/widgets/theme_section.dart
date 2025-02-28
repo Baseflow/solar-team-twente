@@ -18,9 +18,7 @@ class ThemeSection extends StatelessWidget {
     return Section(
       title: l10n.appearance_settings,
       icon: Icons.dark_mode,
-      children: const <Widget>[
-        _ThemeRadioList(),
-      ],
+      children: const <Widget>[_ThemeRadioList()],
     );
   }
 }
@@ -35,15 +33,17 @@ class _ThemeRadioList extends StatelessWidget {
       builder: (BuildContext context, AppThemeMode state) {
         return ListView(
           shrinkWrap: true,
-          children: AppThemeMode.values
-              .map<RadioListTile<AppThemeMode>>((AppThemeMode themeMode) {
-            return RadioListTile<AppThemeMode>(
-              title: Text(_getThemeTitle(themeMode, context)),
-              value: themeMode,
-              groupValue: state,
-              onChanged: context.read<ThemeCubit>().updateTheme,
-            );
-          }).toList(),
+          children:
+              AppThemeMode.values.map<RadioListTile<AppThemeMode>>((
+                AppThemeMode themeMode,
+              ) {
+                return RadioListTile<AppThemeMode>(
+                  title: Text(_getThemeTitle(themeMode, context)),
+                  value: themeMode,
+                  groupValue: state,
+                  onChanged: context.read<ThemeCubit>().updateTheme,
+                );
+              }).toList(),
         );
       },
     );

@@ -17,9 +17,7 @@ class ThemeView extends StatelessWidget {
     return BlocBuilder<ThemeCubit, AppThemeMode>(
       builder: (BuildContext context, AppThemeMode state) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(l10n.appearance_settings),
-          ),
+          appBar: AppBar(title: Text(l10n.appearance_settings)),
           body: ListView.builder(
             itemCount: AppThemeMode.values.length,
             itemBuilder: (BuildContext context, int index) {
@@ -28,8 +26,9 @@ class ThemeView extends StatelessWidget {
                 title: Text(_getThemeTitle(themeMode, context)),
                 value: themeMode,
                 groupValue: state,
-                onChanged: (AppThemeMode? value) =>
-                    context.read<ThemeCubit>().updateTheme(value),
+                onChanged:
+                    (AppThemeMode? value) =>
+                        context.read<ThemeCubit>().updateTheme(value),
               );
             },
           ),

@@ -16,10 +16,7 @@ class NewsMessageDTO {
   }
 
   factory NewsMessageDTO.fromEntity(NewsMessage entity) {
-    return NewsMessageDTO._(
-      title: entity.title,
-      message: entity.message,
-    );
+    return NewsMessageDTO._(title: entity.title, message: entity.message);
   }
 
   final String message;
@@ -27,10 +24,7 @@ class NewsMessageDTO {
   final String? dateSubmitted;
 
   Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'title': title,
-      'message': message,
-    };
+    return <String, dynamic>{'title': title, 'message': message};
   }
 
   NewsMessage toEntity() {

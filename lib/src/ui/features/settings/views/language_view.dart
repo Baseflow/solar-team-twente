@@ -18,14 +18,10 @@ class LanguageView extends StatelessWidget {
     const List<Locale> locales = AppLocalizations.supportedLocales;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.language),
-      ),
+      appBar: AppBar(title: Text(context.l10n.language)),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: Sizes.s24,
-          ),
+          padding: const EdgeInsets.only(top: Sizes.s24),
           child: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,

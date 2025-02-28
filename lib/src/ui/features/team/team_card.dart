@@ -28,9 +28,7 @@ class TeamCard extends StatelessWidget {
             Container(
               height: 160,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(12),
-                ),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
                 image: DecorationImage(
                   image: AssetImage(Assets.solarTeamPeople.path),
                   fit: BoxFit.cover,

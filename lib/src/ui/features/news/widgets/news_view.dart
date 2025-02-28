@@ -14,23 +14,17 @@ class NewsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.newsPageTitle),
-      ),
+      appBar: AppBar(title: Text(context.l10n.newsPageTitle)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Sizes.s16),
         child: BlocBuilder<NewsCubit, NewsState>(
           builder: (BuildContext context, NewsState state) {
             if (state is! NewsLoaded) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (state.newsMessages.isEmpty) {
-              return Center(
-                child: Text(context.l10n.noNewsMessages),
-              );
+              return Center(child: Text(context.l10n.noNewsMessages));
             }
 
             return ListView.separated(

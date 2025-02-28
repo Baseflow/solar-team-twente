@@ -4,10 +4,7 @@ import 'repository_exception.dart';
 class AuthenticationException
     extends RepositoryException<AuthenticationExceptionCode> {
   /// Creates a new [AuthenticationException].
-  const AuthenticationException({
-    required super.errorCode,
-    super.message,
-  });
+  const AuthenticationException({required super.errorCode, super.message});
 }
 
 /// [AuthenticationExceptionCode] providing the error codes for the service.

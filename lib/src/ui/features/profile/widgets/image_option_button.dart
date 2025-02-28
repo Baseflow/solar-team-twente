@@ -68,9 +68,7 @@ class _ImageOptionButtonState extends State<ImageOptionButton> {
     }
   }
 
-  Future<void> _pickImageFromCameraWeb(
-    BuildContext context,
-  ) async {
+  Future<void> _pickImageFromCameraWeb(BuildContext context) async {
     final List<CameraDescription> cameras = await availableCameras();
     if (!mounted) return;
     // Potential exceptions for this case are handeled in the CameraDialog.
@@ -81,15 +79,13 @@ class _ImageOptionButtonState extends State<ImageOptionButton> {
   void _showCameraDialog(List<CameraDescription> cameras) {
     showDialog<void>(
       context: context,
-      builder: (BuildContext dialogContext) =>
-          CameraDialog(camera: cameras.first),
+      builder:
+          (BuildContext dialogContext) => CameraDialog(camera: cameras.first),
     );
   }
 
   void _showErrorSnackBar(String message) {
-    context.showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    context.showSnackBar(SnackBar(content: Text(message)));
   }
 
   Future<void> _handleMobileImagePick(
@@ -106,9 +102,7 @@ class _ImageOptionButtonState extends State<ImageOptionButton> {
     }
   }
 
-  Future<void> _pickImageFromGallery(
-    BuildContext context,
-  ) async {
+  Future<void> _pickImageFromGallery(BuildContext context) async {
     final ProfileCubit profileCubit = context.read<ProfileCubit>();
     final XFile? pickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,

@@ -6,9 +6,8 @@ import '../repositories/leaderboard_repository.dart';
 /// {@endtemplate}
 class LeaderboardService {
   /// {@macro leaderboard_service}
-  LeaderboardService({
-    required LeaderboardRepository leaderboardRepository,
-  }) : _leaderboardRepository = leaderboardRepository;
+  LeaderboardService({required LeaderboardRepository leaderboardRepository})
+    : _leaderboardRepository = leaderboardRepository;
 
   final LeaderboardRepository _leaderboardRepository;
 

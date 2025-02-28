@@ -31,16 +31,15 @@ class RaceDaysBottomSheet extends StatelessWidget {
       child: BlocBuilder<RaceDayCarouselCubit, RaceDayCarouselState>(
         builder: (BuildContext context, RaceDayCarouselState state) {
           if (state is! RaceDayCarouselLoaded) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
-          final DateTime dateToDisplay = state.selectedRaceDay.index == 0
-              ? DateTime.now()
-              : Constants.startDate.add(
-                  Duration(days: state.selectedRaceDay.index - 1),
-                );
+          final DateTime dateToDisplay =
+              state.selectedRaceDay.index == 0
+                  ? DateTime.now()
+                  : Constants.startDate.add(
+                    Duration(days: state.selectedRaceDay.index - 1),
+                  );
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,9 +62,7 @@ class RaceDaysBottomSheet extends StatelessWidget {
                         const GutterSmall(),
                         const Text('·'),
                         const GutterSmall(),
-                        Text(
-                          '${l10n.day(1)} ${state.selectedRaceDay.index}',
-                        ),
+                        Text('${l10n.day(1)} ${state.selectedRaceDay.index}'),
                       ] else
                         Text(l10n.fullRace),
                     ],

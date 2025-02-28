@@ -5,10 +5,7 @@ import '../../../../core.dart';
 part 'race_team_dto.g.dart';
 
 /// {@macro race_team}
-@JsonSerializable(
-  createToJson: false,
-  fieldRename: FieldRename.snake,
-)
+@JsonSerializable(createToJson: false, fieldRename: FieldRename.snake)
 class RaceTeamDto {
   /// {@macro race_team}
   RaceTeamDto({
