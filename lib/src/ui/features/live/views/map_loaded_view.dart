@@ -77,8 +77,8 @@ class _MapLoadedViewState extends State<MapLoadedView>
           ) async {
             if (carouselState.selectedRaceDay.index > 0) {
               context.read<MapCubit>().loadSelectedDay(
-                carouselState.selectedRaceDay.index - 1,
-              );
+                    carouselState.selectedRaceDay.index - 1,
+                  );
             }
             await _animateToSection(
               mapState.selectedRaceDayGeoJson!.markers,

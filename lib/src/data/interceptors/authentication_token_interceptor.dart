@@ -9,8 +9,8 @@ class AuthenticationTokenInterceptor implements Interceptor {
   AuthenticationTokenInterceptor({
     required AuthenticationRepository authenticationRepository,
     required Dio dio,
-  }) : _dioClient = dio,
-       _authenticationRepository = authenticationRepository;
+  })  : _dioClient = dio,
+        _authenticationRepository = authenticationRepository;
 
   final Dio _dioClient;
   final AuthenticationRepository _authenticationRepository;

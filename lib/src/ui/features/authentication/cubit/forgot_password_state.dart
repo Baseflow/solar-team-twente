@@ -24,11 +24,11 @@ class ForgotPasswordState extends Equatable {
 
   @override
   List<Object?> get props => <Object?>[
-    email,
-    authErrorCode,
-    isLoading,
-    emailSentSuccessfully,
-  ];
+        email,
+        authErrorCode,
+        isLoading,
+        emailSentSuccessfully,
+      ];
 
   /// Copies the state with a new value.
   ForgotPasswordState copyWith({

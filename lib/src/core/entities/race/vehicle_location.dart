@@ -12,9 +12,9 @@ class VehicleLocation extends Equatable {
   ///
   /// Defaults to Johannesburg, South Africa.
   const VehicleLocation.initial()
-    : name = 'Whoops',
-      coordinates = const LatLng(26.2041, 28.0473),
-      lastSeen = -1;
+      : name = 'Whoops',
+        coordinates = const LatLng(26.2041, 28.0473),
+        lastSeen = -1;
 
   final String name;
   final LatLng coordinates;

@@ -5,7 +5,7 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 class CenteredLoadingMessage extends StatelessWidget {
   /// Creates a new instance of the [CenteredLoadingMessage] widget.
   CenteredLoadingMessage({required this.loadingMessage, super.key})
-    : assert(loadingMessage.isNotEmpty, 'loadingMessage should not be empty');
+      : assert(loadingMessage.isNotEmpty, 'loadingMessage should not be empty');
 
   /// The message to display while loading.
   ///
