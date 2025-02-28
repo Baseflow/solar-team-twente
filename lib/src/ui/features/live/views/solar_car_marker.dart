@@ -15,7 +15,7 @@ class SolarCarMarker extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.s4),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.8),
+            color: Colors.white.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(Sizes.s96),
             border: Border.all(
               color: context.colorScheme.primary,

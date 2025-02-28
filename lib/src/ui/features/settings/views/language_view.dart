@@ -1,5 +1,3 @@
-import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart'
-    as awesome;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:locale_names/locale_names.dart';
@@ -58,5 +56,11 @@ class LanguageView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+extension on String {
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 }

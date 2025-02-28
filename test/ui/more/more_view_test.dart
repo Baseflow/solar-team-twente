@@ -96,7 +96,7 @@ MaterialAppHelper _buildMoreView(
 ) {
   return MaterialAppHelper(
     child: MultiBlocProvider(
-      providers: <BlocProvider<dynamic>>[
+      providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<AuthenticationCubit>.value(
           value: mockAuthenticationCubit,
         ),

@@ -39,7 +39,7 @@ class LivePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: <BlocProvider<StateStreamableSource<Object?>>>[
+      providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<RaceDayCarouselCubit>(
           create: (_) {
             final int daysSinceStart =

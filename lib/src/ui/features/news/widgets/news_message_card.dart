@@ -54,7 +54,8 @@ class NewsMessageCard extends StatelessWidget {
               formattedSubmissionTime,
               textAlign: TextAlign.end,
               style: context.textTheme.labelSmall!.copyWith(
-                color: context.colorScheme.onPrimaryContainer.withOpacity(0.5),
+                color: context.colorScheme.onPrimaryContainer
+                    .withValues(alpha: 0.5),
               ),
             ),
           ],

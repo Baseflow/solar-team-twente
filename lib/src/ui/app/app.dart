@@ -22,20 +22,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: <BlocProvider<StateStreamableSource<Object?>>>[
+      providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<AuthenticationCubit>(
           create: (BuildContext context) => AuthenticationCubit(
             Ioc.container.get<AuthenticationService>(),
           )..ensureValidToken(),
         ),
-        // Until profile is implemented, the following code is commented out.
-        // BlocProvider<ProfileCubit>(
-        //   create: (BuildContext context) {
-        //     return ProfileCubit(
-        //       Ioc.container.get<ProfileService>(),
-        //     )..getProfile();
-        //   },
-        // ),
         BlocProvider<LanguageCubit>(
           create: (BuildContext languageContext) {
             final String defaultLanguageCode = _defaultLanguageCode(context);
