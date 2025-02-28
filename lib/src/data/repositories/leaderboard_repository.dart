@@ -17,7 +17,7 @@ class SupabaseLeaderboardRepository implements LeaderboardRepository {
     final Stream<List<Map<String, dynamic>>> response = _client
         .from('leaderboard')
         .stream(primaryKey: <String>['number']).order('position',
-            ascending: true);
+            ascending: true,);
 
     return response.map(
       (List<Map<String, dynamic>> data) =>
