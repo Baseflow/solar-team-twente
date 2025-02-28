@@ -15,12 +15,14 @@
 
 default_platform(:android)
 
+# Parsing files
 platform :android do
-  desc 'Push a new beta build to Google Play Store test track'
 
-  def parseConfigFile(fileName)
+  desc 'Push a new beta build to Google Play Store internal test track'
+
+  def parse_config_file(file_name)
     config = Hash.new
-    File.open("../../#{fileName}", "r") do |file_handle|
+    File.open("../../#{file_name}", "r") do |file_handle|
       IO.foreach(file_handle).with_object({}) do |line|
         next if line.to_s.empty?
         next if line.start_with?('#')
@@ -28,7 +30,7 @@ platform :android do
         key, value = line.split('=').map(&:strip)
         config[key] = value
       end
-    end
+    end  
 
     return config
   end
@@ -37,7 +39,7 @@ platform :android do
   # Play Store.
   #
   # This lane takes an `environment` parameter which is used to determine which
-  # compile time configuration file should be used when building the Flutter
+  # compile time configuration file should be used when building the Flutter 
   # application. Valid values are:
   # - dev, development: create a development version of the Flutter app.
   # - stg, stag, staging: create a staging version of the Flutter app.
@@ -48,21 +50,33 @@ platform :android do
   #
   # Usage:
   # ```
-  # bundle exec fastlane beta config:settings.prod
+  # bundle exec fastlane beta config:.env.prd
   # ```
   lane :beta do |values|
     # Get the contents of the `config` argument. If the argument is not specified fallback to the
-    # `settings.dev` configuration file.
-    configFile = values.fetch(:config, '.env.prd');
-    configuration = parseConfigFile(configFile)
+    # `.env.prd` configuration file.
+    config_file = values.fetch(:config, '.env.prd');
+    configuration = parse_config_file(config_file)
+
+    version_codes = google_play_track_version_codes(
+      track:"internal", # Remark: Change track if needed
+      package_name:configuration['APP_ID'],
+      json_key: "../.secrets/google_play_api_key.json",
+    )
 
     # Use a custom script to build the Flutter Android application.
-    sh("../scripts/flutter_build_android.sh", "-c", configFile, "-s", configuration["SECRETS_CONFIG_PATH"])
+    sh(
+      "bash",
+      "../scripts/flutter_build_android.sh", 
+      "-c", config_file, 
+      "-s", configuration["SECRETS_CONFIG_PATH"],
+      "--last-version", version_codes.first.to_s
+    )
 
     # Upload the build to the internal testing track on the Google Play Store.
     upload_to_play_store(
         aab: '../build/app/outputs/bundle/release/app-release.aab',
-        json_key: '../.secrets/Fastlane_Service_Account.json',
+        json_key: '../.secrets/google_play_api_key.json',
         package_name: configuration['APP_ID'],
         release_status: 'draft',
         track: 'internal',
