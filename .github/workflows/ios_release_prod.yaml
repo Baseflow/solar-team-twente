@@ -90,4 +90,4 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         working-directory: ${{ env.working_directory_ios }}
-        run: bundle exec fastlane beta config:'settings.prod' #TODO: Change to settings.stg when available
+        run: bundle exec fastlane beta config:'.env.prd' #TODO: Change to settings.stg when available
