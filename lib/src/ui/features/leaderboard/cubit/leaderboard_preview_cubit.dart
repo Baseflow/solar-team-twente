@@ -13,8 +13,8 @@ part 'leaderboard_preview_state.dart';
 class LeaderboardPreviewCubit extends Cubit<LeaderboardPreviewState> {
   /// {@macro leaderboard_preview_cubit}
   LeaderboardPreviewCubit(LeaderboardService leaderboardService)
-    : _leaderboardService = leaderboardService,
-      super(LeaderboardPreviewInitial());
+      : _leaderboardService = leaderboardService,
+        super(LeaderboardPreviewInitial());
 
   final LeaderboardService _leaderboardService;
 

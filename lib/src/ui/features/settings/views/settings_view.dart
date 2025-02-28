@@ -28,11 +28,10 @@ class SettingsView extends StatelessWidget {
               builder: (BuildContext context, String languageCode) {
                 return BaseListTile(
                   title: l10n.language,
-                  subtitle:
-                      context
-                          .read<LanguageCubit>()
-                          .currentLocale
-                          .nativeDisplayLanguage,
+                  subtitle: context
+                      .read<LanguageCubit>()
+                      .currentLocale
+                      .nativeDisplayLanguage,
                   leadingIcon: const Icon(Icons.language),
                   onTap: () => context.pushNamed(LanguagePage.name),
                 );
