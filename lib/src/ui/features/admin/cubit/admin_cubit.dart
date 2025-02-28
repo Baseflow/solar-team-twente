@@ -8,8 +8,8 @@ part 'admin_state.dart';
 
 class AdminCubit extends Cubit<AdminState> {
   AdminCubit({required NewsService newsService})
-    : _newsService = newsService,
-      super(const AdminInitial());
+      : _newsService = newsService,
+        super(const AdminInitial());
 
   final NewsService _newsService;
 

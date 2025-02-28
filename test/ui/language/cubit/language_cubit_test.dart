@@ -97,11 +97,10 @@ void main() {
     );
     blocTest<LanguageCubit, String>(
       'should currentLocale return default language code',
-      build:
-          () => LanguageCubit(
-            languageService: mockLanguageService,
-            defaultLanguageCode: defaultLanguageCode,
-          ),
+      build: () => LanguageCubit(
+        languageService: mockLanguageService,
+        defaultLanguageCode: defaultLanguageCode,
+      ),
       act: (LanguageCubit cubit) => cubit.currentLocale,
       verify: (LanguageCubit cubit) {
         expect(cubit.currentLocale.languageCode, defaultLanguageCode);

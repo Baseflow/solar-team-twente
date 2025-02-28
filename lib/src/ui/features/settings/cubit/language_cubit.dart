@@ -10,9 +10,9 @@ class LanguageCubit extends Cubit<String> {
   LanguageCubit({
     required LanguageService languageService,
     required String defaultLanguageCode,
-  }) : _languageService = languageService,
-       _defaultLanguageCode = defaultLanguageCode,
-       super(defaultLanguageCode);
+  })  : _languageService = languageService,
+        _defaultLanguageCode = defaultLanguageCode,
+        super(defaultLanguageCode);
 
   /// The [LanguageService] to manage the language of the app.
   final LanguageService _languageService;
@@ -31,17 +31,17 @@ class LanguageCubit extends Cubit<String> {
 
     final String languageCode =
         <String?>[fetchedLanguageCode, _defaultLanguageCode, 'en'].firstWhere(
-          _isSupportedLanguage,
-          orElse: () => AppLocalizations.supportedLocales.first.languageCode,
-        )!;
+      _isSupportedLanguage,
+      orElse: () => AppLocalizations.supportedLocales.first.languageCode,
+    )!;
 
     emit(languageCode);
   }
 
   /// The current [Locale] of the app.
   Locale get currentLocale => AppLocalizations.supportedLocales.firstWhere(
-    (Locale locale) => locale.languageCode == state,
-  );
+        (Locale locale) => locale.languageCode == state,
+      );
 
   bool _isSupportedLanguage(String? languageCode) {
     return AppLocalizations.supportedLocales.any(

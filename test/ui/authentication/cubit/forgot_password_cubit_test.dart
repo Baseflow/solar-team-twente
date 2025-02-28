@@ -17,10 +17,9 @@ void main() {
       'should emit state with updated email',
       build: () => ForgotPasswordCubit(mockAuthenticationService),
       act: (ForgotPasswordCubit cubit) => cubit.updateEmail('email@test.com'),
-      expect:
-          () => <ForgotPasswordState>[
-            const ForgotPasswordState(email: 'email@test.com'),
-          ],
+      expect: () => <ForgotPasswordState>[
+        const ForgotPasswordState(email: 'email@test.com'),
+      ],
     );
   });
 
@@ -41,18 +40,17 @@ void main() {
           await Future<void>.delayed(Duration.zero);
           await cubit.sendPasswordResetEmail();
         },
-        expect:
-            () => <ForgotPasswordState>[
-              const ForgotPasswordState(email: 'test@example.com'),
-              const ForgotPasswordState(
-                email: 'test@example.com',
-                isLoading: true,
-              ),
-              const ForgotPasswordState(
-                email: 'test@example.com',
-                emailSentSuccessfully: true,
-              ),
-            ],
+        expect: () => <ForgotPasswordState>[
+          const ForgotPasswordState(email: 'test@example.com'),
+          const ForgotPasswordState(
+            email: 'test@example.com',
+            isLoading: true,
+          ),
+          const ForgotPasswordState(
+            email: 'test@example.com',
+            emailSentSuccessfully: true,
+          ),
+        ],
       ),
       blocTest<ForgotPasswordCubit, ForgotPasswordState>(
         'should emit loading, then error state when service throws exception',
@@ -69,18 +67,17 @@ void main() {
           await Future<void>.delayed(Duration.zero);
           await cubit.sendPasswordResetEmail();
         },
-        expect:
-            () => <ForgotPasswordState>[
-              const ForgotPasswordState(email: 'test@example.com'),
-              const ForgotPasswordState(
-                email: 'test@example.com',
-                isLoading: true,
-              ),
-              const ForgotPasswordState(
-                email: 'test@example.com',
-                authErrorCode: AuthenticationExceptionCode.userNotFound,
-              ),
-            ],
+        expect: () => <ForgotPasswordState>[
+          const ForgotPasswordState(email: 'test@example.com'),
+          const ForgotPasswordState(
+            email: 'test@example.com',
+            isLoading: true,
+          ),
+          const ForgotPasswordState(
+            email: 'test@example.com',
+            authErrorCode: AuthenticationExceptionCode.userNotFound,
+          ),
+        ],
       ),
     },
   );

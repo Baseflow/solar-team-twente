@@ -4,7 +4,7 @@ import '../repositories/repositories.dart';
 class AnalyticsService {
   /// Creates a new instance of [AnalyticsService].
   AnalyticsService({required AnalyticsRepository analyticsRepository})
-    : _analyticsRepository = analyticsRepository;
+      : _analyticsRepository = analyticsRepository;
 
   /// The [AnalyticsRepository] to manage analytics events.
   final AnalyticsRepository _analyticsRepository;

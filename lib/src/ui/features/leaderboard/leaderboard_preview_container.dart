@@ -22,12 +22,11 @@ class LeaderboardPreviewContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = context.l10n;
     return BlocProvider<LeaderboardPreviewCubit>(
-      create:
-          (_) => LeaderboardPreviewCubit(
-            LeaderboardService(
-              leaderboardRepository: Ioc.container.get<LeaderboardRepository>(),
-            ),
-          )..initializeLeaderboard(),
+      create: (_) => LeaderboardPreviewCubit(
+        LeaderboardService(
+          leaderboardRepository: Ioc.container.get<LeaderboardRepository>(),
+        ),
+      )..initializeLeaderboard(),
       child: Builder(
         builder: (BuildContext context) {
           return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
@@ -35,28 +34,28 @@ class LeaderboardPreviewContainer extends StatelessWidget {
               return switch (state) {
                 LeaderboardPreviewLoaded() => const LeaderboardPreviewList(),
                 LeaderboardPreviewEmpty() => Text(
-                  l10n.leaderboardEmptyMessage,
-                  textAlign: TextAlign.center,
-                ),
-                LeaderboardPreviewError() => Text(
-                  l10n.leaderboardErrorMessage,
-                  style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.colorScheme.error,
+                    l10n.leaderboardEmptyMessage,
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                LeaderboardPreviewError() => Text(
+                    l10n.leaderboardErrorMessage,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      color: context.colorScheme.error,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 _ => SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Shimmer.fromColors(
-                    baseColor: context.colorScheme.secondary,
-                    highlightColor: context.colorScheme.primary,
-                    child: Image.asset(
-                      Assets.light.logo.path,
-                      semanticLabel: 'Solarteam Twente Logo',
+                    height: 100,
+                    width: double.infinity,
+                    child: Shimmer.fromColors(
+                      baseColor: context.colorScheme.secondary,
+                      highlightColor: context.colorScheme.primary,
+                      child: Image.asset(
+                        Assets.light.logo.path,
+                        semanticLabel: 'Solarteam Twente Logo',
+                      ),
                     ),
                   ),
-                ),
               };
             },
           );
