@@ -73,5 +73,15 @@ class AuthenticationService {
     }
   }
 
+  /// Starts the rest password procedure for the given [email].
+  Future<void> resetPassword(String email) {
+    return _authenticationRepository.resetPassword(email);
+  }
+
+  /// Deletes the account of the user if the [password] is correct.
+  Future<void> deleteAccount({required String password}) async {
+    return _authenticationRepository.deleteAccount(password: password);
+  }
+
   User? get currentUser => _authenticationRepository.currentUser;
 }

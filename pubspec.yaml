@@ -5,12 +5,11 @@ publish_to: 'none'
 
 environment:
   sdk: '>=3.6.0 <4.0.0'
-  flutter: ^3.27.0
+  flutter: ^3.29.0
 
 dependencies:
   accessibility_tools: ^2.0.0
   cached_network_image: ^3.4.0
-  camera: ^0.11.0+1
   carousel_slider: ^5.0.0
   dio: ^5.4.3+1
   dio_cache_interceptor: ^3.5.0
