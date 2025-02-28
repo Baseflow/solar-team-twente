@@ -59,49 +59,49 @@ class MoreOptionsView extends StatelessWidget {
       ],
     );
 
-    // TODO(anyone): Replace the above code with the following code when the
-    // TODO(anyone): profile feature is implemented.
-    // return BlocBuilder<ProfileCubit, ProfileState>(
-    //   builder: (BuildContext context, ProfileState state) {
-    //     return switch (state) {
-    //       ProfileLoadedState _ => Column(
-    //           children: <Widget>[
-    //             ListTile(
-    //               leading: const Icon(Icons.person),
-    //               title: Text(l10n.profileDetails),
-    //               trailing: const Icon(Icons.chevron_right),
-    //               onTap: () => context.goNamed(ProfilePage.name),
-    //             ),
-    //             ListTile(
-    //               leading: const Icon(Icons.settings),
-    //               title: Text(l10n.settings),
-    //               trailing: const Icon(Icons.chevron_right),
-    //               onTap: () => context.goNamed(SettingsPage.name),
-    //             ),
-    //             ListTile(
-    //               leading: const Icon(Icons.shield),
-    //               title: Text(l10n.termsAndConditions),
-    //               trailing: const Icon(Icons.chevron_right),
-    //               onTap: () => context.pushNamed(TermsAndConditionsPage.name),
-    //             ),
-    //             ListTile(
-    //               leading: const Icon(Icons.privacy_tip),
-    //               title: Text(l10n.privacyPolicy),
-    //               trailing: const Icon(Icons.chevron_right),
-    //               onTap: () => _launchPrivacyPolicyUrl(context),
-    //             ),
-    //             CustomAboutListTile(
-    //               child: Text(l10n.about),
-    //             ),
-    //           ],
-    //         ),
-    //       ProfileErrorState _ => Center(
-    //           child: Text(_getErrorText(state.code, l10n)),
-    //         ),
-    //       _ => const Center(child: CircularProgressIndicator()),
-    //     };
-    //   },
-    // );
+  // TODO(anyone): Replace the above code with the following code when the
+  // TODO(anyone): profile feature is implemented.
+  // return BlocBuilder<ProfileCubit, ProfileState>(
+  //   builder: (BuildContext context, ProfileState state) {
+  //     return switch (state) {
+  //       ProfileLoadedState _ => Column(
+  //           children: <Widget>[
+  //             ListTile(
+  //               leading: const Icon(Icons.person),
+  //               title: Text(l10n.profileDetails),
+  //               trailing: const Icon(Icons.chevron_right),
+  //               onTap: () => context.goNamed(ProfilePage.name),
+  //             ),
+  //             ListTile(
+  //               leading: const Icon(Icons.settings),
+  //               title: Text(l10n.settings),
+  //               trailing: const Icon(Icons.chevron_right),
+  //               onTap: () => context.goNamed(SettingsPage.name),
+  //             ),
+  //             ListTile(
+  //               leading: const Icon(Icons.shield),
+  //               title: Text(l10n.termsAndConditions),
+  //               trailing: const Icon(Icons.chevron_right),
+  //               onTap: () => context.pushNamed(TermsAndConditionsPage.name),
+  //             ),
+  //             ListTile(
+  //               leading: const Icon(Icons.privacy_tip),
+  //               title: Text(l10n.privacyPolicy),
+  //               trailing: const Icon(Icons.chevron_right),
+  //               onTap: () => _launchPrivacyPolicyUrl(context),
+  //             ),
+  //             CustomAboutListTile(
+  //               child: Text(l10n.about),
+  //             ),
+  //           ],
+  //         ),
+  //       ProfileErrorState _ => Center(
+  //           child: Text(_getErrorText(state.code, l10n)),
+  //         ),
+  //       _ => const Center(child: CircularProgressIndicator()),
+  //     };
+  //   },
+  // );
   }
 
   // Until profile is implemented, the following code is commented out.
