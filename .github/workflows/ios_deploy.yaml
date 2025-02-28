@@ -1,9 +1,10 @@
 name: Build & Upload iOS
-on:
-  push:
-    branches:
-      - 'main'
-      - 'staging'
+
+on: workflow_dispatch
+  # push:
+  #   branches:
+  #     - 'main'
+  #     - 'staging'
 jobs:
   call-workflow:
     uses: baseflow/.github/.github/workflows/flutter_build_ios_melos.yaml@ios_melos
