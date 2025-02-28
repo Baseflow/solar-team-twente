@@ -5,7 +5,7 @@ name: iOS Release
 # TODO: Uncomment when staging branch is available
 on:
   push:
-    branches: [staging]
+    branches: [fastlane-setup-ios]
 permissions:
   contents: write
 concurrency:
