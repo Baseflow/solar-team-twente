@@ -12,15 +12,22 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+def get_version_from_pubspec
+  pubspec = YAML.load_file('../../pubspec.yaml')
+  version = pubspec['version']
+  version.split('+').first # Extract only the version number, excluding the build number
+end
 
 default_platform(:ios)
 
 platform :ios do
+    desc "Push a new beta build to TestFlight"
+
     def registerAppleApiKey()
         app_store_connect_api_key(
-            issuer_id: "138f0eae-4c48-4815-8c85-12eeab935cda",
-            key_id: "DKR4T8DVUQ",
-            key_filepath: '../.secrets/solarteam_apple_app_store_connect_api_key.p8',
+            issuer_id: "APP_STORE_CONNECT_API_ISSUER_ID",
+            key_id: "APP_STORE_CONNECT_API_KEY_ID",
+            key_filepath: '../.secrets/app_store_connect_api_key.p8',
             is_key_content_base64: false,
             duration: 1200, # optional (maximum 1200)
             in_house: false # optional but may be required if using match/sigh
@@ -30,6 +37,7 @@ platform :ios do
     def synchronizeCertificates()
         match(
             type: "appstore",
+	    readonly: true,
             app_identifier: [
                 "com.baseflow.solarapp"
             ],
@@ -87,14 +95,19 @@ platform :ios do
         configFile = values.fetch(:config, '.env.dev')
         configuration = parseConfigFile(configFile)
 
-        # Setup authentication to allow Fastlane to access the Apple App Store Connect portal.
-        registerAppleApiKey()
+	certificates()
 
-        # Synchronize certificates and provisioning profiles for the different Scoop versions.
-        synchronizeCertificates()
+    	version = get_version_from_pubspec
+    	# Increments the build number to be 1 greater than the latest build number on TestFlight.
+    	increment_build_number({ build_number: latest_testflight_build_number(version: version, app_identifier: configuration['APP_ID_IOS'], api_key_path: '../.secrets/app_store_key.json') + 1 })
 
-        # Use a custom script to build the Flutter iOS application.
-        sh("../scripts/flutter_build_ios.sh", "-c", configFile, "-s", configuration["SECRETS_CONFIG_PATH"])
+        sh "chmod -R 777 ../../"
+	sh(
+	 "bash",
+	 "../scripts/flutter_build_ios.sh",
+	 "-c", configFile,
+	 "-s", configuration["SECRETS_CONFIG_PATH"]
+	)
 
         # Archive the iOS application (skipping the build stap as this is already done by the Flutter script).
         build_app(
