@@ -64,16 +64,17 @@ class _ForgotPasswordForm extends StatelessWidget {
       listenWhen: (ForgotPasswordState previous, ForgotPasswordState current) {
         final bool isEmailSentSuccessfully =
             previous.emailSentSuccessfully != current.emailSentSuccessfully &&
-                current.emailSentSuccessfully;
+            current.emailSentSuccessfully;
         final bool isAuthError =
             previous.authErrorCode != current.authErrorCode &&
-                current.authErrorCode != null;
+            current.authErrorCode != null;
         return isEmailSentSuccessfully || isAuthError;
       },
       listener: (BuildContext context, ForgotPasswordState state) {
-        final String snackBarText = state.emailSentSuccessfully
-            ? context.l10n.passwordChangeRequestSuccess
-            : context.l10n.errorResettingPassword;
+        final String snackBarText =
+            state.emailSentSuccessfully
+                ? context.l10n.passwordChangeRequestSuccess
+                : context.l10n.errorResettingPassword;
         context.showSnackBar(SnackBar(content: Text(snackBarText)));
         if (state.emailSentSuccessfully) {
           context.pop();

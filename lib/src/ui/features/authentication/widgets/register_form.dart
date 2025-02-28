@@ -64,15 +64,16 @@ class RegistrationForm extends StatelessWidget {
               ),
               validator:
                   FormBuilderValidators.compose(<FormFieldValidator<String>>[
-                FormBuilderValidators.required(
-                  errorText: l10n.passwordRequired,
-                ),
-                FormBuilderValidators.minLength(
-                  8,
-                  errorText: l10n.passwordMinimum8Char,
-                ),
-                (_) => cubit.checkMatchingPasswords(l10n.passwordsNotMatching),
-              ]),
+                    FormBuilderValidators.required(
+                      errorText: l10n.passwordRequired,
+                    ),
+                    FormBuilderValidators.minLength(
+                      8,
+                      errorText: l10n.passwordMinimum8Char,
+                    ),
+                    (_) =>
+                        cubit.checkMatchingPasswords(l10n.passwordsNotMatching),
+                  ]),
             ),
             const Gutter(),
             TextFormField(
@@ -89,21 +90,23 @@ class RegistrationForm extends StatelessWidget {
               ),
               validator:
                   FormBuilderValidators.compose(<FormFieldValidator<String>>[
-                FormBuilderValidators.required(
-                  errorText: l10n.passwordRequired,
-                ),
-                FormBuilderValidators.minLength(
-                  8,
-                  errorText: l10n.passwordMinimum8Char,
-                ),
-                (_) => cubit.checkMatchingPasswords(l10n.passwordsNotMatching),
-              ]),
+                    FormBuilderValidators.required(
+                      errorText: l10n.passwordRequired,
+                    ),
+                    FormBuilderValidators.minLength(
+                      8,
+                      errorText: l10n.passwordMinimum8Char,
+                    ),
+                    (_) =>
+                        cubit.checkMatchingPasswords(l10n.passwordsNotMatching),
+                  ]),
             ),
             const Gutter(),
             BlocConsumer<RegisterCubit, RegisterState>(
-              listenWhen: (RegisterState previous, RegisterState current) =>
-                  (previous.isLoading && !current.isLoading) &&
-                  (current.authErrorCode != null),
+              listenWhen:
+                  (RegisterState previous, RegisterState current) =>
+                      (previous.isLoading && !current.isLoading) &&
+                      (current.authErrorCode != null),
               listener: (BuildContext context, RegisterState state) {
                 ScaffoldMessenger.of(
                   context,
@@ -123,12 +126,13 @@ class RegistrationForm extends StatelessWidget {
                             style: const TextStyle(
                               decoration: TextDecoration.underline,
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                context.pushNamed(
-                                  TermsAndConditionsPage.name,
-                                );
-                              },
+                            recognizer:
+                                TapGestureRecognizer()
+                                  ..onTap = () {
+                                    context.pushNamed(
+                                      TermsAndConditionsPage.name,
+                                    );
+                                  },
                           ),
                           TextSpan(text: ' ${l10n.and.toLowerCase()} '),
                           TextSpan(
@@ -136,25 +140,26 @@ class RegistrationForm extends StatelessWidget {
                             style: const TextStyle(
                               decoration: TextDecoration.underline,
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                final Uri url = Uri.parse(
-                                  Constants.appPrivacyPolicy,
-                                );
-                                launchUrl(url).catchError((
-                                  Object error,
-                                ) async {
-                                  if (!context.mounted) return false;
-                                  await context.showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        context.l10n.failLaunchUrl,
-                                      ),
-                                    ),
-                                  );
-                                  return false;
-                                });
-                              },
+                            recognizer:
+                                TapGestureRecognizer()
+                                  ..onTap = () {
+                                    final Uri url = Uri.parse(
+                                      Constants.appPrivacyPolicy,
+                                    );
+                                    launchUrl(url).catchError((
+                                      Object error,
+                                    ) async {
+                                      if (!context.mounted) return false;
+                                      await context.showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            context.l10n.failLaunchUrl,
+                                          ),
+                                        ),
+                                      );
+                                      return false;
+                                    });
+                                  },
                           ),
                           const TextSpan(text: '.'),
                         ],

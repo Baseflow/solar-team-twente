@@ -20,8 +20,8 @@ class MapView extends StatelessWidget {
       builder: (_, MapState state) {
         return switch (state) {
           final MapInitial _ || final MapLoading _ => const Center(
-              child: CircularProgressIndicator(),
-            ),
+            child: CircularProgressIndicator(),
+          ),
           final MapRaceLoaded _ => const MapLoadedView(),
         };
       },
