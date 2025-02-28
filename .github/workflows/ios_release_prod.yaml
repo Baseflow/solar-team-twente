@@ -1,11 +1,8 @@
 # Write a workflow to build and release appbundle to Play Store
 name: iOS Release
 # For now only configure the release workflow to run when manually triggered.
-# on: workflow_dispatch
+on: workflow_dispatch
 # TODO: Uncomment when staging branch is available
-on:
-  push:
-    branches: [fastlane-setup-ios]
 permissions:
   contents: write
 concurrency:
