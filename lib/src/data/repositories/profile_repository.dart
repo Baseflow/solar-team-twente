@@ -19,8 +19,8 @@ class ApiProfileRepository implements ProfileRepository {
       if (e is DioException) {
         throw switch (e.response?.statusCode.toDataResponseCode()) {
           _ => UnknownException(
-              e.message ?? 'Unhandled code ${e.response?.statusCode}',
-            ),
+            e.message ?? 'Unhandled code ${e.response?.statusCode}',
+          ),
         };
       }
       throw const UnknownException('Non dio exception');

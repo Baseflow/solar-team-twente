@@ -20,40 +20,46 @@ void main() {
     group('updates', () {
       blocTest<ChangePasswordCubit, ChangePasswordState>(
         'the new password',
-        build: () => ChangePasswordCubit(
-          mockAuthenticationService,
-          const ChangePasswordState(),
-        ),
+        build:
+            () => ChangePasswordCubit(
+              mockAuthenticationService,
+              const ChangePasswordState(),
+            ),
         act: (ChangePasswordCubit cubit) => cubit.updateNewPassword(password),
-        expect: () => <ChangePasswordState>[
-          const ChangePasswordState(newPassword: password),
-        ],
+        expect:
+            () => <ChangePasswordState>[
+              const ChangePasswordState(newPassword: password),
+            ],
       );
 
       blocTest<ChangePasswordCubit, ChangePasswordState>(
         'the confirm new password',
-        build: () => ChangePasswordCubit(
-          mockAuthenticationService,
-          const ChangePasswordState(),
-        ),
-        act: (ChangePasswordCubit cubit) =>
-            cubit.updateConfirmNewPassword(password),
-        expect: () => <ChangePasswordState>[
-          const ChangePasswordState(confirmNewPassword: password),
-        ],
+        build:
+            () => ChangePasswordCubit(
+              mockAuthenticationService,
+              const ChangePasswordState(),
+            ),
+        act:
+            (ChangePasswordCubit cubit) =>
+                cubit.updateConfirmNewPassword(password),
+        expect:
+            () => <ChangePasswordState>[
+              const ChangePasswordState(confirmNewPassword: password),
+            ],
       );
     });
 
     group('emits', () {
       blocTest<ChangePasswordCubit, ChangePasswordState>(
         'correct state after successful password change',
-        build: () => ChangePasswordCubit(
-          mockAuthenticationService,
-          const ChangePasswordState(
-            newPassword: password,
-            confirmNewPassword: password,
-          ),
-        ),
+        build:
+            () => ChangePasswordCubit(
+              mockAuthenticationService,
+              const ChangePasswordState(
+                newPassword: password,
+                confirmNewPassword: password,
+              ),
+            ),
         act: (ChangePasswordCubit cubit) async {
           when(
             () =>
@@ -61,29 +67,31 @@ void main() {
           ).thenAnswer((_) async {});
           await cubit.changePassword();
         },
-        expect: () => <ChangePasswordState>[
-          const ChangePasswordState(
-            isLoading: true,
-            newPassword: password,
-            confirmNewPassword: password,
-          ),
-          const ChangePasswordState(
-            changePasswordSuccessful: true,
-            newPassword: password,
-            confirmNewPassword: password,
-          ),
-        ],
+        expect:
+            () => <ChangePasswordState>[
+              const ChangePasswordState(
+                isLoading: true,
+                newPassword: password,
+                confirmNewPassword: password,
+              ),
+              const ChangePasswordState(
+                changePasswordSuccessful: true,
+                newPassword: password,
+                confirmNewPassword: password,
+              ),
+            ],
       );
 
       blocTest<ChangePasswordCubit, ChangePasswordState>(
         'not successful state after unsuccessful password change',
-        build: () => ChangePasswordCubit(
-          mockAuthenticationService,
-          const ChangePasswordState(
-            newPassword: password,
-            confirmNewPassword: differentPassword,
-          ),
-        ),
+        build:
+            () => ChangePasswordCubit(
+              mockAuthenticationService,
+              const ChangePasswordState(
+                newPassword: password,
+                confirmNewPassword: differentPassword,
+              ),
+            ),
         act: (ChangePasswordCubit cubit) async {
           when(
             () =>
@@ -91,12 +99,13 @@ void main() {
           ).thenAnswer((_) async {});
           await cubit.changePassword();
         },
-        expect: () => <ChangePasswordState>[
-          const ChangePasswordState(
-            newPassword: password,
-            confirmNewPassword: differentPassword,
-          ),
-        ],
+        expect:
+            () => <ChangePasswordState>[
+              const ChangePasswordState(
+                newPassword: password,
+                confirmNewPassword: differentPassword,
+              ),
+            ],
       );
     });
 
@@ -135,8 +144,7 @@ void main() {
     });
 
     group('validNewPassword', () {
-      test(
-          'is true when new passwords match and current password '
+      test('is true when new passwords match and current password '
           'differs from them', () {
         const ChangePasswordState state = ChangePasswordState(
           currentPassword: differentPassword,
@@ -153,8 +161,7 @@ void main() {
         );
         expect(state.validNewPassword, false);
       });
-      test(
-          'is false when new passwords do not match and '
+      test('is false when new passwords do not match and '
           'current password differs from them', () {
         const ChangePasswordState state = ChangePasswordState(
           currentPassword: 'differentCurrentPassword',
@@ -163,8 +170,7 @@ void main() {
         );
         expect(state.validNewPassword, false);
       });
-      test(
-          'is false when new passwords do not match and '
+      test('is false when new passwords do not match and '
           'current password matches new password', () {
         const ChangePasswordState state = ChangePasswordState(
           currentPassword: password,

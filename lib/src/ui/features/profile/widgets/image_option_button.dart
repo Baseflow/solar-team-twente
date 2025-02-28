@@ -79,8 +79,8 @@ class _ImageOptionButtonState extends State<ImageOptionButton> {
   void _showCameraDialog(List<CameraDescription> cameras) {
     showDialog<void>(
       context: context,
-      builder: (BuildContext dialogContext) =>
-          CameraDialog(camera: cameras.first),
+      builder:
+          (BuildContext dialogContext) => CameraDialog(camera: cameras.first),
     );
   }
 

@@ -9,7 +9,7 @@ part 'forgot_password_state.dart';
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   /// Creates a new instance of [ForgotPasswordCubit].
   ForgotPasswordCubit(this._profileService)
-      : super(const ForgotPasswordState());
+    : super(const ForgotPasswordState());
 
   final ProfileService _profileService;
 

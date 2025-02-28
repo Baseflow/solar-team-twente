@@ -60,8 +60,7 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOne);
     });
 
-    testWidgets(
-        'does not display a CircularLoadingIndicator when '
+    testWidgets('does not display a CircularLoadingIndicator when '
         'not in loading state', (WidgetTester tester) async {
       when(
         () => mockChangePasswordCubit.state,

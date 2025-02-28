@@ -5,7 +5,7 @@ import '../repositories/profile_repository.dart';
 class ProfileService {
   /// Creates a new [ProfileService] instance.
   const ProfileService({required ProfileRepository profileRepository})
-      : _profileRepository = profileRepository;
+    : _profileRepository = profileRepository;
 
   final ProfileRepository _profileRepository;
 

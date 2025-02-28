@@ -13,9 +13,9 @@ part 'authentication_state.dart';
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   /// Creates a new instance of [AuthenticationCubit].
   AuthenticationCubit(this._authenticationService)
-      : _authStatusStream = _authenticationService.authStatusStream,
-        _subscription = null,
-        super(const AuthenticationState());
+    : _authStatusStream = _authenticationService.authStatusStream,
+      _subscription = null,
+      super(const AuthenticationState());
 
   final AuthenticationService _authenticationService;
 

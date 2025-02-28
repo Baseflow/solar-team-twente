@@ -39,8 +39,8 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
   SupabaseAuthenticationRepository.private({
     required SupabaseClient authenticationClient,
     required TokenDataStore tokenDataStore,
-  })  : _authenticationClient = authenticationClient,
-        _tokenDataStore = tokenDataStore;
+  }) : _authenticationClient = authenticationClient,
+       _tokenDataStore = tokenDataStore;
 
   static SupabaseAuthenticationRepository? _repositoryInstance;
 

@@ -29,11 +29,12 @@ void main() {
           ..updatePassword(mockPassword)
           ..deleteAccount();
       },
-      expect: () => <DeleteAccountState>[
-        const DeleteAccountInitial(password: mockPassword),
-        const DeleteAccountLoadingState(password: mockPassword),
-        const DeleteAccountSuccessState(password: mockPassword),
-      ],
+      expect:
+          () => <DeleteAccountState>[
+            const DeleteAccountInitial(password: mockPassword),
+            const DeleteAccountLoadingState(password: mockPassword),
+            const DeleteAccountSuccessState(password: mockPassword),
+          ],
     );
 
     blocTest<DeleteAccountCubit, DeleteAccountState>(
@@ -54,14 +55,15 @@ void main() {
           ..updatePassword(mockPassword)
           ..deleteAccount();
       },
-      expect: () => <DeleteAccountState>[
-        const DeleteAccountInitial(password: mockPassword),
-        const DeleteAccountLoadingState(password: mockPassword),
-        const DeleteAccountErrorState(
-          password: mockPassword,
-          errorCode: DeleteAccountExceptionCode.invalidPassword,
-        ),
-      ],
+      expect:
+          () => <DeleteAccountState>[
+            const DeleteAccountInitial(password: mockPassword),
+            const DeleteAccountLoadingState(password: mockPassword),
+            const DeleteAccountErrorState(
+              password: mockPassword,
+              errorCode: DeleteAccountExceptionCode.invalidPassword,
+            ),
+          ],
     );
 
     blocTest<DeleteAccountCubit, DeleteAccountState>(
@@ -82,14 +84,15 @@ void main() {
           ..updatePassword(mockPassword)
           ..deleteAccount();
       },
-      expect: () => <DeleteAccountState>[
-        const DeleteAccountInitial(password: mockPassword),
-        const DeleteAccountLoadingState(password: mockPassword),
-        const DeleteAccountErrorState(
-          password: mockPassword,
-          errorCode: DeleteAccountExceptionCode.unknown,
-        ),
-      ],
+      expect:
+          () => <DeleteAccountState>[
+            const DeleteAccountInitial(password: mockPassword),
+            const DeleteAccountLoadingState(password: mockPassword),
+            const DeleteAccountErrorState(
+              password: mockPassword,
+              errorCode: DeleteAccountExceptionCode.unknown,
+            ),
+          ],
     );
   });
 }
