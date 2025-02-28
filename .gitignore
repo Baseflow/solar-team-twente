@@ -153,3 +153,5 @@ node_modules/
 .fvm/
 
 untranslated.txt
+
+android/app/.cxx
