@@ -97,8 +97,7 @@ void main() {
       expect(button.isLoading, isTrue);
     });
 
-    testWidgets(
-        'should enable the sign in button when not loading and valid '
+    testWidgets('should enable the sign in button when not loading and valid '
         'credentials are entered', (WidgetTester tester) async {
       whenListen(
         mockLoginCubit,

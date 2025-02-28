@@ -4,7 +4,7 @@ import '../repositories/repositories.dart';
 class CrashlyticsService {
   /// Creates a new instance of [CrashlyticsService].
   CrashlyticsService({required CrashlyticsRepository crashlyticsRepository})
-      : _crashlyticsRepository = crashlyticsRepository;
+    : _crashlyticsRepository = crashlyticsRepository;
 
   /// The [CrashlyticsRepository] to manage Crashlytics events.
   final CrashlyticsRepository _crashlyticsRepository;

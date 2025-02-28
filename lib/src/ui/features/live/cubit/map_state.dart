@@ -96,8 +96,8 @@ class MapRaceLoaded extends MapState {
 
   @override
   List<Object?> get props => <Object?>[
-        vehicleLocation,
-        allRaceDaysGeoJson,
-        selectedRaceDayGeoJson,
-      ];
+    vehicleLocation,
+    allRaceDaysGeoJson,
+    selectedRaceDayGeoJson,
+  ];
 }
