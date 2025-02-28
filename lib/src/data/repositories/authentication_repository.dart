@@ -163,4 +163,14 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   User? get currentUser => _authenticationClient.auth.currentUser;
+
+  @override
+  Future<void> deleteAccount({required String password}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> resetPassword(String email) {
+    throw UnimplementedError();
+  }
 }

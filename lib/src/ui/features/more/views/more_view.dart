@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../extensions/build_context_extensions.dart';
 import '../../../localizations/generated/app_localizations.dart';
 import '../../../localizations/l10n.dart';
-import '../../profile/widgets/profile_background.dart';
-import '../../profile/widgets/profile_header.dart';
 import '../widgets/more_options_view.dart';
 
 /// The view displaying the user profile.
@@ -17,7 +15,6 @@ class MoreView extends StatelessWidget {
     final AppLocalizations l10n = context.l10n;
     return Stack(
       children: <Widget>[
-        const ProfileBackground(),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -28,7 +25,9 @@ class MoreView extends StatelessWidget {
           body: const SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[ProfileHeader(), MoreOptionsView()],
+              children: <Widget>[
+                MoreOptionsView(),
+              ],
             ),
           ),
         ),

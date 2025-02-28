@@ -40,5 +40,11 @@ abstract interface class AuthenticationRepository {
   /// Throws an exception if the update failed.
   Future<Token> updatePassword({required String newPassword});
 
+  /// Resets the password for the user with the given [email].
+  Future<void> resetPassword(String email);
+
+  /// Deletes the account of the user if the [password] is correct.
+  Future<void> deleteAccount({required String password});
+
   User? get currentUser;
 }
