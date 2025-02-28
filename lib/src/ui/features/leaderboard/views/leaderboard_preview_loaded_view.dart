@@ -68,10 +68,9 @@ class LeaderboardPositionRow extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Sizes.s8),
-        color:
-            team.name == Constants.solarTeamName
-                ? context.colorScheme.primaryContainer
-                : null,
+        color: team.name == Constants.solarTeamName
+            ? context.colorScheme.primaryContainer
+            : null,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(

@@ -34,12 +34,11 @@ class RaceDaysBottomSheet extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final DateTime dateToDisplay =
-              state.selectedRaceDay.index == 0
-                  ? DateTime.now()
-                  : Constants.startDate.add(
-                    Duration(days: state.selectedRaceDay.index - 1),
-                  );
+          final DateTime dateToDisplay = state.selectedRaceDay.index == 0
+              ? DateTime.now()
+              : Constants.startDate.add(
+                  Duration(days: state.selectedRaceDay.index - 1),
+                );
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
