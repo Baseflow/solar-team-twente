@@ -39,7 +39,8 @@ platform :ios do
             type: "appstore",
 	    readonly: true,
             app_identifier: [
-                "com.baseflow.solarapp"
+                "com.baseflow.solarapp",
+                "com.baseflow.solarapp.stg",
             ],
             force_for_new_devices: true
         )
@@ -92,14 +93,14 @@ platform :ios do
     lane :beta do |values|
         # Get the contents of the `config` argument. If the argument is not specified fallback to the
         # `settings.dev` configuration file.
-        configFile = values.fetch(:config, '.env.dev')
+        configFile = values.fetch(:config, '.env.prd')
         configuration = parseConfigFile(configFile)
 
 	certificates()
 
     	version = get_version_from_pubspec
     	# Increments the build number to be 1 greater than the latest build number on TestFlight.
-    	increment_build_number({ build_number: latest_testflight_build_number(version: version, app_identifier: configuration['APP_ID_IOS'], api_key_path: '../.secrets/app_store_key.json') + 1 })
+    	increment_build_number({ build_number: latest_testflight_build_number(version: version, app_identifier: configuration['APP_ID']) + 1 })
 
         sh "chmod -R 777 ../../"
 	sh(
