@@ -102,7 +102,7 @@ platform :ios do
         increment_build_number({
             build_number: latest_testflight_build_number(
                 version: version,
-                app_identifier: configuration['APP_ID_IOS'],
+                app_identifier: configuration['APP_ID'],
                 api_key_path: '../.secrets/app_store_key.json'
             ) + 1
         })
