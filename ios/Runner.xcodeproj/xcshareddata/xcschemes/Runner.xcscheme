@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "#!/bin/sh&#10;&#10;# Specifies the file path to which the Dart define is written.&#10;# We will create a file named `Dart-Defines.xcconfig`.&#10;OUTPUT_FILE=&quot;${SRCROOT}/Flutter/Dart-Defines.xcconfig&quot;&#10;# The file is initially emptied so that the old properties do not remain when the contents of the Dart define are changed.&#10;: &gt; $OUTPUT_FILE&#10;&#10;# This function decodes the Dart define.&#10;function decode_url() { echo &quot;${*}&quot; | base64 --decode; }&#10;&#10;IFS=&apos;,&apos; read -r -a define_items &lt;&lt;&lt;&quot;$DART_DEFINES&quot;&#10;&#10;for index in &quot;${!define_items[@]}&quot;&#10;do&#10;    item=$(decode_url &quot;${define_items[$index]}&quot;)&#10;    # Dart definitions also include items that are automatically defined on the Flutter side. &#10;    # However, if we export those definitions, we will not be able to build due to errors, # so we do not output items that start with flutter or FLUTTER.&#10;    lowercase_item=$(echo &quot;$item&quot; | tr &apos;[:upper:]&apos; &apos;[:lower:]&apos;)&#10;    if [[ $lowercase_item != flutter* ]]; then&#10;        echo &quot;$item&quot; &gt;&gt; &quot;$OUTPUT_FILE&quot;&#10;    fi&#10;done&#10;">
+               scriptText = "${SRCROOT}/scripts/extract_dart_defines.sh&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
