@@ -39,8 +39,7 @@ platform :ios do
             type: "appstore",
 	    readonly: true,
             app_identifier: [
-                "com.baseflow.solarapp",
-                "com.baseflow.solarapp.stg",
+                "com.baseflow.solarapp"
             ],
             force_for_new_devices: true
         )
