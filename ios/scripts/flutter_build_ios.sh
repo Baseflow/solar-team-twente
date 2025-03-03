@@ -37,6 +37,9 @@ cd ../../
 # Make sure we work in a clean environment.
 flutter clean
 
+# Build the generated files.
+dart run build_runner build --delete-conflicting-outputs
+
 # Build the Flutter application.
 flutter build xcarchive \
     --obfuscate \
