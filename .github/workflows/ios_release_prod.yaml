@@ -102,6 +102,7 @@ jobs:
           encrypted_apple_app_store_api_key: "${{ secrets.APP_STORE_CONNECT_API_KEY }}"
           passphrase: "${{ secrets.PGP_PASSPHRASE }}"
           secrets_file: "${{ secrets.SECRETS_FILE }}"
+          encrypted_apple_key_json: "${{ secrets.APP_STORE_KEY_JSON }}"
           secrets_path: "${{ env.working_directory }}/.secrets"
 
       - name: Cache dependencies
