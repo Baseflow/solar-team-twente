@@ -2,15 +2,17 @@
 name: iOS Release
 # For now only configure the release workflow to run when manually triggered.
 on: workflow_dispatch
-# TODO: Uncomment when staging branch is available
+
 permissions:
   contents: write
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 env:
   working_directory: "."
   working_directory_ios: "./ios"
+
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
@@ -18,10 +20,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1 # Use shallow clone for faster checkout
+
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -29,21 +33,27 @@ jobs:
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-
+
       - name: Install Dependencies
         run: flutter pub get
         working-directory: ${{ env.working_directory }}
+
       - name: Generate Localization Files
         run: flutter gen-l10n
         working-directory: ${{ env.working_directory }}
+
       - name: Generate .g.dart files
         run: flutter pub run build_runner build --delete-conflicting-outputs
         working-directory: ${{ env.working_directory }}
+
       - name: Format
         run: dart format $(find . -name "*.dart" -not -wholename "*/generated/*" -not -name "*.mocks.dart" -not -wholename "./.dart_tool/*") --set-exit-if-changed
         working-directory: ${{ env.working_directory }}
+
       - name: Analyze
         run: flutter analyze
         working-directory: ${{ env.working_directory }}
+
   release-ios:
     runs-on: macos-latest
     needs: lint-and-test
@@ -51,24 +61,38 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
           bundler-cache: true
+
       - name: Install and update Bundler
         run: |
           gem install bundler
           bundle update --bundler
         working-directory: ${{ env.working_directory_ios }}
+
       - name: Install dependencies
         run: bundle install
         working-directory: ${{ env.working_directory_ios }}
+
       - name: Install Fastlane
         run: gem install fastlane
+
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
+
+      - name: Set up SSH key for Fastlane
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Add SSH key to known hosts
+        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Decrypt signing information
         uses: ./.github/actions/decrypt-secrets
         with:
@@ -79,6 +103,7 @@ jobs:
           passphrase: "${{ secrets.PGP_PASSPHRASE }}"
           secrets_file: "${{ secrets.SECRETS_FILE }}"
           secrets_path: "${{ env.working_directory }}/.secrets"
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -86,8 +111,9 @@ jobs:
           key: ${{ runner.os }}-pub-${{ hashFiles('${{ env.working_directory }}/**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-
+
       - name: Run Fastlane release script
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         working-directory: ${{ env.working_directory_ios }}
-        run: bundle exec fastlane beta config:'.env.prd' #TODO: Change to settings.stg when available
+        run: bundle exec fastlane beta config:'.env.prd'
