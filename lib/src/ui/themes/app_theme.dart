@@ -20,9 +20,9 @@ class AppTheme {
 
   /// Creates a new instance of [AppTheme] with the dark color scheme.
   factory AppTheme.dark() => AppTheme._init(
-        FlexTones.material(Brightness.dark),
-        brightness: Brightness.dark,
-      );
+    FlexTones.material(Brightness.dark),
+    brightness: Brightness.dark,
+  );
 
   /// Creates a new instance of [AppTheme] with the high contrast
   /// color scheme.
@@ -32,9 +32,9 @@ class AppTheme {
   /// Creates a new instance of [AppTheme] with the high contrast dark
   /// color scheme.
   factory AppTheme.highContrastDark() => AppTheme._init(
-        FlexTones.ultraContrast(Brightness.dark),
-        brightness: Brightness.dark,
-      );
+    FlexTones.ultraContrast(Brightness.dark),
+    brightness: Brightness.dark,
+  );
 
   /// The base color of the application.
   final Color baseColorPrimary = const Color.fromRGBO(216, 64, 47, 1);

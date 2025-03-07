@@ -25,9 +25,7 @@ class MoreView extends StatelessWidget {
           body: const SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                MoreOptionsView(),
-              ],
+              children: <Widget>[MoreOptionsView()],
             ),
           ),
         ),
