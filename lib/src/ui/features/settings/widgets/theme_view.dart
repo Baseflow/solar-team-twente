@@ -26,8 +26,9 @@ class ThemeView extends StatelessWidget {
                 title: Text(_getThemeTitle(themeMode, context)),
                 value: themeMode,
                 groupValue: state,
-                onChanged: (AppThemeMode? value) =>
-                    context.read<ThemeCubit>().updateTheme(value),
+                onChanged:
+                    (AppThemeMode? value) =>
+                        context.read<ThemeCubit>().updateTheme(value),
               );
             },
           ),

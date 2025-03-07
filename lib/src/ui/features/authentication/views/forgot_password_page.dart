@@ -20,8 +20,9 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ForgotPasswordCubit>(
-      create: (BuildContext context) =>
-          ForgotPasswordCubit(Ioc.container.get<AuthenticationService>()),
+      create:
+          (BuildContext context) =>
+              ForgotPasswordCubit(Ioc.container.get<AuthenticationService>()),
       child: const ForgotPasswordView(),
     );
   }

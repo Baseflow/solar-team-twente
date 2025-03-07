@@ -4,7 +4,7 @@ import '../repositories/repositories.dart';
 class LanguageService {
   /// Creates a new instance of [LanguageService].
   LanguageService({required LanguageRepository languageRepository})
-      : _languageRepository = languageRepository;
+    : _languageRepository = languageRepository;
 
   /// The [LanguageRepository] to manage shared preferences.
   final LanguageRepository _languageRepository;
