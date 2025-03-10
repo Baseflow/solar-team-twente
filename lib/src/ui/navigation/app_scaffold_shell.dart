@@ -56,17 +56,19 @@ class AppScaffoldShell extends StatelessWidget {
           initialLocation: index == navigationShell.currentIndex,
         );
       },
-      destinations: navigationShell.route.branches.map((StatefulShellBranch e) {
-        return switch (e.defaultRoute?.name) {
-          LivePage.routeName => LivePage.destination(context),
-          DashboardPage.routeName => DashboardPage.destination(context),
-          NewsPage.routeName => NewsPage.destination(context),
-          MorePage.name => MorePage.destination(context),
-          _ => throw UnimplementedError(
-              'The route ${e.defaultRoute?.name} is not implemented.',
-            ),
-        };
-      }).toList(),
+      destinations:
+          navigationShell.route.branches.map((StatefulShellBranch e) {
+            return switch (e.defaultRoute?.name) {
+              LivePage.routeName => LivePage.destination(context),
+              DashboardPage.routeName => DashboardPage.destination(context),
+              NewsPage.routeName => NewsPage.destination(context),
+              MorePage.name => MorePage.destination(context),
+              _ =>
+                throw UnimplementedError(
+                  'The route ${e.defaultRoute?.name} is not implemented.',
+                ),
+            };
+          }).toList(),
     );
   }
 }
