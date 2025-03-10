@@ -36,8 +36,8 @@ class AdminView extends StatelessWidget {
           return switch (state.authStatus) {
             AuthenticationStatus.unauthenticated => const AdminContainer(),
             AuthenticationStatus.authenticated => AuthorizedAdminView(
-                user: context.read<AuthenticationCubit>().currentUser,
-              ),
+              user: context.read<AuthenticationCubit>().currentUser,
+            ),
             _ => const CircularProgressIndicator(),
           };
         },
