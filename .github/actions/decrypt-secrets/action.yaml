@@ -17,8 +17,6 @@ inputs:
   secrets_path:
     description: Path to where the secrets will be stored.
     required: true
-  encrypted_apple_key_json:
-    required: true
 runs:
   using: composite
   steps:
@@ -47,7 +45,3 @@ runs:
         # Decrypt the .secrets file
         echo "${{inputs.secrets_file}}" > "${{ inputs.secrets_path }}/.secrets.asc"
         gpg -d --passphrase '${{inputs.passphrase}}' --batch "${{ inputs.secrets_path }}/.secrets.asc" > "${{ inputs.secrets_path }}/.secrets.prd"
-
-        # Decrypt the Apple App Store JSON key
-        echo "${{inputs.encrypted_apple_key_json}}" > "${{ inputs.secrets_path }}/app_store_key.asc"
-        gpg -d --passphrase '${{inputs.passphrase}}' --batch "${{ inputs.secrets_path }}/app_store_key.asc" > "${{ inputs.secrets_path }}/app_store_key.json"
