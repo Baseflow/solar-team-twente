@@ -120,7 +120,8 @@ platform :ios do
             export_team_id: CredentialsManager::AppfileConfig.try_fetch_value(:team_id),
             skip_build_archive: true,
             archive_path: "../build/ios/archive/Runner.xcarchive",
-            export_method: "app-store"
+            export_method: "app-store",
+            api_key_path: '../.secrets/app_store_key.json'
         )
 
         # Upload the build to Apple TestFlight.
