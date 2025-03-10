@@ -90,6 +90,7 @@ platform :ios do
     # bundle exec fastlane beta environment:"dev"
     # ```
     lane :beta do |values|
+        setup_ci if is_ci
         # Get the contents of the `config` argument. If the argument is not specified fallback to the
         # `settings.dev` configuration file.
         configFile = values.fetch(:config, '.env.prd')
