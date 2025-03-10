@@ -103,7 +103,8 @@ platform :ios do
         increment_build_number({
             build_number: latest_testflight_build_number(
                 version: version,
-                app_identifier: configuration["APP_ID"]
+                app_identifier: configuration["APP_ID"],
+                api_key_path: '../.secrets/app_store_key.json'
             ) + 1
         })
 
@@ -124,6 +125,8 @@ platform :ios do
         )
 
         # Upload the build to Apple TestFlight.
-        upload_to_testflight()
+        upload_to_testflight(
+            api_key_path: '../.secrets/app_store_key.json'
+        )
     end
 end
