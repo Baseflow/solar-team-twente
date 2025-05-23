@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../../../core.dart';
 import '../types/admin_error_code.dart';
@@ -7,43 +8,73 @@ import '../types/admin_error_code.dart';
 part 'admin_state.dart';
 
 class AdminCubit extends Cubit<AdminState> {
-  AdminCubit({required PostsService newsService}) : _newsService = newsService, super(const AdminInitial());
+  AdminCubit({required PostsService newsService})
+    : _newsService = newsService,
+      super(const AdminState(status: AdminStatus.initial));
 
   final PostsService _newsService;
 
-  Future<void> submitNewsMessage() async {
-    if (state.newsMessageTitle == null ||
-        state.newsMessageBody == null ||
-        state.newsMessageTitle!.isEmpty ||
-        state.newsMessageBody!.isEmpty) {
-      emit(
-        AdminError(
-          errorCode: AdminErrorCode.missingTitleOrBody,
-          newsMessageBody: state.newsMessageBody,
-          newsMessageTitle: state.newsMessageTitle,
-        ),
-      );
+  Future<void> submitPost() async {
+    if (!state.isValid) {
+      emit(state.copyWith(status: AdminStatus.error, errorCode: AdminErrorCode.missingContent));
       return;
     }
 
-    emit(AdminLoading(newsMessageTitle: state.newsMessageTitle, newsMessageBody: state.newsMessageBody));
+    emit(state.copyWith(status: AdminStatus.loading));
 
     await _newsService
-        .submitMessage(Post(title: state.newsMessageTitle!, message: state.newsMessageBody!))
-        .catchError((_) => emit(const AdminError(errorCode: AdminErrorCode.sendingMessageFailed)));
+        .submitMessage(
+          Post(
+            title: state.postTitle!,
+            message: state.postBody!,
+            type: state.postType!,
+            location: state.postLocation!,
+            images: state.postImageUrls!,
+            videoUrl: state.postVideoUrl,
+          ),
+        )
+        .catchError(
+          (_) => emit(const AdminState(status: AdminStatus.error, errorCode: AdminErrorCode.sendingMessageFailed)),
+        );
 
-    if (state is AdminError) {
+    if (state.errorCode != null) {
       return;
     }
 
-    emit(AdminMessageSent(newsMessageTitle: state.newsMessageTitle!, newsMessageBody: state.newsMessageBody!));
+    emit(
+      AdminState(
+        status: AdminStatus.messageSent,
+        postTitle: state.postTitle,
+        postBody: state.postBody,
+        postType: state.postType,
+        postLocation: state.postLocation,
+        postImageUrls: state.postImageUrls,
+        postVideoUrl: state.postVideoUrl,
+      ),
+    );
   }
 
   void titleChanged(String value) {
-    emit(AdminInitial(newsMessageBody: state.newsMessageBody, newsMessageTitle: value));
+    emit(state.copyWith(postTitle: value));
   }
 
   void bodyChanged(String value) {
-    emit(AdminInitial(newsMessageBody: value, newsMessageTitle: state.newsMessageTitle));
+    emit(state.copyWith(postBody: value));
+  }
+
+  void typeChanged(PostType type) {
+    emit(state.copyWith(postType: type));
+  }
+
+  void locationChanged(LatLng location) {
+    emit(state.copyWith(postLocation: location));
+  }
+
+  void imageUrlsChanged(List<String> urls) {
+    emit(state.copyWith(postImageUrls: urls));
+  }
+
+  void videoUrlChanged(String? url) {
+    emit(state.copyWith(postVideoUrl: url));
   }
 }
