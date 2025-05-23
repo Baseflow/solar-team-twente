@@ -1,6 +1,7 @@
 export 'analytics_repository.dart';
 export 'authentication_repository.dart';
 export 'crashlytics_repository.dart';
+export 'images_repository.dart';
 export 'language_repository.dart';
 export 'leaderboard_repository.dart';
 export 'posts_repository.dart';

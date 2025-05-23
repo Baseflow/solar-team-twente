@@ -5,9 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core.dart';
 import 'clients/clients.dart';
 import 'data_stores/data_stores.dart';
-import 'repositories/leaderboard_repository.dart';
 import 'repositories/repositories.dart';
-import 'repositories/vehicle_location_repository.dart';
 
 /// Initializes the data library ensuring all dependencies
 /// are registered.
@@ -50,5 +48,6 @@ Future<void> _registerDependencies() async {
       () => SupabaseVehicleLocationRepository(client: ioc.get<SupabaseClient>()),
     )
     ..registerFactory<PostsRepository>(() => SupabasePostsRepository(ioc.get<SupabaseClient>()))
-    ..registerFactory<LeaderboardRepository>(() => SupabaseLeaderboardRepository(ioc.get<SupabaseClient>()));
+    ..registerFactory<LeaderboardRepository>(() => SupabaseLeaderboardRepository(ioc.get<SupabaseClient>()))
+    ..registerFactory<ImagesRepository>(() => SupabaseImagesRepository(ioc.get<SupabaseClient>()));
 }
