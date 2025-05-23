@@ -14,7 +14,7 @@
         "--dart-define-from-file",
         ".env.dev",
         "--dart-define-from-file",
-        ".secrets/.secrets.dev",
+        ".env.secret",
         "--web-port",
         "8080",
         "--target",
