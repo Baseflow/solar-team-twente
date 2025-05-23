@@ -55,7 +55,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.baseflow.solarteamtwente"
-    compileSdkVersion 34 // flutter.compileSdkVersion
+    compileSdkVersion 35 // flutter.compileSdkVersion
     ndkVersion "26.1.10909125" // flutter.ndkVersion
 
     compileOptions {
@@ -82,7 +82,7 @@ android {
         resValue "string", "app_title", dartDefines.APP_TITLE
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21 // flutter.minSdkVersion
+        minSdkVersion 23 // flutter.minSdkVersion
         targetSdkVersion 34 // flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

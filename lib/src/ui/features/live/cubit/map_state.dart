@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 
 import '../../../../../core.dart';
 
@@ -8,12 +7,11 @@ import '../../../../../core.dart';
 /// {@endtemplate}
 sealed class MapState extends Equatable {
   /// {@macro map_carrousel_state}
-  const MapState({this.vehicleLocation = const VehicleLocation.initial(), this.geoJson});
+  const MapState({this.vehicleLocation = const VehicleLocation.initial()});
 
   final VehicleLocation vehicleLocation;
-  final GeoJsonParser? geoJson;
 
-  MapState copyWith({VehicleLocation? vehicleLocation, GeoJsonParser? geoJson});
+  MapState copyWith({VehicleLocation? vehicleLocation});
 }
 
 /// {@template map_carrousel_initial_state}
@@ -28,7 +26,7 @@ class MapInitial extends MapState {
   List<Object?> get props => <Object?>[];
 
   @override
-  MapState copyWith({VehicleLocation? vehicleLocation, GeoJsonParser? geoJson}) {
+  MapState copyWith({VehicleLocation? vehicleLocation}) {
     return const MapInitial();
   }
 }
@@ -45,7 +43,7 @@ class MapLoading extends MapState {
   List<Object?> get props => <Object?>[];
 
   @override
-  MapState copyWith({VehicleLocation? vehicleLocation, GeoJsonParser? geoJson}) {
+  MapState copyWith({VehicleLocation? vehicleLocation}) {
     return const MapLoading();
   }
 }
@@ -56,14 +54,14 @@ class MapLoading extends MapState {
 /// {@endtemplate}
 class MapRaceLoaded extends MapState {
   /// {@macro map_carrousel_race_loaded_state}
-  const MapRaceLoaded({required super.vehicleLocation, required super.geoJson});
+  const MapRaceLoaded({required super.vehicleLocation});
 
   /// Copy the current state with the provided changes.
   @override
-  MapState copyWith({VehicleLocation? vehicleLocation, GeoJsonParser? geoJson}) {
-    return MapRaceLoaded(vehicleLocation: vehicleLocation ?? this.vehicleLocation, geoJson: geoJson ?? this.geoJson);
+  MapState copyWith({VehicleLocation? vehicleLocation}) {
+    return MapRaceLoaded(vehicleLocation: vehicleLocation ?? this.vehicleLocation);
   }
 
   @override
-  List<Object?> get props => <Object?>[vehicleLocation, geoJson];
+  List<Object?> get props => <Object?>[vehicleLocation];
 }

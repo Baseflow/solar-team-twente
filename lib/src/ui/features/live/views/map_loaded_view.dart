@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
+import 'package:flutter_map_geojson2/geojson2/geojson_layer.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../../../assets/generated/assets.gen.dart';
 import '../../../constants/sizes_constants.dart';
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
@@ -55,14 +57,6 @@ class _MapLoadedViewState extends State<MapLoadedView> with TickerProviderStateM
         }
       },
       builder: (BuildContext context, MapState mapState) {
-        mapState as MapRaceLoaded;
-
-        final Polyline<LatLng> routeLine = Polyline<LatLng>(
-          points: mapState.geoJson!.markers.map<LatLng>((Marker marker) => marker.point).toList(),
-          strokeWidth: 4,
-          color: Colors.black,
-        );
-
         return FlutterMap(
           mapController: _animatedMapController.mapController,
           options: MapOptions(
@@ -86,12 +80,12 @@ class _MapLoadedViewState extends State<MapLoadedView> with TickerProviderStateM
                 ),
               ],
             ),
-            PolylineLayer<Object>(polylines: <Polyline<LatLng>>[routeLine]),
             const Positioned(
               bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
               right: Sizes.s16,
               child: _LiveButton(),
             ),
+            GeoJsonLayer.asset(Assets.geojson.linestring),
           ],
         );
       },

@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_map_geojson/flutter_map_geojson.dart';
 
 import '../../../../../core.dart';
-import '../../../../assets/generated/assets.gen.dart';
 import 'map_state.dart';
 
 /// {@template map_carrousel_cubit}
@@ -26,14 +22,7 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> loadMap() async {
-    final String jsonString = await rootBundle.loadString(Assets.geojson.fullMap);
-    final Map<String, dynamic> json = jsonDecode(jsonString) as Map<String, dynamic>;
-
-    final GeoJsonParser geoJson = GeoJsonParser()..parseGeoJson(json);
-
-    await Future<void>.delayed(const Duration(seconds: 2));
-
-    emit(MapRaceLoaded(vehicleLocation: const VehicleLocation.initial(), geoJson: geoJson));
+    emit(const MapRaceLoaded(vehicleLocation: VehicleLocation.initial()));
 
     _subscribeToVehicleLocation();
   }
