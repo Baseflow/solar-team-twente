@@ -12,7 +12,7 @@ class NewsCubit extends Cubit<NewsState> {
 
   final NewsService _newsService;
 
-  late StreamSubscription<List<NewsMessage>> _newsSubscription;
+  late StreamSubscription<List<Post>> _newsSubscription;
 
   @override
   Future<void> close() {
@@ -22,7 +22,7 @@ class NewsCubit extends Cubit<NewsState> {
 
   void initialize() {
     _newsSubscription = _newsService.messages.listen(
-      (List<NewsMessage> newsMessages) {
+      (List<Post> newsMessages) {
         emit(NewsLoaded(newsMessages: newsMessages));
       },
       onError: (Object error) {

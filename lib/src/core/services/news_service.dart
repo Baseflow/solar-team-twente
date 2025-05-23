@@ -3,11 +3,11 @@ import '../../../core.dart';
 class NewsService {
   NewsService(this._repository);
 
-  final NewsRepository _repository;
+  final PostsRepository _repository;
 
-  Stream<List<NewsMessage>> get messages => _repository.newsMessages;
+  Stream<List<Post>> get messages => _repository.newsMessages;
 
-  Future<void> submitMessage(NewsMessage message) {
-    return _repository.submitNewsMessage(message);
+  Future<void> submitMessage(Post message) {
+    return _repository.submitPost(message);
   }
 }

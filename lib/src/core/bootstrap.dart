@@ -30,7 +30,7 @@ void _registerDependencies() {
     ..registerFactory<VehicleLocationService>(
       () => VehicleLocationService(vehicleLocationRepository: ioc.get<VehicleLocationRepository>()),
     )
-    ..registerFactory<NewsService>(() => NewsService(ioc.get<NewsRepository>()))
+    ..registerFactory<NewsService>(() => NewsService(ioc.get<PostsRepository>()))
     ..registerFactory<LeaderboardService>(
       () => LeaderboardService(leaderboardRepository: ioc.get<LeaderboardRepository>()),
     );

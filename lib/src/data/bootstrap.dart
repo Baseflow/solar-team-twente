@@ -49,6 +49,6 @@ Future<void> _registerDependencies() async {
     ..registerFactory<VehicleLocationRepository>(
       () => SupabaseVehicleLocationRepository(client: ioc.get<SupabaseClient>()),
     )
-    ..registerFactory<NewsRepository>(() => SupabaseNewsRepository(ioc.get<SupabaseClient>()))
+    ..registerFactory<PostsRepository>(() => SupabasePostsRepository(ioc.get<SupabaseClient>()))
     ..registerFactory<LeaderboardRepository>(() => SupabaseLeaderboardRepository(ioc.get<SupabaseClient>()));
 }

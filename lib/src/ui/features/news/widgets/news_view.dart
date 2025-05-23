@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
-import '../../../../core/entities/news_message.dart';
+import '../../../../core/entities/post.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../localizations/l10n.dart';
 import '../cubit/news_cubit.dart';
@@ -29,7 +29,7 @@ class NewsView extends StatelessWidget {
 
             return ListView.separated(
               itemBuilder: (BuildContext context, int index) {
-                final NewsMessage newsMessage = state.newsMessages[index];
+                final Post newsMessage = state.newsMessages[index];
                 return NewsMessageCard(
                   title: newsMessage.title,
                   newsMessage: newsMessage.message,

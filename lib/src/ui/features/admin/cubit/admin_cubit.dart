@@ -29,7 +29,7 @@ class AdminCubit extends Cubit<AdminState> {
     emit(AdminLoading(newsMessageTitle: state.newsMessageTitle, newsMessageBody: state.newsMessageBody));
 
     await _newsService
-        .submitMessage(NewsMessage(title: state.newsMessageTitle!, message: state.newsMessageBody!))
+        .submitMessage(Post(title: state.newsMessageTitle!, message: state.newsMessageBody!))
         .catchError((_) => emit(const AdminError(errorCode: AdminErrorCode.sendingMessageFailed)));
 
     if (state is AdminError) {
