@@ -1,6 +1,7 @@
 export 'analytics_service.dart';
 export 'authentication_service.dart';
 export 'crashlytics_service.dart';
+export 'images_service.dart';
 export 'language_service.dart';
 export 'leaderboard_service.dart';
 export 'posts_service.dart';
