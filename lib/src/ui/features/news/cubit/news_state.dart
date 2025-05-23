@@ -3,11 +3,11 @@ part of 'news_cubit.dart';
 abstract class NewsState extends Equatable {
   const NewsState({required this.newsMessages});
 
-  final List<NewsMessage> newsMessages;
+  final List<Post> newsMessages;
 }
 
 class NewsInitial extends NewsState {
-  NewsInitial() : super(newsMessages: <NewsMessage>[]);
+  NewsInitial() : super(newsMessages: <Post>[]);
 
   @override
   List<Object> get props => <Object>[newsMessages];
