@@ -13,6 +13,8 @@
       "args": [
         "--dart-define-from-file",
         ".env.dev",
+        "--dart-define-from-file",
+        ".secrets/.secrets.dev",
         "--web-port",
         "8080",
         "--target",
@@ -27,7 +29,9 @@
       "program": "lib/main.dart",
       "args": [
         "--dart-define-from-file",
-        ".env.stag",
+        ".env.stg",
+        "--dart-define-from-file",
+        ".secrets/.secrets.stg",
         "--web-port",
         "8080",
         "--target",
@@ -42,7 +46,9 @@
       "program": "lib/main.dart",
       "args": [
         "--dart-define-from-file",
-        ".env.prod",
+        ".env.prd",
+        "--dart-define-from-file",
+        ".secrets/.secrets.prd",
         "--web-port",
         "8080",
         "--target",
@@ -58,6 +64,8 @@
       "args": [
         "--dart-define-from-file",
         ".env.dev",
+        "--dart-define-from-file",
+        ".secrets/.secrets.dev",
         "--web-port",
         "8080",
         "--target",
@@ -72,7 +80,9 @@
       "flutterMode": "release",
       "args": [
         "--dart-define-from-file",
-        ".env.prod",
+        ".env.prd",
+        "--dart-define-from-file",
+        ".secrets/.secrets.prd",
         "--web-port",
         "8080",
         "--target",
