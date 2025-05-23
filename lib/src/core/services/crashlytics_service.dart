@@ -20,11 +20,7 @@ class CrashlyticsService {
   }
 
   /// Reports an error to Crashlytics.
-  Future<void> reportError(
-    dynamic error,
-    StackTrace? trace, {
-    bool fatal = false,
-  }) async {
+  Future<void> reportError(dynamic error, StackTrace? trace, {bool fatal = false}) async {
     await _crashlyticsRepository.reportError(error, trace, fatal: fatal);
   }
 }

@@ -17,35 +17,21 @@ void _registerDependencies() {
 
   ioc
     ..registerLazySingleton<AnalyticsService>(
-      () =>
-          AnalyticsService(analyticsRepository: ioc.get<AnalyticsRepository>())
-            ..initialize(),
+      () => AnalyticsService(analyticsRepository: ioc.get<AnalyticsRepository>())..initialize(),
     )
     ..registerLazySingleton<CrashlyticsService>(
-      () => CrashlyticsService(
-        crashlyticsRepository: ioc.get<CrashlyticsRepository>(),
-      )..initialize(),
+      () => CrashlyticsService(crashlyticsRepository: ioc.get<CrashlyticsRepository>())..initialize(),
     )
     ..registerLazySingleton<AuthenticationService>(
-      () => AuthenticationService(
-        authenticationRepository: ioc.get<AuthenticationRepository>(),
-      ),
+      () => AuthenticationService(authenticationRepository: ioc.get<AuthenticationRepository>()),
     )
-    ..registerFactory<LanguageService>(
-      () => LanguageService(languageRepository: ioc.get<LanguageRepository>()),
-    )
-    ..registerFactory<ThemeService>(
-      () => ThemeService(themeRepository: ioc.get<ThemeRepository>()),
-    )
+    ..registerFactory<LanguageService>(() => LanguageService(languageRepository: ioc.get<LanguageRepository>()))
+    ..registerFactory<ThemeService>(() => ThemeService(themeRepository: ioc.get<ThemeRepository>()))
     ..registerFactory<VehicleLocationService>(
-      () => VehicleLocationService(
-        vehicleLocationRepository: ioc.get<VehicleLocationRepository>(),
-      ),
+      () => VehicleLocationService(vehicleLocationRepository: ioc.get<VehicleLocationRepository>()),
     )
     ..registerFactory<NewsService>(() => NewsService(ioc.get<NewsRepository>()))
     ..registerFactory<LeaderboardService>(
-      () => LeaderboardService(
-        leaderboardRepository: ioc.get<LeaderboardRepository>(),
-      ),
+      () => LeaderboardService(leaderboardRepository: ioc.get<LeaderboardRepository>()),
     );
 }

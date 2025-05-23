@@ -54,11 +54,7 @@ class RefreshableStateMessage extends StatelessWidget {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverFillRemaining(
-            child: StateMessageView(
-              asset: asset,
-              message: message,
-              child: child,
-            ),
+            child: StateMessageView(asset: asset, message: message, child: child),
           ),
         ],
       ),

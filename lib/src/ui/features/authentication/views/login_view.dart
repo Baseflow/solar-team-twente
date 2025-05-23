@@ -19,17 +19,11 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const <Widget>[
-          Align(
-            alignment: Alignment.centerRight,
-            child: ChangeLanguageButton(),
-          ),
-        ],
+        actions: const <Widget>[Align(alignment: Alignment.centerRight, child: ChangeLanguageButton())],
       ),
       body: BlocListener<LoginCubit, LoginState>(
         listenWhen: (LoginState previous, LoginState current) {
-          return !current.isLoading &&
-              (current.authErrorCode != null || current.tokenErrorCode != null);
+          return !current.isLoading && (current.authErrorCode != null || current.tokenErrorCode != null);
         },
         listener: (BuildContext context, LoginState state) {
           context.showSnackBar(SnackBar(content: Text(state.errorMessage)));

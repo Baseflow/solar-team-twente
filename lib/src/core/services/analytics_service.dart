@@ -3,8 +3,7 @@ import '../repositories/repositories.dart';
 /// A service to manage analytics events.
 class AnalyticsService {
   /// Creates a new instance of [AnalyticsService].
-  AnalyticsService({required AnalyticsRepository analyticsRepository})
-    : _analyticsRepository = analyticsRepository;
+  AnalyticsService({required AnalyticsRepository analyticsRepository}) : _analyticsRepository = analyticsRepository;
 
   /// The [AnalyticsRepository] to manage analytics events.
   final AnalyticsRepository _analyticsRepository;
@@ -17,10 +16,7 @@ class AnalyticsService {
   /// Logs an analytics event with the given [name] and [params].
   /// The [name] parameter specifies the name of the event.
   /// The [params] parameter specifies additional parameters for the event.
-  Future<void> logEvent({
-    required String name,
-    Map<String, Object>? params,
-  }) async {
+  Future<void> logEvent({required String name, Map<String, Object>? params}) async {
     await _analyticsRepository.logEvent(name: name, params: params);
   }
 

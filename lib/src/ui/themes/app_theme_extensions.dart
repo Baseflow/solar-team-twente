@@ -6,9 +6,6 @@ import '../../../core.dart';
 extension AppThemeModeExtension on AppThemeMode {
   /// Converts the application theme mode to the theme mode.
   ThemeMode toThemeMode() {
-    return ThemeMode.values.firstWhere(
-      (ThemeMode element) => element.name == name,
-      orElse: () => ThemeMode.system,
-    );
+    return ThemeMode.values.firstWhere((ThemeMode element) => element.name == name, orElse: () => ThemeMode.system);
   }
 }

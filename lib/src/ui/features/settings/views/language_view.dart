@@ -40,10 +40,8 @@ class LanguageView extends StatelessWidget {
                   if (value == null) return;
                   try {
                     context.read<LanguageCubit>().changeLanguage(value);
-                  } catch (e) {
-                    context.showSnackBar(
-                      SnackBar(content: Text(context.l10n.changeLanguageError)),
-                    );
+                  } on Exception {
+                    context.showSnackBar(SnackBar(content: Text(context.l10n.changeLanguageError)));
                   }
                 },
               );

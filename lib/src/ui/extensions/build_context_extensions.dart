@@ -23,8 +23,7 @@ extension ContextExtension on BuildContext {
 
   /// Returns the [AppThemeColorExtension]
   /// of the current [BuildContext].
-  AppThemeColorExtension? get colorExtension =>
-      Theme.of(this).extension<AppThemeColorExtension>();
+  AppThemeColorExtension? get colorExtension => Theme.of(this).extension<AppThemeColorExtension>();
 
   /// Shows the given [snackBar].
   Future<void> showSnackBar(SnackBar snackBar) async {

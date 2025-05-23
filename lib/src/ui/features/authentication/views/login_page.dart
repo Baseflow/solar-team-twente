@@ -28,13 +28,9 @@ class LoginPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<LoginCubit>(
-          create:
-              (BuildContext context) =>
-                  LoginCubit(Ioc.container.get<AuthenticationService>()),
+          create: (BuildContext context) => LoginCubit(Ioc.container.get<AuthenticationService>()),
         ),
-        BlocProvider<AboutCubit>(
-          create: (BuildContext context) => AboutCubit()..fetchAppDetails(),
-        ),
+        BlocProvider<AboutCubit>(create: (BuildContext context) => AboutCubit()..fetchAppDetails()),
       ],
       child: AdaptiveSplitLayout(
         body: const LoginView(),
@@ -51,9 +47,7 @@ class LoginPage extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     AppConfig.appTitle,
-                    style: context.textTheme.displayMedium?.copyWith(
-                      color: context.colorScheme.onPrimary,
-                    ),
+                    style: context.textTheme.displayMedium?.copyWith(color: context.colorScheme.onPrimary),
                   ),
                   const GutterSmall(),
                   BlocBuilder<AboutCubit, AboutState>(
@@ -61,9 +55,7 @@ class LoginPage extends StatelessWidget {
                       return Text(
                         state.appVersion,
                         style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onPrimary.withValues(
-                            alpha: 0.8,
-                          ),
+                          color: context.colorScheme.onPrimary.withValues(alpha: 0.8),
                         ),
                       );
                     },

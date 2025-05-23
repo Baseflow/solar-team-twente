@@ -6,8 +6,7 @@ import '../types/types.dart';
 /// the shared preferences.
 class ThemeService {
   /// Creates a new instance of [ThemeService].
-  ThemeService({required ThemeRepository themeRepository})
-    : _themeRepository = themeRepository;
+  ThemeService({required ThemeRepository themeRepository}) : _themeRepository = themeRepository;
 
   final ThemeRepository _themeRepository;
 
@@ -18,12 +17,8 @@ class ThemeService {
 
   /// Gets the saved theme mode from the shared preferences.
   AppThemeMode getSavedThemeMode() {
-    final String savedMode =
-        _themeRepository.getTheme() ?? AppThemeMode.system.name;
+    final String savedMode = _themeRepository.getTheme() ?? AppThemeMode.system.name;
 
-    return AppThemeMode.values.firstWhere(
-      (AppThemeMode e) => e.name == savedMode,
-      orElse: () => AppThemeMode.system,
-    );
+    return AppThemeMode.values.firstWhere((AppThemeMode e) => e.name == savedMode, orElse: () => AppThemeMode.system);
   }
 }

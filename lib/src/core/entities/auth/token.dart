@@ -6,11 +6,7 @@ import 'package:equatable/equatable.dart';
 /// save both these tokens in a single representation.
 class Token extends Equatable {
   /// Creates a new [Token] entity
-  const Token({
-    required this.accessToken,
-    required this.refreshToken,
-    required this.expiresAt,
-  });
+  const Token({required this.accessToken, required this.refreshToken, required this.expiresAt});
 
   /// The access token.
   final String accessToken;

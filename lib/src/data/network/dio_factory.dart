@@ -40,8 +40,11 @@ final class DioFactory {
   }
 
   Dio _createGeneralDio() {
+    const String baseUrl = core.AppConfig.baseUrl;
+    // The default value warning needs to be ignored because the baseUrl is
+    // defined in the AppConfig class and retrieved from the environment.
     // ignore: avoid_redundant_argument_values
-    final Dio generalDio = Dio(BaseOptions(baseUrl: core.AppConfig.baseUrl));
+    final Dio generalDio = Dio(BaseOptions(baseUrl: baseUrl));
     generalDio.interceptors.addAll(<Interceptor>[
       RetryInterceptor(dio: generalDio),
       if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
@@ -54,10 +57,10 @@ final class DioFactory {
   }
 
   Dio _createAuthenticationDio() {
+    // The default value warning needs to be ignored because the baseUrl is
+    // defined in the AppConfig class and retrieved from the environment.
     // ignore: avoid_redundant_argument_values
     return Dio(BaseOptions(baseUrl: core.AppConfig.authUrl))
-      ..interceptors.addAll(<Interceptor>[
-        if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
-      ]);
+      ..interceptors.addAll(<Interceptor>[if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true)]);
   }
 }

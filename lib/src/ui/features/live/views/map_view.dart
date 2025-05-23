@@ -19,9 +19,7 @@ class MapView extends StatelessWidget {
     return BlocBuilder<MapCubit, MapState>(
       builder: (_, MapState state) {
         return switch (state) {
-          final MapInitial _ || final MapLoading _ => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          final MapInitial _ || final MapLoading _ => const Center(child: CircularProgressIndicator()),
           final MapRaceLoaded _ => const MapLoadedView(),
         };
       },

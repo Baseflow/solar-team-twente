@@ -22,27 +22,19 @@ class LeaderboardPreviewContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = context.l10n;
     return BlocProvider<LeaderboardPreviewCubit>(
-      create:
-          (_) => LeaderboardPreviewCubit(
-            LeaderboardService(
-              leaderboardRepository: Ioc.container.get<LeaderboardRepository>(),
-            ),
-          )..initializeLeaderboard(),
+      create: (_) =>
+          LeaderboardPreviewCubit(LeaderboardService(leaderboardRepository: Ioc.container.get<LeaderboardRepository>()))
+            ..initializeLeaderboard(),
       child: Builder(
         builder: (BuildContext context) {
           return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
             builder: (BuildContext context, LeaderboardPreviewState state) {
               return switch (state) {
                 LeaderboardPreviewLoaded() => const LeaderboardPreviewList(),
-                LeaderboardPreviewEmpty() => Text(
-                  l10n.leaderboardEmptyMessage,
-                  textAlign: TextAlign.center,
-                ),
+                LeaderboardPreviewEmpty() => Text(l10n.leaderboardEmptyMessage, textAlign: TextAlign.center),
                 LeaderboardPreviewError() => Text(
                   l10n.leaderboardErrorMessage,
-                  style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.colorScheme.error,
-                  ),
+                  style: context.textTheme.bodyMedium!.copyWith(color: context.colorScheme.error),
                   textAlign: TextAlign.center,
                 ),
                 _ => SizedBox(
@@ -51,10 +43,7 @@ class LeaderboardPreviewContainer extends StatelessWidget {
                   child: Shimmer.fromColors(
                     baseColor: context.colorScheme.secondary,
                     highlightColor: context.colorScheme.primary,
-                    child: Image.asset(
-                      Assets.light.logo.path,
-                      semanticLabel: 'Solarteam Twente Logo',
-                    ),
+                    child: Image.asset(Assets.light.logo.path, semanticLabel: 'Solarteam Twente Logo'),
                   ),
                 ),
               };

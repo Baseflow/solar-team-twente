@@ -30,9 +30,7 @@ class RegisterView extends StatelessWidget {
                 FractionallySizedBox(
                   widthFactor: 0.5,
                   child: Image.asset(
-                    context.isDarkMode
-                        ? Assets.dark.logo.path
-                        : Assets.light.logo.path,
+                    context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
                     semanticLabel: l10n.appBarTitle,
                     fit: BoxFit.contain,
                   ),

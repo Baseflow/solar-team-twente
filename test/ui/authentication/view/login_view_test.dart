@@ -33,56 +33,33 @@ void main() {
   });
 
   group('LoginContainer', () {
-    testWidgets(
-      'should show a loading indicator and button text when isLoading '
-      'is true',
-      (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FilledLoadingButton(
-                buttonText: 'Sign In',
-                onPressed: () {},
-                isLoading: true,
-              ),
-            ),
+    testWidgets('should show a loading indicator and button text when isLoading '
+        'is true', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FilledLoadingButton(buttonText: 'Sign In', onPressed: () {}, isLoading: true),
           ),
-        );
+        ),
+      );
 
-        expect(
-          find.descendant(
-            of: find.byType(FilledButton),
-            matching: find.byType(CircularProgressIndicator),
-          ),
-          findsOneWidget,
-        );
+      expect(
+        find.descendant(of: find.byType(FilledButton), matching: find.byType(CircularProgressIndicator)),
+        findsOneWidget,
+      );
 
-        expect(
-          find.descendant(
-            of: find.byType(FilledButton),
-            matching: find.text('Sign In'),
-          ),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(find.descendant(of: find.byType(FilledButton), matching: find.text('Sign In')), findsOneWidget);
+    });
 
-    testWidgets('should disable the sign in button while loading', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should disable the sign in button while loading', (WidgetTester tester) async {
       whenListen(
         mockLoginCubit,
-        Stream<LoginState>.fromIterable(<LoginState>[
-          const LoginState(isLoading: true),
-        ]),
+        Stream<LoginState>.fromIterable(<LoginState>[const LoginState(isLoading: true)]),
         initialState: const LoginState(),
       );
       await tester.pumpWidget(
         MaterialAppHelper(
-          child: BlocProvider<LoginCubit>.value(
-            value: mockLoginCubit,
-            child: const LoginContainer(),
-          ),
+          child: BlocProvider<LoginCubit>.value(value: mockLoginCubit, child: const LoginContainer()),
         ),
       );
       await tester.pump(const Duration(milliseconds: 100));
@@ -90,9 +67,7 @@ void main() {
       final Finder buttonFinder = find.byType(FilledLoadingButton);
       expect(buttonFinder, findsOneWidget);
 
-      final FilledLoadingButton button = tester.widget<FilledLoadingButton>(
-        buttonFinder,
-      );
+      final FilledLoadingButton button = tester.widget<FilledLoadingButton>(buttonFinder);
 
       expect(button.isLoading, isTrue);
     });
@@ -102,20 +77,14 @@ void main() {
       whenListen(
         mockLoginCubit,
         Stream<LoginState>.fromIterable(<LoginState>[
-          const LoginState(
-            email: 'test@example.com',
-            password: 'validPassword',
-          ),
+          const LoginState(email: 'test@example.com', password: 'validPassword'),
         ]),
         initialState: const LoginState(isLoading: true),
       );
 
       await tester.pumpWidget(
         MaterialAppHelper(
-          child: BlocProvider<LoginCubit>.value(
-            value: mockLoginCubit,
-            child: const LoginContainer(),
-          ),
+          child: BlocProvider<LoginCubit>.value(value: mockLoginCubit, child: const LoginContainer()),
         ),
       );
       await tester.pump();
@@ -123,22 +92,16 @@ void main() {
       final Finder filledLoadingButtonFinder = find.byType(FilledLoadingButton);
       expect(filledLoadingButtonFinder, findsOneWidget);
 
-      final FilledLoadingButton button = tester.widget<FilledLoadingButton>(
-        filledLoadingButtonFinder,
-      );
+      final FilledLoadingButton button = tester.widget<FilledLoadingButton>(filledLoadingButtonFinder);
       expect(button.isLoading, isFalse);
     });
 
-    testWidgets('should show an error message if the login fails', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should show an error message if the login fails', (WidgetTester tester) async {
       whenListen(
         mockLoginCubit,
         Stream<LoginState>.fromIterable(<LoginState>[
           const LoginState(isLoading: true), // Simulate loading
-          const LoginState(
-            authErrorCode: AuthenticationExceptionCode.invalidCredentials,
-          ),
+          const LoginState(authErrorCode: AuthenticationExceptionCode.invalidCredentials),
         ]),
         initialState: const LoginState(),
       );

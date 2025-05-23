@@ -8,12 +8,7 @@ import '../../../extensions/build_context_extensions.dart';
 /// a divider and the section content.
 class Section extends StatelessWidget {
   /// Creates a new [Section] instance.
-  const Section({
-    required this.title,
-    required this.children,
-    this.icon,
-    super.key,
-  });
+  const Section({required this.title, required this.children, this.icon, super.key});
 
   /// The title of the section.
   final String title;

@@ -1,11 +1,7 @@
 /// A news message that is sent out by the Solarteam.
 class NewsMessage {
   /// Creates a new [NewsMessage] with the given [title] and [message].
-  const NewsMessage({
-    required this.title,
-    required this.message,
-    this.dateSubmitted,
-  });
+  const NewsMessage({required this.title, required this.message, this.dateSubmitted});
 
   /// The title of the news message.
   final String title;

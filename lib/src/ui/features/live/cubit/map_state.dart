@@ -89,15 +89,10 @@ class MapRaceLoaded extends MapState {
     return MapRaceLoaded(
       vehicleLocation: vehicleLocation ?? this.vehicleLocation,
       allRaceDaysGeoJson: allRaceDaysGeoJson ?? this.allRaceDaysGeoJson,
-      selectedRaceDayGeoJson:
-          selectedRaceDayGeoJson ?? this.selectedRaceDayGeoJson,
+      selectedRaceDayGeoJson: selectedRaceDayGeoJson ?? this.selectedRaceDayGeoJson,
     );
   }
 
   @override
-  List<Object?> get props => <Object?>[
-    vehicleLocation,
-    allRaceDaysGeoJson,
-    selectedRaceDayGeoJson,
-  ];
+  List<Object?> get props => <Object?>[vehicleLocation, allRaceDaysGeoJson, selectedRaceDayGeoJson];
 }

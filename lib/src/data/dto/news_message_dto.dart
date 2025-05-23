@@ -1,11 +1,7 @@
 import '../../../core.dart';
 
 class NewsMessageDTO {
-  NewsMessageDTO._({
-    required this.title,
-    required this.message,
-    this.dateSubmitted,
-  });
+  NewsMessageDTO._({required this.title, required this.message, this.dateSubmitted});
 
   factory NewsMessageDTO.fromJson(Map<String, dynamic> json) {
     return NewsMessageDTO._(
@@ -28,10 +24,6 @@ class NewsMessageDTO {
   }
 
   NewsMessage toEntity() {
-    return NewsMessage(
-      title: title,
-      message: message,
-      dateSubmitted: DateTime.parse(dateSubmitted!),
-    );
+    return NewsMessage(title: title, message: message, dateSubmitted: DateTime.parse(dateSubmitted!));
   }
 }

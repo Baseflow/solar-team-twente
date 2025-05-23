@@ -9,23 +9,14 @@ part 'token_dto.g.dart';
 @JsonSerializable(createToJson: true)
 class TokenDTO extends Equatable {
   /// Creates a new [TokenDTO] instance.
-  const TokenDTO({
-    required this.accessToken,
-    required this.refreshToken,
-    required this.expiresAt,
-  });
+  const TokenDTO({required this.accessToken, required this.refreshToken, required this.expiresAt});
 
   /// Creates a new [TokenDTO] instance from an [json] instance.
-  factory TokenDTO.fromJson(Map<String, dynamic> json) =>
-      _$TokenDTOFromJson(json);
+  factory TokenDTO.fromJson(Map<String, dynamic> json) => _$TokenDTOFromJson(json);
 
   /// Creates a new [TokenDTO] instance from a [token] entity.
   factory TokenDTO.fromEntity(Token token) {
-    return TokenDTO(
-      accessToken: token.accessToken,
-      refreshToken: token.refreshToken,
-      expiresAt: token.expiresAt,
-    );
+    return TokenDTO(accessToken: token.accessToken, refreshToken: token.refreshToken, expiresAt: token.expiresAt);
   }
 
   /// The access token.
@@ -42,11 +33,7 @@ class TokenDTO extends Equatable {
 
   /// Turns the [TokenDTO] into a [Token] entity.
   Token toEntity() {
-    return Token(
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-      expiresAt: expiresAt,
-    );
+    return Token(accessToken: accessToken, refreshToken: refreshToken, expiresAt: expiresAt);
   }
 
   @override

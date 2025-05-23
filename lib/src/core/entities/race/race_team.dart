@@ -7,11 +7,7 @@
 /// {@endtemplate}
 class RaceTeam {
   /// {@macro race_team}
-  RaceTeam({
-    required this.name,
-    required this.totalDrivenKilometers,
-    required this.position,
-  });
+  RaceTeam({required this.name, required this.totalDrivenKilometers, required this.position});
 
   /// The team's name.
   final String name;

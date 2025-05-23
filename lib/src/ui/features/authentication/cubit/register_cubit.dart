@@ -32,14 +32,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   /// Update the terms and conditions check.
-  void updateTermsAndConditionsCheck({
-    required bool isTermsAndConditionsAccepted,
-  }) {
-    emit(
-      state.copyWith(
-        isTermsAndConditionsAccepted: isTermsAndConditionsAccepted,
-      ),
-    );
+  void updateTermsAndConditionsCheck({required bool isTermsAndConditionsAccepted}) {
+    emit(state.copyWith(isTermsAndConditionsAccepted: isTermsAndConditionsAccepted));
   }
 
   /// Check if the passwords are matching.
@@ -55,32 +49,16 @@ class RegisterCubit extends Cubit<RegisterState> {
     final String email = state.email;
     final String password = state.password;
 
-    emit(
-      state.copyWith(
-        isPrivacyPolicyAccepted: true,
-        isTermsAndConditionsAccepted: true,
-      ),
-    );
+    emit(state.copyWith(isPrivacyPolicyAccepted: true, isTermsAndConditionsAccepted: true));
 
-    if (state.isPrivacyPolicyAccepted &&
-        state.isTermsAndConditionsAccepted &&
-        state.passwordsMatch) {
+    if (state.isPrivacyPolicyAccepted && state.isTermsAndConditionsAccepted && state.passwordsMatch) {
       emit(state.copyWith(isLoading: true));
       await Future<void>.delayed(const Duration(seconds: 2));
       try {
-        await _authenticationService.registerAccount(
-          email: email,
-          password: password,
-        );
+        await _authenticationService.registerAccount(email: email, password: password);
         emit(state.copyWith(isLoading: false, registerSuccessful: true));
       } on AuthenticationException catch (e) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            registerSuccessful: false,
-            authErrorCode: e.errorCode,
-          ),
-        );
+        emit(state.copyWith(isLoading: false, registerSuccessful: false, authErrorCode: e.errorCode));
       }
     }
   }

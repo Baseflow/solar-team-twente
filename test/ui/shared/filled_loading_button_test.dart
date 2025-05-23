@@ -4,16 +4,10 @@ import 'package:solar_team_twente/src/ui/features/shared/widgets/filled_loading_
 
 void main() {
   group('FilledLoadingButton', () {
-    testWidgets('should display only text when not loading.', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should display only text when not loading.', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: FilledLoadingButton(
-            buttonText: 'Test Button',
-            onPressed: () {},
-            isLoading: false,
-          ),
+          home: FilledLoadingButton(buttonText: 'Test Button', onPressed: () {}, isLoading: false),
         ),
       );
 
@@ -21,37 +15,24 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsNothing);
     });
 
-    testWidgets(
-      'should display a circular loading indicator and text when loading.',
-      (WidgetTester tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: FilledLoadingButton(
-                buttonText: 'Test Button',
-                onPressed: () {},
-                isLoading: true,
-              ),
-            ),
+    testWidgets('should display a circular loading indicator and text when loading.', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FilledLoadingButton(buttonText: 'Test Button', onPressed: () {}, isLoading: true),
           ),
-        );
+        ),
+      );
 
-        expect(find.text('Test Button'), findsOneWidget);
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      },
-    );
+      expect(find.text('Test Button'), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
 
-    testWidgets('should be disabled when loading.', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should be disabled when loading.', (WidgetTester tester) async {
       bool buttonPressed = false;
       await tester.pumpWidget(
         MaterialApp(
-          home: FilledLoadingButton(
-            buttonText: 'Test Button',
-            onPressed: () => buttonPressed = true,
-            isLoading: true,
-          ),
+          home: FilledLoadingButton(buttonText: 'Test Button', onPressed: () => buttonPressed = true, isLoading: true),
         ),
       );
 
@@ -62,17 +43,11 @@ void main() {
       expect(buttonPressed, false);
     });
 
-    testWidgets('should be enabled when not loading.', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should be enabled when not loading.', (WidgetTester tester) async {
       bool buttonPressed = false;
       await tester.pumpWidget(
         MaterialApp(
-          home: FilledLoadingButton(
-            buttonText: 'Test Button',
-            onPressed: () => buttonPressed = true,
-            isLoading: false,
-          ),
+          home: FilledLoadingButton(buttonText: 'Test Button', onPressed: () => buttonPressed = true, isLoading: false),
         ),
       );
 

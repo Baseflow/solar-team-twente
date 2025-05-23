@@ -22,9 +22,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RegisterCubit>(
-      create:
-          (BuildContext context) =>
-              RegisterCubit(Ioc.container.get<AuthenticationService>()),
+      create: (BuildContext context) => RegisterCubit(Ioc.container.get<AuthenticationService>()),
       child: AdaptiveSplitLayout(
         body: const RegisterView(),
         secondaryBody: Stack(

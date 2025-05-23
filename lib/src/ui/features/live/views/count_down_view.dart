@@ -24,11 +24,7 @@ class _SolarRaceCountDownState extends State<CountDownView> {
   @override
   void initState() {
     streamDuration = StreamDuration(
-      config: StreamDurationConfig(
-        countDownConfig: CountDownConfig(
-          duration: _startDate.difference(DateTime.now()),
-        ),
-      ),
+      config: StreamDurationConfig(countDownConfig: CountDownConfig(duration: _startDate.difference(DateTime.now()))),
     );
     super.initState();
   }
@@ -50,15 +46,9 @@ class _SolarRaceCountDownState extends State<CountDownView> {
         const Gutter(),
         RawSlideCountdown(
           streamDuration: streamDuration,
-          builder: (
-            BuildContext context,
-            Duration duration,
-            bool shouldCountUp,
-          ) {
+          builder: (BuildContext context, Duration duration) {
             return DefaultTextStyle(
-              style: context.textTheme.bodyMedium!.copyWith(
-                color: Colors.black,
-              ),
+              style: context.textTheme.bodyMedium!.copyWith(color: Colors.black),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -69,13 +59,13 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                         duration: duration,
                         timeUnit: TimeUnit.days,
                         digitType: DigitType.first,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                       RawDigitItem(
                         duration: duration,
                         timeUnit: TimeUnit.days,
                         digitType: DigitType.second,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                     ],
                   ),
@@ -87,13 +77,13 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                         duration: duration,
                         timeUnit: TimeUnit.hours,
                         digitType: DigitType.first,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                       RawDigitItem(
                         duration: duration,
                         timeUnit: TimeUnit.hours,
                         digitType: DigitType.second,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                     ],
                   ),
@@ -105,13 +95,13 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                         duration: duration,
                         timeUnit: TimeUnit.minutes,
                         digitType: DigitType.first,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                       RawDigitItem(
                         duration: duration,
                         timeUnit: TimeUnit.minutes,
                         digitType: DigitType.second,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                     ],
                   ),
@@ -123,13 +113,13 @@ class _SolarRaceCountDownState extends State<CountDownView> {
                         duration: duration,
                         timeUnit: TimeUnit.seconds,
                         digitType: DigitType.first,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                       RawDigitItem(
                         duration: duration,
                         timeUnit: TimeUnit.seconds,
                         digitType: DigitType.second,
-                        countUp: shouldCountUp,
+                        countUp: false,
                       ),
                     ],
                   ),

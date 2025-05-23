@@ -1,8 +1,7 @@
 import 'repository_exception.dart';
 
 /// Exception thrown when an error occurs in the repository.
-class AuthenticationException
-    extends RepositoryException<AuthenticationExceptionCode> {
+class AuthenticationException extends RepositoryException<AuthenticationExceptionCode> {
   /// Creates a new [AuthenticationException].
   const AuthenticationException({required super.errorCode, super.message});
 }

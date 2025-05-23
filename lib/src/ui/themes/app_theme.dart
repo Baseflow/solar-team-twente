@@ -15,26 +15,19 @@ class AppTheme {
   }
 
   /// Creates a new instance of [AppTheme] with the light color scheme.
-  factory AppTheme.light() =>
-      AppTheme._init(FlexTones.material(Brightness.light));
+  factory AppTheme.light() => AppTheme._init(FlexTones.material(Brightness.light));
 
   /// Creates a new instance of [AppTheme] with the dark color scheme.
-  factory AppTheme.dark() => AppTheme._init(
-    FlexTones.material(Brightness.dark),
-    brightness: Brightness.dark,
-  );
+  factory AppTheme.dark() => AppTheme._init(FlexTones.material(Brightness.dark), brightness: Brightness.dark);
 
   /// Creates a new instance of [AppTheme] with the high contrast
   /// color scheme.
-  factory AppTheme.highContrast() =>
-      AppTheme._init(FlexTones.ultraContrast(Brightness.light));
+  factory AppTheme.highContrast() => AppTheme._init(FlexTones.ultraContrast(Brightness.light));
 
   /// Creates a new instance of [AppTheme] with the high contrast dark
   /// color scheme.
-  factory AppTheme.highContrastDark() => AppTheme._init(
-    FlexTones.ultraContrast(Brightness.dark),
-    brightness: Brightness.dark,
-  );
+  factory AppTheme.highContrastDark() =>
+      AppTheme._init(FlexTones.ultraContrast(Brightness.dark), brightness: Brightness.dark);
 
   /// The base color of the application.
   final Color baseColorPrimary = const Color.fromRGBO(216, 64, 47, 1);
@@ -51,15 +44,10 @@ class AppTheme {
       tones: tones,
     );
 
-    final ThemeData themeData = ThemeData.from(
-      colorScheme: colorScheme,
-      useMaterial3: true,
-    );
+    final ThemeData themeData = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     return themeData.copyWith(
-      textTheme: GoogleFonts.poppinsTextTheme(
-        themeData.textTheme,
-      ).apply(bodyColor: colorScheme.onSurface),
+      textTheme: GoogleFonts.poppinsTextTheme(themeData.textTheme).apply(bodyColor: colorScheme.onSurface),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       extensions: <AppThemeColorExtension>[const AppThemeColorExtension()],
       // Add custom theme properties here.
@@ -70,10 +58,7 @@ class AppTheme {
   void _setSystemBarsColor() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent, systemNavigationBarColor: Colors.transparent),
     );
   }
 }

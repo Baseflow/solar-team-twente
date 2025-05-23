@@ -17,11 +17,7 @@ class ChangeLanguageButton extends StatelessWidget {
       builder: (BuildContext context, String languageCode) {
         return TextButton.icon(
           onPressed: () => context.pushNamed(LanguagePage.name),
-          icon: Flag.fromString(
-            context.read<LanguageCubit>().getCountryCode(),
-            height: 20,
-            width: 20,
-          ),
+          icon: Flag.fromString(context.read<LanguageCubit>().getCountryCode(), height: 20, width: 20),
           label: Text(languageCode.toUpperCase()),
         );
       },

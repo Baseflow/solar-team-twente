@@ -36,9 +36,7 @@ class ForgotPasswordView extends StatelessWidget {
                     FractionallySizedBox(
                       widthFactor: 0.5,
                       child: Image.asset(
-                        context.isDarkMode
-                            ? Assets.dark.logo.path
-                            : Assets.light.logo.path,
+                        context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
                         semanticLabel: context.l10n.appBarTitle,
                         fit: BoxFit.contain,
                       ),
@@ -63,18 +61,14 @@ class _ForgotPasswordForm extends StatelessWidget {
     return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
       listenWhen: (ForgotPasswordState previous, ForgotPasswordState current) {
         final bool isEmailSentSuccessfully =
-            previous.emailSentSuccessfully != current.emailSentSuccessfully &&
-            current.emailSentSuccessfully;
-        final bool isAuthError =
-            previous.authErrorCode != current.authErrorCode &&
-            current.authErrorCode != null;
+            previous.emailSentSuccessfully != current.emailSentSuccessfully && current.emailSentSuccessfully;
+        final bool isAuthError = previous.authErrorCode != current.authErrorCode && current.authErrorCode != null;
         return isEmailSentSuccessfully || isAuthError;
       },
       listener: (BuildContext context, ForgotPasswordState state) {
-        final String snackBarText =
-            state.emailSentSuccessfully
-                ? context.l10n.passwordChangeRequestSuccess
-                : context.l10n.errorResettingPassword;
+        final String snackBarText = state.emailSentSuccessfully
+            ? context.l10n.passwordChangeRequestSuccess
+            : context.l10n.errorResettingPassword;
         context.showSnackBar(SnackBar(content: Text(snackBarText)));
         if (state.emailSentSuccessfully) {
           context.pop();
@@ -96,20 +90,11 @@ class _ForgotPasswordForm extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     autofillHints: const <String>[AutofillHints.email],
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.person),
-                      hintText: context.l10n.email,
-                    ),
-                    validator: FormBuilderValidators.compose(
-                      <FormFieldValidator<String>>[
-                        FormBuilderValidators.required(
-                          errorText: context.l10n.emailRequired,
-                        ),
-                        FormBuilderValidators.email(
-                          errorText: context.l10n.emailInvalid,
-                        ),
-                      ],
-                    ),
+                    decoration: InputDecoration(prefixIcon: const Icon(Icons.person), hintText: context.l10n.email),
+                    validator: FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                      FormBuilderValidators.required(errorText: context.l10n.emailRequired),
+                      FormBuilderValidators.email(errorText: context.l10n.emailInvalid),
+                    ]),
                     onFieldSubmitted: (_) {
                       if (!_forgotPasswordFormKey.currentState!.validate()) {
                         return;

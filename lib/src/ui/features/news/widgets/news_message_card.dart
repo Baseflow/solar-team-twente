@@ -6,12 +6,7 @@ import '../../../../assets/generated/assets.gen.dart';
 import '../../../extensions/build_context_extensions.dart';
 
 class NewsMessageCard extends StatelessWidget {
-  const NewsMessageCard({
-    required this.title,
-    required this.newsMessage,
-    required this.dateSubmitted,
-    super.key,
-  });
+  const NewsMessageCard({required this.title, required this.newsMessage, required this.dateSubmitted, super.key});
 
   final String title;
   final String newsMessage;
@@ -36,9 +31,7 @@ class NewsMessageCard extends StatelessWidget {
               child: SizedBox.square(
                 dimension: 40,
                 child: Image.asset(
-                  context.theme.brightness == Brightness.dark
-                      ? Assets.dark.logo.path
-                      : Assets.light.logo.path,
+                  context.theme.brightness == Brightness.dark ? Assets.dark.logo.path : Assets.light.logo.path,
                 ),
               ),
             ),
@@ -54,9 +47,7 @@ class NewsMessageCard extends StatelessWidget {
               formattedSubmissionTime,
               textAlign: TextAlign.end,
               style: context.textTheme.labelSmall!.copyWith(
-                color: context.colorScheme.onPrimaryContainer.withValues(
-                  alpha: 0.5,
-                ),
+                color: context.colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
               ),
             ),
           ],

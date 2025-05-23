@@ -8,12 +8,7 @@ import '../../../constants/sizes_constants.dart';
 /// This can be used to display a warning or error message.
 class StateMessageView extends StatelessWidget {
   /// Creates a new instance of the [StateMessageView] widget.
-  const StateMessageView({
-    required this.asset,
-    required this.message,
-    super.key,
-    this.child,
-  });
+  const StateMessageView({required this.asset, required this.message, super.key, this.child});
 
   /// The Lottie asset to display.
   ///

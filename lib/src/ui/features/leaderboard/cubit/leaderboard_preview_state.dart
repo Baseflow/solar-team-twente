@@ -32,11 +32,7 @@ final class LeaderboardPreviewLoaded extends LeaderboardPreviewState {
     return leaderboard.firstWhere(
       (RaceTeam team) => team.name == Constants.solarTeamName,
       orElse: () {
-        return RaceTeam(
-          name: 'Solar Team Twente not found',
-          totalDrivenKilometers: -1,
-          position: -1,
-        );
+        return RaceTeam(name: 'Solar Team Twente not found', totalDrivenKilometers: -1, position: -1);
       },
     );
   }

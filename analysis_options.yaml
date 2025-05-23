@@ -13,6 +13,9 @@ analyzer:
     - "**/generated/**"
     - "lib/src/ui/localizations/generated/**"
 
+formatter:  
+  page_width: 120
+
 linter:
   rules:
     one_member_abstracts: false
@@ -21,3 +24,4 @@ linter:
     always_specify_types: true
     omit_local_variable_types: false
     public_member_api_docs: false
+    lines_longer_than_80_chars: false

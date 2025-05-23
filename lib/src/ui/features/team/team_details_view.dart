@@ -17,8 +17,7 @@ import 'team_member_view_model.dart';
 /// {@endtemplate}
 class TeamDetailsView extends StatelessWidget {
   /// {@macro team_details_view}
-  TeamDetailsView({required AppLocalizations l10n, super.key})
-    : teamMembers = _getTeamMembers(l10n);
+  TeamDetailsView({required AppLocalizations l10n, super.key}) : teamMembers = _getTeamMembers(l10n);
   final List<TeamMember> teamMembers;
 
   @override
@@ -43,33 +42,18 @@ class TeamDetailsView extends StatelessWidget {
             BlocBuilder<TeamDetailsCubit, int>(
               builder: (BuildContext context, int currentIndex) {
                 return Padding(
-                  padding: const EdgeInsets.only(
-                    top: Sizes.s32,
-                    left: Sizes.s64,
-                    right: Sizes.s64,
-                  ),
+                  padding: const EdgeInsets.only(top: Sizes.s32, left: Sizes.s64, right: Sizes.s64),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        teamMembers[currentIndex].description,
-                        style: context.textTheme.bodySmall,
-                      ),
+                      Text(teamMembers[currentIndex].description, style: context.textTheme.bodySmall),
                       const Gutter(),
                       FilledButton.tonalIcon(
-                        onPressed:
-                            () =>
-                                _launchURL(teamMembers[currentIndex].linkedUrl),
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Sizes.s12,
-                          ),
-                        ),
+                        onPressed: () => _launchURL(teamMembers[currentIndex].linkedUrl),
+                        style: FilledButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: Sizes.s12)),
                         label: Text(
                           l10n.linkedIn,
-                          style: context.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         icon: const Icon(Icons.open_in_new, size: Sizes.s16),
                         iconAlignment: IconAlignment.end,
@@ -103,11 +87,7 @@ class TeamDetailsView extends StatelessWidget {
                     placeholder: (BuildContext context, String url) {
                       return const Center(child: CircularProgressIndicator());
                     },
-                    errorWidget: (
-                      BuildContext context,
-                      String url,
-                      Object error,
-                    ) {
+                    errorWidget: (BuildContext context, String url, Object error) {
                       return const Icon(Icons.error);
                     },
                   ),
@@ -123,10 +103,7 @@ class TeamDetailsView extends StatelessWidget {
                           end: Alignment.topCenter,
                         ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: Sizes.s12,
-                        horizontal: Sizes.s24,
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: Sizes.s12, horizontal: Sizes.s24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -137,12 +114,7 @@ class TeamDetailsView extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            member.profession,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
+                          Text(member.profession, style: context.textTheme.bodySmall?.copyWith(color: Colors.white)),
                         ],
                       ),
                     ),

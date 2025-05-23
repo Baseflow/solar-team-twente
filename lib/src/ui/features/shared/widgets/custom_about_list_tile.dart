@@ -30,9 +30,7 @@ class CustomAboutListTile extends StatelessWidget {
             applicationVersion: state.appVersion,
             applicationLegalese: Constants.applicationLegalese,
             applicationIcon: Image.asset(
-              context.isDarkMode
-                  ? Assets.dark.logo.path
-                  : Assets.light.logo.path,
+              context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
               fit: BoxFit.contain,
               height: Sizes.s24,
             ),
@@ -48,9 +46,7 @@ class CustomAboutListTile extends StatelessWidget {
                       if (!context.mounted) {
                         return false;
                       }
-                      context.showSnackBar(
-                        SnackBar(content: Text(context.l10n.failLaunchUrl)),
-                      );
+                      context.showSnackBar(SnackBar(content: Text(context.l10n.failLaunchUrl)));
                       return false;
                     });
                   },

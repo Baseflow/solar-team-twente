@@ -20,8 +20,7 @@ class MapLoadedView extends StatefulWidget {
   State<MapLoadedView> createState() => _MapLoadedViewState();
 }
 
-class _MapLoadedViewState extends State<MapLoadedView>
-    with TickerProviderStateMixin {
+class _MapLoadedViewState extends State<MapLoadedView> with TickerProviderStateMixin {
   static const double _defaultZoom = 12;
   late final AnimatedMapController _animatedMapController;
 
@@ -54,31 +53,19 @@ class _MapLoadedViewState extends State<MapLoadedView>
           return;
         }
 
-        if (state.vehicleLocation.coordinates !=
-            const LatLng(26.2041, 28.0473)) {
-          await _animatedMapController.animateTo(
-            dest: state.vehicleLocation.coordinates,
-            zoom: _defaultZoom,
-          );
+        if (state.vehicleLocation.coordinates != const LatLng(26.2041, 28.0473)) {
+          await _animatedMapController.animateTo(dest: state.vehicleLocation.coordinates, zoom: _defaultZoom);
         }
       },
       builder: (BuildContext context, MapState mapState) {
         mapState as MapRaceLoaded;
         return BlocConsumer<RaceDayCarouselCubit, RaceDayCarouselState>(
-          listenWhen: (
-            RaceDayCarouselState previous,
-            RaceDayCarouselState current,
-          ) {
+          listenWhen: (RaceDayCarouselState previous, RaceDayCarouselState current) {
             return previous.selectedRaceDay != current.selectedRaceDay;
           },
-          listener: (
-            BuildContext context,
-            RaceDayCarouselState carouselState,
-          ) async {
+          listener: (BuildContext context, RaceDayCarouselState carouselState) async {
             if (carouselState.selectedRaceDay.index > 0) {
-              context.read<MapCubit>().loadSelectedDay(
-                carouselState.selectedRaceDay.index - 1,
-              );
+              context.read<MapCubit>().loadSelectedDay(carouselState.selectedRaceDay.index - 1);
             }
             await _animateToSection(
               mapState.selectedRaceDayGeoJson!.markers,
@@ -93,9 +80,7 @@ class _MapLoadedViewState extends State<MapLoadedView>
               options: MapOptions(
                 initialCenter: mapState.vehicleLocation.coordinates,
                 initialZoom: _defaultZoom,
-                interactionOptions: const InteractionOptions(
-                  flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-                ),
+                interactionOptions: const InteractionOptions(flags: InteractiveFlag.all & ~InteractiveFlag.rotate),
               ),
               children: <Widget>[
                 TileLayer(
@@ -119,12 +104,8 @@ class _MapLoadedViewState extends State<MapLoadedView>
                           height: 2,
                           width: 2,
                           child: DecoratedBox(
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: ColoredBox(
-                              color: context.colorScheme.primary,
-                            ),
+                            decoration: const BoxDecoration(shape: BoxShape.circle),
+                            child: ColoredBox(color: context.colorScheme.primary),
                           ),
                         ),
                       )
@@ -132,12 +113,8 @@ class _MapLoadedViewState extends State<MapLoadedView>
                       ...mapState.selectedRaceDayGeoJson!.markers,
                   ],
                 ),
-                PolygonLayer<Object>(
-                  polygons: mapState.selectedRaceDayGeoJson!.polygons,
-                ),
-                PolylineLayer<Object>(
-                  polylines: mapState.selectedRaceDayGeoJson!.polylines,
-                ),
+                PolygonLayer<Object>(polygons: mapState.selectedRaceDayGeoJson!.polygons),
+                PolylineLayer<Object>(polylines: mapState.selectedRaceDayGeoJson!.polylines),
                 const Positioned(
                   bottom: Sizes.defaultBottomSheetCornerRadius + Sizes.s16,
                   right: Sizes.s16,
@@ -158,18 +135,13 @@ class _MapLoadedViewState extends State<MapLoadedView>
     RaceDayType currentRaceDay,
   ) async {
     if (selectedRaceDay == currentRaceDay) {
-      await _animatedMapController.animateTo(
-        dest: vehicleLocation,
-        zoom: _defaultZoom,
-      );
+      await _animatedMapController.animateTo(dest: vehicleLocation, zoom: _defaultZoom);
       return;
     }
     final double maxZoom = selectedRaceDay == RaceDayType.allDays ? 4 : 5.5;
     await _animatedMapController.animatedFitCamera(
       cameraFit: CameraFit.insideBounds(
-        bounds: LatLngBounds.fromPoints(
-          markers.map((Marker marker) => marker.point).toList(),
-        ),
+        bounds: LatLngBounds.fromPoints(markers.map((Marker marker) => marker.point).toList()),
         maxZoom: maxZoom,
       ),
     );

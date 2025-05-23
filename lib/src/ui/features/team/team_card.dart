@@ -29,10 +29,7 @@ class TeamCard extends StatelessWidget {
               height: 160,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
-                image: DecorationImage(
-                  image: AssetImage(Assets.solarTeamPeople.path),
-                  fit: BoxFit.cover,
-                ),
+                image: DecorationImage(image: AssetImage(Assets.solarTeamPeople.path), fit: BoxFit.cover),
               ),
             ),
             Padding(
@@ -41,15 +38,9 @@ class TeamCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
-                    'Solarteam Twente 2024',
-                    style: context.textTheme.titleLarge,
-                  ),
+                  Text('Solarteam Twente 2024', style: context.textTheme.titleLarge),
                   const GutterTiny(),
-                  Text(
-                    'Sasol Solar Challenge - Innovation Edition',
-                    style: context.textTheme.bodySmall,
-                  ),
+                  Text('Sasol Solar Challenge - Innovation Edition', style: context.textTheme.bodySmall),
                   const Gutter(),
                   FilledButton(
                     onPressed: () {

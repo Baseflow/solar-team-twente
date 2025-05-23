@@ -42,10 +42,6 @@ class RaceTeamDto {
 
   /// Converts the DTO to a core entity.
   RaceTeam toEntity() {
-    return RaceTeam(
-      name: name,
-      totalDrivenKilometers: totalDrivenKilometers,
-      position: position,
-    );
+    return RaceTeam(name: name, totalDrivenKilometers: totalDrivenKilometers, position: position);
   }
 }

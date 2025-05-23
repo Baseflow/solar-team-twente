@@ -8,8 +8,7 @@ part 'forgot_password_state.dart';
 /// Cubit for managing the forgot password page.
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   /// Creates a new instance of [ForgotPasswordCubit].
-  ForgotPasswordCubit(this._authenticationService)
-    : super(const ForgotPasswordState());
+  ForgotPasswordCubit(this._authenticationService) : super(const ForgotPasswordState());
 
   final AuthenticationService _authenticationService;
 
@@ -25,13 +24,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       await _authenticationService.resetPassword(email);
       emit(state.copyWith(isLoading: false, emailSentSuccessfully: true));
     } on AuthenticationException catch (e) {
-      emit(
-        state.copyWith(
-          authErrorCode: e.errorCode,
-          isLoading: false,
-          emailSentSuccessfully: false,
-        ),
-      );
+      emit(state.copyWith(authErrorCode: e.errorCode, isLoading: false, emailSentSuccessfully: false));
     }
   }
 }

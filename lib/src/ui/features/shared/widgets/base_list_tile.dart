@@ -16,8 +16,7 @@ class BaseListTile extends ListTile {
     super.key,
   }) : super(
          title: Text(title, style: titleStyle),
-         subtitle:
-             subtitle != null ? Text(subtitle, style: subtitleStyle) : null,
+         subtitle: subtitle != null ? Text(subtitle, style: subtitleStyle) : null,
          trailing: trailingIcon,
          leading: leadingIcon,
          onTap: onTap,

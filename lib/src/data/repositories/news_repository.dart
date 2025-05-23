@@ -24,8 +24,6 @@ class SupabaseNewsRepository implements NewsRepository {
 
   @override
   Future<void> submitNewsMessage(NewsMessage newsMessage) {
-    return _client
-        .from('news_messages')
-        .upsert(NewsMessageDTO.fromEntity(newsMessage).toJson());
+    return _client.from('news_messages').upsert(NewsMessageDTO.fromEntity(newsMessage).toJson());
   }
 }

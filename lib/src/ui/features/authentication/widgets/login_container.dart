@@ -37,9 +37,7 @@ class LoginContainer extends StatelessWidget {
               children: <Widget>[
                 FractionallySizedBox(
                   child: Image.asset(
-                    context.isDarkMode
-                        ? Assets.dark.logo.path
-                        : Assets.light.logo.path,
+                    context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
                     semanticLabel: l10n.appBarTitle,
                     fit: BoxFit.contain,
                     height: MediaQuery.sizeOf(context).height / 3,
@@ -59,46 +57,25 @@ class LoginContainer extends StatelessWidget {
                               onChanged: context.read<LoginCubit>().updateEmail,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              autofillHints: const <String>[
-                                AutofillHints.email,
-                              ],
-                              decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.person),
-                                labelText: l10n.email,
-                              ),
-                              validator: FormBuilderValidators.compose(
-                                <FormFieldValidator<String>>[
-                                  FormBuilderValidators.required(
-                                    errorText: l10n.emailRequired,
-                                  ),
-                                  FormBuilderValidators.email(
-                                    errorText: l10n.emailInvalid,
-                                  ),
-                                ],
-                              ),
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autofillHints: const <String>[AutofillHints.email],
+                              decoration: InputDecoration(prefixIcon: const Icon(Icons.person), labelText: l10n.email),
+                              validator: FormBuilderValidators.compose(<FormFieldValidator<String>>[
+                                FormBuilderValidators.required(errorText: l10n.emailRequired),
+                                FormBuilderValidators.email(errorText: l10n.emailInvalid),
+                              ]),
                             ),
                             const Gutter(),
                             TextFormField(
-                              onChanged:
-                                  context.read<LoginCubit>().updatePassword,
+                              onChanged: context.read<LoginCubit>().updatePassword,
                               obscureText: true,
                               enableSuggestions: false,
                               autocorrect: false,
                               textInputAction: TextInputAction.go,
-                              autofillHints: const <String>[
-                                AutofillHints.password,
-                              ],
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.lock),
-                                labelText: l10n.password,
-                              ),
-                              validator: FormBuilderValidators.required(
-                                errorText: l10n.passwordRequired,
-                              ),
+                              autofillHints: const <String>[AutofillHints.password],
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              decoration: InputDecoration(prefixIcon: const Icon(Icons.lock), labelText: l10n.password),
+                              validator: FormBuilderValidators.required(errorText: l10n.passwordRequired),
                               onFieldSubmitted: (_) {
                                 if (!_loginFormKey.currentState!.validate()) {
                                   return;
@@ -118,9 +95,7 @@ class LoginContainer extends StatelessWidget {
                             ),
                             const Gutter(),
                             FilledLoadingButton(
-                              isLoading: context.select<LoginCubit, bool>((
-                                LoginCubit value,
-                              ) {
+                              isLoading: context.select<LoginCubit, bool>((LoginCubit value) {
                                 return value.state.isLoading;
                               }),
                               onPressed: () {
@@ -136,26 +111,13 @@ class LoginContainer extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Flexible(
-                                  child: Text(
-                                    '${l10n.noAccountYet}?',
-                                    style: const TextStyle(
-                                      color: Colors.black38,
-                                    ),
-                                  ),
+                                  child: Text('${l10n.noAccountYet}?', style: const TextStyle(color: Colors.black38)),
                                 ),
                                 const SizedBox(width: Sizes.s4),
                                 Flexible(
                                   child: TextButton(
-                                    onPressed:
-                                        () => context.pushNamed(
-                                          RegisterPage.name,
-                                        ),
-                                    child: Text(
-                                      '${l10n.register}.',
-                                      style: const TextStyle(
-                                        color: Colors.black87,
-                                      ),
-                                    ),
+                                    onPressed: () => context.pushNamed(RegisterPage.name),
+                                    child: Text('${l10n.register}.', style: const TextStyle(color: Colors.black87)),
                                   ),
                                 ),
                               ],

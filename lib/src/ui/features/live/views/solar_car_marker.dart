@@ -17,20 +17,11 @@ class SolarCarMarker extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(Sizes.s96),
-            border: Border.all(
-              color: context.colorScheme.primary,
-              width: Sizes.s2,
-            ),
+            border: Border.all(color: context.colorScheme.primary, width: Sizes.s2),
           ),
-          child: SvgPicture.asset(
-            Assets.icons.solarCarIcon,
-            semanticsLabel: 'Solarteam Car',
-          ),
+          child: SvgPicture.asset(Assets.icons.solarCarIcon, semanticsLabel: 'Solarteam Car'),
         ),
-        CustomPaint(
-          size: const Size(Sizes.s24, Sizes.s8),
-          painter: _TrianglePainter(context.colorScheme.primary),
-        ),
+        CustomPaint(size: const Size(Sizes.s24, Sizes.s8), painter: _TrianglePainter(context.colorScheme.primary)),
       ],
     );
   }
@@ -44,12 +35,11 @@ class _TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()..color = color;
-    final Path path =
-        Path()
-          ..moveTo(0, 0)
-          ..lineTo(size.width, 0)
-          ..lineTo(size.width / 2, size.height)
-          ..close();
+    final Path path = Path()
+      ..moveTo(0, 0)
+      ..lineTo(size.width, 0)
+      ..lineTo(size.width / 2, size.height)
+      ..close();
     canvas.drawPath(path, paint);
   }
 

@@ -15,8 +15,7 @@ class DashboardView extends StatelessWidget {
   /// {@macro dashboard_view}
   const DashboardView({super.key});
 
-  static const String _urlString =
-      'https://www.polarsteps.com/SolarTeamTwente/12350380-sasol-solar-challenge';
+  static const String _urlString = 'https://www.polarsteps.com/SolarTeamTwente/12350380-sasol-solar-challenge';
 
   @override
   Widget build(BuildContext context) {

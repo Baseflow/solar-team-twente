@@ -34,12 +34,9 @@ class RaceDaysBottomSheet extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final DateTime dateToDisplay =
-              state.selectedRaceDay.index == 0
-                  ? DateTime.now()
-                  : Constants.startDate.add(
-                    Duration(days: state.selectedRaceDay.index - 1),
-                  );
+          final DateTime dateToDisplay = state.selectedRaceDay.index == 0
+              ? DateTime.now()
+              : Constants.startDate.add(Duration(days: state.selectedRaceDay.index - 1));
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,11 +48,7 @@ class RaceDaysBottomSheet extends StatelessWidget {
                   children: <Widget>[
                     if (state.selectedRaceDay.index != 9)
                       Flexible(
-                        child: Text(
-                          DateFormat.yMMMMd(
-                            context.locale.toString(),
-                          ).format(dateToDisplay.toLocal()),
-                        ),
+                        child: Text(DateFormat.yMMMMd(context.locale.toString()).format(dateToDisplay.toLocal())),
                       ),
                     if (state.selectedRaceDay.index > 0) ...<Widget>[
                       if (state.selectedRaceDay.index != 9) ...<Widget>[

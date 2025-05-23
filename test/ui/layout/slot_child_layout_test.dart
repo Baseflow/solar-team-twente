@@ -6,11 +6,7 @@ import '../../helpers/material_app_helper.dart';
 
 void main() {
   const MaterialAppHelper testLayout = MaterialAppHelper(
-    child: SlotChildLayout(
-      smallBody: Text('Small'),
-      mediumBody: Text('Medium'),
-      largeBody: Text('Large'),
-    ),
+    child: SlotChildLayout(smallBody: Text('Small'), mediumBody: Text('Medium'), largeBody: Text('Large')),
   );
 
   // The device pixel ratio
@@ -23,9 +19,7 @@ void main() {
   const Size lowEndOfLarge = Size(840 * pixelRatio, 800 * pixelRatio);
 
   group('SlotChildLayout', () {
-    testWidgets('should show `Small` text on small screens', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should show `Small` text on small screens', (WidgetTester tester) async {
       await tester.pumpWidget(testLayout);
 
       // GOOD WEATHER (just right, high end)
@@ -41,9 +35,7 @@ void main() {
       addTearDown(() => tester.view.resetPhysicalSize());
     });
 
-    testWidgets('should show `Medium` text on medium screens', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should show `Medium` text on medium screens', (WidgetTester tester) async {
       await tester.pumpWidget(testLayout);
 
       // GOOD WEATHER (just right, low end)
@@ -69,9 +61,7 @@ void main() {
       addTearDown(() => tester.view.resetPhysicalSize());
     });
 
-    testWidgets('should show `Large` text on larger screens', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should show `Large` text on larger screens', (WidgetTester tester) async {
       await tester.pumpWidget(testLayout);
 
       // GOOD WEATHER
@@ -87,14 +77,8 @@ void main() {
       addTearDown(() => tester.view.resetPhysicalSize());
     });
 
-    testWidgets('should show smallBody when mediumBody is null', (
-      WidgetTester tester,
-    ) async {
-      await tester.pumpWidget(
-        const MaterialAppHelper(
-          child: SlotChildLayout(smallBody: Text('Small')),
-        ),
-      );
+    testWidgets('should show smallBody when mediumBody is null', (WidgetTester tester) async {
+      await tester.pumpWidget(const MaterialAppHelper(child: SlotChildLayout(smallBody: Text('Small'))));
 
       tester.view.physicalSize = lowEndOfMedium;
       await tester.pump();
@@ -107,15 +91,10 @@ void main() {
       addTearDown(() => tester.view.resetPhysicalSize());
     });
 
-    testWidgets('should show mediumBody when largeBody is null', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should show mediumBody when largeBody is null', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialAppHelper(
-          child: SlotChildLayout(
-            smallBody: Text('Small'),
-            mediumBody: Text('Medium'),
-          ),
+          child: SlotChildLayout(smallBody: Text('Small'), mediumBody: Text('Medium')),
         ),
       );
 
@@ -126,21 +105,14 @@ void main() {
       addTearDown(() => tester.view.resetPhysicalSize());
     });
 
-    testWidgets(
-      'should show smallBody when mediumBody and largeBody are null',
-      (WidgetTester tester) async {
-        await tester.pumpWidget(
-          const MaterialAppHelper(
-            child: SlotChildLayout(smallBody: Text('Small')),
-          ),
-        );
+    testWidgets('should show smallBody when mediumBody and largeBody are null', (WidgetTester tester) async {
+      await tester.pumpWidget(const MaterialAppHelper(child: SlotChildLayout(smallBody: Text('Small'))));
 
-        tester.view.physicalSize = lowEndOfLarge;
-        await tester.pump();
-        expect(find.text('Small'), findsOneWidget);
+      tester.view.physicalSize = lowEndOfLarge;
+      await tester.pump();
+      expect(find.text('Small'), findsOneWidget);
 
-        addTearDown(() => tester.view.resetPhysicalSize());
-      },
-    );
+      addTearDown(() => tester.view.resetPhysicalSize());
+    });
   });
 }

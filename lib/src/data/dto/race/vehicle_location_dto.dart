@@ -3,12 +3,7 @@ import 'package:latlong2/latlong.dart';
 import '../../../../core.dart';
 
 class VehicleLocationDto {
-  VehicleLocationDto({
-    required this.name,
-    required this.longitude,
-    required this.latitude,
-    required this.lastSeen,
-  });
+  VehicleLocationDto({required this.name, required this.longitude, required this.latitude, required this.lastSeen});
 
   factory VehicleLocationDto.fromJson(Map<String, dynamic> json) {
     return VehicleLocationDto(
@@ -34,19 +29,10 @@ class VehicleLocationDto {
   final int lastSeen;
 
   VehicleLocation toEntity() {
-    return VehicleLocation(
-      name: name,
-      coordinates: LatLng(latitude, longitude),
-      lastSeen: lastSeen,
-    );
+    return VehicleLocation(name: name, coordinates: LatLng(latitude, longitude), lastSeen: lastSeen);
   }
 
   Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'name': name,
-      'longitude': longitude,
-      'latitude': latitude,
-      'last_seen': lastSeen,
-    };
+    return <String, dynamic>{'name': name, 'longitude': longitude, 'latitude': latitude, 'last_seen': lastSeen};
   }
 }

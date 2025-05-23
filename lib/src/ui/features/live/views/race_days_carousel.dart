@@ -21,8 +21,7 @@ class _RaceDaysCarouselState extends State<RaceDaysCarousel> {
   @override
   void initState() {
     super.initState();
-    final int daysSinceStart =
-        DateTime.now().difference(Constants.startDate).inDays;
+    final int daysSinceStart = DateTime.now().difference(Constants.startDate).inDays;
     _pageController = PageController(initialPage: daysSinceStart);
   }
 
@@ -36,18 +35,11 @@ class _RaceDaysCarouselState extends State<RaceDaysCarousel> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 96,
-      child: BlocSelector<
-        RaceDayCarouselCubit,
-        RaceDayCarouselState,
-        RaceDayType
-      >(
+      child: BlocSelector<RaceDayCarouselCubit, RaceDayCarouselState, RaceDayType>(
         selector: (RaceDayCarouselState state) => state.currentRaceDay,
         builder: (BuildContext context, RaceDayType currentRaceDay) {
           return BlocListener<RaceDayCarouselCubit, RaceDayCarouselState>(
-            listenWhen: (
-              RaceDayCarouselState previous,
-              RaceDayCarouselState current,
-            ) {
+            listenWhen: (RaceDayCarouselState previous, RaceDayCarouselState current) {
               final double currentPageIndex = _pageController.page ?? 0;
               return previous.selectedRaceDay != current.selectedRaceDay &&
                   currentPageIndex == currentPageIndex.round() &&
@@ -68,25 +60,15 @@ class _RaceDaysCarouselState extends State<RaceDaysCarousel> {
               onPageChanged: context.read<RaceDayCarouselCubit>().selectRaceDay,
               children: <Widget>[
                 if (!RaceDaysCarousel._hasRaceStarted) const CountDownView(),
-                ...List<RaceDayView>.generate(RaceDayType.values.length - 1, (
-                  int index,
-                ) {
+                ...List<RaceDayView>.generate(RaceDayType.values.length - 1, (int index) {
                   final int raceDayIndex = index + 1;
                   return RaceDayView(
-                    showPreviousRace:
-                        raceDayIndex > 1 || !RaceDaysCarousel._hasRaceStarted,
+                    showPreviousRace: raceDayIndex > 1 || !RaceDaysCarousel._hasRaceStarted,
                     showNextRace: raceDayIndex < RaceDayType.values.length - 1,
-                    isCurrentRaceDone:
-                        currentRaceDay.index > raceDayIndex &&
-                        RaceDaysCarousel._hasRaceStarted,
-                    isPreviousRaceDone:
-                        currentRaceDay.index >= raceDayIndex &&
-                        RaceDaysCarousel._hasRaceStarted,
-                    isNextRaceDone:
-                        raceDayIndex < currentRaceDay.index &&
-                        RaceDaysCarousel._hasRaceStarted,
-                    showCurrentRace:
-                        raceDayIndex != RaceDayType.values.last.index,
+                    isCurrentRaceDone: currentRaceDay.index > raceDayIndex && RaceDaysCarousel._hasRaceStarted,
+                    isPreviousRaceDone: currentRaceDay.index >= raceDayIndex && RaceDaysCarousel._hasRaceStarted,
+                    isNextRaceDone: raceDayIndex < currentRaceDay.index && RaceDaysCarousel._hasRaceStarted,
+                    showCurrentRace: raceDayIndex != RaceDayType.values.last.index,
                   );
                 }),
               ],

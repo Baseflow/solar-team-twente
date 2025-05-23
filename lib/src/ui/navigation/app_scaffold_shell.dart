@@ -34,41 +34,29 @@ class AppScaffoldShell extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(Sizes.s8),
               child: Image.asset(
-                context.isDarkMode
-                    ? Assets.dark.logo.path
-                    : Assets.light.logo.path,
+                context.isDarkMode ? Assets.dark.logo.path : Assets.light.logo.path,
                 fit: BoxFit.contain,
                 height: Sizes.s64,
               ),
             ),
           ),
-          Divider(
-            color: context.colorScheme.surfaceContainerHighest,
-            thickness: 1,
-          ),
+          Divider(color: context.colorScheme.surfaceContainerHighest, thickness: 1),
         ],
       ),
       body: (BuildContext context) => navigationShell,
       selectedIndex: navigationShell.currentIndex,
       onSelectedIndexChange: (int index) {
-        navigationShell.goBranch(
-          index,
-          initialLocation: index == navigationShell.currentIndex,
-        );
+        navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
       },
-      destinations:
-          navigationShell.route.branches.map((StatefulShellBranch e) {
-            return switch (e.defaultRoute?.name) {
-              LivePage.routeName => LivePage.destination(context),
-              DashboardPage.routeName => DashboardPage.destination(context),
-              NewsPage.routeName => NewsPage.destination(context),
-              MorePage.name => MorePage.destination(context),
-              _ =>
-                throw UnimplementedError(
-                  'The route ${e.defaultRoute?.name} is not implemented.',
-                ),
-            };
-          }).toList(),
+      destinations: navigationShell.route.branches.map((StatefulShellBranch e) {
+        return switch (e.defaultRoute?.name) {
+          LivePage.routeName => LivePage.destination(context),
+          DashboardPage.routeName => DashboardPage.destination(context),
+          NewsPage.routeName => NewsPage.destination(context),
+          MorePage.name => MorePage.destination(context),
+          _ => throw UnimplementedError('The route ${e.defaultRoute?.name} is not implemented.'),
+        };
+      }).toList(),
     );
   }
 }

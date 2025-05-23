@@ -23,38 +23,24 @@ class LeaderboardPreviewList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
       builder: (BuildContext context, LeaderboardPreviewState state) {
-        assert(
-          state is LeaderboardPreviewLoaded,
-          'State has to be of type `LeaderboardPreviewLoaded` at this point.',
-        );
+        assert(state is LeaderboardPreviewLoaded, 'State has to be of type `LeaderboardPreviewLoaded` at this point.');
 
-        final LeaderboardPreviewLoaded loadedState =
-            state as LeaderboardPreviewLoaded;
+        final LeaderboardPreviewLoaded loadedState = state as LeaderboardPreviewLoaded;
         final List<RaceTeam> leaderboard = loadedState.leaderboard;
         final RaceTeam solarTeamTwente = loadedState.solarTeamTwente;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
-              context.l10n.leaderboardTitle,
-              style: context.textTheme.titleLarge,
-            ),
+            Text(context.l10n.leaderboardTitle, style: context.textTheme.titleLarge),
             const SizedBox(height: Sizes.s4),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: Sizes.s8),
-              child: Text(
-                context.l10n.distanceCovered,
-                style: context.textTheme.bodySmall,
-                textAlign: TextAlign.end,
-              ),
+              child: Text(context.l10n.distanceCovered, style: context.textTheme.bodySmall, textAlign: TextAlign.end),
             ),
             const SizedBox(height: Sizes.s12),
             if (solarTeamTwente.position > 3) ...<Widget>[
-              LeaderboardPositionRow(
-                team: solarTeamTwente,
-                racePosition: solarTeamTwente.position,
-              ),
+              LeaderboardPositionRow(team: solarTeamTwente, racePosition: solarTeamTwente.position),
               const SizedBox(height: Sizes.s12),
             ],
             ListView.builder(
@@ -63,10 +49,7 @@ class LeaderboardPreviewList extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 final RaceTeam team = leaderboard[index];
-                return LeaderboardPositionRow(
-                  team: team,
-                  racePosition: team.position,
-                );
+                return LeaderboardPositionRow(team: team, racePosition: team.position);
               },
             ),
             Align(

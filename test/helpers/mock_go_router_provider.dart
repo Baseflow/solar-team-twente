@@ -5,11 +5,7 @@ import 'package:mocktail/mocktail.dart';
 class MockGoRouter extends Mock implements GoRouter {}
 
 class MockGoRouterProvider extends StatelessWidget {
-  const MockGoRouterProvider({
-    required this.goRouter,
-    required this.child,
-    super.key,
-  });
+  const MockGoRouterProvider({required this.goRouter, required this.child, super.key});
 
   /// The mock navigator used to mock navigation calls.
   final MockGoRouter goRouter;
@@ -18,6 +14,5 @@ class MockGoRouterProvider extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) =>
-      InheritedGoRouter(goRouter: goRouter, child: child);
+  Widget build(BuildContext context) => InheritedGoRouter(goRouter: goRouter, child: child);
 }

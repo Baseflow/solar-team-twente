@@ -7,18 +7,15 @@ import '../../../core.dart';
 /// Takes care of all authentication related business logic.
 class AuthenticationService {
   /// Creates a new instance of [AuthenticationService].
-  AuthenticationService({
-    required AuthenticationRepository authenticationRepository,
-  }) : _authenticationRepository = authenticationRepository;
+  AuthenticationService({required AuthenticationRepository authenticationRepository})
+    : _authenticationRepository = authenticationRepository;
 
   final AuthenticationRepository _authenticationRepository;
 
-  final StreamController<AuthenticationStatus> _authStatusController =
-      StreamController<AuthenticationStatus>();
+  final StreamController<AuthenticationStatus> _authStatusController = StreamController<AuthenticationStatus>();
 
   /// A stream of [AuthenticationStatus] to listen to.
-  Stream<AuthenticationStatus> get authStatusStream =>
-      _authStatusController.stream;
+  Stream<AuthenticationStatus> get authStatusStream => _authStatusController.stream;
 
   /// Signs in the user with the given [email] and [password].
   Future<void> signIn({required String email, required String password}) async {
@@ -33,14 +30,8 @@ class AuthenticationService {
   }
 
   /// Registers a new account given [email] and [password].
-  Future<void> registerAccount({
-    required String email,
-    required String password,
-  }) async {
-    await _authenticationRepository.registerAccount(
-      email: email,
-      password: password,
-    );
+  Future<void> registerAccount({required String email, required String password}) async {
+    await _authenticationRepository.registerAccount(email: email, password: password);
     _authStatusController.add(AuthenticationStatus.authenticated);
   }
 
@@ -64,11 +55,9 @@ class AuthenticationService {
       }
 
       _authStatusController.add(
-        token != null
-            ? AuthenticationStatus.authenticated
-            : AuthenticationStatus.unauthenticated,
+        token != null ? AuthenticationStatus.authenticated : AuthenticationStatus.unauthenticated,
       );
-    } catch (e) {
+    } on Exception {
       _authStatusController.add(AuthenticationStatus.unauthenticated);
     }
   }

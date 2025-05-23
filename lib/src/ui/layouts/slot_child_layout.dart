@@ -7,12 +7,7 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 /// have a list of items on mobile and an alternative layout on larger screens.
 class SlotChildLayout extends StatelessWidget {
   /// Create a new instance of [SlotChildLayout]
-  const SlotChildLayout({
-    this.smallBody,
-    this.mediumBody,
-    this.largeBody,
-    super.key,
-  });
+  const SlotChildLayout({this.smallBody, this.mediumBody, this.largeBody, super.key});
 
   /// The body to show on small screens.
   final Widget? smallBody;
@@ -39,19 +34,13 @@ class SlotChildLayout extends StatelessWidget {
         Breakpoints.medium: SlotLayout.from(
           key: const Key('adaptive_overview_layout_medium_body'),
           builder: (BuildContext context) {
-            return mediumBody ??
-                smallBody ??
-                AdaptiveScaffold.emptyBuilder(context);
+            return mediumBody ?? smallBody ?? AdaptiveScaffold.emptyBuilder(context);
           },
         ),
         Breakpoints.large: SlotLayout.from(
           key: const Key('adaptive_overview_layout_large_body'),
-          builder:
-              (BuildContext context) =>
-                  largeBody ??
-                  mediumBody ??
-                  smallBody ??
-                  AdaptiveScaffold.emptyBuilder(context),
+          builder: (BuildContext context) =>
+              largeBody ?? mediumBody ?? smallBody ?? AdaptiveScaffold.emptyBuilder(context),
         ),
       },
     );

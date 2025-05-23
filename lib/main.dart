@@ -15,8 +15,7 @@ import 'ui.dart' as ui;
 Future<void> main() async {
   await runZonedGuarded(
     () async {
-      final WidgetsBinding widgetsBinding =
-          WidgetsFlutterBinding.ensureInitialized();
+      final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
       // Retain native splash screen until Dart is ready
       if (!kIsWeb) {
@@ -26,9 +25,7 @@ Future<void> main() async {
       // Initialize the GetIt Ioc Container.
       GetItIocContainer.register();
 
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
       await data.bootstrap();
       await core.bootstrap();

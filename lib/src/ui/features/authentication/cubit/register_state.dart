@@ -69,10 +69,8 @@ class RegisterState {
       isLoading: isLoading ?? this.isLoading,
       authErrorCode: authErrorCode ?? this.authErrorCode,
       registerSuccessful: registerSuccessful ?? this.registerSuccessful,
-      isPrivacyPolicyAccepted:
-          isPrivacyPolicyAccepted ?? this.isPrivacyPolicyAccepted,
-      isTermsAndConditionsAccepted:
-          isTermsAndConditionsAccepted ?? this.isTermsAndConditionsAccepted,
+      isPrivacyPolicyAccepted: isPrivacyPolicyAccepted ?? this.isPrivacyPolicyAccepted,
+      isTermsAndConditionsAccepted: isTermsAndConditionsAccepted ?? this.isTermsAndConditionsAccepted,
     );
   }
 }

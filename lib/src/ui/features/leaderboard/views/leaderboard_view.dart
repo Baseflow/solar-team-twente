@@ -19,23 +19,13 @@ class LeaderboardView extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: BlocProvider<LeaderboardPreviewCubit>(
-            create:
-                (_) => LeaderboardPreviewCubit(
-                  LeaderboardService(
-                    leaderboardRepository:
-                        Ioc.container.get<LeaderboardRepository>(),
-                  ),
-                )..initializeLeaderboard(),
+            create: (_) => LeaderboardPreviewCubit(
+              LeaderboardService(leaderboardRepository: Ioc.container.get<LeaderboardRepository>()),
+            )..initializeLeaderboard(),
             child: Builder(
               builder: (BuildContext context) {
-                return BlocBuilder<
-                  LeaderboardPreviewCubit,
-                  LeaderboardPreviewState
-                >(
-                  builder: (
-                    BuildContext context,
-                    LeaderboardPreviewState state,
-                  ) {
+                return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
+                  builder: (BuildContext context, LeaderboardPreviewState state) {
                     if (state is LeaderboardPreviewLoaded) {
                       return const OverallLeaderboardView();
                     } else {

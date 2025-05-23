@@ -22,10 +22,7 @@ void main() {
         when(() => mockLanguageService.fetchLanguageCode()).thenAnswer((_) {
           return defaultLanguageCode;
         });
-        return LanguageCubit(
-          languageService: mockLanguageService,
-          defaultLanguageCode: defaultLanguageCode,
-        );
+        return LanguageCubit(languageService: mockLanguageService, defaultLanguageCode: defaultLanguageCode);
       },
       act: (LanguageCubit cubit) => cubit.fetchLanguage(),
       expect: () => <String>[defaultLanguageCode],
@@ -36,10 +33,7 @@ void main() {
         when(() => mockLanguageService.fetchLanguageCode()).thenAnswer((_) {
           return dutchLanguageCode;
         });
-        return LanguageCubit(
-          languageService: mockLanguageService,
-          defaultLanguageCode: defaultLanguageCode,
-        );
+        return LanguageCubit(languageService: mockLanguageService, defaultLanguageCode: defaultLanguageCode);
       },
       act: (LanguageCubit cubit) => cubit.fetchLanguage(),
       expect: () => <String>[dutchLanguageCode],
@@ -48,15 +42,10 @@ void main() {
     blocTest<LanguageCubit, String>(
       'should use default language code',
       build: () {
-        when(
-          () => mockLanguageService.saveLanguageCode(defaultLanguageCode),
-        ).thenAnswer((_) {
+        when(() => mockLanguageService.saveLanguageCode(defaultLanguageCode)).thenAnswer((_) {
           return Future<String>.value(defaultLanguageCode);
         });
-        return LanguageCubit(
-          languageService: mockLanguageService,
-          defaultLanguageCode: defaultLanguageCode,
-        );
+        return LanguageCubit(languageService: mockLanguageService, defaultLanguageCode: defaultLanguageCode);
       },
       act: (LanguageCubit cubit) => cubit.changeLanguage(defaultLanguageCode),
       expect: () => <String>[defaultLanguageCode],
@@ -64,15 +53,10 @@ void main() {
     blocTest<LanguageCubit, String>(
       'should change to NL language code',
       build: () {
-        when(
-          () => mockLanguageService.saveLanguageCode(dutchLanguageCode),
-        ).thenAnswer((_) {
+        when(() => mockLanguageService.saveLanguageCode(dutchLanguageCode)).thenAnswer((_) {
           return Future<String>.value(dutchLanguageCode);
         });
-        return LanguageCubit(
-          languageService: mockLanguageService,
-          defaultLanguageCode: defaultLanguageCode,
-        );
+        return LanguageCubit(languageService: mockLanguageService, defaultLanguageCode: defaultLanguageCode);
       },
       act: (LanguageCubit cubit) => cubit.changeLanguage(dutchLanguageCode),
       expect: () => <String>[dutchLanguageCode],
@@ -80,28 +64,17 @@ void main() {
     blocTest<LanguageCubit, String>(
       'should called getCountryCode once',
       build: () {
-        when(
-          () => mockLanguageService.getCountryCode(defaultLanguageCode),
-        ).thenReturn('GB');
-        return LanguageCubit(
-          languageService: mockLanguageService,
-          defaultLanguageCode: defaultLanguageCode,
-        );
+        when(() => mockLanguageService.getCountryCode(defaultLanguageCode)).thenReturn('GB');
+        return LanguageCubit(languageService: mockLanguageService, defaultLanguageCode: defaultLanguageCode);
       },
       act: (LanguageCubit cubit) => cubit.getCountryCode(),
       verify: (_) {
-        verify(
-          () => mockLanguageService.getCountryCode(defaultLanguageCode),
-        ).called(1);
+        verify(() => mockLanguageService.getCountryCode(defaultLanguageCode)).called(1);
       },
     );
     blocTest<LanguageCubit, String>(
       'should currentLocale return default language code',
-      build:
-          () => LanguageCubit(
-            languageService: mockLanguageService,
-            defaultLanguageCode: defaultLanguageCode,
-          ),
+      build: () => LanguageCubit(languageService: mockLanguageService, defaultLanguageCode: defaultLanguageCode),
       act: (LanguageCubit cubit) => cubit.currentLocale,
       verify: (LanguageCubit cubit) {
         expect(cubit.currentLocale.languageCode, defaultLanguageCode);

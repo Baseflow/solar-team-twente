@@ -18,12 +18,8 @@ class OverallLeaderboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LeaderboardPreviewCubit, LeaderboardPreviewState>(
       builder: (BuildContext context, LeaderboardPreviewState state) {
-        assert(
-          state is LeaderboardPreviewLoaded,
-          'State has to be of type `LeaderboardPreviewLoaded` at this point.',
-        );
-        final LeaderboardPreviewLoaded loadedState =
-            state as LeaderboardPreviewLoaded;
+        assert(state is LeaderboardPreviewLoaded, 'State has to be of type `LeaderboardPreviewLoaded` at this point.');
+        final LeaderboardPreviewLoaded loadedState = state as LeaderboardPreviewLoaded;
         final List<RaceTeam> leaderboard = loadedState.leaderboard;
         return Padding(
           padding: const EdgeInsets.all(Sizes.s16),
@@ -31,12 +27,8 @@ class OverallLeaderboardView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                ...leaderboard
-                    .take(3)
-                    .map((RaceTeam team) => TopThreeRankingView(team: team)),
-                ...leaderboard
-                    .skip(3)
-                    .map((RaceTeam team) => LeaderboardPosition(team: team)),
+                ...leaderboard.take(3).map((RaceTeam team) => TopThreeRankingView(team: team)),
+                ...leaderboard.skip(3).map((RaceTeam team) => LeaderboardPosition(team: team)),
                 const SizedBox(height: Sizes.s12),
               ],
             ),
@@ -67,10 +59,7 @@ class LeaderboardPosition extends StatelessWidget {
             ),
           ),
           Expanded(child: Text(team.name)),
-          Text(
-            '${team.totalDrivenKilometers} km',
-            style: context.textTheme.bodySmall,
-          ),
+          Text('${team.totalDrivenKilometers} km', style: context.textTheme.bodySmall),
         ],
       ),
     );

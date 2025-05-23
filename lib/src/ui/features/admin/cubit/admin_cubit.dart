@@ -7,9 +7,7 @@ import '../types/admin_error_code.dart';
 part 'admin_state.dart';
 
 class AdminCubit extends Cubit<AdminState> {
-  AdminCubit({required NewsService newsService})
-    : _newsService = newsService,
-      super(const AdminInitial());
+  AdminCubit({required NewsService newsService}) : _newsService = newsService, super(const AdminInitial());
 
   final NewsService _newsService;
 
@@ -28,53 +26,24 @@ class AdminCubit extends Cubit<AdminState> {
       return;
     }
 
-    emit(
-      AdminLoading(
-        newsMessageTitle: state.newsMessageTitle,
-        newsMessageBody: state.newsMessageBody,
-      ),
-    );
+    emit(AdminLoading(newsMessageTitle: state.newsMessageTitle, newsMessageBody: state.newsMessageBody));
 
     await _newsService
-        .submitMessage(
-          NewsMessage(
-            title: state.newsMessageTitle!,
-            message: state.newsMessageBody!,
-          ),
-        )
-        .catchError(
-          (_) => emit(
-            const AdminError(errorCode: AdminErrorCode.sendingMessageFailed),
-          ),
-        );
+        .submitMessage(NewsMessage(title: state.newsMessageTitle!, message: state.newsMessageBody!))
+        .catchError((_) => emit(const AdminError(errorCode: AdminErrorCode.sendingMessageFailed)));
 
     if (state is AdminError) {
       return;
     }
 
-    emit(
-      AdminMessageSent(
-        newsMessageTitle: state.newsMessageTitle!,
-        newsMessageBody: state.newsMessageBody!,
-      ),
-    );
+    emit(AdminMessageSent(newsMessageTitle: state.newsMessageTitle!, newsMessageBody: state.newsMessageBody!));
   }
 
   void titleChanged(String value) {
-    emit(
-      AdminInitial(
-        newsMessageBody: state.newsMessageBody,
-        newsMessageTitle: value,
-      ),
-    );
+    emit(AdminInitial(newsMessageBody: state.newsMessageBody, newsMessageTitle: value));
   }
 
   void bodyChanged(String value) {
-    emit(
-      AdminInitial(
-        newsMessageBody: value,
-        newsMessageTitle: state.newsMessageTitle,
-      ),
-    );
+    emit(AdminInitial(newsMessageBody: value, newsMessageTitle: state.newsMessageTitle));
   }
 }

@@ -6,9 +6,7 @@ class MockLanguageRepository extends Mock implements LanguageRepository {}
 
 void main() {
   test('should return GB language code', () {
-    final LanguageService languageService = LanguageService(
-      languageRepository: MockLanguageRepository(),
-    );
+    final LanguageService languageService = LanguageService(languageRepository: MockLanguageRepository());
 
     const String languageCode = 'en';
     final String countryCode = languageService.getCountryCode(languageCode);
@@ -17,9 +15,7 @@ void main() {
   });
 
   test('should return NL language code', () {
-    final LanguageService languageService = LanguageService(
-      languageRepository: MockLanguageRepository(),
-    );
+    final LanguageService languageService = LanguageService(languageRepository: MockLanguageRepository());
 
     const String languageCode = 'nl';
     final String countryCode = languageService.getCountryCode(languageCode);

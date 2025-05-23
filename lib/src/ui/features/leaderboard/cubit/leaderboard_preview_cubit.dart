@@ -32,11 +32,7 @@ class LeaderboardPreviewCubit extends Cubit<LeaderboardPreviewState> {
 
     _leaderboardSubscription = _leaderboardService.leaderboard.listen(
       (List<RaceTeam> leaderboard) {
-        emit(
-          leaderboard.isEmpty
-              ? LeaderboardPreviewEmpty()
-              : LeaderboardPreviewLoaded(leaderboard: leaderboard),
-        );
+        emit(leaderboard.isEmpty ? LeaderboardPreviewEmpty() : LeaderboardPreviewLoaded(leaderboard: leaderboard));
       },
       onError: (dynamic error) {
         emit(LeaderboardPreviewError());

@@ -26,10 +26,7 @@ class FirebaseAnalyticsClient implements AnalyticsRepository {
   /// The [name] parameter specifies the name of the event.
   /// The [params] parameter specifies additional parameters for the event.
   @override
-  Future<void> logEvent({
-    required String name,
-    Map<String, Object>? params,
-  }) async {
+  Future<void> logEvent({required String name, Map<String, Object>? params}) async {
     await FirebaseAnalytics.instance.logEvent(name: name, parameters: params);
   }
 
@@ -37,8 +34,7 @@ class FirebaseAnalyticsClient implements AnalyticsRepository {
   ///
   /// The [identifier] parameter specifies the user identifier.
   @override
-  Future<void> setUserId(String identifier) async =>
-      _analytics.setUserId(id: identifier);
+  Future<void> setUserId(String identifier) async => _analytics.setUserId(id: identifier);
 
   /// Updates the user properties for analytics.
   @override

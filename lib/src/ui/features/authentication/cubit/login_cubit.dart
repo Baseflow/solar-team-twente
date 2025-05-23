@@ -33,13 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
       await _authenticationService.signIn(email: email, password: password);
       emit(state.copyWith(isLoading: false, loginSuccessful: true));
     } on AuthenticationException catch (e) {
-      emit(
-        state.copyWith(
-          isLoading: false,
-          loginSuccessful: false,
-          authErrorCode: e.errorCode,
-        ),
-      );
+      emit(state.copyWith(isLoading: false, loginSuccessful: false, authErrorCode: e.errorCode));
     }
   }
 

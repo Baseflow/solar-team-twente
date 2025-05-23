@@ -7,9 +7,5 @@ abstract interface class CrashlyticsRepository {
   Future<void> setUserIdentifier(String identifier);
 
   /// Logs an error with the given [error] and [trace].
-  Future<void> reportError(
-    dynamic error,
-    StackTrace? trace, {
-    bool fatal = false,
-  });
+  Future<void> reportError(dynamic error, StackTrace? trace, {bool fatal = false});
 }

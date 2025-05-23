@@ -25,36 +25,21 @@ class AdminInitial extends AdminState {
 }
 
 class AdminError extends AdminState {
-  const AdminError({
-    required this.errorCode,
-    super.newsMessageTitle,
-    super.newsMessageBody,
-  });
+  const AdminError({required this.errorCode, super.newsMessageTitle, super.newsMessageBody});
 
   final AdminErrorCode errorCode;
 
   @override
-  List<Object?> get props => <Object?>[
-    errorCode,
-    newsMessageTitle,
-    newsMessageBody,
-  ];
+  List<Object?> get props => <Object?>[errorCode, newsMessageTitle, newsMessageBody];
 
   @override
-  AdminState copyWith({
-    String? newsMessageTitle,
-    String? newsMessageBody,
-    AdminErrorCode? errorCode,
-  }) {
+  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody, AdminErrorCode? errorCode}) {
     return AdminError(errorCode: errorCode ?? this.errorCode);
   }
 }
 
 class AdminMessageSent extends AdminState {
-  const AdminMessageSent({
-    required String super.newsMessageTitle,
-    required String super.newsMessageBody,
-  });
+  const AdminMessageSent({required String super.newsMessageTitle, required String super.newsMessageBody});
 
   @override
   List<Object> get props => <Object>[newsMessageTitle!, newsMessageBody!];

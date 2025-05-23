@@ -20,10 +20,9 @@ class SupabaseLeaderboardRepository implements LeaderboardRepository {
         .order('position', ascending: true);
 
     return response.map(
-      (List<Map<String, dynamic>> data) =>
-          data.map<RaceTeam>((Map<String, dynamic> json) {
-            return RaceTeamDto.fromJson(json).toEntity();
-          }).toList(),
+      (List<Map<String, dynamic>> data) => data.map<RaceTeam>((Map<String, dynamic> json) {
+        return RaceTeamDto.fromJson(json).toEntity();
+      }).toList(),
     );
   }
 }

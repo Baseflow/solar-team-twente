@@ -8,10 +8,6 @@ class TimeLineDottedLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DottedLine(
-      lineThickness: 3,
-      alignment: WrapAlignment.spaceBetween,
-      dashColor: context.colorScheme.primary,
-    );
+    return DottedLine(lineThickness: 3, alignment: WrapAlignment.spaceBetween, dashColor: context.colorScheme.primary);
   }
 }

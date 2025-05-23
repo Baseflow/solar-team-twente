@@ -29,11 +29,8 @@ class MapCubit extends Cubit<MapState> {
     final List<dynamic> combinedRaceDays = <dynamic>[];
     final List<GeoJsonParser> allRaceDaysGeoJson = <GeoJsonParser>[];
     for (int i = 0; i < Assets.geojson.values.length - 1; i++) {
-      final String jsonString = await rootBundle.loadString(
-        Assets.geojson.values[i],
-      );
-      final Map<String, dynamic> json =
-          jsonDecode(jsonString) as Map<String, dynamic>;
+      final String jsonString = await rootBundle.loadString(Assets.geojson.values[i]);
+      final Map<String, dynamic> json = jsonDecode(jsonString) as Map<String, dynamic>;
       allRaceDaysGeoJson.add(GeoJsonParser()..parseGeoJson(json));
       for (final dynamic feature in json['features'] as List<dynamic>) {
         combinedRaceDays.add(feature);
@@ -45,14 +42,11 @@ class MapCubit extends Cubit<MapState> {
       'features': combinedRaceDays,
     };
 
-    final GeoJsonParser geoJson =
-        GeoJsonParser()..parseGeoJson(combinedGeoJson);
+    final GeoJsonParser geoJson = GeoJsonParser()..parseGeoJson(combinedGeoJson);
     allRaceDaysGeoJson.add(geoJson);
 
-    final bool hasRaceStarted =
-        Constants.startDate.difference(DateTime.now()).inMinutes < 0;
-    final int daysSinceStart =
-        DateTime.now().difference(Constants.startDate).inDays;
+    final bool hasRaceStarted = Constants.startDate.difference(DateTime.now()).inMinutes < 0;
+    final int daysSinceStart = DateTime.now().difference(Constants.startDate).inDays;
 
     await Future<void>.delayed(const Duration(seconds: 2));
 
@@ -60,19 +54,14 @@ class MapCubit extends Cubit<MapState> {
       MapRaceLoaded(
         vehicleLocation: const VehicleLocation.initial(),
         allRaceDaysGeoJson: allRaceDaysGeoJson,
-        selectedRaceDayGeoJson:
-            hasRaceStarted
-                ? allRaceDaysGeoJson[daysSinceStart]
-                : allRaceDaysGeoJson[0],
+        selectedRaceDayGeoJson: hasRaceStarted ? allRaceDaysGeoJson[daysSinceStart] : allRaceDaysGeoJson[0],
       ),
     );
     _subscribeToVehicleLocation();
   }
 
   void loadSelectedDay(int index) {
-    emit(
-      state.copyWith(selectedRaceDayGeoJson: state.allRaceDaysGeoJson[index]),
-    );
+    emit(state.copyWith(selectedRaceDayGeoJson: state.allRaceDaysGeoJson[index]));
   }
 
   /// Subscribes to the stream of the vehicle location.
@@ -82,11 +71,7 @@ class MapCubit extends Cubit<MapState> {
         emit(state.copyWith(vehicleLocation: vehicleLocation));
       },
       onError: (_) {
-        emit(
-          (state as MapRaceLoaded).copyWith(
-            vehicleLocation: const VehicleLocation.initial(),
-          ),
-        );
+        emit((state as MapRaceLoaded).copyWith(vehicleLocation: const VehicleLocation.initial()));
       },
     );
   }

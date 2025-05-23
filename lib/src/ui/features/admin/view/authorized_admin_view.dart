@@ -50,9 +50,7 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: BlocProvider<AdminCubit>(
-          create:
-              (BuildContext context) =>
-                  AdminCubit(newsService: Ioc.container.get<NewsService>()),
+          create: (BuildContext context) => AdminCubit(newsService: Ioc.container.get<NewsService>()),
           child: BlocConsumer<AdminCubit, AdminState>(
             listenWhen: (AdminState previous, AdminState current) {
               return current is AdminMessageSent;
@@ -67,17 +65,12 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
                 children: <Widget>[
                   Text(
                     l10n.adminNewsMessageTitle,
-                    style: context.textTheme.titleLarge!.apply(
-                      color: context.colorScheme.primary,
-                    ),
+                    style: context.textTheme.titleLarge!.apply(color: context.colorScheme.primary),
                   ),
                   const Gutter(),
                   TextField(
                     controller: _titleController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: l10n.title,
-                    ),
+                    decoration: InputDecoration(border: const OutlineInputBorder(), hintText: l10n.title),
                     enabled: state is! AdminLoading,
                     onChanged: context.read<AdminCubit>().titleChanged,
                   ),
@@ -101,17 +94,11 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
                       onPressed: context.read<AdminCubit>().submitNewsMessage,
                       child: Text(l10n.sendMessage),
                     ),
-                  if (state is AdminMessageSent) ...<Widget>[
-                    const Gutter(),
-                    const _MessageSubmittedContainer(),
-                  ],
+                  if (state is AdminMessageSent) ...<Widget>[const Gutter(), const _MessageSubmittedContainer()],
                   const GutterLarge(),
                   Text('${l10n.signedInAs}: ${widget.user?.email}'),
                   const GutterTiny(),
-                  TextButton(
-                    onPressed: context.read<AuthenticationCubit>().signOut,
-                    child: Text(l10n.signOut),
-                  ),
+                  TextButton(onPressed: context.read<AuthenticationCubit>().signOut, child: Text(l10n.signOut)),
                 ],
               );
             },
@@ -143,17 +130,10 @@ class _ErrorContainer extends StatelessWidget {
         children: <Widget>[
           Icon(Icons.warning_amber_rounded, color: context.colorScheme.error),
           const GutterSmall(),
-          Text(
-            switch (errorCode) {
-              AdminErrorCode.missingTitleOrBody =>
-                l10n.missingTitleOrBoddyErrorMessage,
-              AdminErrorCode.sendingMessageFailed =>
-                l10n.sendingMessageFailedErrorMessage,
-            },
-            style: context.textTheme.bodyMedium!.apply(
-              color: context.colorScheme.error,
-            ),
-          ),
+          Text(switch (errorCode) {
+            AdminErrorCode.missingTitleOrBody => l10n.missingTitleOrBoddyErrorMessage,
+            AdminErrorCode.sendingMessageFailed => l10n.sendingMessageFailedErrorMessage,
+          }, style: context.textTheme.bodyMedium!.apply(color: context.colorScheme.error)),
         ],
       ),
     );
@@ -179,10 +159,7 @@ class _MessageSubmittedContainer extends StatelessWidget {
         children: <Widget>[
           const Icon(Icons.check_circle_outline_rounded, color: Colors.green),
           const GutterSmall(),
-          Text(
-            l10n.messageSent,
-            style: context.textTheme.bodyMedium!.apply(color: Colors.green),
-          ),
+          Text(l10n.messageSent, style: context.textTheme.bodyMedium!.apply(color: Colors.green)),
         ],
       ),
     );

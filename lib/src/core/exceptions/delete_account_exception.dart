@@ -1,8 +1,7 @@
 import 'repository_exception.dart';
 
 /// [DeleteAccountException] providing the error codes for the repository.
-class DeleteAccountException
-    extends RepositoryException<DeleteAccountExceptionCode> {
+class DeleteAccountException extends RepositoryException<DeleteAccountExceptionCode> {
   /// Creates a new [DeleteAccountException].
   const DeleteAccountException({required super.errorCode, super.message});
 }

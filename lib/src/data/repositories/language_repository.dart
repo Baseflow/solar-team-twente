@@ -5,9 +5,8 @@ import '../../../core.dart';
 /// A repository to manage the language of the app.
 class SharedPreferencesLanguageRepository implements LanguageRepository {
   /// Creates a new instance of [SharedPreferencesLanguageRepository].
-  SharedPreferencesLanguageRepository({
-    required SharedPreferences sharedPreferences,
-  }) : _sharedPreferences = sharedPreferences;
+  SharedPreferencesLanguageRepository({required SharedPreferences sharedPreferences})
+    : _sharedPreferences = sharedPreferences;
 
   /// The [SharedPreferences] to manage shared preferences.
   final SharedPreferences _sharedPreferences;

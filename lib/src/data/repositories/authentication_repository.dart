@@ -60,21 +60,14 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<Token> signIn({
-    required String email,
-    required String password,
-  }) async {
-    final AuthResponse response = await _authenticationClient.auth
-        .signInWithPassword(email: email, password: password);
-
-    // TODO(Jurijs): Handle error
+  Future<Token> signIn({required String email, required String password}) async {
+    final AuthResponse response = await _authenticationClient.auth.signInWithPassword(email: email, password: password);
+    
     if (response.session == null || response.user == null) {
       throw Exception('Failed to sign in');
     }
 
-    final DateTime expiresAt = DateTime.parse(
-      response.session!.expiresAt!.toString(),
-    );
+    final DateTime expiresAt = DateTime.parse(response.session!.expiresAt!.toString());
 
     final TokenDTO tokenDto = TokenDTO(
       accessToken: response.session!.accessToken,
@@ -107,17 +100,15 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Token> refreshToken(Token token) async {
-    final AuthResponse response = await _authenticationClient.auth
-        .refreshSession(TokenDTO.fromEntity(token).refreshToken);
+    final AuthResponse response = await _authenticationClient.auth.refreshSession(
+      TokenDTO.fromEntity(token).refreshToken,
+    );
 
-    // TODO(Jurijs): Handle error
     if (response.session == null || response.user == null) {
       throw Exception('Failed to refresh token');
     }
 
-    final DateTime expiresAt = DateTime.parse(
-      response.session!.expiresAt!.toString(),
-    );
+    final DateTime expiresAt = DateTime.parse(response.session!.expiresAt!.toString());
 
     final TokenDTO tokenDto = TokenDTO(
       accessToken: response.session!.accessToken,
@@ -132,10 +123,7 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<Token> registerAccount({
-    required String email,
-    required String password,
-  }) async {
+  Future<Token> registerAccount({required String email, required String password}) async {
     // final TokenDTO tokenDto =
     //     await _authenticationClient.registerWithCredentials(
     //   email: email,

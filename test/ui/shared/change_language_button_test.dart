@@ -17,17 +17,12 @@ void main() {
       mockLanguageCubit = MockLanguageCubit();
     });
 
-    testWidgets('should display the EN language code', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should display the EN language code', (WidgetTester tester) async {
       when(() => mockLanguageCubit.state).thenReturn('EN');
       when(() => mockLanguageCubit.getCountryCode()).thenReturn('EN');
       await tester.pumpWidget(
         MaterialAppHelper(
-          child: BlocProvider<LanguageCubit>.value(
-            value: mockLanguageCubit,
-            child: const ChangeLanguageButton(),
-          ),
+          child: BlocProvider<LanguageCubit>.value(value: mockLanguageCubit, child: const ChangeLanguageButton()),
         ),
       );
 

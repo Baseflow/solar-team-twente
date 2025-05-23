@@ -43,12 +43,7 @@ class TopThreeRankingView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(
-                  team.name,
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text(team.name, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
                 Text('${team.totalDrivenKilometers} km'),
               ],
             ),

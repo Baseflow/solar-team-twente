@@ -22,9 +22,7 @@ class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LoginCubit>(
-      create:
-          (BuildContext context) =>
-              LoginCubit(Ioc.container.get<AuthenticationService>()),
+      create: (BuildContext context) => LoginCubit(Ioc.container.get<AuthenticationService>()),
       child: const AdminView(),
     );
   }

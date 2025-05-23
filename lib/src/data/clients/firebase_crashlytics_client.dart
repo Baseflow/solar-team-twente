@@ -51,11 +51,7 @@ class FirebaseCrashlyticsClient implements CrashlyticsRepository {
   /// The [trace] parameter with the stack trace associated with the error.
   /// The [fatal] parameter indicates whether the error is fatal or not.
   @override
-  Future<void> reportError(
-    dynamic error,
-    StackTrace? trace, {
-    bool fatal = false,
-  }) async {
+  Future<void> reportError(dynamic error, StackTrace? trace, {bool fatal = false}) async {
     await _crashlytics.recordError(error, trace, fatal: fatal);
   }
 }

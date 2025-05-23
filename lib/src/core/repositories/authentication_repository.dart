@@ -29,10 +29,7 @@ abstract interface class AuthenticationRepository {
   ///
   /// Returns a [Token] if the sign in was successful.
   /// Throws an exception if the sign in failed.
-  Future<Token> registerAccount({
-    required String email,
-    required String password,
-  });
+  Future<Token> registerAccount({required String email, required String password});
 
   /// Updates a password for a user with a [newPassword].
   ///

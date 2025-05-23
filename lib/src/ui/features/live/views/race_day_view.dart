@@ -27,33 +27,17 @@ class RaceDayView extends StatelessWidget {
     return Row(
       children: <Widget>[
         if (showPreviousRace)
-          Flexible(
-            child:
-                isPreviousRaceDone
-                    ? const TimeLineFilledLine()
-                    : const TimeLineDottedLine(),
-          )
+          Flexible(child: isPreviousRaceDone ? const TimeLineFilledLine() : const TimeLineDottedLine())
         else
           const Flexible(child: SizedBox.expand()),
         const TimeLineMarker(),
         if (showCurrentRace) ...<Widget>[
-          Expanded(
-            flex: 8,
-            child:
-                isCurrentRaceDone
-                    ? const TimeLineFilledLine()
-                    : const TimeLineDottedLine(),
-          ),
+          Expanded(flex: 8, child: isCurrentRaceDone ? const TimeLineFilledLine() : const TimeLineDottedLine()),
           const TimeLineMarker(),
         ] else
           const Expanded(flex: 8, child: SizedBox.expand()),
         if (showNextRace)
-          Flexible(
-            child:
-                isNextRaceDone
-                    ? const TimeLineFilledLine()
-                    : const TimeLineDottedLine(),
-          )
+          Flexible(child: isNextRaceDone ? const TimeLineFilledLine() : const TimeLineDottedLine())
         else
           const Flexible(child: SizedBox.expand()),
       ],

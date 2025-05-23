@@ -18,17 +18,12 @@ class LeaderboardPreviewLoadedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int solarTeamIndex = leaderboard.indexWhere(
-      (RaceTeam team) => team.name == Constants.solarTeamName,
-    );
+    final int solarTeamIndex = leaderboard.indexWhere((RaceTeam team) => team.name == Constants.solarTeamName);
     final int solarTeamPosition = solarTeamIndex + 1;
     return Column(
       children: <Widget>[
         if (solarTeamPosition > 3) ...<Widget>[
-          LeaderboardPositionRow(
-            team: leaderboard[solarTeamIndex],
-            racePosition: solarTeamPosition,
-          ),
+          LeaderboardPositionRow(team: leaderboard[solarTeamIndex], racePosition: solarTeamPosition),
           const SizedBox(height: Sizes.s12),
         ],
         ListView.builder(
@@ -51,11 +46,7 @@ class LeaderboardPreviewLoadedView extends StatelessWidget {
 @visibleForTesting
 class LeaderboardPositionRow extends StatelessWidget {
   /// {@macro leaderboard_position_row}
-  const LeaderboardPositionRow({
-    required this.team,
-    required this.racePosition,
-    super.key,
-  });
+  const LeaderboardPositionRow({required this.team, required this.racePosition, super.key});
 
   /// The team to display.
   final RaceTeam team;
@@ -68,16 +59,10 @@ class LeaderboardPositionRow extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Sizes.s8),
-        color:
-            team.name == Constants.solarTeamName
-                ? context.colorScheme.primaryContainer
-                : null,
+        color: team.name == Constants.solarTeamName ? context.colorScheme.primaryContainer : null,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Sizes.s12,
-          vertical: Sizes.s8,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.s12, vertical: Sizes.s8),
         child: Row(
           children: <Widget>[
             SizedBox(
@@ -96,9 +81,7 @@ class LeaderboardPositionRow extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               '${team.totalDrivenKilometers} km',
-              style: context.textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: context.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
             ),
           ],
         ),

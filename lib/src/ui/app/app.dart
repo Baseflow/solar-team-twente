@@ -24,10 +24,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider<Cubit<Object>>>[
         BlocProvider<AuthenticationCubit>(
-          create:
-              (BuildContext context) => AuthenticationCubit(
-                Ioc.container.get<AuthenticationService>(),
-              )..ensureValidToken(),
+          create: (BuildContext context) =>
+              AuthenticationCubit(Ioc.container.get<AuthenticationService>())..ensureValidToken(),
         ),
         BlocProvider<LanguageCubit>(
           create: (BuildContext languageContext) {
@@ -45,12 +43,8 @@ class App extends StatelessWidget {
         ),
       ],
       child: BlocListener<AuthenticationCubit, AuthenticationState>(
-        listenWhen: (
-          AuthenticationState previous,
-          AuthenticationState current,
-        ) {
-          return previous.authStatus != current.authStatus &&
-              current.authStatus != AuthenticationStatus.initializing;
+        listenWhen: (AuthenticationState previous, AuthenticationState current) {
+          return previous.authStatus != current.authStatus && current.authStatus != AuthenticationStatus.initializing;
         },
         listener: (BuildContext context, AuthenticationState state) {
           if (!kIsWeb) {

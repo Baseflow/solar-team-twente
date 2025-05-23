@@ -4,10 +4,7 @@ part of 'authentication_cubit.dart';
 @immutable
 class AuthenticationState extends Equatable {
   /// Creates a new [AuthenticationState] instance.
-  const AuthenticationState({
-    this.authStatus = AuthenticationStatus.initializing,
-    this.token,
-  });
+  const AuthenticationState({this.authStatus = AuthenticationStatus.initializing, this.token});
 
   /// The authentication status of the current user.
   final AuthenticationStatus authStatus;
@@ -20,13 +17,7 @@ class AuthenticationState extends Equatable {
 
   /// Creates a copy of the [AuthenticationState] with the supplied parameters
   /// replaced.
-  AuthenticationState copyWith({
-    AuthenticationStatus? authStatus,
-    Token? token,
-  }) {
-    return AuthenticationState(
-      authStatus: authStatus ?? this.authStatus,
-      token: token ?? this.token,
-    );
+  AuthenticationState copyWith({AuthenticationStatus? authStatus, Token? token}) {
+    return AuthenticationState(authStatus: authStatus ?? this.authStatus, token: token ?? this.token);
   }
 }

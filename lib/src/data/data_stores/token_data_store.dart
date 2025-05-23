@@ -30,9 +30,7 @@ class FlutterSecureStorageTokenDataStore implements TokenDataStore {
 
   final FlutterSecureStorage _flutterSecureStorage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
-      keyCipherAlgorithm:
-          KeyCipherAlgorithm.RSA_ECB_OAEPwithSHA_256andMGF1Padding,
+      keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_OAEPwithSHA_256andMGF1Padding,
       storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
     ),
   );
@@ -44,9 +42,7 @@ class FlutterSecureStorageTokenDataStore implements TokenDataStore {
 
   @override
   Future<TokenDTO?> retrieveToken() async {
-    final String? encoded = await _flutterSecureStorage.read(
-      key: _tokenStorageKey,
-    );
+    final String? encoded = await _flutterSecureStorage.read(key: _tokenStorageKey);
 
     if (encoded == null) return null;
 
@@ -55,9 +51,6 @@ class FlutterSecureStorageTokenDataStore implements TokenDataStore {
 
   @override
   Future<void> saveToken({required TokenDTO token}) {
-    return _flutterSecureStorage.write(
-      key: _tokenStorageKey,
-      value: jsonEncode(token.toJson()),
-    );
+    return _flutterSecureStorage.write(key: _tokenStorageKey, value: jsonEncode(token.toJson()));
   }
 }

@@ -47,21 +47,12 @@ void main() {
           ..updatePassword('password');
         await cubit.signIn();
       },
-      expect:
-          () => <LoginState>[
-            const LoginState(email: 'test@example.com'),
-            const LoginState(email: 'test@example.com', password: 'password'),
-            const LoginState(
-              email: 'test@example.com',
-              password: 'password',
-              isLoading: true,
-            ),
-            const LoginState(
-              email: 'test@example.com',
-              password: 'password',
-              loginSuccessful: true,
-            ),
-          ],
+      expect: () => <LoginState>[
+        const LoginState(email: 'test@example.com'),
+        const LoginState(email: 'test@example.com', password: 'password'),
+        const LoginState(email: 'test@example.com', password: 'password', isLoading: true),
+        const LoginState(email: 'test@example.com', password: 'password', loginSuccessful: true),
+      ],
     );
 
     blocTest<LoginCubit, LoginState>(
@@ -72,11 +63,7 @@ void main() {
             email: any(named: 'email'),
             password: any(named: 'password'),
           ),
-        ).thenThrow(
-          const AuthenticationException(
-            errorCode: AuthenticationExceptionCode.userNotFound,
-          ),
-        );
+        ).thenThrow(const AuthenticationException(errorCode: AuthenticationExceptionCode.userNotFound));
       },
       build: () => LoginCubit(mockAuthenticationService),
       act: (LoginCubit cubit) async {
@@ -85,21 +72,16 @@ void main() {
           ..updatePassword('password');
         await cubit.signIn();
       },
-      expect:
-          () => <LoginState>[
-            const LoginState(email: 'test@example.com'),
-            const LoginState(email: 'test@example.com', password: 'password'),
-            const LoginState(
-              email: 'test@example.com',
-              password: 'password',
-              isLoading: true,
-            ),
-            const LoginState(
-              email: 'test@example.com',
-              password: 'password',
-              authErrorCode: AuthenticationExceptionCode.userNotFound,
-            ),
-          ],
+      expect: () => <LoginState>[
+        const LoginState(email: 'test@example.com'),
+        const LoginState(email: 'test@example.com', password: 'password'),
+        const LoginState(email: 'test@example.com', password: 'password', isLoading: true),
+        const LoginState(
+          email: 'test@example.com',
+          password: 'password',
+          authErrorCode: AuthenticationExceptionCode.userNotFound,
+        ),
+      ],
     );
   });
 }

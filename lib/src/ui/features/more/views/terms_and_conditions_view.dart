@@ -19,10 +19,7 @@ class TermsAndConditionsView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(Sizes.s16),
           child: RichText(
-            text: TextSpan(
-              text: context.l10n.termsAndConditionsText,
-              style: context.textTheme.bodyMedium,
-            ),
+            text: TextSpan(text: context.l10n.termsAndConditionsText, style: context.textTheme.bodyMedium),
           ),
         ),
       ),

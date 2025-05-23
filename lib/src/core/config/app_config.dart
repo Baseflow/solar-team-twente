@@ -23,7 +23,5 @@ class AppConfig {
   static const String authUrl = String.fromEnvironment('AUTH_URL');
 
   /// Supabase specific anon key, unique to the supabase project.
-  static const String supabaseAnonKey = String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-  );
+  static const String supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 }

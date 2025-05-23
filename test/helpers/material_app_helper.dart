@@ -23,11 +23,7 @@ class MaterialAppHelper extends StatelessWidget {
       home: Material(
         child: Builder(
           builder: (BuildContext context) {
-            return Localizations.override(
-              context: context,
-              locale: Locale(locale),
-              child: child,
-            );
+            return Localizations.override(context: context, locale: Locale(locale), child: child);
           },
         ),
       ),
