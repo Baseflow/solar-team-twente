@@ -164,7 +164,7 @@ service_role key: some_kind_of_service_role_key
        S3 Region: local
 ```
 
-Use the `anon key` as the `SUPABASE_ANON_KEY` in your `.env.dev` file.
+For running your functions locally, please refer to the [Supabase documentation](https://supabase.com/docs/guides/functions/quickstart#running-edge-functions-locally).
 
 ### Linting
 
