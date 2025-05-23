@@ -25,43 +25,17 @@ class MapCubit extends Cubit<MapState> {
     return super.close();
   }
 
-  Future<void> loadAssets() async {
-    final List<dynamic> combinedRaceDays = <dynamic>[];
-    final List<GeoJsonParser> allRaceDaysGeoJson = <GeoJsonParser>[];
-    for (int i = 0; i < Assets.geojson.values.length - 1; i++) {
-      final String jsonString = await rootBundle.loadString(Assets.geojson.values[i]);
-      final Map<String, dynamic> json = jsonDecode(jsonString) as Map<String, dynamic>;
-      allRaceDaysGeoJson.add(GeoJsonParser()..parseGeoJson(json));
-      for (final dynamic feature in json['features'] as List<dynamic>) {
-        combinedRaceDays.add(feature);
-      }
-    }
+  Future<void> loadMap() async {
+    final String jsonString = await rootBundle.loadString(Assets.geojson.fullMap);
+    final Map<String, dynamic> json = jsonDecode(jsonString) as Map<String, dynamic>;
 
-    final Map<String, dynamic> combinedGeoJson = <String, dynamic>{
-      'type': 'FeatureCollection',
-      'features': combinedRaceDays,
-    };
-
-    final GeoJsonParser geoJson = GeoJsonParser()..parseGeoJson(combinedGeoJson);
-    allRaceDaysGeoJson.add(geoJson);
-
-    final bool hasRaceStarted = Constants.startDate.difference(DateTime.now()).inMinutes < 0;
-    final int daysSinceStart = DateTime.now().difference(Constants.startDate).inDays;
+    final GeoJsonParser geoJson = GeoJsonParser()..parseGeoJson(json);
 
     await Future<void>.delayed(const Duration(seconds: 2));
 
-    emit(
-      MapRaceLoaded(
-        vehicleLocation: const VehicleLocation.initial(),
-        allRaceDaysGeoJson: allRaceDaysGeoJson,
-        selectedRaceDayGeoJson: hasRaceStarted ? allRaceDaysGeoJson[daysSinceStart] : allRaceDaysGeoJson[0],
-      ),
-    );
-    _subscribeToVehicleLocation();
-  }
+    emit(MapRaceLoaded(vehicleLocation: const VehicleLocation.initial(), geoJson: geoJson));
 
-  void loadSelectedDay(int index) {
-    emit(state.copyWith(selectedRaceDayGeoJson: state.allRaceDaysGeoJson[index]));
+    _subscribeToVehicleLocation();
   }
 
   /// Subscribes to the stream of the vehicle location.

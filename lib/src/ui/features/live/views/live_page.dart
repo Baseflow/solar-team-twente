@@ -6,7 +6,6 @@ import '../../../../../core.dart';
 import '../../../constants/sizes_constants.dart';
 import '../../../localizations/l10n.dart';
 import '../cubit/map_cubit.dart';
-import '../cubit/race_day_carousel_cubit.dart';
 import 'map_view.dart';
 import 'race_days_bottom_sheet.dart';
 
@@ -38,19 +37,8 @@ class LivePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: <BlocProvider<Cubit<Object>>>[
-        BlocProvider<RaceDayCarouselCubit>(
-          create: (_) {
-            final int daysSinceStart = DateTime.now().difference(Constants.startDate).inDays;
-            return RaceDayCarouselCubit(
-              selectedRaceDay: Constants.hasRaceStarted ? RaceDayType.values[daysSinceStart + 1] : RaceDayType.prep,
-              currentRaceDay: Constants.hasRaceStarted ? RaceDayType.values[daysSinceStart + 1] : RaceDayType.prep,
-            );
-          },
-        ),
-        BlocProvider<MapCubit>(create: (_) => MapCubit(Ioc.container.get<VehicleLocationService>())..loadAssets()),
-      ],
+    return BlocProvider<MapCubit>(
+      create: (_) => MapCubit(Ioc.container.get<VehicleLocationService>())..loadMap(),
       child: const Stack(
         children: <Widget>[
           Positioned.fill(
