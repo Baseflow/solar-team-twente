@@ -1,69 +1,68 @@
 part of 'admin_cubit.dart';
 
-abstract class AdminState extends Equatable {
-  const AdminState({this.newsMessageTitle, this.newsMessageBody});
+enum AdminStatus { initial, loading, error, messageSent }
 
-  final String? newsMessageTitle;
-  final String? newsMessageBody;
+class AdminState extends Equatable {
+  const AdminState({
+    required this.status,
+    this.postTitle,
+    this.postBody,
+    this.postLocation,
+    this.postImageUrls,
+    this.postType,
+    this.postVideoUrl,
+    this.errorCode,
+  });
 
-  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody});
-}
+  final AdminStatus status;
+  final String? postTitle;
+  final String? postBody;
+  final LatLng? postLocation;
+  final List<String>? postImageUrls;
+  final PostType? postType;
+  final String? postVideoUrl;
 
-class AdminInitial extends AdminState {
-  const AdminInitial({super.newsMessageTitle, super.newsMessageBody});
+  final AdminErrorCode? errorCode;
 
-  @override
-  List<Object?> get props => <Object?>[newsMessageTitle, newsMessageBody];
+  bool get isValid {
+    return (postTitle?.isNotEmpty ?? false) &&
+        (postBody?.isNotEmpty ?? false) &&
+        postLocation != null &&
+        postType != null &&
+        (postImageUrls?.isNotEmpty ?? false);
+  }
 
-  @override
-  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody}) {
-    return AdminInitial(
-      newsMessageTitle: newsMessageTitle ?? this.newsMessageTitle,
-      newsMessageBody: newsMessageBody ?? this.newsMessageBody,
+  AdminState copyWith({
+    AdminStatus? status,
+    String? postTitle,
+    String? postBody,
+    LatLng? postLocation,
+    List<String>? postImageUrls,
+    PostType? postType,
+    String? postVideoUrl,
+    AdminErrorCode? errorCode,
+  }) {
+    return AdminState(
+      status: status ?? this.status,
+      postTitle: postTitle ?? this.postTitle,
+      postBody: postBody ?? this.postBody,
+      postLocation: postLocation ?? this.postLocation,
+      postImageUrls: postImageUrls ?? this.postImageUrls,
+      postType: postType ?? this.postType,
+      postVideoUrl: postVideoUrl ?? this.postVideoUrl,
+      errorCode: errorCode ?? this.errorCode,
     );
   }
-}
-
-class AdminError extends AdminState {
-  const AdminError({required this.errorCode, super.newsMessageTitle, super.newsMessageBody});
-
-  final AdminErrorCode errorCode;
 
   @override
-  List<Object?> get props => <Object?>[errorCode, newsMessageTitle, newsMessageBody];
-
-  @override
-  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody, AdminErrorCode? errorCode}) {
-    return AdminError(errorCode: errorCode ?? this.errorCode);
-  }
-}
-
-class AdminMessageSent extends AdminState {
-  const AdminMessageSent({required String super.newsMessageTitle, required String super.newsMessageBody});
-
-  @override
-  List<Object> get props => <Object>[newsMessageTitle!, newsMessageBody!];
-
-  @override
-  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody}) {
-    return AdminMessageSent(
-      newsMessageTitle: newsMessageTitle ?? this.newsMessageTitle!,
-      newsMessageBody: newsMessageBody ?? this.newsMessageBody!,
-    );
-  }
-}
-
-class AdminLoading extends AdminState {
-  const AdminLoading({super.newsMessageBody, super.newsMessageTitle});
-
-  @override
-  List<Object?> get props => <Object?>[newsMessageTitle, newsMessageBody];
-
-  @override
-  AdminState copyWith({String? newsMessageTitle, String? newsMessageBody}) {
-    return AdminLoading(
-      newsMessageTitle: newsMessageTitle ?? this.newsMessageTitle,
-      newsMessageBody: newsMessageBody ?? this.newsMessageBody,
-    );
-  }
+  List<Object?> get props => <Object?>[
+    status,
+    postTitle,
+    postBody,
+    postLocation,
+    postImageUrls,
+    postType,
+    postVideoUrl,
+    errorCode,
+  ];
 }

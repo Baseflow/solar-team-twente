@@ -53,7 +53,7 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
           create: (BuildContext context) => AdminCubit(newsService: Ioc.container.get<PostsService>()),
           child: BlocConsumer<AdminCubit, AdminState>(
             listenWhen: (AdminState previous, AdminState current) {
-              return current is AdminMessageSent;
+              return current.status == AdminStatus.messageSent;
             },
             listener: (BuildContext context, AdminState state) {
               _titleController?.clear();
@@ -71,7 +71,7 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
                   TextField(
                     controller: _titleController,
                     decoration: InputDecoration(border: const OutlineInputBorder(), hintText: l10n.title),
-                    enabled: state is! AdminLoading,
+                    enabled: state.status == AdminStatus.initial,
                     onChanged: context.read<AdminCubit>().titleChanged,
                   ),
                   const Gutter(),
@@ -82,19 +82,19 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
                       border: const OutlineInputBorder(),
                       hintText: l10n.newsMessageBodyHintText,
                     ),
-                    enabled: state is! AdminLoading,
+                    enabled: state.status == AdminStatus.initial,
                     onChanged: context.read<AdminCubit>().bodyChanged,
                   ),
                   const Gutter(),
-                  if (state is AdminError) _ErrorContainer(state.errorCode),
-                  if (state is AdminLoading)
+                  if (state.status == AdminStatus.error) _ErrorContainer(state.errorCode!),
+                  if (state.status == AdminStatus.loading)
                     const Center(child: CircularProgressIndicator())
                   else
-                    FilledButton(
-                      onPressed: context.read<AdminCubit>().submitNewsMessage,
-                      child: Text(l10n.sendMessage),
-                    ),
-                  if (state is AdminMessageSent) ...<Widget>[const Gutter(), const _MessageSubmittedContainer()],
+                    FilledButton(onPressed: context.read<AdminCubit>().submitPost, child: Text(l10n.sendMessage)),
+                  if (state.status == AdminStatus.messageSent) ...<Widget>[
+                    const Gutter(),
+                    const _MessageSubmittedContainer(),
+                  ],
                   const GutterLarge(),
                   Text('${l10n.signedInAs}: ${widget.user?.email}'),
                   const GutterTiny(),
@@ -131,7 +131,7 @@ class _ErrorContainer extends StatelessWidget {
           Icon(Icons.warning_amber_rounded, color: context.colorScheme.error),
           const GutterSmall(),
           Text(switch (errorCode) {
-            AdminErrorCode.missingTitleOrBody => l10n.missingTitleOrBoddyErrorMessage,
+            AdminErrorCode.missingContent => l10n.missingTitleOrBoddyErrorMessage,
             AdminErrorCode.sendingMessageFailed => l10n.sendingMessageFailedErrorMessage,
           }, style: context.textTheme.bodyMedium!.apply(color: context.colorScheme.error)),
         ],
