@@ -9,7 +9,7 @@ class SupabasePostsRepository implements PostsRepository {
   final SupabaseClient _client;
 
   @override
-  Stream<List<Post>> get newsMessages {
+  Stream<List<Post>> get posts {
     final SupabaseStreamBuilder response = _client
         .from('news_messages') // TODO(triqoz): Refactor when backend is ready
         .stream(primaryKey: <String>['id'])

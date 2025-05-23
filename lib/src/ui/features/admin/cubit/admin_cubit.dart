@@ -7,9 +7,9 @@ import '../types/admin_error_code.dart';
 part 'admin_state.dart';
 
 class AdminCubit extends Cubit<AdminState> {
-  AdminCubit({required NewsService newsService}) : _newsService = newsService, super(const AdminInitial());
+  AdminCubit({required PostsService newsService}) : _newsService = newsService, super(const AdminInitial());
 
-  final NewsService _newsService;
+  final PostsService _newsService;
 
   Future<void> submitNewsMessage() async {
     if (state.newsMessageTitle == null ||
