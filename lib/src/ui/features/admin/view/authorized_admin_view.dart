@@ -50,7 +50,7 @@ class _AuthorizedAdminViewState extends State<AuthorizedAdminView> {
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: BlocProvider<AdminCubit>(
-          create: (BuildContext context) => AdminCubit(newsService: Ioc.container.get<NewsService>()),
+          create: (BuildContext context) => AdminCubit(newsService: Ioc.container.get<PostsService>()),
           child: BlocConsumer<AdminCubit, AdminState>(
             listenWhen: (AdminState previous, AdminState current) {
               return current is AdminMessageSent;

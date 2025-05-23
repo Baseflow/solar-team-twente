@@ -10,7 +10,7 @@ part 'news_state.dart';
 class NewsCubit extends Cubit<NewsState> {
   NewsCubit(this._newsService) : super(NewsInitial());
 
-  final NewsService _newsService;
+  final PostsService _newsService;
 
   late StreamSubscription<List<Post>> _newsSubscription;
 
