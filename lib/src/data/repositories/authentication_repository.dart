@@ -62,7 +62,7 @@ class SupabaseAuthenticationRepository implements AuthenticationRepository {
   @override
   Future<Token> signIn({required String email, required String password}) async {
     final AuthResponse response = await _authenticationClient.auth.signInWithPassword(email: email, password: password);
-    
+
     if (response.session == null || response.user == null) {
       throw Exception('Failed to sign in');
     }

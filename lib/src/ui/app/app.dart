@@ -1,4 +1,3 @@
-import 'package:accessibility_tools/accessibility_tools.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,9 +64,6 @@ class App extends StatelessWidget {
               highContrastTheme: AppTheme.highContrast().theme,
               highContrastDarkTheme: AppTheme.highContrastDark().theme,
               themeMode: context.watch<ThemeCubit>().state.toThemeMode(),
-              builder: (BuildContext context, Widget? child) {
-                return AccessibilityTools(child: child);
-              },
             );
           },
         ),
