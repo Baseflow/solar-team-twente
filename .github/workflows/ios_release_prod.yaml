@@ -47,7 +47,7 @@ jobs:
         working-directory: ${{ env.working_directory }}
 
       - name: Format
-        run: dart format $(find . -name "*.dart" -not -wholename "*/generated/*" -not -name "*.mocks.dart" -not -wholename "./.dart_tool/*") --set-exit-if-changed
+        run: dart format $(find . -name "*.dart" -not -wholename "*/generated/*" -not -name "*.mocks.dart" -not -wholename "./.dart_tool/*") -l 120 --set-exit-if-changed
         working-directory: ${{ env.working_directory }}
 
       - name: Analyze
